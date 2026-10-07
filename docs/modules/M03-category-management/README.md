@@ -1,4 +1,4 @@
-# PHÂN HỆ : Phân hệ Quản lý Ticket (TKT)
+# PHÂN HỆ: VÒNG ĐỜI & TRẠNG THÁI TICKET (TKT)
 
 ## [FR-TKT-01] Hệ thống tạo ID Ticket
 * **Mô tả:** Hệ thống tự động tạo mã định danh duy nhất (VD: `IT-20261005-001`) khi có ticket mới được khởi tạo.

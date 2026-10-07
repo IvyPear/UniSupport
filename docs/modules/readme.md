@@ -11,20 +11,20 @@ Hệ thống được chia nhỏ thành 10 phân hệ (Modules) độc lập đ�
 Dưới đây là danh sách 10 phân hệ cốt lõi của hệ thống. Vui lòng bấm vào từng file để đọc đặc tả chi tiết:
 
 ### Nền tảng & Khởi tạo
-* [01_Auth_Module.md](01_Auth_Module.md) - Phân hệ Xác thực & Quản lý tài khoản (Đăng nhập, Đồng bộ dữ liệu).
-* [02_Request_Ticket_Module.md](02_Request_Ticket_Module.md) - Phân hệ Khởi tạo & Vòng đời Ticket (Dành cho Sinh viên).
-* [03_Category_Management_Module.md](03_Category_Management_Module.md) - Phân hệ Quản lý Danh mục (Cấu hình danh mục hỗ trợ).
+* [M01-auth/](M01-auth/) - Phân hệ Xác thực & Quản lý tài khoản ([README.md](M01-auth/README.md) | [prd.md](M01-auth/prd.md)).
+* [M02-request-ticket/](M02-request-ticket/) - Phân hệ Khởi tạo & Vòng đời Ticket ([README.md](M02-request-ticket/README.md) | [prd.md](M02-request-ticket/prd.md)).
+* [M03-category-management/](M03-category-management/) - Phân hệ Quản lý Ticket & Vòng đời Trạng thái ([README.md](M03-category-management/README.md) | [prd.md](M03-category-management/prd.md)).
 
 ### Nghiệp vụ Xử lý & Luân chuyển
-* [04_Staff_Operations_Module.md](04_Staff_Operations_Module.md) - Phân hệ Nghiệp vụ Nhân viên (Tiếp nhận, Xử lý, Cập nhật trạng thái).
-* [05_Routing_Module.md](05_Routing_Module.md) - Phân hệ Định tuyến & Điều phối (Tự động chia việc, Dispatch, Phân công lại).
-* [06_Communication_Module.md](06_Communication_Module.md) - Phân hệ Trao đổi & Tệp đính kèm (Nhắn tin bổ sung thông tin, Gửi file).
+* [M04-staff-operations/](M04-staff-operations/) - Phân hệ Nghiệp vụ Nhân viên ([README.md](M04-staff-operations/README.md) | [prd.md](M04-staff-operations/prd.md)).
+* [M05-routing/](M05-routing/) - Phân hệ Định tuyến & Điều phối ([README.md](M05-routing/README.md) | [prd.md](M05-routing/prd.md)).
+* [M06-communication/](M06-communication/) - Phân hệ Trao đổi & Tệp đính kèm ([README.md](M06-communication/README.md) | [prd.md](M06-communication/prd.md)).
 
 ### Hậu mãi & Quản trị
-* [07_Notification_Module.md](07_Notification_Module.md) - Phân hệ Thông báo hệ thống (Cảnh báo in-app, tự động nhắc nhở).
-* [08_Feedback_Rating_Module.md](08_Feedback_Rating_Module.md) - Phân hệ Đánh giá & Đóng đơn (Chấm điểm chất lượng, Auto-Close 72h).
-* [09_Reporting_Analytics_Module.md](09_Reporting_Analytics_Module.md) - Phân hệ Báo cáo & Thống kê (Dashboard cho Admin và Trưởng phòng).
-* [10_Admin_Management_Module.md](10_Admin_Management_Module.md) - Phân hệ Quản trị Hệ thống (Phân quyền Vai trò, Quản lý trạng thái nhân sự).
+* [M07-notification/](M07-notification/) - Phân hệ Thông báo hệ thống ([README.md](M07-notification/README.md) | [prd.md](M07-notification/prd.md)).
+* [M08-feedback-rating/](M08-feedback-rating/) - Phân hệ Đánh giá & Đóng đơn ([README.md](M08-feedback-rating/README.md) | [prd.md](M08-feedback-rating/prd.md)).
+* [M09-reporting-analytics/](M09-reporting-analytics/) - Phân hệ Báo cáo & Thống kê ([README.md](M09-reporting-analytics/README.md) | [prd.md](M09-reporting-analytics/prd.md)).
+* [M10-admin-management/](M10-admin-management/) - Phân hệ Quản trị Hệ thống ([README.md](M10-admin-management/README.md) | [prd.md](M10-admin-management/prd.md)).
 
 ---
 

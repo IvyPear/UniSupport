@@ -125,9 +125,10 @@ erDiagram
 ## 2. Chi Tiết Các Bảng & Đánh Chỉ Mục (Indexes & Constraints)
 
 ### 2.1 Bảng `tickets`
+
 * **Khoá chính:** `id` (BIGINT, Auto-increment).
 * **Khoá duy nhất:** `code` (VARCHAR(30), UNIQUE) - Định dạng `[MÃ_PHÒNG]-[YYYYMMDD]-[STT_TRONG_NGÀY]`.
-* **Ràng buộc:** 
+* **Ràng buộc:**
   * `CHECK (status IN ('NEW', 'IN_PROGRESS', 'PENDING', 'RESOLVED', 'CLOSED'))`.
   * `CHECK (status != 'RESOLVED' OR (resolution_notes IS NOT NULL AND LENGTH(TRIM(resolution_notes)) > 0))`.
 * **Chỉ mục (Indexes):**
@@ -136,10 +137,12 @@ erDiagram
   * `idx_tickets_dept_status` ON `tickets(department_id, status)` (Tối ưu màn hình quản lý phòng ban/Admin).
 
 ### 2.2 Bảng `users`
+
 * **Khoá duy nhất:** `user_code` (Mã định danh SV/NV), `email`.
 * **Ràng buộc:** `CHECK (role IN ('STUDENT', 'STAFF', 'MANAGER', 'ADMIN'))`.
 * **Chỉ mục:** `idx_users_code_role` ON `users(user_code, role)`.
 
 ### 2.3 Bảng `ratings`
+
 * **Khoá duy nhất:** `ticket_id` (Đảm bảo tính duy nhất 1-1 với ticket).
 * **Ràng buộc:** `CHECK (score BETWEEN 1 AND 5)`.

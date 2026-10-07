@@ -1,4 +1,4 @@
-# PHÂN HỆ : YÊU CẦU SINH VIÊN (REQ)
+# PHÂN HỆ: YÊU CẦU SINH VIÊN (REQ)
 
 ## [FR-REQ-01] Sinh viên tạo mới Ticket
 * **Mô tả:** Sinh viên tạo yêu cầu hỗ trợ mới bằng cách chọn danh mục, nhập tiêu đề và nội dung.

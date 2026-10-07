@@ -1,4 +1,4 @@
-# PHÂN HỆ : TÀI KHOẢN (AUTH)
+# PHÂN HỆ: TÀI KHOẢN (AUTH)
 
 ## [FR-AUTH-01] Người dùng đăng nhập hệ thống
 * **Mô tả:** Tất cả các vai trò (Sinh viên, Nhân viên, Quản lý, Admin) thực hiện đăng nhập vào hệ thống bằng mã số định danh và mật khẩu cá nhân.
