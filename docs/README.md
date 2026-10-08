@@ -24,17 +24,10 @@ Chào mừng bạn đến với bộ tài liệu hoàn chỉnh của hệ thốn
 ---
 
 ### 📦 2. Đặc Tả Yêu Cầu Chức Năng (Modules / PRD)
-Tập hợp đặc tả 10 phân hệ chức năng tiêu chuẩn (kèm `FR`, `BR`, `Main Flow`, `Alternative Flow` và `Acceptance Criteria - AC`):
-* [01_Auth_Module.md](modules/01_Auth_Module.md) - Phân hệ Tài khoản (Đăng nhập, Closed-loop system, Admin Import).
-* [02_Request_Ticket_Module.md](modules/02_Request_Ticket_Module.md) - Phân hệ Sinh viên Khởi tạo Ticket.
-* [03_Category_Management_Module.md](modules/03_Category_Management_Module.md) - Quản lý Danh mục Dịch vụ & Chuyên trách.
-* [04_Staff_Operations_Module.md](modules/04_Staff_Operations_Module.md) - Phân hệ Nhân viên Tiếp nhận & Xử lý (Claim, Resolve, Spam).
-* [05_Routing_Module.md](modules/05_Routing_Module.md) - Cơ chế Định tuyến Tự động & Điều phối Đơn.
-* [06_Communication_Module.md](modules/06_Communication_Module.md) - Trao đổi 2 chiều & Đính kèm Minh chứng.
-* [07_Notification_Module.md](modules/07_Notification_Module.md) - Hệ thống Thông báo (In-app & Email).
-* [08_Feedback_Rating_Module.md](modules/08_Feedback_Rating_Module.md) - Đánh giá Chất lượng 1-5 Sao & Khóa đơn.
-* [09_Reporting_Analytics_Module.md](modules/09_Reporting_Analytics_Module.md) - Báo cáo Thống kê & Hiệu suất Nhân sự.
-* [10_Admin_Management_Module.md](modules/10_Admin_Management_Module.md) - Quản trị Hệ thống Toàn trường.
+Tập hợp đặc tả **13 Phân hệ thực thi (từ M01 đến M13)** phân chia thành 3 thư mục Giai đoạn phát triển ([Xem chi tiết: modules/readme.md](modules/readme.md)):
+* **Giai đoạn 1 — Nền tảng & Working MVP (`modules/Giai-Doan-1-Nen-Tang-Working-MVP/`):** M01 (Đăng nhập & Xác thực), M02 (Quản lý tài khoản — Admin), M03 (Vai trò & Phân quyền — Admin), M04 (Quản lý danh mục hỗ trợ), M05 (Khởi tạo Ticket — Sinh viên), M06 (Tiếp nhận Ticket — Nhân viên), M07 (Xử lý & Trao đổi — Nhân viên), M08 (Trả kết quả — Nhân viên).
+* **Giai đoạn 2 — Phân hệ Sinh viên (`modules/Giai-Doan-2-Phan-He-Sinh-Vien/`):** M09 (Theo dõi & Bổ sung thông tin), M10 (Kết quả & Đánh giá).
+* **Giai đoạn 3 — Điều phối & Giám sát (`modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/`):** M11 (Quản lý & Điều phối Ticket), M12 (Giám sát tiến độ), M13 (Dashboard & Báo cáo).
 
 ---
 

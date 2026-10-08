@@ -2,9 +2,9 @@
 
 ## 1. Danh mục Chức năng (Function Catalog)
 
-| Mã FR | Tên Chức năng | Actor Chính | Mô tả Tóm tắt |
-| :--- | :--- | :--- | :--- |
-| **[FR-NOTI-01]** | Gửi Thông báo Tự động | Hệ thống | Đẩy cảnh báo in-app (biểu tượng quả chuông) khi ticket có sự thay đổi quan trọng. |
+| Mã FR                 | Tên Chức năng            | Actor Chính | Mô tả Tóm tắt                                                                               |
+| :--------------------- | :-------------------------- | :----------- | :---------------------------------------------------------------------------------------------- |
+| **[FR-NOTI-01]** | Gửi Thông báo Tự động | Hệ thống   | Đẩy cảnh báo in-app (biểu tượng quả chuông) khi ticket có sự thay đổi quan trọng. |
 
 ---
 
@@ -38,11 +38,13 @@
 ## 3. Cơ chế & Cách Vận hành (Operational Mechanics)
 
 ### 3.1. Sự kiện Bật Cảnh báo (Trigger Events)
+
 1. **Thông báo cho Sinh viên:** Khi đơn đổi trạng thái (`In Progress`, `Pending`, `Resolved`, `Closed`).
 2. **Thông báo cho Nhân viên:** Khi được Quản lý phân công (`Assign`), khi có đơn được chuyển từ phòng khác tới, hoặc khi Sinh viên phản hồi bổ sung thông tin.
 3. **Thông báo cho Admin:** Khi có đơn mới khởi tạo mang danh mục "Khác".
 4. **Lọc thông báo rác (Spam Filter):** Các hành vi chỉnh sửa lỗi chính tả nhẹ ở trạng thái `New` không tạo thông báo.
 
 ### 3.2. Cơ chế Tương tác Chuông & Hàng đợi Retry
+
 1. **Điều hướng trực tiếp (Deep Linking):** Người dùng nhấp vào dòng thông báo ở quả chuông -> Trình duyệt mở thẳng tới trang chi tiết của đúng Ticket đó.
 2. **Hàng đợi phát lại (Retry Queue):** Nếu thiết bị người dùng mất mạng đúng lúc thông báo gửi đi, hệ thống ghi nhận vào hàng đợi ngầm và đẩy lại thông báo ngay khi thiết bị có kết nối Internet trở lại.

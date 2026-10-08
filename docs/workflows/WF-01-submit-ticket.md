@@ -1,11 +1,13 @@
 # WF-01: Luồng Khởi Tạo Yêu Cầu từ phía Sinh Viên (Submit Ticket)
 
 ## 1. Mô tả
+
 Luồng ghi nhận toàn bộ hành trình sinh viên tạo một yêu cầu hỗ trợ mới cho đến khi đơn được khởi tạo và phân bổ thành công vào danh sách chờ của hệ thống.
 
 ---
 
 ## 2. Các bước thực hiện
+
 1. **Đăng nhập & Khởi tạo:** Sinh viên đăng nhập vào hệ thống ([FR-AUTH-01]) và lựa chọn chức năng tạo mới yêu cầu hỗ trợ ([FR-REQ-01]).
 2. **Nhập liệu & Đính kèm:** Sinh viên điền tiêu đề, lựa chọn danh mục, nhập nội dung yêu cầu chi tiết và đính kèm tài liệu/hình ảnh minh họa (dung lượng tối đa 5MB/file) nếu cần thiết ([FR-COM-03]). Sau đó bấm "Gửi yêu cầu".
 3. **Sinh mã & Trạng thái:** Hệ thống tự động sinh mã định danh duy nhất cho đơn (VD: `IT-20261005-001`) ([FR-TKT-01]) và lưu trữ ticket khởi điểm ở trạng thái `New` ([FR-TKT-02]).
@@ -28,3 +30,4 @@ graph TD
     E --> G[Gán mã ID & Trạng thái NEW]
     F --> G
     F --> H([Bắn thông báo In-app cho Admin])
+```

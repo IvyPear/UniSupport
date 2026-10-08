@@ -1,31 +1,74 @@
-# DANH MỤC QUY TRÌNH NGHIỆP VỤ (WORKFLOWS) - UNISUPPORT
+# TÀI LIỆU LUỒNG QUY TRÌNH NGHIỆP VỤ (FUNCTIONAL WORKFLOWS PRD)
 
-## 1. Giới thiệu tổng quan
-Thư mục này lưu trữ toàn bộ các tài liệu đặc tả Luồng quy trình nghiệp vụ (Workflows) của hệ thống hỗ trợ hành chính sinh viên **UniSupport**. 
-
-Mỗi quy trình mô tả chi tiết hành trình của một hoặc nhiều luồng dữ liệu, sự tương tác giữa các tác nhân (Sinh viên, Nhân viên, Quản lý, Admin) và hệ thống, có đính kèm sơ đồ luồng (Mermaid Diagram) và được ánh xạ trực tiếp đến các Đặc tả chức năng (FR - Functional Requirements).
-
----
-
-## 2. Danh sách Luồng quy trình (Workflow Index)
-Dưới đây là danh sách 9 luồng nghiệp vụ cốt lõi của hệ thống. Vui lòng bấm vào từng file để xem chi tiết:
-
-### Luồng cốt lõi (Core Ticket Lifecycle)
-* [WF-01: Khởi tạo yêu cầu (Submit Ticket)](WF-01-submit-ticket.md) - Sinh viên tạo đơn và định tuyến tự động.
-* [WF-02: Tiếp nhận và Xử lý (Claim & Process)](WF-02-claim-and-process.md) - Luồng đi thẳng (Happy Path) nhân viên xử lý đơn.
-* [WF-03: Yêu cầu bổ sung & Đếm ngược (Request Info)](WF-03-request-additional-info.md) - Nhân viên thiếu thông tin, chờ sinh viên phản hồi (Pending 72h).
-* [WF-04: Luân chuyển & Điều phối (Transfer)](WF-04-transfer-department.md) - Xử lý sai phòng ban, phân công lại hoặc Admin phân phối đơn.
-* [WF-05: Hoàn tất xử lý (Complete/Resolve)](WF-05-complete-or-resolve.md) - Nhân viên đóng gói kết quả, cập nhật trạng thái hoặc đánh dấu Spam.
-* [WF-06: Đánh giá & Đóng đơn (Close & Rate)](WF-06-close-and-rate.md) - Sinh viên đánh giá chất lượng hoặc hệ thống tự động đóng đơn (Auto-Close).
-
-### Luồng Hệ thống & Quản trị (System & Admin)
-* [WF-07: Xác thực & Đồng bộ tài khoản (Authentication)](WF-07-authentication.md) - Đăng nhập hệ thống và Admin import danh sách người dùng.
-* [WF-08: Điều phối & Báo cáo (Manager Assign)](WF-08-manager-assign.md) - Trưởng phòng theo dõi Dashboard và phân công lại công việc.
-* [WF-09: Cấu hình hệ thống (Admin System)](WF-09-admin-system.md) - Quản trị toàn trường, quản lý danh mục và trạng thái tài khoản.
+> **Dự án:** UniSupport — System Helpdesk & Support  
+> **Ánh xạ Phân hệ:** Phân hệ M01 đến M13 (3 Giai đoạn triển khai)  
+> **Tác nhân:** Sinh viên, Nhân viên, Quản lý (Trưởng phòng), Admin  
 
 ---
 
-## 3. Hướng dẫn đọc tài liệu
-* **Mã FR (Ví dụ: `FR-STF-01`):** Các mã nằm trong ngoặc đơn trỏ trực tiếp đến các yêu cầu chức năng (Functional Requirements) tương ứng trong bộ PRD chính.
-* **Sơ đồ Mermaid:** Tất cả các luồng đều được minh họa bằng mã `mermaid`. Nếu xem trên GitHub, GitLab, Notion hoặc các Markdown Editor hỗ trợ (như Obsidian, VSCode có cài extension), sơ đồ sẽ tự động render thành hình ảnh trực quan.
-* **Quy ước Vòng đời Ticket (States):** Vui lòng nắm vững 5 trạng thái cốt lõi của đơn trước khi đọc luồng: `New` (Mới) $\rightarrow$ `In Progress` (Đang xử lý) $\rightarrow$ `Pending` (Chờ bổ sung) $\rightarrow$ `Resolved` (Đã giải quyết) $\rightarrow$ `Closed` (Đã đóng).
+## 1. Bản đồ Danh mục Luồng Nghiệp vụ (Workflows Index)
+
+### 📌 01. Vòng đời Ticket & Tổng quan
+* **[01-lifecycle-overview.md](01-lifecycle-overview.md)** — Sơ đồ vòng đời Ticket (Mermaid), bảng 5 trạng thái cốt lõi và các nguyên tắc nghiệp vụ chung.
+
+---
+
+### 🎓 02. Phân hệ Sinh viên (Student Workflows)
+* **[02-student-workflows.md](02-student-workflows.md)** — Tập hợp 5 quy trình nghiệp vụ Sinh viên:
+  * **SV-01:** Gửi yêu cầu hỗ trợ ([M05-create-ticket](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M05-create-ticket/))
+  * **SV-02:** Theo dõi yêu cầu ([M09-ticket-tracking-supplement](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M09-ticket-tracking-supplement/))
+  * **SV-03:** Bổ sung thông tin ([M09-ticket-tracking-supplement](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M09-ticket-tracking-supplement/))
+  * **SV-04:** Xem kết quả ([M10-results-feedback](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M10-results-feedback/))
+  * **SV-05:** Đánh giá chất lượng ([M10-results-feedback](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M10-results-feedback/))
+
+---
+
+### 🛠️ 03. Phân hệ Nhân viên (Staff Workflows)
+* **[03-staff-workflows.md](03-staff-workflows.md)** — Tập hợp 6 quy trình nghiệp vụ Nhân viên phòng ban:
+  * **NV-01:** Tiếp nhận Ticket ([M06-receive-ticket](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M06-receive-ticket/))
+  * **NV-02:** Cập nhật tiến độ ([M07-process-exchange](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/))
+  * **NV-03:** Yêu cầu bổ sung ([M07-process-exchange](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/))
+  * **NV-04:** Chuyển Ticket sai phòng ban ([M07-process-exchange](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/))
+  * **NV-05:** Trả kết quả ([M08-ticket-results](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M08-ticket-results/))
+  * **NV-06:** Xem lịch sử xử lý ([M07-process-exchange](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/))
+
+---
+
+### 📊 04. Phân hệ Quản lý / Trưởng phòng (Manager Workflows)
+* **[04-manager-workflows.md](04-manager-workflows.md)** — Tập hợp 6 quy trình nghiệp vụ Quản lý:
+  * **QL-01:** Theo dõi tổng quan phòng ban ([M13-dashboard-reporting](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-reporting/))
+  * **QL-02:** Phân công nhanh ([M11-routing-dispatch](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-routing-dispatch/))
+  * **QL-03:** Giám sát tiến độ và tồn đọng ([M12-progress-monitoring](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-progress-monitoring/))
+  * **QL-04:** Theo dõi hiệu suất Nhân viên ([M12-progress-monitoring](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-progress-monitoring/), [M13-dashboard-reporting](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-reporting/))
+  * **QL-05:** Quản lý danh mục phòng ban ([M04-category-management](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M04-category-management/))
+  * **QL-06:** Báo cáo và đánh giá ([M13-dashboard-reporting](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-reporting/))
+
+---
+
+### ⚙️ 05. Phân hệ Quản trị viên (Admin Workflows)
+* **[05-admin-workflows.md](05-admin-workflows.md)** — Tập hợp 6 quy trình nghiệp vụ Admin:
+  * **AD-01:** Quản lý tài khoản ([M02-account-management](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M02-account-management/))
+  * **AD-02:** Vai trò và phân quyền ([M03-roles-permissions](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M03-roles-permissions/))
+  * **AD-03:** Quản lý danh mục toàn trường ([M04-category-management](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M04-category-management/))
+  * **AD-04:** Phân loại Ticket "Khác" ([M11-routing-dispatch](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-routing-dispatch/))
+  * **AD-05:** Điều chuyển Ticket sai phòng ban ([M11-routing-dispatch](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-routing-dispatch/))
+  * **AD-06:** Theo dõi và thống kê toàn trường ([M12-progress-monitoring](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-progress-monitoring/), [M13-dashboard-reporting](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-reporting/))
+
+---
+
+### 🔔 06. Ma trận Thông báo & ⚙️ 07. Quyết định Nghiệp vụ
+* **[06-notification-matrix.md](06-notification-matrix.md)** — Ma trận 6 hành vi thông báo hệ thống đã thống nhất.
+* **[07-business-rules.md](07-business-rules.md)** — Danh mục 10 quyết định nghiệp vụ (BR-01 đến BR-10) cần chốt trước khi hoàn thiện Database/API.
+
+---
+
+### 📁 08. Luồng Quy trình Chi tiết (Detail WF Files)
+* **[WF-01-submit-ticket.md](WF-01-submit-ticket.md)** — [SV-01] Sinh viên khởi tạo yêu cầu.
+* **[WF-02-claim-and-process.md](WF-02-claim-and-process.md)** — [NV-01, NV-02] Nhân viên tiếp nhận và xử lý.
+* **[WF-03-request-additional-info.md](WF-03-request-additional-info.md)** — [NV-03, SV-03] Yêu cầu bổ sung & đếm ngược 72h.
+* **[WF-04-transfer-department.md](WF-04-transfer-department.md)** — [NV-04, AD-04, AD-05] Luân chuyển & điều chuyển đơn.
+* **[WF-05-complete-or-resolve.md](WF-05-complete-or-resolve.md)** — [NV-05] Trả kết quả & hoàn tất xử lý.
+* **[WF-06-close-and-rate.md](WF-06-close-and-rate.md)** — [SV-04, SV-05] Xem kết quả & đánh giá 1–5 sao.
+* **[WF-07-authentication.md](WF-07-authentication.md)** — [AD-01] Đăng nhập & đồng bộ tài khoản.
+* **[WF-08-manager-assign.md](WF-08-manager-assign.md)** — [QL-01 đến QL-06] Điều phối & giám sát Trưởng phòng.
+* **[WF-09-admin-system.md](WF-09-admin-system.md)** — [AD-01 đến AD-06] Cấu hình & quản trị hệ thống Admin.
