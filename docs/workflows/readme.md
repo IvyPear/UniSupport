@@ -61,14 +61,11 @@
 
 ---
 
-### 🔔 06. Ma trận Thông báo & ⚙️ 07. Quyết định Nghiệp vụ
+### 🔔 06. Ma trận Thông báo 
 
 * **[06-ma-tran-thong-bao.md](06-ma-tran-thong-bao.md)** — Ma trận 6 hành vi thông báo hệ thống đã thống nhất.
-* **[quy-tac-nghiep-vu.md](../domain/quy-tac-nghiep-vu.md)** — Danh mục các quy tắc nghiệp vụ (BR-01 đến BR-10) toàn hệ thống.
 
----
-
-### 📁 08. Luồng Quy trình Chi tiết (Detail WF Files)
+### 📁 07. Luồng Quy trình Chi tiết (Detail WF Files)
 
 * **[01-luong-hoat-dong-Ticket.md](01-luong-hoat-dong-Ticket.md)** — Sơ đồ luồng hoạt động Ticket tổng quan và vòng đời xử lý.
 * **[02-quy-trinh-sinh-vien.md](02-quy-trinh-sinh-vien.md)** — Chi tiết 5 luồng quy trình Sinh viên (Khởi tạo, Theo dõi, Bổ sung, Kết quả, Đánh giá).
