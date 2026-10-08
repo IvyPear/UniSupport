@@ -15,7 +15,7 @@ Chào mừng bạn đến với bộ tài liệu hoàn chỉnh của hệ thốn
 
 ---
 
-### 🏛️ 1. Nghiệp Vụ Cốt Lõi (Domain Knowledge)
+### 🏛️ 1. Nghiệp Vụ Cốt Lõi (Domain Knowledge) ([Xem chỉ mục chi tiết: domain/readme.md](domain/readme.md))
 * [docs/domain/domain-overview.md](domain/domain-overview.md) - Bối cảnh, Vấn đề cốt lõi và Giải pháp tổng thể Single Service Desk.
 * [docs/domain/business-rules.md](domain/business-rules.md) - Quy tắc nghiệp vụ toàn cục của toàn hệ thống.
 * [docs/domain/state-transition.md](domain/state-transition.md) - Vòng đời 5 trạng thái Ticket (`NEW` $\rightarrow$ `IN_PROGRESS` $\rightarrow$ `PENDING` $\rightarrow$ `RESOLVED` $\rightarrow$ `CLOSED`) và Ma trận chuyển đổi.
