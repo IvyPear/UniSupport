@@ -9,6 +9,9 @@
 * **Mô tả:** Sinh viên chọn đơn vị cần hỗ trợ và loại danh mục thủ tục hành chính cụ thể hoặc chọn danh mục "Khác".
 * **Actor:** Sinh viên
 * **Preconditions:** Sinh viên đã đăng nhập thành công.
+* **Trường dữ liệu (Data Fields):**
+  * `department_id`: Integer (Bắt buộc hoặc Null nếu chọn "Khác")
+  * `category_id`: Integer (Bắt buộc, Mã danh mục cụ thể hoặc ID đặc biệt của mục "Khác")
 * **Main Flow:**
   1. Sinh viên bấm “Tạo yêu cầu mới”.
   2. Giao diện hiển thị cây danh mục hỗ trợ phân theo Phòng ban.
@@ -25,12 +28,19 @@
 * **Mô tả:** Sinh viên điền chi tiết nội dung yêu cầu, đính kèm tệp minh chứng và gửi đơn lên hệ thống.
 * **Actor:** Sinh viên
 * **Preconditions:** Đã chọn danh mục ở FR-M05-01.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_code`: String (Hệ thống tự động sinh: `[CAT]-[YYYYMMDD]-[SEQ]`, VD: `AC-20261005-0042`)
+  * `title`: String (Bắt buộc, Max 150 ký tự, Tiêu đề tóm tắt yêu cầu)
+  * `description`: Text (Bắt buộc, Min 10 ký tự, Nội dung trình bày chi tiết)
+  * `attachments`: Array of Files (Tùy chọn, Max 5 file, Dung lượng Max 5MB/file: `.png`, `.jpg`, `.pdf`, `.docx`)
+  * `student_id`: Integer (Khóa ngoại tới tài khoản Sinh viên tạo đơn)
+  * `initial_status`: Enum (`NEW`)
 * **Main Flow:**
   1. Nhập Tiêu đề (tối đa 150 ký tự) và Nội dung chi tiết.
   2. Đính kèm tệp tin (ảnh, PDF, docx - tối đa 5MB/file) nếu có.
   3. Bấm “Gửi yêu cầu”.
   4. Hệ thống kiểm tra dữ liệu đầu vào.
-  5. Tự động sinh mã Ticket duy nhất: `[CAT]-[YYYYMMDD]-[SEQ]` (VD: `AC-20261005-0042`).
+  5. Tự động sinh mã Ticket duy nhất: `[CAT]-[YYYYMMDD]-[SEQ]`.
   6. Lưu vào CSDL với trạng thái khởi tạo `New` (Chưa tiếp nhận).
   7. Hiển thị mã đơn và thông báo tạo thành công.
 * **Business Rules (BR):**

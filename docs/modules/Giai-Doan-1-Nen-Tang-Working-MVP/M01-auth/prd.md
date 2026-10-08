@@ -9,9 +9,13 @@
 * **Mô tả:** Tất cả các vai trò (Sinh viên, Nhân viên, Admin, Quản lý) thực hiện đăng nhập vào hệ thống bằng mã số định danh và mật khẩu cá nhân.
 * **Actor:** Sinh viên, Nhân viên, Admin, Quản lý
 * **Preconditions:** Người dùng đã được cấp tài khoản hợp lệ trong hệ thống UniSupport.
+* **Trường dữ liệu (Data Fields):**
+  * `identity_code`: String (Bắt buộc, Max 20 ký tự, Mã SV / Mã Cán bộ / Mã Định danh)
+  * `password`: String (Bắt buộc, Min 6 - Max 100 ký tự, Mật khẩu cá nhân)
+  * `remember_me`: Boolean (Tùy chọn, Mặc định: `false`)
 * **Main Flow:**
   1. Người dùng truy cập trang Đăng nhập.
-  2. Nhập mã định danh (Mã sinh viên / Mã cán bộ) và mật khẩu.
+  2. Nhập mã định danh và mật khẩu.
   3. Nhấn “Đăng nhập”.
   4. Hệ thống kiểm tra thông tin đăng nhập và trạng thái tài khoản.
   5. Nếu thông tin hợp lệ, hệ thống đăng nhập thành công và chuyển người dùng đến trang chủ theo vai trò.
@@ -36,6 +40,10 @@
 * **Mô tả:** Hệ thống thực hiện xác thực Token JWT/Session và điều hướng người dùng tới Dashboard thuộc đúng phân quyền vai trò.
 * **Actor:** Sinh viên, Nhân viên, Admin, Quản lý
 * **Preconditions:** Đã đăng nhập thành công ở FR-M01-01.
+* **Trường dữ liệu (Data Fields):**
+  * `access_token`: String (Bắt buộc, Mã hóa JWT Token, chứa `user_id`, `role`, `exp`)
+  * `role`: Enum (`STUDENT`, `STAFF`, `MANAGER`, `ADMIN`)
+  * `redirect_url`: String (Tự động tạo theo phân quyền URL)
 * **Main Flow:**
   1. Hệ thống đọc Role và Quyền từ Token xác thực.
   2. Điều hướng tự động: Sinh viên $\rightarrow$ Trang cá nhân yêu cầu; Nhân viên $\rightarrow$ Danh sách xử lý phòng ban; Quản lý $\rightarrow$ Department Dashboard; Admin $\rightarrow$ Global System Dashboard.

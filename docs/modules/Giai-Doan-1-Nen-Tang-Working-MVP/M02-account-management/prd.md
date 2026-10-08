@@ -9,6 +9,11 @@
 * **Mô tả:** Admin thực hiện xem danh sách, tìm kiếm, lọc và quản lý thông tin các tài khoản người dùng trên toàn hệ thống.
 * **Actor:** Admin
 * **Preconditions:** Admin đã đăng nhập hệ thống thành công.
+* **Trường dữ liệu (Data Fields):**
+  * `search_keyword`: String (Tùy chọn, Tìm theo Mã định danh / Họ tên / Email)
+  * `department_id`: Integer (Tùy chọn, Khóa ngoại tới Bảng Phòng ban)
+  * `role_id`: Enum (`STUDENT`, `STAFF`, `MANAGER`, `ADMIN`)
+  * `status_filter`: Enum (`ACTIVE`, `INACTIVE`, `ALL`)
 * **Main Flow:**
   1. Admin truy cập mục Quản lý tài khoản.
   2. Hệ thống tải danh sách tài khoản toàn trường.
@@ -28,6 +33,13 @@
 * **Mô tả:** Admin thực hiện cập nhật thông tin, thay đổi trạng thái hoạt động (Khóa/Mở khóa) hoặc Import danh sách tài khoản hàng loạt từ file tệp.
 * **Actor:** Admin
 * **Preconditions:** Admin có quyền quản trị tài khoản cao nhất.
+* **Trường dữ liệu (Data Fields):**
+  * `account_file`: File (Bắt buộc, Định dạng `.xlsx` hoặc `.csv`, Dung lượng Max 10MB)
+  * `identity_code`: String (Bắt buộc trong file, Duy nhất, Max 20 ký tự)
+  * `full_name`: String (Bắt buộc trong file, Max 100 ký tự)
+  * `department_code`: String (Bắt buộc trong file, Mã phòng ban)
+  * `role`: Enum (`STUDENT`, `STAFF`, `MANAGER`, `ADMIN`)
+  * `status`: Enum (`ACTIVE`, `INACTIVE`)
 * **Main Flow:**
   1. Admin chọn chức năng “Import tài khoản” và tải lên file `.xlsx` hoặc `.csv`.
   2. Hệ thống kiểm tra cấu trúc cột dữ liệu (*Mã định danh, Họ tên, Role, Phòng ban*).

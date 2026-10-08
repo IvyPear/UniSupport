@@ -9,6 +9,12 @@
 * **Mô tả:** Admin tạo mới, chỉnh sửa, ẩn/hiện danh mục dịch vụ hỗ trợ toàn trường và gán Phòng ban tiếp nhận mặc định.
 * **Actor:** Admin
 * **Preconditions:** Đã đăng nhập tài khoản Admin.
+* **Trường dữ liệu (Data Fields):**
+  * `category_code`: String (Bắt buộc, Duy nhất, 2-4 ký tự in hoa, VD: `AC`, `FN`, `IT`)
+  * `category_name`: String (Bắt buộc, Max 100 ký tự, Tên danh mục dịch vụ)
+  * `target_department_id`: Integer (Bắt buộc, Khóa ngoại tới Phòng ban tiếp nhận)
+  * `sla_hours`: Integer (Bắt buộc, Thời gian cam kết xử lý SLA mặc định tính theo giờ, VD: 24, 48)
+  * `is_visible`: Boolean (Mặc định: `true`)
 * **Main Flow:**
   1. Admin truy cập Quản lý danh mục hỗ trợ.
   2. Nhấn “Thêm danh mục mới”.
@@ -28,6 +34,11 @@
 * **Mô tả:** Quản lý phòng ban (Trưởng phòng) xem và cấu hình danh mục dịch vụ chuyên trách thuộc nội bộ phòng ban mình.
 * **Actor:** Quản lý phòng ban
 * **Preconditions:** Tài khoản Role Quản lý đã gắn đúng Phòng ban.
+* **Trường dữ liệu (Data Fields):**
+  * `category_id`: Integer (Khóa chính)
+  * `guideline_notes`: Text (Tùy chọn, Hướng dẫn hồ sơ sinh viên cần chuẩn bị)
+  * `department_sla_hours`: Integer (Bắt buộc, Giờ)
+  * `status`: Enum (`ACTIVE`, `INACTIVE`)
 * **Main Flow:**
   1. Quản lý mở Quản lý danh mục phòng ban.
   2. Xem danh sách danh mục trực thuộc.

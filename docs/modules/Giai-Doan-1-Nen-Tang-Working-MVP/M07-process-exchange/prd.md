@@ -9,6 +9,11 @@
 * **Mô tả:** Nhân viên cập nhật tiến độ công việc, ghi chú nội bộ và theo dõi lịch sử xử lý.
 * **Actor:** Nhân viên
 * **Preconditions:** Đã tiếp nhận Ticket ở FR-M06-02.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Khóa chính Ticket)
+  * `internal_note`: Text (Tùy chọn, Ghi chú nội bộ dành cho nhân sự phòng ban)
+  * `updated_status`: Enum (`IN_PROGRESS`)
+  * `logged_at`: DateTime (Mốc thời gian hệ thống ghi nhận)
 * **Main Flow:**
   1. Mở Ticket đang phụ trách.
   2. Nhập ghi chú xử lý nội bộ.
@@ -23,6 +28,12 @@
 * **Mô tả:** Nhân viên gửi yêu cầu Sinh viên bổ sung thêm thông tin/hồ sơ còn thiếu, chuyển trạng thái đơn sang `Pending` kèm bộ đếm 72h.
 * **Actor:** Nhân viên, Sinh viên
 * **Preconditions:** Ticket đang ở trạng thái `In Progress`.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Bắt buộc)
+  * `request_message`: Text (Bắt buộc, Chi tiết nội dung/tài liệu cần Sinh viên bổ sung)
+  * `new_status`: Enum (`PENDING`)
+  * `pending_start`: DateTime (Thời điểm chuyển Pending)
+  * `pending_deadline`: DateTime (Thời điểm hết hạn = `pending_start` + 72 giờ)
 * **Main Flow:**
   1. Nhân viên chọn “Yêu cầu bổ sung thông tin”.
   2. Bắt buộc nhập chi tiết nội dung thông tin/hồ sơ cần bổ sung.
@@ -41,6 +52,13 @@
 * **Mô tả:** Nhân viên phát hiện Ticket bị gửi nhầm phòng ban chuyên trách, thực hiện thao tác chuyển trả đơn về Admin.
 * **Actor:** Nhân viên
 * **Preconditions:** Ticket thuộc phòng ban hiện tại nhưng không đúng chuyên môn.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Bắt buộc)
+  * `transfer_reason`: Text (Bắt buộc, Lý do cụ thể chuyển trả đơn cho Admin)
+  * `old_department_id`: Integer (Hệ thống tự động điền)
+  * `new_category_id`: Integer (ID đặc biệt của danh mục "Khác")
+  * `new_status`: Enum (`NEW`)
+  * `assignee_id`: Null (Hệ thống làm trống tên người phụ trách cũ)
 * **Main Flow:**
   1. Nhân viên chọn “Báo cáo sai phòng ban”.
   2. Bắt buộc nhập Lý do chuyển trả.

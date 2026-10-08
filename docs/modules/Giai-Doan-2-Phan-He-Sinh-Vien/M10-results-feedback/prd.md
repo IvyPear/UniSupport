@@ -9,6 +9,10 @@
 * **Mô tả:** Sinh viên xem nội dung giải trình kết quả (Resolution Notes) và tải tài liệu trả lời khi đơn ở trạng thái `Resolved`.
 * **Actor:** Sinh viên
 * **Preconditions:** Ticket ở trạng thái `Resolved`.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Bắt buộc)
+  * `resolution_notes`: Text (Chỉ đọc)
+  * `result_file_urls`: Array of Strings (Danh sách đường dẫn tải tệp kết quả)
 * **Main Flow:**
   1. Mở Ticket `Resolved`.
   2. Hệ thống hiển thị phần thông tin Kết quả xử lý từ Nhân viên.
@@ -22,6 +26,9 @@
 * **Mô tả:** Sinh viên chấm điểm đánh giá chất lượng phục vụ từ 1 đến 5 sao cho đơn đã xử lý.
 * **Actor:** Sinh viên
 * **Preconditions:** Ticket ở trạng thái `Resolved`.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Bắt buộc)
+  * `rating_score`: Integer (Bắt buộc, Enum: `1`, `2`, `3`, `4`, `5`)
 * **Main Flow:**
   1. Tại màn hình xem kết quả, chọn mục “Đánh giá chất lượng”.
   2. Chọn số sao từ 1 đến 5 sao.
@@ -37,6 +44,13 @@
 * **Mô tả:** Sinh viên nhập góp ý tùy chọn và xác nhận đóng đơn vĩnh viễn (`Closed`).
 * **Actor:** Sinh viên
 * **Preconditions:** Hoàn tất chọn sao ở FR-M10-02.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Bắt buộc)
+  * `rating_score`: Integer (Bắt buộc, 1-5 sao)
+  * `feedback_comment`: Text (Tùy chọn, Ý kiến đóng góp thêm của Sinh viên)
+  * `new_status`: Enum (`CLOSED`)
+  * `closed_at`: DateTime (Mốc thời gian đóng đơn)
+  * `is_auto_closed`: Boolean (Mặc định `false`, bằng `true` nếu do tự động đóng 72h)
 * **Main Flow:**
   1. Nhập ý kiến nhận xét (tùy chọn).
   2. Bấm “Gửi đánh giá & Đóng đơn”.
@@ -46,4 +60,4 @@
   * **BR-02 (Auto-Close):** Sau 72 giờ ở trạng thái `Resolved` mà Sinh viên không đánh giá, hệ thống tự động gỡ bộ đếm và chuyển thành `Closed`.
 * **Acceptance Criteria (AC):**
   * **AC-01:** Đánh giá xong $\rightarrow$ Chuyển `Closed`, khóa vĩnh viễn mọi thao tác chỉnh sửa/bình luận.
-  * **AC-02 (Kiểm thử BR-02):** Quá 72h không đánh giá $ightarrow$ Tự động đóng đơn sang `Closed`.
+  * **AC-02 (Kiểm thử BR-02):** Quá 72h không đánh giá $\rightarrow$ Tự động đóng đơn sang `Closed`.

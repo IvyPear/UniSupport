@@ -9,6 +9,10 @@
 * **Mô tả:** Admin xem và quản lý danh mục các Vai trò chuẩn trong hệ thống (Sinh viên, Nhân viên, Quản lý, Admin).
 * **Actor:** Admin
 * **Preconditions:** Đăng nhập với quyền Admin tối cao.
+* **Trường dữ liệu (Data Fields):**
+  * `role_id`: String (Khóa chính: `ROLE_STUDENT`, `ROLE_STAFF`, `ROLE_MANAGER`, `ROLE_ADMIN`)
+  * `role_name`: String (Bắt buộc, Max 50 ký tự, Tên tiếng Việt hiển thị)
+  * `user_count`: Integer (Chỉ đọc, Số tài khoản đang gán Role này)
 * **Main Flow:**
   1. Admin mở mục Quản lý vai trò.
   2. Hệ thống hiển thị 4 vai trò cốt lõi và số lượng người dùng đang gán theo từng vai trò.
@@ -24,6 +28,10 @@
 * **Mô tả:** Admin thiết lập Ma trận phân quyền (ACL) cho từng vai trò trong hệ thống.
 * **Actor:** Admin
 * **Preconditions:** Quyền Admin hệ thống.
+* **Trường dữ liệu (Data Fields):**
+  * `role_id`: String (Bắt buộc)
+  * `permission_codes`: Array of Strings (Danh sách mã quyền: `TICKET_READ`, `TICKET_WRITE`, `CATEGORY_MANAGE`...)
+  * `is_enabled`: Boolean (Mặc định: `true`)
 * **Main Flow:**
   1. Admin chọn một Vai trò cần cấu hình.
   2. Hệ thống hiển thị danh sách các quyền hạn chức năng.

@@ -9,6 +9,11 @@
 * **Mô tả:** Nhân viên mở hộp thư tiếp nhận xem danh sách các Ticket mới gửi ở trạng thái `New` thuộc phòng ban mình phụ trách.
 * **Actor:** Nhân viên
 * **Preconditions:** Nhân viên đăng nhập thành công và có phòng ban trực thuộc.
+* **Trường dữ liệu (Data Fields):**
+  * `department_id`: Integer (Bắt buộc, ID phòng ban của Nhân viên hiện tại)
+  * `status`: Enum (`NEW`)
+  * `page_number`: Integer (Mặc định: 1)
+  * `page_size`: Integer (Mặc định: 20)
 * **Main Flow:**
   1. Truy cập mục “Ticket mới tiếp nhận”.
   2. Hệ thống tải danh sách đơn ở trạng thái `New` của phòng ban.
@@ -24,6 +29,11 @@
 * **Mô tả:** Nhân viên chọn một Ticket mới và bấm nút Tiếp nhận (Claim) để chịu trách nhiệm giải quyết.
 * **Actor:** Nhân viên
 * **Preconditions:** Ticket ở trạng thái `New`.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Khóa chính của Ticket)
+  * `staff_id`: Integer (ID Nhân viên bấm nhận việc)
+  * `claimed_at`: DateTime (Mốc thời gian tiếp nhận)
+  * `new_status`: Enum (`IN_PROGRESS`)
 * **Main Flow:**
   1. Mở xem chi tiết Ticket.
   2. Nhấn nút “Tiếp nhận” (Claim).

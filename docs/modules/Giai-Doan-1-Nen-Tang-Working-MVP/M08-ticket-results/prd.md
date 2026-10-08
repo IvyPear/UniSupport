@@ -9,6 +9,10 @@
 * **Mô tả:** Nhân viên nhập văn bản giải trình kết quả (Resolution Notes) và đính kèm tệp kết quả trả lời cho Sinh viên.
 * **Actor:** Nhân viên
 * **Preconditions:** Ticket đang ở trạng thái `In Progress`.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Bắt buộc)
+  * `resolution_notes`: Text (Bắt buộc, Nội dung văn bản trả lời/kết quả giải quyết)
+  * `result_attachments`: Array of Files (Tùy chọn, Max 5MB/file, File văn bản trả lời)
 * **Main Flow:**
   1. Nhân viên chọn “Trả kết quả / Hoàn tất”.
   2. Nhập nội dung chi tiết tại trường *Resolution Notes*.
@@ -17,7 +21,7 @@
 * **Business Rules (BR):**
   * **BR-01:** Trường *Resolution Notes* (Kết quả giải quyết) là bắt buộc. Nếu để trống hệ thống sẽ chặn không cho hoàn thành.
 * **Alternative / Error Flows:**
-  * Nếu chưa nhập *Resolution Notes* $ightarrow$ Hệ thống cảnh báo đỏ và chặn chuyển trạng thái.
+  * Nếu chưa nhập *Resolution Notes* $\rightarrow$ Hệ thống cảnh báo đỏ và chặn chuyển trạng thái.
 * **Acceptance Criteria (AC):**
   * **AC-01:** Nhập đủ nội dung và bấm hoàn thành $\rightarrow$ Lưu kết quả vào CSDL thành công.
 
@@ -27,6 +31,12 @@
 * **Mô tả:** Hệ thống chuyển trạng thái Ticket sang `Resolved` và phát 1 thông báo kết quả duy nhất cho Sinh viên.
 * **Actor:** Nhân viên, Hệ thống
 * **Preconditions:** Hoàn tất FR-M08-01.
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Bắt buộc)
+  * `new_status`: Enum (`RESOLVED`)
+  * `resolved_at`: DateTime (Mốc thời gian hoàn thành)
+  * `notification_type`: Enum (`TICKET_RESOLVED`)
+  * `recipient_id`: Integer (ID tài khoản Sinh viên nhận đơn)
 * **Main Flow:**
   1. Hệ thống cập nhật trạng thái đơn thành `Resolved` (Đã giải quyết).
   2. Ghi nhận thời điểm hoàn thành vào CSDL.

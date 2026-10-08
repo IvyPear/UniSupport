@@ -9,6 +9,10 @@
 * **Mô tả:** Sinh viên xem danh sách các đơn đã gửi và xem màn hình chi tiết tiến độ giải quyết thời gian thực.
 * **Actor:** Sinh viên
 * **Preconditions:** Đã đăng nhập tài khoản Sinh viên.
+* **Trường dữ liệu (Data Fields):**
+  * `student_id`: Integer (Bắt buộc, ID Sinh viên hiện tại)
+  * `ticket_id`: Integer (Khóa chính Ticket khi xem chi tiết)
+  * `current_status`: Enum (`NEW`, `IN_PROGRESS`, `PENDING`, `RESOLVED`, `CLOSED`)
 * **Main Flow:**
   1. Mở menu “Yêu cầu của tôi”.
   2. Danh sách tải toàn bộ các Ticket do chính Sinh viên khởi tạo.
@@ -23,6 +27,9 @@
 ## [FR-M09-02] Tìm kiếm, lọc và theo dõi lịch sử Ticket
 * **Mô tả:** Sinh viên tìm kiếm đơn theo Mã Ticket/Tiêu đề và lọc danh sách theo từng trạng thái xử lý.
 * **Actor:** Sinh viên
+* **Trường dữ liệu (Data Fields):**
+  * `search_keyword`: String (Tùy chọn, Mã Ticket hoặc Tiêu đề)
+  * `status_filter`: Enum (`ALL`, `NEW`, `IN_PROGRESS`, `PENDING`, `RESOLVED`, `CLOSED`)
 * **Main Flow:**
   1. Nhập từ khóa tìm kiếm tại ô Tìm kiếm.
   2. Chọn bộ lọc Trạng thái (`Chưa tiếp nhận`, `Đang xử lý`, `Chờ bổ sung`, `Hoàn thành`).
@@ -36,6 +43,12 @@
 * **Mô tả:** Sinh viên phản hồi nhập nội dung và tải tệp đính kèm bổ sung khi Ticket ở trạng thái `Pending`.
 * **Actor:** Sinh viên
 * **Preconditions:** Ticket đang ở trạng thái `Pending` (Chờ bổ sung).
+* **Trường dữ liệu (Data Fields):**
+  * `ticket_id`: Integer (Bắt buộc)
+  * `supplement_message`: Text (Bắt buộc, Văn bản giải trình/bổ sung của Sinh viên)
+  * `supplement_files`: Array of Files (Tùy chọn, Tệp minh chứng bổ sung, Max 5MB/file)
+  * `new_status`: Enum (`IN_PROGRESS`)
+  * `assignee_id`: Integer (Giữ nguyên ID Nhân viên phụ trách cũ)
 * **Main Flow:**
   1. Mở Ticket `Pending` từ thông báo hoặc danh sách.
   2. Đọc yêu cầu bổ sung của Nhân viên.
@@ -54,6 +67,13 @@
 ## [FR-M09-04] Tiếp nhận thông báo trạng thái và yêu cầu bổ sung
 * **Mô tả:** Sinh viên nhận thông báo In-app (chấm đỏ biểu tượng quả chuông) khi có thay đổi trạng thái đơn.
 * **Actor:** Sinh viên
+* **Trường dữ liệu (Data Fields):**
+  * `notification_id`: Integer (Khóa chính thông báo)
+  * `recipient_id`: Integer (Bắt buộc, ID Sinh viên nhận)
+  * `title`: String (Max 100 ký tự)
+  * `message`: String (Max 255 ký tự)
+  * `target_ticket_id`: Integer (Bắt buộc, ID Ticket để chuyển hướng khi nhấp chuột)
+  * `is_read`: Boolean (Mặc định: `false`)
 * **Main Flow:**
   1. Hệ thống phát thông báo In-app khi đơn đổi trạng thái hoặc có yêu cầu bổ sung.
   2. Sinh viên bấm vào thông báo.
