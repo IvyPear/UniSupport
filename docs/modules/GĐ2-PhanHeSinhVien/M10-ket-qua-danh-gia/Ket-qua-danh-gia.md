@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M10
 * **Tên Phân hệ:** M10: Kết quả & Đánh giá (Results & Feedback)
-* **Phân nhóm Giai đoạn:** `Giai-Doan-2-Phan-He-Sinh-Vien`
+* **Phân nhóm Giai đoạn:** `GĐ2-PhanHeSinhVien`
 * **Đối tượng phụ trách:** Sinh viên
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

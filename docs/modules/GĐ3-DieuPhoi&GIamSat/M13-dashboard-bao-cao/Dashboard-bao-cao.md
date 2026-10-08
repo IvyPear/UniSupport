@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M13
 * **Tên Phân hệ:** M13: Dashboard & Báo cáo (Dashboard & Reporting)
-* **Phân nhóm Giai đoạn:** `Giai-Doan-3-Dieu-Phoi-Giam-Sat`
+* **Phân nhóm Giai đoạn:** `GĐ3-DieuPhoi&GIamSat`
 * **Đối tượng phụ trách:** Quản lý, Admin
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

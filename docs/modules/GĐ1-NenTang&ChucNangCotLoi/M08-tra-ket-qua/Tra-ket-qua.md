@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M08
 * **Tên Phân hệ:** M08: Trả kết quả — Nhân viên (Ticket Results)
-* **Phân nhóm Giai đoạn:** `Giai-Doan-1-Nen-Tang-Working-MVP`
+* **Phân nhóm Giai đoạn:** `GĐ1-NenTang&ChucNangCotLoi`
 * **Đối tượng phụ trách:** Nhân viên
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

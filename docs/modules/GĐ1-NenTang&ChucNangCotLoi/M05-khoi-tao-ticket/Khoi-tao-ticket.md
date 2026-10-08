@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M05
 * **Tên Phân hệ:** M05: Khởi tạo Ticket — Sinh viên (Create Ticket)
-* **Phân nhóm Giai đoạn:** `Giai-Doan-1-Nen-Tang-Working-MVP`
+* **Phân nhóm Giai đoạn:** `GĐ1-NenTang&ChucNangCotLoi`
 * **Đối tượng phụ trách:** Sinh viên
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

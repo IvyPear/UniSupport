@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M03
 * **Tên Phân hệ:** M03: Vai trò & Phân quyền Admin (Roles & Permissions)
-* **Phân nhóm Giai đoạn:** `Giai-Doan-1-Nen-Tang-Working-MVP`
+* **Phân nhóm Giai đoạn:** `GĐ1-NenTang&ChucNangCotLoi`
 * **Đối tượng phụ trách:** Admin
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

@@ -1,13 +1,13 @@
 # 4. PHÂN HỆ QUẢN LÝ / TRƯỞNG PHÒNG (MANAGER WORKFLOWS)
 
-> **Ánh xạ Phân hệ:** [M04-quan-ly-danh-muc](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M04-quan-ly-danh-muc/), [M11-quan-ly-dieu-phoi](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-quan-ly-dieu-phoi/), [M12-giam-sat-tien-do](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-bao-cao/)
+> **Ánh xạ Phân hệ:** [M04-quan-ly-danh-muc](../modules/GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/), [M11-quan-ly-dieu-phoi](../modules/GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/), [M12-giam-sat-tien-do](../modules/GĐ3-DieuPhoi&GIamSat/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../modules/GĐ3-DieuPhoi&GIamSat/M13-dashboard-bao-cao/)
 
 ---
 
 ### QL-01 — Theo dõi tổng quan phòng ban
 
 * **Tác nhân:** Quản lý (Trưởng phòng/Phó phòng ban).
-* **Ánh xạ Module:** [M13-dashboard-bao-cao](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-bao-cao/) (`[FR-M13-01]`)
+* **Ánh xạ Module:** [M13-dashboard-bao-cao](../modules/GĐ3-DieuPhoi&GIamSat/M13-dashboard-bao-cao/) (`[FR-M13-01]`)
 * **Luồng chính:**
   1. Đăng nhập hệ thống, mở **Department Dashboard**.
   2. Hệ thống xác định phạm vi phòng ban trực thuộc của Quản lý.
@@ -28,7 +28,7 @@ graph TD
 ### QL-02 — Phân công nhanh
 
 * **Tác nhân:** Quản lý phòng ban.
-* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-quan-ly-dieu-phoi/) (`[FR-M11-01]`)
+* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/) (`[FR-M11-01]`)
 * **Luồng chính:**
   1. Mở danh sách Ticket của phòng ban đang ở trạng thái `Chưa tiếp nhận`.
   2. Chọn Ticket cần điều phối, bấm **Phân công** (`Assign / Re-assign`).
@@ -52,7 +52,7 @@ graph TD
 ### QL-03 — Giám sát tiến độ và tồn đọng
 
 * **Tác nhân:** Quản lý phòng ban.
-* **Ánh xạ Module:** [M12-giam-sat-tien-do](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-giam-sat-tien-do/) (`[FR-M12-01]`, `[FR-M12-02]`)
+* **Ánh xạ Module:** [M12-giam-sat-tien-do](../modules/GĐ3-DieuPhoi&GIamSat/M12-giam-sat-tien-do/) (`[FR-M12-01]`, `[FR-M12-02]`)
 * **Luồng chính:**
   1. Mở menu **Giám sát yêu cầu**.
   2. Hệ thống liệt kê danh sách đơn tồn đọng lâu ngày, đơn quá hạn SLA hoặc đơn kẹt ở trạng thái `Pending`.
@@ -74,7 +74,7 @@ graph TD
 ### QL-04 — Theo dõi hiệu suất Nhân viên
 
 * **Tác nhân:** Quản lý phòng ban.
-* **Ánh xạ Module:** [M12-giam-sat-tien-do](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-giam-sat-tien-do/) (`[FR-M12-01]`), [M13-dashboard-bao-cao](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-bao-cao/) (`[FR-M13-03]`)
+* **Ánh xạ Module:** [M12-giam-sat-tien-do](../modules/GĐ3-DieuPhoi&GIamSat/M12-giam-sat-tien-do/) (`[FR-M12-01]`), [M13-dashboard-bao-cao](../modules/GĐ3-DieuPhoi&GIamSat/M13-dashboard-bao-cao/) (`[FR-M13-03]`)
 * **Luồng chính:**
   1. Truy cập danh sách Nhân viên thuộc phòng ban.
   2. Chọn 1 Nhân viên cụ thể để xem báo cáo chi tiết.
@@ -95,7 +95,7 @@ graph TD
 ### QL-05 — Quản lý danh mục phòng ban
 
 * **Tác nhân:** Quản lý phòng ban.
-* **Ánh xạ Module:** [M04-quan-ly-danh-muc](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M04-quan-ly-danh-muc/) (`[FR-M04-02]`)
+* **Ánh xạ Module:** [M04-quan-ly-danh-muc](../modules/GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/) (`[FR-M04-02]`)
 * **Luồng chính:**
   1. Mở menu **Danh mục hỗ trợ phòng ban**.
   2. Hệ thống liệt kê danh mục dịch vụ hiện có của phòng ban.
@@ -118,7 +118,7 @@ graph TD
 ### QL-06 — Báo cáo và đánh giá
 
 * **Tác nhân:** Quản lý phòng ban.
-* **Ánh xạ Module:** [M13-dashboard-bao-cao](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-bao-cao/) (`[FR-M13-02]`, `[FR-M13-03]`)
+* **Ánh xạ Module:** [M13-dashboard-bao-cao](../modules/GĐ3-DieuPhoi&GIamSat/M13-dashboard-bao-cao/) (`[FR-M13-02]`, `[FR-M13-03]`)
 * **Luồng chính:**
   1. Mở menu **Báo cáo & Thống kê**.
   2. Thiết lập bộ lọc: Tuần/Tháng/Quý/Năm và loại danh mục.

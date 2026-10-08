@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M07
 * **Tên Phân hệ:** M07: Xử lý & Trao đổi — Nhân viên (Process & Exchange)
-* **Phân nhóm Giai đoạn:** `Giai-Doan-1-Nen-Tang-Working-MVP`
+* **Phân nhóm Giai đoạn:** `GĐ1-NenTang&ChucNangCotLoi`
 * **Đối tượng phụ trách:** Nhân viên
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

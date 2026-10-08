@@ -33,11 +33,11 @@ flowchart TD
 
 | Trạng thái | Ý nghĩa | Thao tác chuyển đến | Ánh xạ Module |
 |---|---|---|---|
-| **Chưa tiếp nhận** | Ticket mới được tạo, chưa có người nhận | Sinh viên gửi Ticket hoặc Ticket được điều chuyển về hàng chờ | [M05-khoi-tao-ticket](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M05-khoi-tao-ticket/) |
-| **Đã tiếp nhận** | Có Nhân viên phụ trách | Nhân viên bấm nhận Ticket (Claim) hoặc Quản lý phân công | [M06-tiep-nhan-ticket](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M06-tiep-nhan-ticket/) |
-| **Đang xử lý** | Nhân viên đang thực hiện công việc | Nhân viên bắt đầu xử lý; Sinh viên bổ sung thông tin thành công | [M07-xu-ly-trao-doi](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-xu-ly-trao-doi/) |
-| **Chờ bổ sung** | Đang chờ Sinh viên cung cấp thêm dữ liệu | Nhân viên gửi yêu cầu bổ sung thông tin (Pending 72h) | [M07-xu-ly-trao-doi](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-xu-ly-trao-doi/), [M09](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M09-theo-doi-bo-sung/) |
-| **Hoàn thành** | Nhân viên đã gửi kết quả xử lý | Nhân viên trả kết quả thành công | [M08-tra-ket-qua](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M08-tra-ket-qua/) |
+| **Chưa tiếp nhận** | Ticket mới được tạo, chưa có người nhận | Sinh viên gửi Ticket hoặc Ticket được điều chuyển về hàng chờ | [M05-khoi-tao-ticket](../modules/GĐ1-NenTang&ChucNangCotLoi/M05-khoi-tao-ticket/) |
+| **Đã tiếp nhận** | Có Nhân viên phụ trách | Nhân viên bấm nhận Ticket (Claim) hoặc Quản lý phân công | [M06-tiep-nhan-ticket](../modules/GĐ1-NenTang&ChucNangCotLoi/M06-tiep-nhan-ticket/) |
+| **Đang xử lý** | Nhân viên đang thực hiện công việc | Nhân viên bắt đầu xử lý; Sinh viên bổ sung thông tin thành công | [M07-xu-ly-trao-doi](../modules/GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/) |
+| **Chờ bổ sung** | Đang chờ Sinh viên cung cấp thêm dữ liệu | Nhân viên gửi yêu cầu bổ sung thông tin (Pending 72h) | [M07-xu-ly-trao-doi](../modules/GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/), [M09](../modules/GĐ2-PhanHeSinhVien/M09-theo-doi-bo-sung/) |
+| **Hoàn thành** | Nhân viên đã gửi kết quả xử lý | Nhân viên trả kết quả thành công | [M08-tra-ket-qua](../modules/GĐ1-NenTang&ChucNangCotLoi/M08-tra-ket-qua/) |
 
 ---
 

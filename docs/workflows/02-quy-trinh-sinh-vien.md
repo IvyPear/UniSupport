@@ -1,6 +1,6 @@
 # 2. PHÂN HỆ SINH VIÊN (STUDENT WORKFLOWS)
 
-> **Ánh xạ Phân hệ:** [M05-khoi-tao-ticket](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M05-khoi-tao-ticket/), [M09-theo-doi-bo-sung](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M09-theo-doi-bo-sung/), [M10-ket-qua-danh-gia](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M10-ket-qua-danh-gia/)
+> **Ánh xạ Phân hệ:** [M05-khoi-tao-ticket](../modules/GĐ1-NenTang&ChucNangCotLoi/M05-khoi-tao-ticket/), [M09-theo-doi-bo-sung](../modules/GĐ2-PhanHeSinhVien/M09-theo-doi-bo-sung/), [M10-ket-qua-danh-gia](../modules/GĐ2-PhanHeSinhVien/M10-ket-qua-danh-gia/)
 
 ---
 
@@ -8,7 +8,7 @@
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Đã đăng nhập; hệ thống có danh mục phòng ban hoạt động.
-* **Ánh xạ Module:** [M05-khoi-tao-ticket](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M05-khoi-tao-ticket/) (`[FR-M05-01]`, `[FR-M05-02]`)
+* **Ánh xạ Module:** [M05-khoi-tao-ticket](../modules/GĐ1-NenTang&ChucNangCotLoi/M05-khoi-tao-ticket/) (`[FR-M05-01]`, `[FR-M05-02]`)
 * **Luồng chính:**
   1. Chọn **Tạo yêu cầu**.
   2. Hệ thống hiển thị danh sách phòng ban và danh mục.
@@ -42,7 +42,7 @@ graph TD
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Sinh viên có Ticket đã khởi tạo.
-* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M09-theo-doi-bo-sung/) (`[FR-M09-01]`, `[FR-M09-02]`)
+* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/GĐ2-PhanHeSinhVien/M09-theo-doi-bo-sung/) (`[FR-M09-01]`, `[FR-M09-02]`)
 * **Luồng chính:**
   1. Mở menu **Yêu cầu của tôi**.
   2. Hệ thống tải danh sách Ticket thuộc sở hữu của tài khoản hiện tại.
@@ -67,7 +67,7 @@ graph TD
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Ticket đang ở trạng thái **Chờ bổ sung** (`Pending`).
-* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M09-theo-doi-bo-sung/) (`[FR-M09-03]`, `[FR-M09-04]`)
+* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/GĐ2-PhanHeSinhVien/M09-theo-doi-bo-sung/) (`[FR-M09-03]`, `[FR-M09-04]`)
 * **Luồng chính:**
   1. Sinh viên nhận thông báo yêu cầu bổ sung từ Nhân viên.
   2. Mở Ticket, đọc nội dung yêu cầu cụ thể.
@@ -95,7 +95,7 @@ graph TD
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Ticket ở trạng thái **Hoàn thành** (`Resolved`).
-* **Ánh xạ Module:** [M10-ket-qua-danh-gia](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M10-ket-qua-danh-gia/) (`[FR-M10-01]`)
+* **Ánh xạ Module:** [M10-ket-qua-danh-gia](../modules/GĐ2-PhanHeSinhVien/M10-ket-qua-danh-gia/) (`[FR-M10-01]`)
 * **Luồng chính:**
   1. Nhận thông báo có kết quả giải quyết từ hệ thống.
   2. Mở thông báo hoặc mở chi tiết Ticket từ danh sách.
@@ -120,7 +120,7 @@ graph TD
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Ticket ở trạng thái **Hoàn thành** (`Resolved`).
-* **Ánh xạ Module:** [M10-ket-qua-danh-gia](../modules/Giai-Doan-2-Phan-He-Sinh-Vien/M10-ket-qua-danh-gia/) (`[FR-M10-02]`, `[FR-M10-03]`)
+* **Ánh xạ Module:** [M10-ket-qua-danh-gia](../modules/GĐ2-PhanHeSinhVien/M10-ket-qua-danh-gia/) (`[FR-M10-02]`, `[FR-M10-03]`)
 * **Luồng chính:**
   1. Mở Ticket đã hoàn thành và chọn **Đánh giá**.
   2. Giao diện hiển thị thang điểm 1–5 sao và ô nhập nhận xét/góp ý.

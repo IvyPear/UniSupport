@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M04
 * **Tên Phân hệ:** M04: Quản lý danh mục hỗ trợ (Category Management)
-* **Phân nhóm Giai đoạn:** `Giai-Doan-1-Nen-Tang-Working-MVP`
+* **Phân nhóm Giai đoạn:** `GĐ1-NenTang&ChucNangCotLoi`
 * **Đối tượng phụ trách:** Admin, Quản lý
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

@@ -1,13 +1,13 @@
 # 5. PHÂN HỆ QUẢN TRỊ VIÊN (ADMIN WORKFLOWS)
 
-> **Ánh xạ Phân hệ:** [M02-quan-ly-tai-khoan](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M02-quan-ly-tai-khoan/), [M03-vai-tro-phan-quyen](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M03-vai-tro-phan-quyen/), [M04-quan-ly-danh-muc](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M04-quan-ly-danh-muc/), [M11-quan-ly-dieu-phoi](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-quan-ly-dieu-phoi/), [M12-giam-sat-tien-do](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-bao-cao/)
+> **Ánh xạ Phân hệ:** [M02-quan-ly-tai-khoan](../modules/GĐ1-NenTang&ChucNangCotLoi/M02-quan-ly-tai-khoan/), [M03-vai-tro-phan-quyen](../modules/GĐ1-NenTang&ChucNangCotLoi/M03-vai-tro-phan-quyen/), [M04-quan-ly-danh-muc](../modules/GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/), [M11-quan-ly-dieu-phoi](../modules/GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/), [M12-giam-sat-tien-do](../modules/GĐ3-DieuPhoi&GIamSat/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../modules/GĐ3-DieuPhoi&GIamSat/M13-dashboard-bao-cao/)
 
 ---
 
 ### AD-01 — Quản lý tài khoản
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M02-quan-ly-tai-khoan](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M02-quan-ly-tai-khoan/) (`[FR-M02-01]`, `[FR-M02-02]`)
+* **Ánh xạ Module:** [M02-quan-ly-tai-khoan](../modules/GĐ1-NenTang&ChucNangCotLoi/M02-quan-ly-tai-khoan/) (`[FR-M02-01]`, `[FR-M02-02]`)
 * **Luồng chính:**
   1. Mở menu **Quản lý tài khoản**.
   2. Xem danh sách người dùng toàn trường; lọc theo Role, Phòng ban, Trạng thái.
@@ -31,7 +31,7 @@ graph TD
 ### AD-02 — Vai trò và phân quyền
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M03-vai-tro-phan-quyen](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M03-vai-tro-phan-quyen/) (`[FR-M03-01]`, `[FR-M03-02]`)
+* **Ánh xạ Module:** [M03-vai-tro-phan-quyen](../modules/GĐ1-NenTang&ChucNangCotLoi/M03-vai-tro-phan-quyen/) (`[FR-M03-01]`, `[FR-M03-02]`)
 * **Luồng chính:**
   1. Mở menu **Vai trò & Phân quyền**.
   2. Hiển thị danh sách Vai trò (`Student`, `Staff`, `Manager`, `Admin`) và Ma trận quyền chi tiết (ACL).
@@ -53,7 +53,7 @@ graph TD
 ### AD-03 — Quản lý danh mục toàn trường
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M04-quan-ly-danh-muc](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M04-quan-ly-danh-muc/) (`[FR-M04-01]`)
+* **Ánh xạ Module:** [M04-quan-ly-danh-muc](../modules/GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/) (`[FR-M04-01]`)
 * **Luồng chính:**
   1. Mở menu **Quản lý danh mục toàn trường**.
   2. Xem cây danh mục hỗ trợ chia theo từng Phòng ban.
@@ -75,7 +75,7 @@ graph TD
 ### AD-04 — Phân loại Ticket "Khác"
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-quan-ly-dieu-phoi/) (`[FR-M11-02]`)
+* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/) (`[FR-M11-02]`)
 * **Luồng chính:**
   1. Sinh viên khởi tạo đơn chọn danh mục **Khác**.
   2. Hệ thống chuyển đơn về Hàng chờ phân loại của Admin.
@@ -99,7 +99,7 @@ graph TD
 ### AD-05 — Điều chuyển Ticket sai phòng ban
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-quan-ly-dieu-phoi/) (`[FR-M11-03]`)
+* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/) (`[FR-M11-03]`)
 * **Luồng chính:**
   1. Nhân viên chuyển trả đơn sai phòng ban về cho Admin .
   2. Đơn xuất hiện trong danh sách **Đơn sai phòng ban chờ điều chuyển** của Admin.
@@ -122,7 +122,7 @@ graph TD
 ### AD-06 — Theo dõi và thống kê toàn trường
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M12-giam-sat-tien-do](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-giam-sat-tien-do/) (`[FR-M12-03]`), [M13-dashboard-bao-cao](../modules/Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-bao-cao/) (`[FR-M13-01]`)
+* **Ánh xạ Module:** [M12-giam-sat-tien-do](../modules/GĐ3-DieuPhoi&GIamSat/M12-giam-sat-tien-do/) (`[FR-M12-03]`), [M13-dashboard-bao-cao](../modules/GĐ3-DieuPhoi&GIamSat/M13-dashboard-bao-cao/) (`[FR-M13-01]`)
 * **Luồng chính:**
   1. Truy cập **Global Dashboard**.
   2. Hệ thống tổng hợp dữ liệu Ticket trên quy mô toàn hệ thống trường.
