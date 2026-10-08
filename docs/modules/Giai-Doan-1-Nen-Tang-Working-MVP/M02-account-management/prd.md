@@ -1,36 +1,42 @@
-# PHÂN HỆ: M02 — QUẢN LÝ TÀI KHOẢN — ADMIN
+# PHÂN HỆ: M02 — QUẢN LÝ TÀI KHOẢN ADMIN (ACCOUNT MANAGEMENT)
 
 > **Giai đoạn:** GIAI ĐOẠN 1 — NỀN TẢNG & WORKING MVP  
-> **Thư mục Phân hệ:** `Giai-Doan-1-Nen-Tang-Working-MVP/M02-account-management`  
-> **Actors:** Admin  
+> **Actor chính:** Admin  
 
 ---
 
 ## [FR-M02-01] Tạo, xem, tìm kiếm và lọc tài khoản
-* **Mô tả:** Tạo, xem, tìm kiếm và lọc tài khoản.
-* **Actor:** Admin.
-* **Preconditions:** Phân hệ Quản lý tài khoản — Admin thuộc GIAI ĐOẠN 1 — NỀN TẢNG & WORKING MVP được kích hoạt.
+* **Mô tả:** Admin thực hiện xem danh sách, tìm kiếm, lọc và quản lý thông tin các tài khoản người dùng trên toàn hệ thống.
+* **Actor:** Admin
+* **Preconditions:** Admin đã đăng nhập hệ thống thành công.
 * **Main Flow:**
-  1. Truy cập chức năng 'Tạo, xem, tìm kiếm và lọc tài khoản'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
+  1. Admin truy cập mục Quản lý tài khoản.
+  2. Hệ thống tải danh sách tài khoản toàn trường.
+  3. Admin nhập từ khóa tìm kiếm (Mã định danh, Họ tên) hoặc chọn lọc theo Phòng ban / Vai trò / Trạng thái (`Active`/`Inactive`).
+  4. Hệ thống trả về danh sách kết quả phù hợp theo thời gian thực.
+* **Business Rules (BR):**
+  * **BR-01:** Hệ thống vận hành cơ chế đóng, tài khoản tạo mới phải gắn với Mã định danh chính thức và Vai trò hợp lệ.
+* **Alternative / Error Flows:**
+  * Nếu không tìm thấy kết quả phù hợp, hệ thống hiển thị thông báo *“Không tìm thấy tài khoản phù hợp”*.
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Lọc theo phòng ban/vai trò trả về đúng danh sách người dùng thuộc phân vùng đó.
+  * **AC-02:** Tìm kiếm theo Mã định danh hoặc Họ tên hiển thị đúng thông tin tài khoản.
 
 ---
 
-## [FR-M02-02] Cập nhật, khóa, mở khóa và xóa tài khoản
-* **Mô tả:** Cập nhật, khóa, mở khóa và xóa tài khoản.
-* **Actor:** Admin.
-* **Preconditions:** Phân hệ Quản lý tài khoản — Admin thuộc GIAI ĐOẠN 1 — NỀN TẢNG & WORKING MVP được kích hoạt.
+## [FR-M02-02] Cập nhật, khóa, mở khóa và Import tài khoản từ Excel/CSV
+* **Mô tả:** Admin thực hiện cập nhật thông tin, thay đổi trạng thái hoạt động (Khóa/Mở khóa) hoặc Import danh sách tài khoản hàng loạt từ file tệp.
+* **Actor:** Admin
+* **Preconditions:** Admin có quyền quản trị tài khoản cao nhất.
 * **Main Flow:**
-  1. Truy cập chức năng 'Cập nhật, khóa, mở khóa và xóa tài khoản'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
-
-
----
-
-## Quy tắc Nghiệm thu & Phụ thuộc
-* **Database thật:** Dữ liệu được ghi nhận trực tiếp trên CSDL thật, không sử dụng mock data.
-* **Nghiệm thu cuốn chiếu:** Hoàn thiện và đóng gói nghiệm thu module trước khi chuyển tiếp.
+  1. Admin chọn chức năng “Import tài khoản” và tải lên file `.xlsx` hoặc `.csv`.
+  2. Hệ thống kiểm tra cấu trúc cột dữ liệu (*Mã định danh, Họ tên, Role, Phòng ban*).
+  3. Với mã định danh chưa có: Tạo tài khoản mới với mật khẩu mặc định.
+  4. Với mã định danh đã có: Cập nhật họ tên, phòng ban và **giữ nguyên mật khẩu hiện tại**.
+  5. Khi chuyển trạng thái sang `Inactive` (Khóa): Hệ thống văng phiên làm việc của người dùng đó lập tức.
+* **Business Rules (BR):**
+  * **BR-01:** Không được phép xóa cứng các tài khoản đã từng phát sinh Ticket để bảo toàn dữ liệu lịch sử.
+  * **BR-02:** File import sai định dạng hoặc thiếu trường bắt buộc sẽ bị chặn và trả về báo cáo dòng lỗi cho Admin.
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Import file Excel hợp lệ $\rightarrow$ Khởi tạo/cập nhật tài khoản thành công và hiển thị tổng số dòng thành công/thất bại.
+  * **AC-02:** Khóa tài khoản `Inactive` $\rightarrow$ Người dùng bị văng phiên đăng nhập ngay lập tức và không thể đăng nhập lại.

@@ -1,48 +1,40 @@
-# PHÂN HỆ: M12 — GIÁM SÁT TIẾN ĐỘ
+# PHÂN HỆ: M12 — GIÁM SÁT TIẾN ĐỘ (PROGRESS MONITORING)
 
 > **Giai đoạn:** GIAI ĐOẠN 3 — ĐIỀU PHỐI & GIÁM SÁT  
-> **Thư mục Phân hệ:** `Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-progress-monitoring`  
-> **Actors:** Quản lý, Admin  
+> **Actor chính:** Quản lý phòng ban, Admin  
 
 ---
 
-## [FR-M12-01] Quản lý theo dõi tiến độ và hiệu suất nhân viên
-* **Mô tả:** Quản lý theo dõi tiến độ và hiệu suất nhân viên.
-* **Actor:** Quản lý, Admin.
-* **Preconditions:** Phân hệ Giám sát tiến độ thuộc GIAI ĐOẠN 3 — ĐIỀU PHỐI & GIÁM SÁT được kích hoạt.
+## [FR-M12-01] Quản lý theo dõi tiến độ và hiệu suất nhân viên phòng ban
+* **Mô tả:** Quản lý phòng ban theo dõi danh sách các đơn đang xử lý, tiến độ giải quyết và tải khối lượng công việc của từng Nhân viên.
+* **Actor:** Quản lý phòng ban
+* **Preconditions:** Role Quản lý phòng ban.
 * **Main Flow:**
-  1. Truy cập chức năng 'Quản lý theo dõi tiến độ và hiệu suất nhân viên'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
+  1. Mở màn hình Giám sát tiến độ phòng ban.
+  2. Hệ thống tổng hợp số đơn `New`, `In Progress`, `Pending`, `Resolved` theo từng Nhân viên.
+  3. Quản lý nhấp xem danh sách chi tiết công việc của một Nhân viên cụ thể.
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Hiển thị chính xác bảng phân bổ khối lượng công việc thực tế của từng nhân sự phòng ban.
 
 ---
 
-## [FR-M12-02] Theo dõi Ticket tồn đọng, chưa tiếp nhận và quá hạn
-* **Mô tả:** Theo dõi Ticket tồn đọng, chưa tiếp nhận và quá hạn.
-* **Actor:** Quản lý, Admin.
-* **Preconditions:** Phân hệ Giám sát tiến độ thuộc GIAI ĐOẠN 3 — ĐIỀU PHỐI & GIÁM SÁT được kích hoạt.
+## [FR-M12-02] Theo dõi Ticket tồn đọng, chưa tiếp nhận và quá hạn SLA
+* **Mô tả:** Hệ thống hiển thị cảnh báo đỏ đối với các Ticket chưa có người nhận quá lâu hoặc có nguy cơ quá hạn SLA.
+* **Actor:** Quản lý phòng ban
 * **Main Flow:**
-  1. Truy cập chức năng 'Theo dõi Ticket tồn đọng, chưa tiếp nhận và quá hạn'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
+  1. Mở danh sách Giám sát cảnh báo.
+  2. Hệ thống lọc và tô đỏ các Ticket quá hạn đếm ngược 72h hoặc quá hạn SLA phòng ban.
+  3. Quản lý xem chi tiết để can thiệp điều phối (Re-assign).
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Ticket vượt mốc thời gian quy định lập tức hiển thị nhãn cảnh báo đỏ nổi bật.
 
 ---
 
-## [FR-M12-03] Admin theo dõi tiến độ xử lý toàn trường
-* **Mô tả:** Admin theo dõi tiến độ xử lý toàn trường.
-* **Actor:** Quản lý, Admin.
-* **Preconditions:** Phân hệ Giám sát tiến độ thuộc GIAI ĐOẠN 3 — ĐIỀU PHỐI & GIÁM SÁT được kích hoạt.
+## [FR-M12-03] Admin theo dõi tiến độ xử lý và cảnh báo toàn trường
+* **Mô tả:** Admin giám sát chỉ số quá hạn và điểm nghẽn tiến độ trên phạm vi tất cả các phòng ban trong toàn trường.
+* **Actor:** Admin
 * **Main Flow:**
-  1. Truy cập chức năng 'Admin theo dõi tiến độ xử lý toàn trường'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
-
-
----
-
-## Quy tắc Nghiệm thu & Phụ thuộc
-* **Database thật:** Dữ liệu được ghi nhận trực tiếp trên CSDL thật, không sử dụng mock data.
-* **Nghiệm thu cuốn chiếu:** Hoàn thiện và đóng gói nghiệm thu module trước khi chuyển tiếp.
+  1. Admin mở Giám sát tiến độ toàn trường.
+  2. Hệ thống thống kê danh sách các phòng ban có tỷ lệ tồn đọng hoặc quá hạn cao nhất.
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Hiển thị đầy đủ số liệu giám sát và điểm nghẽn tiến độ của toàn hệ thống.

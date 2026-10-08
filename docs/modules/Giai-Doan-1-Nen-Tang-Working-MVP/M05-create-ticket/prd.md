@@ -1,36 +1,43 @@
-# PHÂN HỆ: M05 — KHỞI TẠO TICKET — SINH VIÊN
+# PHÂN HỆ: M05 — KHỞI TẠO TICKET — SINH VIÊN (CREATE TICKET)
 
 > **Giai đoạn:** GIAI ĐOẠN 1 — NỀN TẢNG & WORKING MVP  
-> **Thư mục Phân hệ:** `Giai-Doan-1-Nen-Tang-Working-MVP/M05-create-ticket`  
-> **Actors:** Sinh viên  
+> **Actor chính:** Sinh viên  
 
 ---
 
 ## [FR-M05-01] Chọn phòng ban, danh mục hoặc “Khác”
-* **Mô tả:** Chọn phòng ban, danh mục hoặc “Khác”.
-* **Actor:** Sinh viên.
-* **Preconditions:** Phân hệ Khởi tạo Ticket — Sinh viên thuộc GIAI ĐOẠN 1 — NỀN TẢNG & WORKING MVP được kích hoạt.
+* **Mô tả:** Sinh viên chọn đơn vị cần hỗ trợ và loại danh mục thủ tục hành chính cụ thể hoặc chọn danh mục "Khác".
+* **Actor:** Sinh viên
+* **Preconditions:** Sinh viên đã đăng nhập thành công.
 * **Main Flow:**
-  1. Truy cập chức năng 'Chọn phòng ban, danh mục hoặc “Khác”'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
+  1. Sinh viên bấm “Tạo yêu cầu mới”.
+  2. Giao diện hiển thị cây danh mục hỗ trợ phân theo Phòng ban.
+  3. Sinh viên chọn Phòng ban $\rightarrow$ Chọn Danh mục tương ứng.
+  4. Hoặc nếu không biết rõ đơn vị, Sinh viên chọn danh mục “Khác”.
+* **Business Rules (BR):**
+  * **BR-01:** Đơn chọn danh mục “Khác” sẽ được chuyển về Hàng chờ của Admin để phân loại định tuyến.
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Chọn đúng phòng ban/danh mục $\rightarrow$ Form tải đúng thông tin hướng dẫn dịch vụ.
 
 ---
 
-## [FR-M05-02] Nhập thông tin, đính kèm và gửi Ticket
-* **Mô tả:** Nhập thông tin, đính kèm và gửi Ticket.
-* **Actor:** Sinh viên.
-* **Preconditions:** Phân hệ Khởi tạo Ticket — Sinh viên thuộc GIAI ĐOẠN 1 — NỀN TẢNG & WORKING MVP được kích hoạt.
+## [FR-M05-02] Nhập thông tin, đính kèm file và gửi Ticket
+* **Mô tả:** Sinh viên điền chi tiết nội dung yêu cầu, đính kèm tệp minh chứng và gửi đơn lên hệ thống.
+* **Actor:** Sinh viên
+* **Preconditions:** Đã chọn danh mục ở FR-M05-01.
 * **Main Flow:**
-  1. Truy cập chức năng 'Nhập thông tin, đính kèm và gửi Ticket'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
-
-
----
-
-## Quy tắc Nghiệm thu & Phụ thuộc
-* **Database thật:** Dữ liệu được ghi nhận trực tiếp trên CSDL thật, không sử dụng mock data.
-* **Nghiệm thu cuốn chiếu:** Hoàn thiện và đóng gói nghiệm thu module trước khi chuyển tiếp.
+  1. Nhập Tiêu đề (tối đa 150 ký tự) và Nội dung chi tiết.
+  2. Đính kèm tệp tin (ảnh, PDF, docx - tối đa 5MB/file) nếu có.
+  3. Bấm “Gửi yêu cầu”.
+  4. Hệ thống kiểm tra dữ liệu đầu vào.
+  5. Tự động sinh mã Ticket duy nhất: `[CAT]-[YYYYMMDD]-[SEQ]` (VD: `AC-20261005-0042`).
+  6. Lưu vào CSDL với trạng thái khởi tạo `New` (Chưa tiếp nhận).
+  7. Hiển thị mã đơn và thông báo tạo thành công.
+* **Business Rules (BR):**
+  * **BR-01:** Tiêu đề và Nội dung là trường bắt buộc không được bỏ trống.
+  * **BR-02:** Tệp đính kèm vượt quá 5MB hoặc sai định dạng sẽ bị từ chối.
+* **Alternative / Error Flows:**
+  * Bỏ trống tiêu đề hoặc nội dung $\rightarrow$ Hệ thống cảnh báo đỏ tại chỗ và không cho gửi.
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Nhập đủ thông tin và gửi thành công $\rightarrow$ Sinh mã Ticket chuẩn, lưu trạng thái `New` trong Database thật.
+  * **AC-02:** Đính kèm file > 5MB $\rightarrow$ Hệ thống hiển thị thông báo vượt dung lượng cho phép.

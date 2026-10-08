@@ -1,48 +1,49 @@
-# PHÂN HỆ: M10 — KẾT QUẢ & ĐÁNH GIÁ
+# PHÂN HỆ: M10 — KẾT QUẢ & ĐÁNH GIÁ (RESULTS & FEEDBACK)
 
 > **Giai đoạn:** GIAI ĐOẠN 2 — PHÂN HỆ SINH VIÊN  
-> **Thư mục Phân hệ:** `Giai-Doan-2-Phan-He-Sinh-Vien/M10-results-feedback`  
-> **Actors:** Sinh viên  
+> **Actor chính:** Sinh viên  
 
 ---
 
-## [FR-M10-01] Xem kết quả và tải tài liệu
-* **Mô tả:** Xem kết quả và tải tài liệu.
-* **Actor:** Sinh viên.
-* **Preconditions:** Phân hệ Kết quả & Đánh giá thuộc GIAI ĐOẠN 2 — PHÂN HỆ SINH VIÊN được kích hoạt.
+## [FR-M10-01] Xem kết quả xử lý và tải tệp kết quả
+* **Mô tả:** Sinh viên xem nội dung giải trình kết quả (Resolution Notes) và tải tài liệu trả lời khi đơn ở trạng thái `Resolved`.
+* **Actor:** Sinh viên
+* **Preconditions:** Ticket ở trạng thái `Resolved`.
 * **Main Flow:**
-  1. Truy cập chức năng 'Xem kết quả và tải tài liệu'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
+  1. Mở Ticket `Resolved`.
+  2. Hệ thống hiển thị phần thông tin Kết quả xử lý từ Nhân viên.
+  3. Bấm tải tệp kết quả trả lời (nếu có).
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Hiển thị đầy đủ văn bản kết quả và hỗ trợ tải file kết quả an toàn.
 
 ---
 
 ## [FR-M10-02] Đánh giá mức độ hài lòng 1–5 sao
-* **Mô tả:** Đánh giá mức độ hài lòng 1–5 sao.
-* **Actor:** Sinh viên.
-* **Preconditions:** Phân hệ Kết quả & Đánh giá thuộc GIAI ĐOẠN 2 — PHÂN HỆ SINH VIÊN được kích hoạt.
+* **Mô tả:** Sinh viên chấm điểm đánh giá chất lượng phục vụ từ 1 đến 5 sao cho đơn đã xử lý.
+* **Actor:** Sinh viên
+* **Preconditions:** Ticket ở trạng thái `Resolved`.
 * **Main Flow:**
-  1. Truy cập chức năng 'Đánh giá mức độ hài lòng 1–5 sao'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
+  1. Tại màn hình xem kết quả, chọn mục “Đánh giá chất lượng”.
+  2. Chọn số sao từ 1 đến 5 sao.
+  3. Hệ thống ghi nhận điểm sao.
+* **Business Rules (BR):**
+  * **BR-01:** Chọn số sao (1-5) là thao tác bắt buộc khi gửi đánh giá.
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Chọn sao và bấm gửi $\rightarrow$ Lưu điểm CSAT vào CSDL thành công.
 
 ---
 
-## [FR-M10-03] Viết nhận xét và xem thông báo kết quả
-* **Mô tả:** Viết nhận xét và xem thông báo kết quả.
-* **Actor:** Sinh viên.
-* **Preconditions:** Phân hệ Kết quả & Đánh giá thuộc GIAI ĐOẠN 2 — PHÂN HỆ SINH VIÊN được kích hoạt.
+## [FR-M10-03] Viết nhận xét và đóng Ticket vĩnh viễn
+* **Mô tả:** Sinh viên nhập góp ý tùy chọn và xác nhận đóng đơn vĩnh viễn (`Closed`).
+* **Actor:** Sinh viên
+* **Preconditions:** Hoàn tất chọn sao ở FR-M10-02.
 * **Main Flow:**
-  1. Truy cập chức năng 'Viết nhận xét và xem thông báo kết quả'.
-  2. Nhập/xử lý dữ liệu nghiệp vụ và xác thực.
-  3. Hệ thống ghi nhận dữ liệu vào Database thật và phát sinh thông báo/trạng thái.
-* **Acceptance Criteria (AC):** Chạy trực tiếp trên hệ thống thật và kết nối CSDL thật.
-
-
----
-
-## Quy tắc Nghiệm thu & Phụ thuộc
-* **Database thật:** Dữ liệu được ghi nhận trực tiếp trên CSDL thật, không sử dụng mock data.
-* **Nghiệm thu cuốn chiếu:** Hoàn thiện và đóng gói nghiệm thu module trước khi chuyển tiếp.
+  1. Nhập ý kiến nhận xét (tùy chọn).
+  2. Bấm “Gửi đánh giá & Đóng đơn”.
+  3. Hệ thống lưu nhận xét và chuyển trạng thái Ticket thành `Closed` (Đóng vĩnh viễn).
+* **Business Rules (BR):**
+  * **BR-01:** Ticket ở trạng thái `Closed` bị khóa cứng mọi tương tác, tuyệt đối không cho phép mở lại (No Reopen).
+  * **BR-02 (Auto-Close):** Sau 72 giờ ở trạng thái `Resolved` mà Sinh viên không đánh giá, hệ thống tự động gỡ bộ đếm và chuyển thành `Closed`.
+* **Acceptance Criteria (AC):**
+  * **AC-01:** Đánh giá xong $\rightarrow$ Chuyển `Closed`, khóa vĩnh viễn mọi thao tác chỉnh sửa/bình luận.
+  * **AC-02 (Kiểm thử BR-02):** Quá 72h không đánh giá $ightarrow$ Tự động đóng đơn sang `Closed`.
