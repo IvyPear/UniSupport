@@ -5,12 +5,13 @@
 ---
 
 ### NV-01 — Tiếp nhận Ticket
+
 * **Tác nhân:** Nhân viên phòng ban.
 * **Tiền điều kiện:** Đã đăng nhập tài khoản Role Nhân viên, thuộc phòng ban xử lý.
 * **Ánh xạ Module:** [M06-receive-ticket](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M06-receive-ticket/) (`[FR-M06-01]`, `[FR-M06-02]`)
 * **Luồng chính:**
   1. Mở danh sách **Yêu cầu mới**.
-  2. Hệ thống hiển thị danh sách Ticket ở trạng thái **Chưa tiếp nhận** thuộc phòng ban.
+  2. Hệ thống hiển thị danh sách Ticket ở trạng thái **Chưa tiếp nhận** (`New`) thuộc phòng ban.
   3. Tìm kiếm, lọc theo ngày tạo, độ ưu tiên; chọn mở xem chi tiết.
   4. Nhấn nút **Tiếp nhận** (`Claim`).
   5. Backend xác thực Ticket vẫn chưa có người nhận và chưa bị khóa.
@@ -19,9 +20,21 @@
 * **Ngoại lệ:** Nhân viên khác vừa nhận trước $\rightarrow$ báo lỗi xung đột và tự động làm mới danh sách.
 * **Kết quả:** Ticket có duy nhất 1 Nhân viên phụ trách.
 
+```mermaid
+graph TD
+    A([Nhân viên mở Hộp thư phòng ban]) --> B[Xem danh sách Ticket mới NEW]
+    B --> C[Mở chi tiết 1 Ticket]
+    C --> D[Bấm nút Tiếp nhận / Claim]
+    D --> E{Kiểm tra đồng thời Concurrency?}
+    E -->|Người khác đã nhận| F[Báo lỗi & Reload danh sách]
+    E -->|Chưa ai nhận| G[Gán ID Nhân viên hiện tại làm Assignee]
+    G --> H([Chuyển trạng thái IN PROGRESS & Lưu CSDL])
+```
+
 ---
 
 ### NV-02 — Cập nhật tiến độ
+
 * **Tác nhân:** Nhân viên phụ trách Ticket.
 * **Ánh xạ Module:** [M07-process-exchange](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/) (`[FR-M07-01]`)
 * **Luồng chính:**
@@ -33,9 +46,18 @@
 * **Ngoại lệ:** Người dùng không phải Assignee $\rightarrow$ từ chối thao tác.
 * **Kết quả:** Tiến độ xử lý được cập nhật minh bạch và lưu truy vết.
 
+```mermaid
+graph TD
+    A([Nhân viên mở Ticket cá nhân]) --> B[Nhập ghi chú tiến độ nội bộ]
+    B --> C[Bấm Cập nhật tiến độ]
+    C --> D[Lưu Audit Trail vào CSDL]
+    D --> E([Tự động cập nhật hiển thị cho Sinh viên])
+```
+
 ---
 
 ### NV-03 — Yêu cầu bổ sung
+
 * **Tác nhân:** Nhân viên phụ trách Ticket.
 * **Ánh xạ Module:** [M07-process-exchange](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/) (`[FR-M07-02]`)
 * **Luồng chính:**
@@ -48,24 +70,46 @@
 * **Ngoại lệ:** Nội dung bổ sung để trống $\rightarrow$ chặn gửi; Ticket đã đóng $\rightarrow$ không cho yêu cầu.
 * **Kết quả:** Luồng bổ sung thông tin khép kín, không sinh thêm đơn mới.
 
+```mermaid
+graph TD
+    A([Ticket đang IN PROGRESS]) --> B[Bấm Yêu cầu bổ sung]
+    B --> C[Nhập chi tiết nội dung cần bổ sung]
+    C --> D{Nội dung có bị trống?}
+    D -->|Có| C
+    D -->|Không| E[Chuyển trạng thái sang PENDING]
+    E --> F[Kích hoạt đếm ngược ngầm 72 Giờ]
+    F --> G([Gửi thông báo In-app tới Sinh viên])
+```
+
 ---
 
 ### NV-04 — Chuyển Ticket sai phòng ban
+
 * **Tác nhân:** Nhân viên phụ trách Ticket.
 * **Ánh xạ Module:** [M07-process-exchange](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/) (`[FR-M07-03]`)
 * **Luồng chính:**
   1. Mở Ticket thuộc phạm vi xử lý.
   2. Xác định yêu cầu bị sai phòng ban chuyên trách.
   3. Chọn **Chuyển về Admin**, bắt buộc nhập lý do chuyển trả.
-  4. Hệ thống làm trống Assignee, đổi danh mục thành "Khác", đưa về trạng thái **Chưa tiếp nhận** và chuyển về hàng chờ Admin.
+  4. Hệ thống làm trống Assignee, đổi danh mục thành "Khác", đưa về trạng thái **Chưa tiếp nhận** (`New`) và chuyển về hàng chờ Admin.
   5. Phát thông báo tự động cho Admin.
   6. Admin xem xét và thực hiện điều chuyển sang phòng ban phù hợp theo `AD-05`.
-* **Ngoại lệ:** Không nhập lý do chuyển trả $ightarrow$ hệ thống chặn thao tác.
+* **Ngoại lệ:** Không nhập lý do chuyển trả $\rightarrow$ hệ thống chặn thao tác.
 * **Kết quả:** Ticket được luân chuyển lại đúng thẩm quyền mà không làm mất lịch sử ban đầu.
+
+```mermaid
+graph TD
+    A([Phát hiện Ticket sai phòng ban]) --> B[Bấm chuyển tiếp]-->
+  
+   E[Hệ thống xóa Assignee cũ]
+    E --> F[Đổi danh mục sang 'Khác' & về NEW]
+    F --> G([Quay về Hàng chờ Admin & thông báo])
+```
 
 ---
 
 ### NV-05 — Trả kết quả
+
 * **Tác nhân:** Nhân viên phụ trách Ticket.
 * **Ánh xạ Module:** [M08-ticket-results](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M08-ticket-results/) (`[FR-M08-01]`, `[FR-M08-02]`)
 * **Luồng chính:**
@@ -75,12 +119,27 @@
   4. Nhấn **Hoàn thành**.
   5. Hệ thống xác thực dữ liệu, lưu kết quả và đổi trạng thái sang **Hoàn thành** (`Resolved`).
   6. Ghi log lịch sử hoàn tất, tự động phát 1 thông báo kết quả cho Sinh viên xem.
-* **Ngoại lệ:** Thiếu nội dung giải trình $ightarrow$ chặn hoàn thành; trạng thái đơn không hợp lệ $ightarrow$ báo lỗi.
+* **Ngoại lệ:** Thiếu nội dung giải trình $
+  ightarrow$ chặn hoàn thành; trạng thái đơn không hợp lệ $
+  ightarrow$ báo lỗi.
 * **Kết quả:** Ticket hoàn tất xử lý chuyên môn và sẵn sàng để Sinh viên nghiệm thu/đánh giá.
+
+```mermaid
+graph TD
+    A([Hoàn tất giải quyết công việc]) --> B[Bấm Trả kết quả / Hoàn thành]
+    B --> C[Nhập Resolution Notes & đính kèm file]
+    C --> D{Kiểm tra Resolution Notes?}
+    D -->|Trống| E[Báo lỗi yêu cầu nhập kết quả]
+    E --> C
+    D -->|Hợp lệ| F[Lưu kết quả vào CSDL]
+    F --> G[Chuyển trạng thái sang RESOLVED]
+    G --> H([Gửi 1 thông báo duy nhất cho Sinh viên])
+```
 
 ---
 
 ### NV-06 — Xem lịch sử xử lý
+
 * **Tác nhân:** Nhân viên.
 * **Ánh xạ Module:** [M07-process-exchange](../modules/Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/) (`[FR-M07-01]`)
 * **Luồng chính:**
@@ -89,3 +148,11 @@
   3. Tìm kiếm theo mã Ticket, tên Sinh viên, khoảng thời gian.
   4. Xem chi tiết nội dung, lịch sử luân chuyển và điểm đánh giá của Sinh viên (nếu có).
 * **Kết quả:** Nhân viên tra cứu và quản lý lịch sử làm việc cá nhân.
+
+```mermaid
+graph TD
+    A([Nhân viên mở Lịch sử xử lý]) --> B[Tải danh sách Ticket quá khứ]
+    B --> C[Lọc theo Mã Ticket / Ngày tháng / CSAT]
+    C --> D[Mở xem chi tiết Audit Log & Phản hồi]
+    D --> E([Hoàn tất tra cứu cá nhân])
+```
