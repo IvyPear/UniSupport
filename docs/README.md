@@ -11,15 +11,15 @@ Chào mừng bạn đến với bộ tài liệu hoàn chỉnh của hệ thốn
 ## 2. Danh Mục Tài Liệu Chi Tiết (Documentation Index)
 
 ### 📌 Tổng Quan Sản Phẩm (Product Overview)
-* [product.md](product.md) - Định vị sản phẩm, mục tiêu dự án, các đối tượng sử dụng (Actors) và giá trị cốt lõi.
+* [tong-quan-san-pham.md](tong-quan-san-pham.md) - Định vị sản phẩm, mục tiêu dự án, các đối tượng sử dụng (Actors) và giá trị cốt lõi.
 
 ---
 
 ### 🏛️ 1. Nghiệp Vụ Cốt Lõi (Domain Knowledge) ([Xem chỉ mục chi tiết: domain/readme.md](domain/readme.md))
-* [docs/domain/domain-overview.md](domain/domain-overview.md) - Bối cảnh, Vấn đề cốt lõi và Giải pháp tổng thể Single Service Desk.
-* [docs/domain/business-rules.md](domain/business-rules.md) - Quy tắc nghiệp vụ toàn cục của toàn hệ thống.
-* [docs/domain/state-transition.md](domain/state-transition.md) - Vòng đời 5 trạng thái Ticket (`NEW` $\rightarrow$ `IN_PROGRESS` $\rightarrow$ `PENDING` $\rightarrow$ `RESOLVED` $\rightarrow$ `CLOSED`) và Ma trận chuyển đổi.
-* [docs/domain/ticket-model.md](domain/ticket-model.md) - Mô hình khái niệm của Ticket.
+* [docs/domain/tong-quan-domain.md](domain/tong-quan-domain.md) - Bối cảnh, Vấn đề cốt lõi và Giải pháp tổng thể Single Service Desk.
+* [docs/domain/quy-tac-nghiep-vu.md](domain/quy-tac-nghiep-vu.md) - Quy tắc nghiệp vụ toàn cục của toàn hệ thống.
+* [docs/domain/chuyen-doi-trang-thai.md](domain/chuyen-doi-trang-thai.md) - Vòng đời 5 trạng thái Ticket (`NEW` $\rightarrow$ `IN_PROGRESS` $\rightarrow$ `PENDING` $\rightarrow$ `RESOLVED` $\rightarrow$ `CLOSED`) và Ma trận chuyển đổi.
+* [docs/domain/mo-hinh-ticket.md](domain/mo-hinh-ticket.md) - Mô hình khái niệm của Ticket.
 
 ---
 
@@ -37,12 +37,12 @@ Tập hợp đặc tả **13 Phân hệ thực thi (từ M01 đến M13)** phân
 ---
 
 ### 💻 4. Thiết Kế Kỹ Thuật (Technical Design)
-* [architecture-overview.md](technical/architecture-overview.md) - Sơ đồ Kiến trúc Hệ thống Phân tầng, Tech Stack, Security (JWT/RBAC) và NFR (SLA/Performance).
-* [database-erd.md](technical/database-erd.md) - Sơ đồ CSDL Quan hệ (Mermaid ERD), Chi tiết Bảng, Constraints và Indexes.
-* [api-specification.md](technical/api-specification.md) - Đặc tả RESTful API Endpoints chuẩn hóa.
+* [tong-quan-kien-truc.md](technical/tong-quan-kien-truc.md) - Sơ đồ Kiến trúc Hệ thống Phân tầng, Tech Stack, Security (JWT/RBAC) và NFR (SLA/Performance).
+* [co-so-du-lieu-erd.md](technical/co-so-du-lieu-erd.md) - Sơ đồ CSDL Quan hệ (Mermaid ERD), Chi tiết Bảng, Constraints và Indexes.
+* [dac-ta-api.md](technical/dac-ta-api.md) - Đặc tả RESTful API Endpoints chuẩn hóa.
 
 ---
 
 ### 🧪 5. Kế Hoạch & Ma Trận Kiểm Thử (QA & Testing)
-* [test-strategy.md](qa/test-strategy.md) - Kế hoạch Kiểm thử, Các mức độ testing, Ma trận phân loại Bug Severity và Tiêu chí Release.
-* [test-cases-matrix.md](qa/test-cases-matrix.md) - Ma trận Kịch bản Kiểm thử chi tiết (Test Cases) phủ 100% yêu cầu PRD.
+* [chien-luoc-kiem-thu.md](qa/chien-luoc-kiem-thu.md) - Kế hoạch Kiểm thử, Các mức độ testing, Ma trận phân loại Bug Severity và Tiêu chí Release.
+* [ma-tran-test-case.md](qa/ma-tran-test-case.md) - Ma trận Kịch bản Kiểm thử chi tiết (Test Cases) phủ 100% yêu cầu PRD.

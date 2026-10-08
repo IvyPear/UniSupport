@@ -22,29 +22,29 @@
 
 *Mục tiêu: Hoàn thiện quản trị nền tảng và luồng tạo → tiếp nhận → xử lý → trả kết quả Ticket trên Database thật.*
 
-* **[M01-auth/](Giai-Doan-1-Nen-Tang-Working-MVP/M01-auth/) - M01: Đăng nhập & Xác thực** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M01-auth/prd.md) | [Auth.md](Giai-Doan-1-Nen-Tang-Working-MVP/M01-auth/Auth.md))
+* **[M01-dang-nhap-xac-thuc/](Giai-Doan-1-Nen-Tang-Working-MVP/M01-dang-nhap-xac-thuc/) - M01: Đăng nhập & Xác thực** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M01-dang-nhap-xac-thuc/prd.md) | [Dang-nhap-xac-thuc.md](Giai-Doan-1-Nen-Tang-Working-MVP/M01-dang-nhap-xac-thuc/Dang-nhap-xac-thuc.md))
   * Đăng nhập, đăng xuất, quên và đặt lại mật khẩu.
   * Xác thực và điều hướng theo Role.
-* **[M02-account-management/](Giai-Doan-1-Nen-Tang-Working-MVP/M02-account-management/) - M02: Quản lý tài khoản — Admin** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M02-account-management/prd.md) | [Account-management.md](Giai-Doan-1-Nen-Tang-Working-MVP/M02-account-management/Account-management.md))
+* **[M02-quan-ly-tai-khoan/](Giai-Doan-1-Nen-Tang-Working-MVP/M02-quan-ly-tai-khoan/) - M02: Quản lý tài khoản — Admin** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M02-quan-ly-tai-khoan/prd.md) | [Quan-ly-tai-khoan.md](Giai-Doan-1-Nen-Tang-Working-MVP/M02-quan-ly-tai-khoan/Quan-ly-tai-khoan.md))
   * Tạo, xem, tìm kiếm và lọc tài khoản.
   * Cập nhật, khóa, mở khóa và xóa tài khoản.
-* **[M03-roles-permissions/](Giai-Doan-1-Nen-Tang-Working-MVP/M03-roles-permissions/) - M03: Vai trò & Phân quyền — Admin** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M03-roles-permissions/prd.md) | [Roles-permissions.md](Giai-Doan-1-Nen-Tang-Working-MVP/M03-roles-permissions/Roles-permissions.md))
+* **[M03-vai-tro-phan-quyen/](Giai-Doan-1-Nen-Tang-Working-MVP/M03-vai-tro-phan-quyen/) - M03: Vai trò & Phân quyền — Admin** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M03-vai-tro-phan-quyen/prd.md) | [Vai-tro-phan-quyen.md](Giai-Doan-1-Nen-Tang-Working-MVP/M03-vai-tro-phan-quyen/Vai-tro-phan-quyen.md))
   * Quản lý vai trò người dùng.
   * Cấu hình và kiểm soát quyền truy cập.
-* **[M04-category-management/](Giai-Doan-1-Nen-Tang-Working-MVP/M04-category-management/) - M04: Quản lý danh mục hỗ trợ** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M04-category-management/prd.md) | [Category-management.md](Giai-Doan-1-Nen-Tang-Working-MVP/M04-category-management/Category-management.md))
+* **[M04-quan-ly-danh-muc/](Giai-Doan-1-Nen-Tang-Working-MVP/M04-quan-ly-danh-muc/) - M04: Quản lý danh mục hỗ trợ** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M04-quan-ly-danh-muc/prd.md) | [Quan-ly-danh-muc.md](Giai-Doan-1-Nen-Tang-Working-MVP/M04-quan-ly-danh-muc/Quan-ly-danh-muc.md))
   * Admin quản lý danh mục toàn trường.
   * Quản lý thêm danh mục thuộc phòng ban.
-* **[M05-create-ticket/](Giai-Doan-1-Nen-Tang-Working-MVP/M05-create-ticket/) - M05: Khởi tạo Ticket — Sinh viên** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M05-create-ticket/prd.md) | [Create-ticket.md](Giai-Doan-1-Nen-Tang-Working-MVP/M05-create-ticket/Create-ticket.md))
+* **[M05-khoi-tao-ticket/](Giai-Doan-1-Nen-Tang-Working-MVP/M05-khoi-tao-ticket/) - M05: Khởi tạo Ticket — Sinh viên** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M05-khoi-tao-ticket/prd.md) | [Khoi-tao-ticket.md](Giai-Doan-1-Nen-Tang-Working-MVP/M05-khoi-tao-ticket/Khoi-tao-ticket.md))
   * Chọn phòng ban, danh mục hoặc “Khác”.
   * Nhập thông tin, đính kèm và gửi Ticket.
-* **[M06-receive-ticket/](Giai-Doan-1-Nen-Tang-Working-MVP/M06-receive-ticket/) - M06: Tiếp nhận Ticket — Nhân viên** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M06-receive-ticket/prd.md) | [Receive-ticket.md](Giai-Doan-1-Nen-Tang-Working-MVP/M06-receive-ticket/Receive-ticket.md))
+* **[M06-tiep-nhan-ticket/](Giai-Doan-1-Nen-Tang-Working-MVP/M06-tiep-nhan-ticket/) - M06: Tiếp nhận Ticket — Nhân viên** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M06-tiep-nhan-ticket/prd.md) | [Tiep-nhan-ticket.md](Giai-Doan-1-Nen-Tang-Working-MVP/M06-tiep-nhan-ticket/Tiep-nhan-ticket.md))
   * Xem danh sách Ticket mới thuộc phòng ban.
   * Tìm kiếm, lọc và tiếp nhận Ticket.
-* **[M07-process-exchange/](Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/) - M07: Xử lý & Trao đổi — Nhân viên** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/prd.md) | [Process-exchange.md](Giai-Doan-1-Nen-Tang-Working-MVP/M07-process-exchange/Process-exchange.md))
+* **[M07-xu-ly-trao-doi/](Giai-Doan-1-Nen-Tang-Working-MVP/M07-xu-ly-trao-doi/) - M07: Xử lý & Trao đổi — Nhân viên** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M07-xu-ly-trao-doi/prd.md) | [Xu-ly-trao-doi.md](Giai-Doan-1-Nen-Tang-Working-MVP/M07-xu-ly-trao-doi/Xu-ly-trao-doi.md))
   * Cập nhật trạng thái và tiến độ Ticket.
   * Yêu cầu bổ sung và trao đổi với Sinh viên.
   * Chuyển Ticket sai phòng ban về Admin.
-* **[M08-ticket-results/](Giai-Doan-1-Nen-Tang-Working-MVP/M08-ticket-results/) - M08: Trả kết quả — Nhân viên** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M08-ticket-results/prd.md) | [Ticket-results.md](Giai-Doan-1-Nen-Tang-Working-MVP/M08-ticket-results/Ticket-results.md))
+* **[M08-tra-ket-qua/](Giai-Doan-1-Nen-Tang-Working-MVP/M08-tra-ket-qua/) - M08: Trả kết quả — Nhân viên** ([prd.md](Giai-Doan-1-Nen-Tang-Working-MVP/M08-tra-ket-qua/prd.md) | [Tra-ket-qua.md](Giai-Doan-1-Nen-Tang-Working-MVP/M08-tra-ket-qua/Tra-ket-qua.md))
   * Nhập kết quả và đính kèm tài liệu.
   * Hoàn thành Ticket và thông báo cho Sinh viên.
 
@@ -54,12 +54,12 @@
 
 *Mục tiêu: Hoàn thiện toàn bộ trải nghiệm Sinh viên.*
 
-* **[M09-ticket-tracking-supplement/](Giai-Doan-2-Phan-He-Sinh-Vien/M09-ticket-tracking-supplement/) - M09: Theo dõi & Bổ sung thông tin** ([prd.md](Giai-Doan-2-Phan-He-Sinh-Vien/M09-ticket-tracking-supplement/prd.md) | [Ticket-tracking-supplement.md](Giai-Doan-2-Phan-He-Sinh-Vien/M09-ticket-tracking-supplement/Ticket-tracking-supplement.md))
+* **[M09-theo-doi-bo-sung/](Giai-Doan-2-Phan-He-Sinh-Vien/M09-theo-doi-bo-sung/) - M09: Theo dõi & Bổ sung thông tin** ([prd.md](Giai-Doan-2-Phan-He-Sinh-Vien/M09-theo-doi-bo-sung/prd.md) | [Theo-doi-bo-sung.md](Giai-Doan-2-Phan-He-Sinh-Vien/M09-theo-doi-bo-sung/Theo-doi-bo-sung.md))
   * Xem danh sách, chi tiết và trạng thái Ticket.
   * Tìm kiếm, lọc và theo dõi lịch sử Ticket.
   * Bổ sung thông tin và tài liệu theo yêu cầu.
   * Thông báo trạng thái và yêu cầu bổ sung.
-* **[M10-results-feedback/](Giai-Doan-2-Phan-He-Sinh-Vien/M10-results-feedback/) - M10: Kết quả & Đánh giá** ([prd.md](Giai-Doan-2-Phan-He-Sinh-Vien/M10-results-feedback/prd.md) | [Results-feedback.md](Giai-Doan-2-Phan-He-Sinh-Vien/M10-results-feedback/Results-feedback.md))
+* **[M10-ket-qua-danh-gia/](Giai-Doan-2-Phan-He-Sinh-Vien/M10-ket-qua-danh-gia/) - M10: Kết quả & Đánh giá** ([prd.md](Giai-Doan-2-Phan-He-Sinh-Vien/M10-ket-qua-danh-gia/prd.md) | [Ket-qua-danh-gia.md](Giai-Doan-2-Phan-He-Sinh-Vien/M10-ket-qua-danh-gia/Ket-qua-danh-gia.md))
   * Xem kết quả và tải tài liệu.
   * Đánh giá mức độ hài lòng 1–5 sao.
   * Viết nhận xét và xem thông báo kết quả.
@@ -70,15 +70,15 @@
 
 *Mục tiêu: Hoàn thiện điều phối phòng ban và giám sát toàn trường.*
 
-* **[M11-routing-dispatch/](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-routing-dispatch/) - M11: Quản lý & Điều phối Ticket** ([prd.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-routing-dispatch/prd.md) | [Routing-dispatch.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-routing-dispatch/Routing-dispatch.md))
+* **[M11-quan-ly-dieu-phoi/](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-quan-ly-dieu-phoi/) - M11: Quản lý & Điều phối Ticket** ([prd.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-quan-ly-dieu-phoi/prd.md) | [Quan-ly-dieu-phoi.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M11-quan-ly-dieu-phoi/Quan-ly-dieu-phoi.md))
   * Quản lý phân công Ticket cho nhân viên thuộc phòng ban.
   * Admin phân loại Ticket “Khác”.
   * Admin tiếp nhận và điều chuyển Ticket sai phòng ban.
-* **[M12-progress-monitoring/](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-progress-monitoring/) - M12: Giám sát tiến độ** ([prd.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-progress-monitoring/prd.md) | [Progress-monitoring.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-progress-monitoring/Progress-monitoring.md))
+* **[M12-giam-sat-tien-do/](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-giam-sat-tien-do/) - M12: Giám sát tiến độ** ([prd.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-giam-sat-tien-do/prd.md) | [Giam-sat-tien-do.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M12-giam-sat-tien-do/Giam-sat-tien-do.md))
   * Quản lý theo dõi tiến độ và hiệu suất nhân viên.
   * Theo dõi Ticket tồn đọng, chưa tiếp nhận và quá hạn.
   * Admin theo dõi tiến độ xử lý toàn trường.
-* **[M13-dashboard-reporting/](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-reporting/) - M13: Dashboard & Báo cáo** ([prd.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-reporting/prd.md) | [Dashboard-reporting.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-reporting/Dashboard-reporting.md))
+* **[M13-dashboard-bao-cao/](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-bao-cao/) - M13: Dashboard & Báo cáo** ([prd.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-bao-cao/prd.md) | [Dashboard-bao-cao.md](Giai-Doan-3-Dieu-Phoi-Giam-Sat/M13-dashboard-bao-cao/Dashboard-bao-cao.md))
   * Dashboard và thống kê theo phạm vi quyền.
   * Báo cáo Ticket theo trạng thái, danh mục và thời gian.
   * Thống kê đánh giá và hiệu suất nhân viên.

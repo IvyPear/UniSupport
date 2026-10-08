@@ -10,10 +10,10 @@
 
 | File Tài liệu | Tiêu đề chính | Nội dung tóm tắt |
 | :--- | :--- | :--- |
-| **[domain-overview.md](domain-overview.md)** | Đề xuất Giải pháp Single Service Desk | Bối cảnh, vấn đề cốt lõi, giải pháp một cửa số hóa và các đối tượng sử dụng (Actors: Sinh viên, Nhân viên, Quản lý, Admin). |
-| **[business-rules.md](business-rules.md)** | Quy tắc Nghiệp vụ & Ràng buộc Hệ thống | Các quy tắc cốt lõi về phân quyền RBAC, điều kiện chỉnh sửa Ticket, cơ chế Pending 72h, kiểm soát kết quả giải quyết và định tuyến danh mục "Khác". |
-| **[state-transition.md](state-transition.md)** | Quy định Luồng Trạng thái Ticket | Vòng đời 5 trạng thái Ticket (`New` $\rightarrow$ `In Progress` $\rightarrow$ `Pending` $\rightarrow$ `Resolved` $\rightarrow$ `Closed`), ma trận chuyển đổi và các quy tắc tự động hóa. |
-| **[ticket-model.md](ticket-model.md)** | Cấu trúc Dữ liệu Yêu cầu (Ticket Data Model) | Định dạng mã Ticket (`[CATEGORY_CODE]-[YYYYMMDD]-[SEQ_NUMBER]`), các thuộc tính dữ liệu cơ bản, trạng thái, timestamps và Resolution Notes. |
+| **[tong-quan-domain.md](tong-quan-domain.md)** | Đề xuất Giải pháp Single Service Desk | Bối cảnh, vấn đề cốt lõi, giải pháp một cửa số hóa và các đối tượng sử dụng (Actors: Sinh viên, Nhân viên, Quản lý, Admin). |
+| **[quy-tac-nghiep-vu.md](quy-tac-nghiep-vu.md)** | Quy tắc Nghiệp vụ & Ràng buộc Hệ thống | Các quy tắc cốt lõi về phân quyền RBAC, điều kiện chỉnh sửa Ticket, cơ chế Pending 72h, kiểm soát kết quả giải quyết và định tuyến danh mục "Khác". |
+| **[chuyen-doi-trang-thai.md](chuyen-doi-trang-thai.md)** | Quy định Luồng Trạng thái Ticket | Vòng đời 5 trạng thái Ticket (`New` $\rightarrow$ `In Progress` $\rightarrow$ `Pending` $\rightarrow$ `Resolved` $\rightarrow$ `Closed`), ma trận chuyển đổi và các quy tắc tự động hóa. |
+| **[mo-hinh-ticket.md](mo-hinh-ticket.md)** | Cấu trúc Dữ liệu Yêu cầu (Ticket Data Model) | Định dạng mã Ticket (`[CATEGORY_CODE]-[YYYYMMDD]-[SEQ_NUMBER]`), các thuộc tính dữ liệu cơ bản, trạng thái, timestamps và Resolution Notes. |
 
 ---
 
