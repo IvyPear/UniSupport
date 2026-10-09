@@ -25,12 +25,12 @@
 * **[M01-dang-nhap-xac-thuc/](GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/) - M01: Đăng nhập & Xác thực** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/prd.md) | [Dang-nhap-xac-thuc.md](GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/Dang-nhap-xac-thuc.md))
   * Đăng nhập, đăng xuất, quên và đặt lại mật khẩu.
   * Xác thực và điều hướng theo Role.
-* **[M02-quan-ly-tai-khoan/](GĐ1-NenTang&ChucNangCotLoi/M02-quan-ly-tai-khoan/) - M02: Quản lý tài khoản — Admin** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M02-quan-ly-tai-khoan/prd.md) | [Quan-ly-tai-khoan.md](GĐ1-NenTang&ChucNangCotLoi/M02-quan-ly-tai-khoan/Quan-ly-tai-khoan.md))
-  * Tạo, xem, tìm kiếm và lọc tài khoản.
-  * Cập nhật, khóa, mở khóa và xóa tài khoản.
-* **[M03-vai-tro-phan-quyen/](GĐ1-NenTang&ChucNangCotLoi/M03-vai-tro-phan-quyen/) - M03: Vai trò & Phân quyền — Admin** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M03-vai-tro-phan-quyen/prd.md) | [Vai-tro-phan-quyen.md](GĐ1-NenTang&ChucNangCotLoi/M03-vai-tro-phan-quyen/Vai-tro-phan-quyen.md))
+* **[M02-vai-tro-phan-quyen/](GĐ1-NenTang&ChucNangCotLoi/M02-vai-tro-phan-quyen/) - M02: Vai trò & Phân quyền — Admin** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M02-vai-tro-phan-quyen/prd.md) | [Vai-tro-phan-quyen.md](GĐ1-NenTang&ChucNangCotLoi/M02-vai-tro-phan-quyen/Vai-tro-phan-quyen.md))
   * Quản lý vai trò người dùng.
   * Cấu hình và kiểm soát quyền truy cập.
+* **[M03-quan-ly-tai-khoan/](GĐ1-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/) - M03: Quản lý tài khoản — Admin** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/prd.md) | [Quan-ly-tai-khoan.md](GĐ1-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/Quan-ly-tai-khoan.md))
+  * Tạo, xem, tìm kiếm và lọc tài khoản.
+  * Cập nhật, khóa, mở khóa và xóa tài khoản.
 * **[M04-quan-ly-danh-muc/](GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/) - M04: Quản lý danh mục hỗ trợ** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/prd.md) | [Quan-ly-danh-muc.md](GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/Quan-ly-danh-muc.md))
   * Admin quản lý danh mục toàn trường.
   * Quản lý thêm danh mục thuộc phòng ban.

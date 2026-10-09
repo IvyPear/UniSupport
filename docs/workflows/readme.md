@@ -52,8 +52,8 @@
 ### ⚙️ 05. Phân hệ Quản trị viên (Admin Workflows)
 
 * **[05-quy-trinh-admin.md](05-quy-trinh-admin.md)** — Tập hợp 6 quy trình nghiệp vụ Admin:
-  * **AD-01:** Quản lý tài khoản ([M02-quan-ly-tai-khoan](../modules/GĐ1-NenTang&ChucNangCotLoi/M02-quan-ly-tai-khoan/))
-  * **AD-02:** Vai trò và phân quyền ([M03-vai-tro-phan-quyen](../modules/GĐ1-NenTang&ChucNangCotLoi/M03-vai-tro-phan-quyen/))
+  * **AD-01:** Quản lý tài khoản ([M03-quan-ly-tai-khoan](../modules/GĐ1-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/))
+  * **AD-02:** Vai trò và phân quyền ([M02-vai-tro-phan-quyen](../modules/GĐ1-NenTang&ChucNangCotLoi/M02-vai-tro-phan-quyen/))
   * **AD-03:** Quản lý danh mục toàn trường ([M04-quan-ly-danh-muc](../modules/GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/))
   * **AD-04:** Phân loại Ticket "Khác" ([M11-quan-ly-dieu-phoi](../modules/GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/))
   * **AD-05:** Điều chuyển Ticket sai phòng ban ([M11-quan-ly-dieu-phoi](../modules/GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/))
