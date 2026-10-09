@@ -1,6 +1,6 @@
-# PHÂN HỆ: M03 — VAI TRÒ & PHÂN QUYỀN ADMIN (ROLES & PERMISSIONS)
+# PHÂN HỆ: M02 — VAI TRÒ & PHÂN QUYỀN ADMIN (ROLES & PERMISSIONS)
 
-## [FR-M03-01] Quản lý vai trò người dùng
+## [FR-M02-01] Quản lý vai trò người dùng
 
 **Mô tả:** Admin xem và quản lý danh mục các Vai trò chuẩn trong hệ thống (Sinh viên, Nhân viên, Quản lý, Admin).
 
@@ -33,7 +33,7 @@
 
 * **AC-01:** Hiển thị chính xác danh sách 4 vai trò chuẩn và thống kê số lượng người dùng.
 
-## [FR-M03-02] Cấu hình và kiểm soát quyền truy cập chi tiết
+## [FR-M02-02] Cấu hình và kiểm soát quyền truy cập chi tiết
 
 **Mô tả:** Admin thiết lập Ma trận phân quyền (ACL) cho từng vai trò trong hệ thống.
 

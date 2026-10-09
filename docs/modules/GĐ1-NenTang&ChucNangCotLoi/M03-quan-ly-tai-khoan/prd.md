@@ -1,6 +1,6 @@
-# PHÂN HỆ: M02 — QUẢN LÝ TÀI KHOẢN ADMIN (ACCOUNT MANAGEMENT)
+# PHÂN HỆ: M03 — QUẢN LÝ TÀI KHOẢN ADMIN (ACCOUNT MANAGEMENT)
 
-## [FR-M02-01] Tạo, xem, tìm kiếm và lọc tài khoản
+## [FR-M03-01] Tạo, xem, tìm kiếm và lọc tài khoản
 
 **Mô tả:** Admin thực hiện xem danh sách, tìm kiếm, lọc và quản lý thông tin các tài khoản người dùng trên toàn hệ thống.
 
@@ -35,7 +35,7 @@
 * **AC-01:** Lọc theo phòng ban/vai trò trả về đúng danh sách người dùng thuộc phân vùng đó.
 * **AC-02:** Tìm kiếm theo Mã định danh hoặc Họ tên hiển thị đúng thông tin tài khoản.
 
-## [FR-M02-02] Cập nhật, khóa, mở khóa và Import tài khoản từ Excel/CSV
+## [FR-M03-02] Cập nhật, khóa, mở khóa và Import tài khoản từ Excel/CSV
 
 **Mô tả:** Admin thực hiện cập nhật thông tin, thay đổi trạng thái hoạt động (Khóa/Mở khóa) hoặc Import danh sách tài khoản hàng loạt từ file tệp.
 
