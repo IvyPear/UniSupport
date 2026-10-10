@@ -13,8 +13,7 @@ flowchart TD
  B -->|Không| D[Hàng chờ phòng ban]
  C --> D
  D --> E[NV tiếp nhận hoặc QL phân công]
- E --> F[Đã tiếp nhận]
- F --> G[Đang xử lý]
+ E --> G[Đang xử lý]
  G --> H{Đủ thông tin?}
  H -->|Không| I[Chờ bổ sung]
  I --> J[SV bổ sung nội dung/tài liệu]
@@ -23,8 +22,9 @@ flowchart TD
  G --> L{Sai phòng ban?}
  L -->|Có| M[Chuyển về Admin]
  M --> C
- K --> N[Hoàn thành]
+ K --> N[Đã giải quyết]
  N --> O[SV xem kết quả và đánh giá]
+ O --> P[Đã đóng]
 ```
 
 ---
@@ -34,10 +34,10 @@ flowchart TD
 | Trạng thái | Ý nghĩa | Thao tác chuyển đến | Ánh xạ Module |
 |---|---|---|---|
 | **Chưa tiếp nhận** | Ticket mới được tạo, chưa có người nhận | Sinh viên gửi Ticket hoặc Ticket được điều chuyển về hàng chờ | [M05-khoi-tao-ticket](../modules/GĐ1-NenTang&ChucNangCotLoi/M05-khoi-tao-ticket/) |
-| **Đã tiếp nhận** | Có Nhân viên phụ trách | Nhân viên bấm nhận Ticket (Claim) hoặc Quản lý phân công | [M06-tiep-nhan-ticket](../modules/GĐ1-NenTang&ChucNangCotLoi/M06-tiep-nhan-ticket/) |
-| **Đang xử lý** | Nhân viên đang thực hiện công việc | Nhân viên bắt đầu xử lý; Sinh viên bổ sung thông tin thành công | [M07-xu-ly-trao-doi](../modules/GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/) |
+| **Đang xử lý** | Nhân viên đã tiếp nhận hoặc đang xử lý công việc | Nhân viên bấm nhận việc, quản lý phân công, hoặc Sinh viên bổ sung thông tin | [M06-tiep-nhan-ticket](../modules/GĐ1-NenTang&ChucNangCotLoi/M06-tiep-nhan-ticket/), [M07-xu-ly-trao-doi](../modules/GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/) |
 | **Chờ bổ sung** | Đang chờ Sinh viên cung cấp thêm dữ liệu | Nhân viên gửi yêu cầu bổ sung thông tin (Pending 72h) | [M07-xu-ly-trao-doi](../modules/GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/), [M09](../modules/GĐ2-PhanHeSinhVien/M09-theo-doi-bo-sung/) |
-| **Hoàn thành** | Nhân viên đã gửi kết quả xử lý | Nhân viên trả kết quả thành công | [M08-tra-ket-qua](../modules/GĐ1-NenTang&ChucNangCotLoi/M08-tra-ket-qua/) |
+| **Đã giải quyết** | Nhân viên đã gửi kết quả xử lý | Nhân viên trả kết quả thành công | [M08-tra-ket-qua](../modules/GĐ1-NenTang&ChucNangCotLoi/M08-tra-ket-qua/) |
+| **Đã đóng** | Khóa Ticket vĩnh viễn, kết thúc vòng đời | Sinh viên đánh giá xong hoặc quá 72h không đánh giá | [M10-ket-qua-danh-gia](../modules/GĐ2-PhanHeSinhVien/M10-ket-qua-danh-gia/) |
 
 ---
 
