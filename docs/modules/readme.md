@@ -85,8 +85,14 @@
 
 ---
 
-## 3. Quy tắc Nghiệm thu 
+## 3. Quy tắc Nghiệm thu & Bóc tách Phụ thuộc Giai đoạn
 
-1. **Dữ liệu hệ thống:** Thực hiện trên Database thật do chính người dùng nhập vào
+1. **Dữ liệu hệ thống:** Thực hiện trên Database thật do chính người dùng nhập vào.
 2. **Nghiệm thu theo từng Phân hệ:** Hoàn thiện Frontend, Backend, API và kiểm thử trong phạm vi từng module.
-3. **Phụ thuộc M07/M11:** M07 có chức năng chuyển Ticket sai phòng ban về Admin, M11 có giao diện xử lý điều chuyển. Để nghiệm thu M07 ở GĐ1, đưa phần chuyển tiếp của M11 lên GĐ1.
+3. **Giải quyết điểm nghẽn Phụ thuộc M07 / M11 (GĐ1 vs GĐ3):** 
+   - Module `M07` (GĐ1) có chức năng `[FR-M07-03]` (`NV-04`) cho phép Nhân viên bấm chuyển trả Ticket sai phòng ban về Admin.
+   - Module `M11` (GĐ3) có chức năng `[FR-M11-03]` (`AD-05`) cho phép Admin điều chuyển đơn này sang phòng ban mới.
+   - **Quy tắc bóc tách:** Để tránh rủi ro đơn bị "kẹt chết" ở GĐ1 khi Nhân viên bấm chuyển trả, tính năng cốt lõi **Admin tiếp nhận & điều chuyển Ticket sai phòng ban (`[FR-M11-03]` Core MVP)** được bóc tách và đưa lên triển khai, nghiệm thu đồng bộ ngay ở **Giai đoạn 1**. Các tính năng quản lý phân công nâng cao khác của M11 vẫn giữ nguyên tại Giai đoạn 3.
+4. **Hệ thống Thông báo In-app:** 
+   - Đã được quy hoạch đồng bộ trên 4 Vai trò: Sinh viên (`[FR-M09-04]`), Nhân viên (`[FR-M06-03]`), Admin (`[FR-M11-04]`), và Quản lý (`[FR-M12-04]`).
+

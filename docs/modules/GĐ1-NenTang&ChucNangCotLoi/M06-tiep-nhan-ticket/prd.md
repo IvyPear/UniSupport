@@ -70,4 +70,38 @@
 * **AC-01:** Tiếp nhận thành công → Gán tên nhân viên phụ trách, chuyển trạng thái Đang xử lý, cập nhật hệ thống.
 * **AC-02 (Kiểm thử BR-01):** Thao tác trùng → Chặn người bấm sau và tải lại dữ liệu.
 
+## [FR-M06-03] Tiếp nhận thông báo In-app cho Nhân viên
+
+**Mô tả:** Nhân viên nhận thông báo trong ứng dụng (chấm đỏ quả chuông trên thanh điều hướng) khi Sinh viên bổ sung thông tin/tài liệu cho Ticket (Sự kiện #2 trong Ma trận thông báo) hoặc khi được Quản lý phân công đơn mới.
+
+**Actor:** Nhân viên
+
+**Preconditions (Điều kiện tiên quyết):** Đã đăng nhập tài khoản Nhân viên.
+
+**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
+
+- **Mã thông báo:** Khóa chính thông báo.
+- **Người nhận thông báo:** Bắt buộc, ID Nhân viên (Assignee).
+- **Tiêu đề:** Max 100 ký tự (Ví dụ: "Sinh viên đã bổ sung thông tin cho Ticket #TK-1234").
+- **Nội dung thông báo:** Max 255 ký tự.
+- **Ticket liên quan:** Bắt buộc, ID Ticket để chuyển hướng khi nhấp chuột.
+- **Trạng thái đã đọc:** Mặc định: false.
+
+**Luồng chính (Main Flow):**
+
+1. Khi Sinh viên gửi bổ sung thông tin (`SV-03`) hoặc Quản lý phân công đơn (`QL-02`), hệ thống tự động sinh thông báo In-app cho đúng Nhân viên phụ trách.
+2. Nhân viên thấy chấm đỏ thông báo trên thanh tiêu đề và nhấp xem danh sách thông báo.
+3. Nhân viên nhấp vào một thông báo cụ thể.
+4. Hệ thống tự động đánh dấu thông báo đã đọc (`is_read = true`) và chuyển hướng trực tiếp đến màn hình Chi tiết Ticket tương ứng.
+
+**Business Rules (Quy tắc nghiệp vụ):**
+
+* **BR-01:** Giữ nguyên Assignee cũ khi Sinh viên bổ sung thông tin, thông báo gửi chính xác cho Assignee đó.
+* **BR-02:** Không gửi thông báo dư thừa cho các nhân viên khác trong cùng phòng ban.
+
+**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
+
+* **AC-01:** Nhấp vào thông báo → Chuyển hướng trực tiếp mở đúng màn hình Chi tiết Ticket tương ứng và đánh dấu đã đọc.
+
 ---
+

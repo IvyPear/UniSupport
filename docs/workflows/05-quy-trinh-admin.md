@@ -99,9 +99,9 @@ graph TD
 ### AD-05 — Điều chuyển Ticket sai phòng ban
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/) (`[FR-M11-03]`)
+* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/) (`[FR-M11-03]`) *(Phần Core MVP được bóc tách triển khai và nghiệm thu ở Giai đoạn 1 đồng bộ với M07/NV-04)*
 * **Luồng chính:**
-  1. Nhân viên chuyển trả đơn sai phòng ban về cho Admin .
+  1. Nhân viên chuyển trả đơn sai phòng ban về cho Admin.
   2. Đơn xuất hiện trong danh sách **Đơn sai phòng ban chờ điều chuyển** của Admin.
   3. Admin xem lại nội dung.
   4. Chọn Phòng ban mới phù hợp hơn và bấm **Điều chuyển**.

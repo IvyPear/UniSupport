@@ -23,3 +23,6 @@ Nhằm bảo đảm tính minh bạch và toàn vẹn của dữ liệu trong su
 
 ## 6. Quy tắc Định tuyến (Routing Rules)
 *   **Xử lý ngoại lệ danh mục "Khác":** Các yêu cầu thuộc danh mục "Khác" hoặc các đơn do sinh viên chọn nhầm phòng ban sẽ được hệ thống/nhân viên chuyển tiếp đến Quản trị viên (`Admin`) để thực hiện phân phối lại đúng đơn vị chuyên trách tiếp nhận.
+
+## 7. Quy tắc Tính toán Thời gian (Time & SLA Calculation Rules)
+*   **Đếm ngược SLA và Pending 72h:** Việc tính toán thời gian cảnh báo quá hạn SLA của nhân viên cũng như đếm ngược 72h chờ sinh viên phản hồi (trạng thái `Pending`) chỉ được tính theo **Giờ hành chính (Business Hours / Working Days)** của nhà trường (ví dụ: Thứ 2 đến Thứ 6, từ 8h00 - 17h00). Hệ thống không cộng dồn thời gian vào các ngày cuối tuần (Thứ 7, Chủ Nhật) và ngày Lễ Tết để bảo đảm KPI của Nhân viên không bị đánh giá sai lệch.

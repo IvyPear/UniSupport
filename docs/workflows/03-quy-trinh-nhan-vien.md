@@ -99,11 +99,12 @@ graph TD
 
 ```mermaid
 graph TD
-    A([Phát hiện Ticket sai phòng ban]) --> B[Bấm chuyển tiếp]-->
-  
-   E[Hệ thống xóa Assignee cũ]
-    E --> F[Đổi danh mục sang 'Khác' & về NEW]
-    F --> G([Quay về Hàng chờ Admin & thông báo])
+    A([Phát hiện Ticket sai phòng ban]) --> B[Bấm chuyển về Admin]
+    B --> C{Đã nhập lý do?}
+    C -->|Chưa| B
+    C -->|Đã nhập| D[Hệ thống xóa Assignee cũ]
+    D --> E[Đổi danh mục sang Khác & về trạng thái NEW]
+    E --> F([Quay về Hàng chờ Admin & bắn thông báo cho Admin])
 ```
 
 ---
@@ -119,9 +120,7 @@ graph TD
   4. Nhấn **Hoàn thành**.
   5. Hệ thống xác thực dữ liệu, lưu kết quả và đổi trạng thái sang **Hoàn thành** (`Resolved`).
   6. Ghi log lịch sử hoàn tất, tự động phát 1 thông báo kết quả cho Sinh viên xem.
-* **Ngoại lệ:** Thiếu nội dung giải trình $
-  ightarrow$ chặn hoàn thành; trạng thái đơn không hợp lệ $
-  ightarrow$ báo lỗi.
+* **Ngoại lệ:** Thiếu nội dung giải trình $\rightarrow$ chặn hoàn thành; trạng thái đơn không hợp lệ $\rightarrow$ báo lỗi.
 * **Kết quả:** Ticket hoàn tất xử lý chuyên môn và sẵn sàng để Sinh viên nghiệm thu/đánh giá.
 
 ```mermaid
@@ -141,7 +140,7 @@ graph TD
 ### NV-06 — Xem lịch sử xử lý
 
 * **Tác nhân:** Nhân viên.
-* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/) (`[FR-M07-01]`)
+* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/) (`[FR-M07-04]`)
 * **Luồng chính:**
   1. Mở menu **Lịch sử xử lý**.
   2. Hệ thống tải danh sách các Ticket Nhân viên đã tiếp nhận hoặc giải quyết trong quá khứ.

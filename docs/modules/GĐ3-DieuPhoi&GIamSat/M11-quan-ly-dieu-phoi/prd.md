@@ -100,6 +100,7 @@
 **Business Rules (Quy tắc nghiệp vụ):**
 
 - **BR-01:** Chỉ người dùng có quyền phù hợp mới được thực hiện chức năng.
+- **BR-02 (Tách Scope Giai đoạn 1 MVP):** Giao diện và API cốt lõi của tính năng `[FR-M11-03]` (Admin tiếp nhận & điều chuyển Ticket bị báo sai phòng ban) được bóc tách triển khai và nghiệm thu ngay ở **Giai đoạn 1** (đi kèm `M07`/`NV-04`), đảm bảo quy trình luân chuyển đơn không bị tắc nghẽn ở GĐ1.
 
 **Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
 
@@ -110,4 +111,31 @@
 
 * **AC-01:** Điều chuyển thành công → Chuyển về hàng chờ phòng ban mới và lưu toàn bộ log luân chuyển.
 
+## [FR-M11-04] Tiếp nhận thông báo In-app cho Admin
+
+**Mô tả:** Admin nhận thông báo trong ứng dụng khi Nhân viên báo Ticket sai phòng ban (Sự kiện #5 trong Ma trận thông báo) hoặc khi có đơn "Khác" mới cần phân loại.
+
+**Actor:** Admin
+
+**Preconditions (Điều kiện tiên quyết):** Đã đăng nhập tài khoản Admin.
+
+**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
+
+- **Mã thông báo:** Khóa chính thông báo.
+- **Người nhận thông báo:** Bắt buộc, Vai trò Admin.
+- **Tiêu đề:** Max 100 ký tự (Ví dụ: "Có Ticket #TK-9999 bị báo sai phòng ban cần điều chuyển").
+- **Nội dung thông báo:** Max 255 ký tự (Gồm mã đơn, phòng ban chuyển trả, lý do chuyển).
+- **Ticket liên quan:** Bắt buộc, ID Ticket.
+
+**Luồng chính (Main Flow):**
+
+1. Khi Nhân viên bấm chuyển đơn sai phòng ban (`NV-04`), hệ thống phát thông báo In-app tới Hàng chờ thông báo của Admin.
+2. Admin nhấp vào thông báo quả chuông.
+3. Hệ thống điều hướng thẳng tới màn hình Hàng chờ đơn sai phòng ban chờ điều chuyển (`AD-05`).
+
+**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
+
+* **AC-01:** Bấm thông báo → Chuyển hướng trực tiếp mở danh sách Hàng chờ điều chuyển của Admin.
+
 ---
+

@@ -8,6 +8,11 @@
 
 ## 1. Bản đồ Danh mục Luồng Nghiệp vụ (Workflows Index)
 
+### 🔑 00. Quy trình Chung & Đăng nhập / Xác thực
+* **[00-quy-trinh-chung.md](00-quy-trinh-chung.md)** — Quy trình đăng nhập, xác thực 4 role, khóa tài khoản 15 phút, quên mật khẩu và cơ chế văng phiên (session invalidation).
+
+---
+
 ### 📌 01. Vòng đời Ticket & Tổng quan
 
 * **[01-luong-hoat-dong-Ticket.md](01-luong-hoat-dong-Ticket.md)** — Sơ đồ vòng đời Ticket (Mermaid), bảng 5 trạng thái cốt lõi và các nguyên tắc nghiệp vụ chung.
@@ -67,6 +72,7 @@
 
 ### 📁 07. Luồng Quy trình Chi tiết (Detail WF Files)
 
+* **[00-quy-trinh-chung.md](00-quy-trinh-chung.md)** — Chi tiết luồng Đăng nhập, Xác thực, Khóa tài khoản, Quên mật khẩu & Văng phiên.
 * **[01-luong-hoat-dong-Ticket.md](01-luong-hoat-dong-Ticket.md)** — Sơ đồ luồng hoạt động Ticket tổng quan và vòng đời xử lý.
 * **[02-quy-trinh-sinh-vien.md](02-quy-trinh-sinh-vien.md)** — Chi tiết 5 luồng quy trình Sinh viên (Khởi tạo, Theo dõi, Bổ sung, Kết quả, Đánh giá).
 * **[03-quy-trinh-nhan-vien.md](03-quy-trinh-nhan-vien.md)** — Chi tiết 6 luồng quy trình Nhân viên (Tiếp nhận, Xử lý, Bổ sung, Chuyển đơn, Trả kết quả, Lịch sử).

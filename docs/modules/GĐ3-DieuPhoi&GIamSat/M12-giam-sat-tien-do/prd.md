@@ -95,4 +95,55 @@
 
 * **AC-01:** Hiển thị đầy đủ số liệu giám sát và điểm nghẽn tiến độ của toàn hệ thống.
 
+## [FR-M12-04] Tiếp nhận thông báo & Cảnh báo tồn đọng / Quá hạn SLA cho Quản lý
+
+**Mô tả:** Quản lý phòng ban (Trưởng phòng) và Admin nhận thông báo/cảnh báo hệ thống khi Ticket bị quá hạn SLA hoặc chưa được tiếp nhận vượt quá thời gian quy định (Sự kiện #6 trong Ma trận thông báo).
+
+**Actor:** Quản lý phòng ban, Admin
+
+**Preconditions (Điều kiện tiên quyết):** Đã đăng nhập tài khoản Quản lý hoặc Admin.
+
+**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
+
+- **Mã thông báo:** Khóa chính thông báo.
+- **Người nhận thông báo:** Bắt buộc, ID Quản lý phòng ban / Admin.
+- **Mức độ cảnh báo:** Warning / Critical (Vượt mốc SLA).
+- **Ticket liên quan:** Bắt buộc, ID Ticket quá hạn.
+
+**Luồng chính (Main Flow):**
+
+1. Hệ thống chạy job kiểm tra định kỳ (Background SLA checker).
+2. Nếu phát hiện Ticket tồn đọng hoặc quá hạn SLA phòng ban, hệ thống phát cảnh báo trực quan trên Dashboard và sinh thông báo In-app cho Quản lý phòng ban.
+3. Quản lý nhấp vào thông báo/cảnh báo để mở trực tiếp Ticket bị quá hạn và tiến hành phân công lại hoặc đôn đốc nhân viên (`QL-02`).
+
+**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
+
+* **AC-01:** Nhấp vào cảnh báo quá hạn → Mở thẳng chi tiết Ticket đó để Quản lý can thiệp kịp thời.
+
+## [FR-M12-05] Tra cứu Ticket toàn hệ thống (Global Ticket Search)
+
+**Mô tả:** Admin có đặc quyền tìm kiếm, truy vết tiến độ và xem lịch sử luân chuyển của bất kỳ Ticket nào trên phạm vi toàn trường nhằm phục vụ công tác thanh tra, giải đáp thắc mắc đột xuất.
+
+**Actor:** Admin
+
+**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
+
+- **Từ khóa tìm kiếm:** Bắt buộc, nhập Mã Ticket (ưu tiên) hoặc Tên/Mã Sinh viên.
+- **Quyền truy cập dữ liệu:** Vượt qua rào cản phòng ban (Bypass Data Isolation).
+
+**Luồng chính (Main Flow):**
+
+1. Admin mở công cụ “Tra cứu toàn trường”.
+2. Nhập chính xác Mã Ticket hoặc thông tin Sinh viên.
+3. Hệ thống quét toàn bộ Database và trả về danh sách kết quả phù hợp.
+4. Admin nhấp vào Ticket để xem chi tiết toàn bộ: Trạng thái hiện hành, Phòng ban đang thụ lý, Nhân viên phụ trách, và toàn bộ lịch sử luân chuyển (Audit Trail).
+
+**Business Rules (Quy tắc nghiệp vụ):**
+
+- **BR-01 (Đặc quyền xuyên phòng ban):** Chỉ Role Admin mới được phép tìm kiếm và xem chi tiết Ticket không phân biệt phòng ban. Các Role khác (Kể cả Trưởng phòng) bị giới hạn tuyệt đối trong phòng ban của mình.
+
+**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
+
+* **AC-01:** Admin nhập đúng Mã Ticket → Hệ thống hiển thị chi tiết đơn dù đơn đó đang nằm ở bất kỳ phòng ban nào.
+
 ---
