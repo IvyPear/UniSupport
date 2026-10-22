@@ -15,7 +15,7 @@ Tài liệu xác định cách kiểm soát chất lượng của UniSupport t�
 ## 3. Quản lý chất lượng (Quality Management) & Định nghĩa Hoàn thành (Definition of Done)
 * **Định nghĩa rõ ràng "thế nào là xong" (Definition of Done - DoD):** Một công việc (task) không thể chỉ dừng ở mức cá nhân tự nhận là "xong", mà phải hoàn thành đúng quy trình chất lượng đã thiết lập.
 * **Các tiêu chuẩn của một task hoàn thành:**
-  * Đúng với yêu cầu tài liệu (BRD/spec) và thiết kế (design).
+  * Đúng với yêu cầu tài liệu (PRD/spec) và thiết kế (design).
   * Vượt qua các cấp độ kiểm thử: **Unit Test**, **Integration Test**, và **End-to-End (E2E) Test**.
   * Vượt qua các bước kiểm tra tự động (CI/CD) và được người xác nhận (verifier/reviewer) duyệt qua.
 * **Vai trò của Manager:** Quản lý không ngồi kiểm tra chi tiết từng công việc nhỏ mà xây dựng quy trình chuẩn ngay từ đầu để đảm bảo 90% chất lượng đầu ra đạt yêu cầu.
@@ -63,8 +63,6 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 | **M11** | Điều phối Ticket | Chuyển sai phòng ban, phân công lại, audit |
 | **M12** | Giám sát tiến độ | SLA, Ticket tồn đọng, phạm vi phòng ban |
 | **M13** | Dashboard / báo cáo | Đối chiếu thống kê, xuất báo cáo |
-
-*Lưu ý: bảng trên sử dụng mã M01–M13 của Master Schedule. Các mã FR-M01–FR-M13 trong bộ PRD là mã phân hệ tài liệu, không mặc nhiên đồng nhất với module lịch triển khai.*
 
 ## 7. Test scenario trọng yếu
 
