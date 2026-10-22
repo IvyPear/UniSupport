@@ -1,94 +1,174 @@
-# TÀI LIỆU KIỂM SOÁT CHẤT LƯỢNG (QUALITY CONTROL DOCUMENT)
-## HỆ THỐNG TIẾP NHẬN & HỖ TRỢ THỦ TỤC HÀNH CHÍNH SINH VIÊN — UNISUPPORT
+# QUALITY CONTROL DOCUMENT
+## DỰ ÁN UNISUPPORT | KẾ HOẠCH KIỂM SOÁT CHẤT LƯỢNG
 
-> **Dự án:** UniSupport — Nền tảng Tiếp nhận và Hỗ trợ Thủ tục Hành chính Sinh viên (Đại học Aurora)  
-> **Đơn vị thực hiện:** Group 4  
-> **Phiên bản:** 3.0 — **KHÓA CỨNG PHẠM VI (SCOPE FREEZE): CHỈ LÀM ĐÚNG VÀ ĐỦ 13 PHÂN HỆ PRD (M01–M13), TUYỆT ĐỐI KHÔNG CHẾ THÊM CHỨC NĂNG NGOÀI.**  
-> **Tài liệu căn cứ duy nhất:**  
-> - [docs/modules/readme.md](file:///c:/VScode/UniSupport/docs/modules/readme.md) (13 Phân hệ PRD)  
-> - [docs/domain/quy-tac-nghiep-vu.md](file:///c:/VScode/UniSupport/docs/domain/quy-tac-nghiep-vu.md) (8 Quy tắc nghiệp vụ cốt lõi)  
-> - [Team-charter.md](file:///c:/VScode/UniSupport/Team-charter.md) (Quy chế làm việc & Nghiệm thu)
-
----
-
-## 1. NGUYÊN TẮC CỐT LÕI: KHÔNG CHẾ THÊM CHỨC NĂNG NGOÀI PRD
-
-Nhóm thống nhất nguyên tắc tối cao: **Chỉ làm chính xác những gì đã viết trong PRD, không tự ý sáng tạo hay thêm bất kỳ tính năng nào ngoài phạm vi.**
-
-```mermaid
-flowchart LR
-    A["Yêu cầu / Ý tưởng mới"] --> B{Có nằm trong PRD M01-M13 không?}
-    B -- "CÓ" --> C["Thực hiện & Kiểm thử theo đúng Tiêu chí AC"]
-    B -- "KHÔNG (Chế thêm)" --> D["TỪ CHỐI TUYỆT ĐỐI (LOẠI BỎ KHỎI DỰ ÁN)"]
-```
-
-* **Tuyệt đối không có tính năng tự đăng ký tài khoản** (Tài khoản do trường cấp theo BR-01).
-* **Tuyệt đối không có tính năng quên mật khẩu cho SV/NV** (Sinh viên/NV liên hệ IT trường).
-* **Tuyệt đối không chế thêm:** Thanh toán, AI Chatbot, Mạng xã hội, quét camera chuyên sâu, hay các luồng phức tạp nằm ngoài 13 module.
-* **Mục tiêu duy nhất:** Hoàn thiện đúng 13 Phân hệ chạy trên CSDL thật, giao diện xem tốt trên cả **Điện thoại** và **Laptop**, tốc độ tải nhanh không đơ lag.
+| Thông tin | Nội dung |
+| :--- | :--- |
+| **Mã tài liệu** | US-QC-PLAN-01 |
+| **Phiên bản** | 1.0 – Bản dự thảo |
+| **Ngày lập** | 13/10/2026 |
+| **Dự án** | UniSupport – Hệ thống tiếp nhận và xử lý yêu cầu hỗ trợ sinh viên |
+| **Phạm vi** | 19 module theo Master Schedule; đối chiếu 13 phân hệ chức năng PRD |
+| **Người soạn / Duyệt** | [Điền tên] / [Điền tên] |
+| **Trạng thái** | Draft – chờ nhóm xác nhận chỉ tiêu và người phụ trách |
 
 ---
 
-## 2. TIÊU CHÍ ĐÁNH GIÁ 1 TRANG WEB CHẤT LƯỢNG (THEO PRD & CHUẨN THỰC TẾ)
+## 1. Mục đích và phạm vi
+Tài liệu xác định cách kiểm soát chất lượng của UniSupport từ rà soát yêu cầu, kiểm thử chức năng, kiểm thử tích hợp đến nghiệm thu và bàn giao. Mục tiêu là phát hiện sai lệch so với PRD sớm, có bằng chứng kiểm thử, theo dõi lỗi và chỉ cho phép chuyển giai đoạn khi đạt điều kiện chất lượng.
+* **Trong phạm vi:** đăng nhập/phân quyền, tài khoản, danh mục, tạo/tiếp nhận/xử lý Ticket, bổ sung, kết quả/đánh giá, điều phối, giám sát, báo cáo, triển khai.
+* **Ngoài phạm vi:** các chức năng chưa được xác nhận trong PRD và tích hợp bên thứ ba chưa được phê duyệt.
 
-Một trang web chất lượng trong dự án UniSupport chỉ cần đạt **3 tiêu chí rõ ràng, không vẽ vời**:
+## 2. Cơ sở và nguyên tắc QC
+* PRD 13 phân hệ M01–M13: nguồn xác định hành vi nghiệp vụ và Acceptance Criteria của từng FR.
+* Master Schedule 19 module: nguồn xác định trình tự triển khai, mốc kiểm soát và bàn giao.
+* Các tên/mã module trong PRD và Master Schedule có thể không trùng nhau; phải dùng bảng ánh xạ FR ↔ module thực hiện trước khi ký nghiệm thu.
+* Mọi thay đổi yêu cầu sau khi chốt baseline phải có yêu cầu thay đổi, đánh giá ảnh hưởng, phê duyệt và cập nhật test case.
 
-```mermaid
-flowchart TD
-    subgraph Three_Pillars ["3 TIÊU CHÍ ĐÁNH GIÁ CHẤT LƯỢNG TRANG WEB UNISUPPORT"]
-        P1["1. ĐÚNG NGHIỆP VỤ PRD 100%<br>Chạy trên CSDL thật, đủ 13 module, đúng 5 trạng thái Ticket, đúng 8 Business Rules"]
-        P2["2. HIỆU NĂNG TẢI NHANH (Performance >= 90)<br>Mở trang dưới 2.5s, bấm nút phản hồi ngay, không bị đơ giật"]
-        P3["3. CHẠY TỐT TRÊN ĐIỆN THOẠI & LAPTOP<br>Giao diện co giãn chuẩn, không tràn màn hình ngang, dễ nhìn và dễ bấm"]
-    end
-```
+## 3. Quản lý chất lượng (Quality Management) & Định nghĩa Hoàn thành (Definition of Done)
+### 3.1. Definition of Done (DoD) cho task
+Task chỉ được chuyển sang **Done** khi đáp ứng đủ các tiêu chí áp dụng dưới đây; người thực hiện không tự phê duyệt thay cho reviewer.
 
-### 2.1. Tiêu chí 1: Đúng nghiệp vụ PRD & CSDL thật (100% Functional Pass)
-* Mọi dữ liệu tạo ra (Tài khoản, Danh mục, Ticket, Lời nhắn, File, Đánh giá) phải lưu vào CSDL thật (MySQL/PostgreSQL), **không dùng dữ liệu giả/mockup**.
-* Luồng Ticket đi đúng 5 trạng thái: `NEW` $\rightarrow$ `IN_PROGRESS` $\rightarrow$ `PENDING` $\rightarrow$ `RESOLVED` $\rightarrow$ `CLOSED`.
-* Tuân thủ đúng 8 Quy tắc nghiệp vụ trong [docs/domain/quy-tac-nghiep-vu.md](file:///c:/VScode/UniSupport/docs/domain/quy-tac-nghiep-vu.md).
+| Tiêu chí | Điều kiện hoàn thành | Bằng chứng tối thiểu |
+| :--- | :--- | :--- |
+| **Yêu cầu và thiết kế** | Kết quả khớp PRD/FR và Acceptance Criteria (AC); thiết kế liên quan đã được cập nhật hoặc xác nhận không cần thay đổi. Sai khác với PRD phải qua Change Request. | Liên kết FR/AC, design hoặc ghi nhận review |
+| **Unit test** | Unit test được thiết kế/viết cho logic thay đổi và chạy đạt; không bỏ qua test liên quan đang thất bại. | Kết quả test trong CI hoặc báo cáo test |
+| **Kiểm thử theo ảnh hưởng** | Cập nhật/chạy Integration, System/E2E, Security hoặc Regression khi thay đổi ảnh hưởng các luồng đó; tất cả test bắt buộc của task đạt. | Test case và kết quả chạy gắn với task |
+| **CI/CD** | Các bước bắt buộc của pipeline (build, lint/type check nếu có, automated tests và kiểm tra triển khai nếu áp dụng) đều pass. Pipeline đỏ hoặc bị bỏ qua thì task chưa Done. | Link pipeline thành công |
+| **Review độc lập** | Có ít nhất một reviewer không phải tác giả kiểm tra thay đổi, test và tiêu chí chấp nhận. Nếu task đổi quy trình nghiệp vụ, BA/PO hoặc chủ quy trình xác nhận luồng đầu-cuối, vai trò, trạng thái và ngoại lệ. | Review được chấp thuận; xác nhận nghiệp vụ nếu có ảnh hưởng |
+| **Lỗi và tài liệu** | Không còn lỗi Critical/High thuộc phạm vi task; tài liệu, hướng dẫn hoặc test case liên quan được cập nhật. | Defect log và liên kết tài liệu/test đã cập nhật |
 
-### 2.2. Tiêu chí 2: Hiệu năng tải trang (Google Lighthouse Performance $\ge 90$)
-* **Tốc độ mở trang (LCP):** Bảng danh sách Ticket và Dashboard hiển thị nội dung chính trong vòng **$\le 2.5\text{ giây}$**.
-* **Độ nhạy khi bấm nút (INP):** Khi người dùng bấm nút nhận việc, gửi đơn, chuyển trạng thái, giao diện phản hồi ngay trong vòng **$\le 200\text{ms}$**.
-* **Ổn định bố cục (CLS $\le 0.1$):** Không bị giật lệch vị trí nút bấm khi đang tải trang.
-* **Console sạch sẽ:** Bảng điều khiển Console của trình duyệt không có lỗi đỏ (Zero Red Errors).
+**Luồng đóng task:** (1) Làm rõ phạm vi, FR/AC và ảnh hưởng; (2) thống nhất thiết kế và test trước khi triển khai; (3) thực hiện, viết/chạy unit test và các test theo ảnh hưởng; (4) mở PR kèm liên kết yêu cầu và bằng chứng; (5) reviewer và người xác nhận nghiệp vụ (nếu cần) duyệt; (6) pipeline bắt buộc pass; (7) người phụ trách kiểm tra checklist, ghi bằng chứng rồi mới chuyển task sang Done. Nếu bất kỳ bước bắt buộc nào fail, task quay lại In Progress/Review, không tính là hoàn thành.
 
-### 2.3. Tiêu chí 3: Chạy tốt trên Điện thoại và Laptop (Responsive)
-* **Trên Điện thoại di động (Mobile 375px – 430px):**
-  * Giao diện vừa khít chiều ngang màn hình, tuyệt đối **không bị thanh cuộn ngang**.
-  * Bảng Ticket tự động hiển thị dạng thẻ (Card) dọc để dễ đọc trên màn hình nhỏ.
-  * Các nút bấm to rõ, ngón tay chạm dễ dàng không bị bấm nhầm.
-* **Trên Laptop / Máy tính để bàn (Desktop 1024px – 1920px):**
-  * Hiển thị bảng dữ liệu đầy đủ các cột (Mã đơn, Sinh viên, Trạng thái, Ngày gửi, SLA, Nút thao tác).
-  * Dashboard hiển thị biểu đồ trực quan, tận dụng tốt không gian màn hình.
+### 3.2. Definition of Done (DoD) cho milestone
+Milestone chỉ được xem là **Done** sau khi có quyết định nghiệm thu, không chỉ vì đã hết thời gian hoặc mọi task đã được báo xong. Điều kiện đóng milestone:
+* Tất cả task trong phạm vi đã Done theo mục 3.1; task chưa hoàn thành chỉ được đưa ra khỏi phạm vi milestone qua Change Request được PO/PM phê duyệt, đánh giá ảnh hưởng và cập nhật baseline.
+* 100% FR/AC thuộc milestone được ánh xạ tới test case và có kết quả; các luồng nghiệp vụ đầu-cuối trọng yếu của milestone đều pass.
+* Regression và các kiểm thử tích hợp/E2E bị ảnh hưởng đã pass; không còn lỗi Critical/High chưa xử lý trong phạm vi nghiệm thu.
+* BA/PO hoặc chủ quy trình xác nhận quy trình nghiệp vụ; QA/QC xác nhận bằng chứng và kết quả test; Manager/PM hoặc người được ủy quyền chấp thuận đóng milestone.
+* Lưu biên bản nghiệm thu gồm phạm vi, kết quả theo từng gate, lỗi còn lại/rủi ro được chấp thuận, người duyệt và ngày duyệt.
 
----
+**Luồng đóng milestone:** rà soát danh sách task và truy vết FR/AC → chạy bộ kiểm thử hồi quy và luồng đầu-cuối → review quy trình với người đại diện nghiệp vụ → QA/QC tổng hợp bằng chứng và lỗi → người có thẩm quyền ký nghiệm thu. Nếu gate không đạt, milestone giữ trạng thái In Progress/Blocked, lập danh sách việc cần xử lý và chỉ đánh giá lại sau khi có bằng chứng mới.
 
-## 3. BẢNG KHÓA CỨNG ĐÚNG 13 PHÂN HỆ THEO PRD (KHÔNG THỪA - KHÔNG THIẾU)
+### 3.3. Trách nhiệm quản lý
+Manager/PM thiết lập người chịu trách nhiệm, reviewer, gate và nơi lưu bằng chứng từ đầu milestone; theo dõi ngoại lệ và rủi ro. Manager không thay reviewer kỹ thuật hoặc BA/PO xác nhận quy trình nghiệp vụ. Mọi ngoại lệ DoD phải ghi rõ lý do, rủi ro, người chấp thuận và hạn xử lý; ngoại lệ không được ghi nhận thì không được tính là Done.
 
-Dưới đây là danh mục chính xác 13 Phân hệ, làm đúng các yêu cầu này là **ĐẠT (PASS)**:
+## 4. Tiêu chuẩn chất lượng đề xuất
+Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, cần được nhóm/giảng viên xác nhận trước khi sử dụng làm tiêu chí nghiệm thu chính thức.
 
-| Mã | Tên Phân Hệ | Mô Tả Chức Năng Cốt Lõi Theo PRD | Hiển Thị Mobile / Laptop |
-| :---: | :--- | :--- | :--- |
-| **M01** | [Đăng nhập & Xác thực](file:///c:/VScode/UniSupport/docs/modules/G%C4%901-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/prd.md) | - Đăng nhập bằng Mã định danh + Mật khẩu.<br>- Điều hướng đúng 4 Roles (Sinh viên, Nhân viên, Quản lý, Admin).<br>- Đăng xuất.<br>- Nhập sai 5 lần tạm khóa 15 phút (BR-01). Không có nút Đăng ký cho SV/NV. | - **Mobile:** Form vừa màn hình, dễ nhập.<br>- **Laptop:** Form căn giữa trang nhã. |
-| **M02** | [Vai trò & Phân quyền](file:///c:/VScode/UniSupport/docs/modules/G%C4%901-NenTang&ChucNangCotLoi/M02-vai-tro-phan-quyen/prd.md) | - Admin cấu hình quyền cho 4 vai trò. | - **Mobile:** Danh sách thẻ.<br>- **Laptop:** Bảng phân quyền. |
-| **M03** | [Quản lý tài khoản](file:///c:/VScode/UniSupport/docs/modules/G%C4%901-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/prd.md) | - Admin tạo, xem, tìm kiếm, lọc, khóa/mở khóa tài khoản người dùng trên CSDL thật. | - **Mobile:** Tìm kiếm nhanh, thẻ người dùng.<br>- **Laptop:** Bảng danh sách có lọc theo Role/Phòng ban. |
-| **M04** | [Quản lý danh mục](file:///c:/VScode/UniSupport/docs/modules/G%C4%901-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/prd.md) | - Admin quản lý danh mục toàn trường.<br>- Quản lý thêm danh mục phòng ban.<br>- Có danh mục "Khác". | - **Mobile:** Danh mục dạng cây thu gọn.<br>- **Laptop:** Bảng/Cây danh mục trực quan. |
-| **M05** | [Khởi tạo Ticket (SV)](file:///c:/VScode/UniSupport/docs/modules/G%C4%901-NenTang&ChucNangCotLoi/M05-khoi-tao-ticket/prd.md) | - Chọn Phòng ban $\rightarrow$ Danh mục (hoặc "Khác").<br>- Nhập Tiêu đề ($\le 150$ ký tự), Nội dung ($\ge 10$ ký tự).<br>- Đính kèm tệp (tối đa 5 file, $\le 5$MB/file: png, jpg, pdf, docx).<br>- Tự sinh mã `[CAT]-[YYYYMMDD]-[SEQ]`. Trạng thái ban đầu: `NEW`. | - **Mobile:** Form nộp đơn cuộn mượt mà.<br>- **Laptop:** Form 2 cột tiện thao tác. |
-| **M06** | [Tiếp nhận Ticket (NV)](file:///c:/VScode/UniSupport/docs/modules/G%C4%901-NenTang&ChucNangCotLoi/M06-tiep-nhan-ticket/prd.md) | - Nhân viên xem danh sách đơn `NEW` của phòng mình (BR-02).<br>- Bấm "Tiếp nhận" (Claim) $\rightarrow$ chuyển sang `IN_PROGRESS`.<br>- Kiểm tra không để 2 nhân viên cùng nhận 1 đơn. | - **Mobile:** Thẻ đơn tóm tắt, nút nhận việc to rõ.<br>- **Laptop:** Bảng đơn mới có lọc theo ngày/độ ưu tiên. |
-| **M07** | [Xử lý & Trao đổi (NV)](file:///c:/VScode/UniSupport/docs/modules/G%C4%901-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/prd.md) | - Cập nhật tiến độ & Ghi chú nội bộ.<br>- Bấm "Yêu cầu bổ sung" $\rightarrow$ chuyển sang `PENDING` (bật đếm ngược 72h).<br>- Bấm chuyển trả đơn sai phòng ban về Admin (`NV-04`). | - **Mobile:** Khung trao đổi dạng chatbox dễ gõ.<br>- **Laptop:** Khung đôi: Chi tiết đơn & Lịch sử trao đổi. |
-| **M08** | [Trả kết quả (NV)](file:///c:/VScode/UniSupport/docs/modules/G%C4%901-NenTang&ChucNangCotLoi/M08-tra-ket-qua/prd.md) | - Bắt buộc nhập *Resolution Notes* (kết quả xử lý) mới được lưu (BR-05).<br>- Đính kèm tệp kết quả (nếu có).<br>- Chuyển trạng thái sang `RESOLVED`. | - **Mobile:** Nút hoàn thành cố định cuối màn hình.<br>- **Laptop:** Khung soạn kết quả đầy đủ. |
-| **M09** | [Theo dõi & Bổ sung (SV)](file:///c:/VScode/UniSupport/docs/modules/G%C4%902-PhanHeSinhVien/M09-theo-doi-bo-sung/prd.md) | - Sinh viên xem danh sách và chi tiết các đơn của mình.<br>- Bổ sung thông tin khi đơn ở trạng thái `PENDING` $\rightarrow$ về lại `IN_PROGRESS`.<br>- Sinh viên được hủy đơn khi còn ở trạng thái `NEW`. Khi `IN_PROGRESS` thì khóa nút sửa (BR-03). | - **Mobile:** Dòng thời gian trạng thái đổi màu, thông báo đỏ khi cần bổ sung.<br>- **Laptop:** Bảng tra cứu đầy đủ chi tiết lịch sử. |
-| **M10** | [Kết quả & Đánh giá (SV)](file:///c:/VScode/UniSupport/docs/modules/G%C4%902-PhanHeSinhVien/M10-ket-qua-danh-gia/prd.md) | - Xem kết quả và tải file giải quyết.<br>- Đánh giá mức độ hài lòng 1–5 sao và nhận xét $\rightarrow$ chuyển sang `CLOSED`.<br>- Nếu không đánh giá, tự động đóng sau 72h.<br>- Đơn `CLOSED` bị khóa vĩnh viễn (BR-06). | - **Mobile:** Modal đánh giá 5 sao dễ bấm.<br>- **Laptop:** Giao diện xem kết quả kèm bảng đánh giá. |
-| **M11** | [Quản lý & Điều phối](file:///c:/VScode/UniSupport/docs/modules/G%C4%903-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/prd.md) | - Quản lý phân công đơn cho nhân viên trong phòng.<br>- Admin tiếp nhận đơn mục "Khác" và đơn bị trả về sai phòng ban $\rightarrow$ điều chuyển sang đúng phòng ban (`AD-05`). | - **Mobile:** Chọn nhân viên phân công nhanh.<br>- **Laptop:** Bảng điều phối hiển thị tải công việc của cán bộ. |
-| **M12** | [Giám sát tiến độ](file:///c:/VScode/UniSupport/docs/modules/G%C4%903-DieuPhoi&GIamSat/M12-giam-sat-tien-do/prd.md) | - Theo dõi đơn tồn đọng, quá hạn SLA tính theo Giờ hành chính (8h00 - 17h00, T2-T6, bỏ T7/CN/Lễ) (BR-08).<br>- Hiển thị cờ cảnh báo vàng/đỏ. | - **Mobile:** Thẻ đơn viền màu cảnh báo SLA.<br>- **Laptop:** Bảng giám sát chuyên sâu kèm bộ lọc. |
-| **M13** | [Dashboard & Báo cáo](file:///c:/VScode/UniSupport/docs/modules/G%C4%903-DieuPhoi&GIamSat/M13-dashboard-bao-cao/prd.md) | - Thống kê số lượng theo trạng thái, phòng ban, thời gian xử lý trung bình, điểm CSAT trên CSDL thật.<br>- Biểu đồ trực quan và xuất báo cáo. | - **Mobile:** Biểu đồ hiển thị vừa màn hình, vuốt xem tooltip.<br>- **Laptop:** Dashboard đa widget biểu đồ (Cột, Tròn, Đường). |
+| Mã | Chỉ tiêu | Ngưỡng đề xuất / cách đo |
+| :--- | :--- | :--- |
+| **Q-01** | Bao phủ yêu cầu | 100% FR trong phạm vi release có ít nhất 1 test case và kết quả |
+| **Q-02** | Kiểm thử chức năng | ≥ 95% test case đạt; 100% test case luồng trọng yếu đạt |
+| **Q-03** | Lỗi nghiêm trọng | 0 lỗi Critical/High đang mở tại thời điểm bàn giao |
+| **Q-04** | Phân quyền và riêng tư | 100% kiểm thử truy cập trái quyền trọng yếu đạt |
+| **Q-05** | Tính toàn vẹn Ticket | Không có Ticket trùng do gửi lặp; không mất lịch sử/đính kèm |
+| **Q-06** | Hiệu năng | Ngưỡng phản hồi, tải đồng thời: [CẦN CHỐT] |
+| **Q-07** | Khả năng phục hồi | Có bản sao lưu, thử phục hồi và phương án rollback được kiểm tra |
 
----
+## 5. Chiến lược kiểm tra và kiểm thử
 
-## 4. BẢO VỆ QUYỀN LỢI CỦA BẠN (KHÔNG BỊ ÉP LÀM THÊM)
+| Mức | Nội dung | Đầu ra |
+| :--- | :--- | :--- |
+| **Review tài liệu** | Kiểm tra FR, AC, ngoại lệ, tính nhất quán trạng thái và vai trò | Review checklist |
+| **Unit test** | Kiểm tra xử lý đơn lẻ, validation, ràng buộc dữ liệu | Unit test result |
+| **Integration test** | Luồng xuyên module, thông báo, phân công, lịch sử Ticket | Integration report |
+| **System test** | Kiểm thử end-to-end theo Actor và quyền | System test report |
+| **Security test** | Xác thực, phân quyền, truy cập dữ liệu người khác, file upload | Security checklist |
+| **UAT** | Sinh viên/Nhân viên/Quản lý/Admin thực hiện kịch bản nghiệp vụ | UAT sign-off |
+| **Regression** | Chạy lại test bị ảnh hưởng sau mỗi lần sửa lỗi | Regression report |
+| **Smoke / deployment** | Đăng nhập, tạo Ticket, nhận, xử lý, trả kết quả trên môi trường triển khai | Smoke checklist |
 
-Theo đúng [Team-charter.md](file:///c:/VScode/UniSupport/Team-charter.md):
-1. **Phạm vi dự án dừng lại ở đúng 13 Phân hệ trên.** Không nhận thêm bất kỳ yêu cầu phát sinh nào từ bất kỳ ai.
-2. **Tiêu chuẩn nghiệm thu:** Chỉ cần module của bạn chạy đúng các luồng trên CSDL thật, không lỗi đỏ trên console, mở trên điện thoại không vỡ giao diện $\rightarrow$ **Nghiệm thu Đạt (Done)**.
-3. Không đòi hỏi các bài kiểm thử bảo mật cao siêu, không đòi hỏi các công nghệ ngoài lề.
+## 6. Ma trận kiểm soát theo 19 module
+
+| Module | Hạng mục | Điểm kiểm soát chính |
+| :--- | :--- | :--- |
+| **M01** | Khảo sát & đặc tả | Review PRD; FR có AC rõ |
+| **M02** | Tạm ứng & thiết kế | Review kiến trúc/UI và phê duyệt thiết kế |
+| **M03** | CSDL & nền tảng | Kiểm tra ràng buộc, migration, backup |
+| **M04** | Đăng nhập | Kiểm thử đăng nhập đúng/sai, khóa tài khoản |
+| **M05** | Quản lý tài khoản | Kiểm tra tìm kiếm, import, khóa/mở |
+| **M06** | Phân quyền | Kiểm tra 4 role, truy cập trái quyền |
+| **M07** | Danh mục hỗ trợ | Kiểm tra CRUD, ẩn danh mục, định tuyến |
+| **M08** | Tạo Ticket | Validation, file ≤5MB, chống tạo trùng |
+| **M09** | Theo dõi & bổ sung | Quyền xem Ticket, bổ sung đúng Ticket |
+| **M10** | Kết quả & đánh giá | Xem kết quả, 1–5 sao, đóng Ticket |
+| **M11** | Tiếp nhận Ticket | Chỉ 1 người nhận, chống tranh chấp |
+| **M12** | Xử lý & trao đổi | Yêu cầu bổ sung, lưu lịch sử, thông báo |
+| **M13** | Trả kết quả | Bắt buộc nội dung trả lời, thông báo một lần |
+| **M14** | Điều phối Ticket | Chuyển sai phòng ban, phân công lại, audit |
+| **M15** | Giám sát tiến độ | SLA, Ticket tồn đọng, phạm vi phòng ban |
+| **M16** | Dashboard / báo cáo | Đối chiếu thống kê, xuất báo cáo |
+| **M17** | Tích hợp & UAT | E2E/UAT đủ 4 vai trò |
+| **M18** | Sửa lỗi & bảo mật | Regression, 0 lỗi nghiêm trọng |
+| **M19** | Nghiệm thu / triển khai | Smoke, backup/rollback, sign-off |
+
+*Lưu ý: bảng trên sử dụng mã M01–M19 của Master Schedule. Các mã FR-M01–FR-M13 trong bộ PRD là mã phân hệ tài liệu, không mặc nhiên đồng nhất với module lịch triển khai.*
+
+## 7. Test scenario trọng yếu
+
+| ID | Actor | Kịch bản | Kết quả mong đợi |
+| :--- | :--- | :--- | :--- |
+| **TC-01** | Sinh viên | Gửi Ticket hợp lệ | Tạo đúng 1 Ticket, có mã và gắn sinh viên |
+| **TC-02** | Sinh viên | Thiếu tiêu đề/mô tả hoặc chỉ có khoảng trắng | Không tạo Ticket; hiện lỗi đúng trường |
+| **TC-03** | Sinh viên | Gửi lặp/double click/retry | Chỉ tạo một Ticket |
+| **TC-04** | Sinh viên | Đính kèm sai định dạng hoặc >5MB | Từ chối tệp không hợp lệ |
+| **TC-05** | Nhân viên | Hai nhân viên tiếp nhận cùng Ticket | Chỉ một người được gán |
+| **TC-06** | Nhân viên/SV | Yêu cầu và gửi bổ sung | Chờ bổ sung → Đang xử lý; giữ người phụ trách |
+| **TC-07** | Nhân viên/Admin | Báo sai phòng ban và điều chuyển | Ticket đến đúng hàng chờ, có lịch sử |
+| **TC-08** | Nhân viên/SV | Trả kết quả và xem kết quả | Bắt buộc nội dung; sinh viên được thông báo |
+| **TC-09** | Sinh viên | Đánh giá 1–5 sao và đóng Ticket | Lưu đánh giá; trạng thái đóng theo PRD |
+| **TC-10** | 4 vai trò | Truy cập dữ liệu/chức năng ngoài quyền | Từ chối truy cập, không lộ dữ liệu |
+| **TC-11** | Quản lý | Phân công nhân viên khác phòng ban | Bị từ chối |
+| **TC-12** | Admin/Quản lý | Lọc thống kê, xuất báo cáo | Số liệu đúng phạm vi và kỳ báo cáo |
+
+## 8. Quy trình quản lý lỗi (Defect Management)
+1. Tester phát hiện lỗi, tạo Defect ID kèm module/FR, môi trường, bước tái hiện, kết quả thực tế/mong đợi, bằng chứng.
+2. QA phân loại mức độ và ưu tiên; Leader phân công người sửa.
+3. Developer sửa và cập nhật trạng thái Ready for Retest, ghi phiên bản sửa.
+4. QA tái kiểm thử: Pass → Closed; Fail → Reopened; đồng thời chạy regression các luồng liên quan.
+5. Lỗi ảnh hưởng yêu cầu hoặc phạm vi được chuyển qua quy trình Change Request thay vì âm thầm sửa PRD.
+
+| Mức | Định nghĩa | Quy tắc xử lý đề xuất |
+| :--- | :--- | :--- |
+| **Critical** | Mất dữ liệu, lộ dữ liệu, hệ thống không dùng được | Chặn nghiệm thu |
+| **High** | Luồng chính không thực hiện được hoặc sai quyền | Chặn nghiệm thu |
+| **Medium** | Lỗi chức năng phụ có giải pháp tạm | Cần kế hoạch khắc phục và phê duyệt ngoại lệ |
+| **Low** | Giao diện, nội dung nhỏ không ảnh hưởng nghiệp vụ | Ghi backlog có thời hạn |
+
+## 9. Quality Gates theo giai đoạn
+
+| Gate | Thời điểm | Điều kiện ra cổng |
+| :--- | :--- | :--- |
+| **G1 – Baseline** | Sau M01–M02 | PRD/thiết kế được review, AC rõ, scope và mapping FR–module được duyệt |
+| **G2 – Working MVP** | Sau các module nền tảng và luồng Ticket cốt lõi | Đăng nhập → tạo → tiếp nhận → xử lý → trả kết quả hoạt động trên dữ liệu thật |
+| **G3 – Student flows** | Sau M09–M10 | Theo dõi, bổ sung, xem kết quả và đánh giá đạt test trọng yếu |
+| **G4 – Management** | Sau M14–M16 | Điều phối, cảnh báo, dashboard/báo cáo đúng phạm vi |
+| **G5 – Release** | Sau M17–M19 | UAT đạt; không còn Critical/High; có triển khai, rollback và ký nghiệm thu |
+
+Mỗi gate phải áp dụng DoD task/milestone tại mục 3. Gate chỉ **Pass** khi có đủ bằng chứng kiểm thử và xác nhận của đúng vai trò; nếu chưa đạt, ghi trạng thái **Blocked** cùng owner và việc cần hoàn thành. Các chỉ tiêu Q-01–Q-07 áp dụng theo ngưỡng đã được nhóm xác nhận; ngưỡng còn [CẦN CHỐT] không được tự coi là đã đạt.
+
+## 10. Hồ sơ bằng chứng và báo cáo QC
+* Requirements Traceability Matrix (FR ↔ Module ↔ Test Case ↔ Kết quả).
+* Test Case Register và Test Execution Report theo đợt kiểm thử.
+* Defect Log: ID, mức độ, người xử lý, trạng thái, ngày mở/đóng.
+* Biên bản review PRD, biên bản nghiệm thu module và UAT.
+* Báo cáo tổng hợp: số test đã chạy/đạt/trượt, lỗi mở theo mức, rủi ro và quyết định gate.
+
+## 11. Rủi ro chất lượng và phương án
+
+| Rủi ro | Tác động | Biện pháp |
+| :--- | :--- | :--- |
+| **Mã module PRD khác Master Schedule** | Sai phạm vi test / nghiệm thu | Chốt mapping trước khi viết test case |
+| **Hai người nhận cùng Ticket** | Sai người phụ trách | Test cạnh tranh và kiểm tra dữ liệu cuối |
+| **Thông báo gửi trùng** | Nhiễu trải nghiệm | Kiểm thử retry và sự kiện lặp |
+| **Quy tắc 72 giờ chưa đồng nhất** | Sai đóng/chờ bổ sung | Chốt điều kiện SLA/auto-close với BA/PO |
+| **Phân quyền sai** | Lộ Ticket cá nhân/phòng ban | Test ma trận quyền và dữ liệu xuyên role |
+| **Lỗi xuất báo cáo** | Quyết định sai | Đối soát với dữ liệu nguồn |
+
+## 12. Các quyết định cần chốt trước baseline
+* Xác nhận ngày thực tế, milestone và người phụ trách từ Master Schedule bản cuối.
+* Xác nhận mapping 13 phân hệ PRD sang 19 module triển khai.
+* Xác nhận các trạng thái Ticket (New, In Progress, Pending, Resolved, Closed) và thời điểm chuyển.
+* Xác nhận cách tính 72 giờ ở Pending và tự động đóng 72 giờ sau Resolved.
+* Xác nhận ngưỡng SLA, hiệu năng, số lượng người dùng đồng thời và tỷ lệ pass tối thiểu.
+* Xác nhận môi trường UAT, dữ liệu thử, người có quyền ký nghiệm thu.
