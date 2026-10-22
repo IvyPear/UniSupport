@@ -54,11 +54,11 @@
 **Luồng chính (Main Flow):**
 
 1. Sinh viên mở chi tiết Ticket đang ở trạng thái `Chờ bổ sung`.
-2. Đọc nội dung yêu cầu bổ sung từ Nhân viên và theo dõi thời gian còn lại trên đồng hồ đếm ngược 72 giờ.
+2. Đọc nội dung yêu cầu bổ sung từ Nhân viên và theo dõi thời gian còn lại trên đồng hồ đếm ngược 3 ngày làm việc (không tính Thứ 7, Chủ nhật và ngày lễ).
 3. Sinh viên nhập nội dung giải trình bổ sung tại form phản hồi.
 4. Tải lên các tệp tài liệu/giấy tờ minh chứng (nếu có).
 5. Nhấn “Xác nhận gửi bổ sung”.
-6. Hệ thống lưu nội dung bổ sung vào dòng thời gian của Ticket và dừng bộ đếm ngược 72 giờ.
+6. Hệ thống lưu nội dung bổ sung vào dòng thời gian của Ticket và dừng bộ đếm ngược 3 ngày làm việc.
 7. Tự động chuyển trạng thái Ticket về lại `Đang xử lý` (`In Progress`).
 8. Giữ nguyên Nhân viên phụ trách cũ và phát thông báo cho Nhân viên đó tiếp tục giải quyết.
 
@@ -69,6 +69,6 @@
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Sinh viên nộp bổ sung thành công $\rightarrow$ Đơn chuyển về `Đang xử lý`, hủy bộ đếm 72h và lưu thông tin vào lịch sử.
+* **AC-01:** Sinh viên nộp bổ sung thành công $\rightarrow$ Đơn chuyển về `Đang xử lý`, hủy bộ đếm 3 ngày làm việc và lưu thông tin vào lịch sử.
 
 ---

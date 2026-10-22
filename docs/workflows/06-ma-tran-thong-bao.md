@@ -6,7 +6,7 @@
 
 ## Bảng Ma trận 7 Hành vi Thông báo Standard
 
-| # | Sự kiện / Hành vi phát sinh | Người nhận thông báo | Module & FR liên quan | Quy tắc vận hành |
+| # | Sự kiện / Hành vi phát sinh | Người nhận thông                                                         báo | Module & FR liên quan | Quy tắc vận hành |
 |---|---|---|---|---|
 | **1** | Trạng thái Ticket thay đổi (VD: `Chưa tiếp nhận` $\rightarrow$ `Đang xử lý` $\rightarrow$ `Chờ bổ sung`) | Sinh viên | [M09](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) (`[FR-M09-04]`) / `NV-02` | Bắn thông báo In-app. Nhấn vào thông báo sẽ mở trực tiếp màn hình chi tiết Ticket đó. |
 | **2** | Sinh viên gửi thông tin/tài liệu bổ sung thành công | Nhân viên đang phụ trách Ticket | [M06](../modules/GD2/Moc3-XuLi&BoSung/M06-tiep-nhan-ticket/) (`[FR-M06-03]`), [M09](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) / `SV-03` | Bắn thông báo In-app cho đúng Nhân viên (Assignee) cũ. Giữ nguyên Assignee, không đổi người. |

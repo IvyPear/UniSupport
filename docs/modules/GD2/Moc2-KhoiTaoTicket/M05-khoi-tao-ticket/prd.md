@@ -70,3 +70,48 @@
 * **AC-02:** File đính kèm > 5MB hoặc sai định dạng $\rightarrow$ Hệ thống hiển thị cảnh báo lỗi và không cho gửi.
 
 ---
+
+## [FR-M05-03] Sinh viên chỉnh sửa Tiêu đề và Nội dung khi đơn chưa được tiếp nhận
+
+**Mô tả:** Khi Ticket đang ở trạng thái `Chưa tiếp nhận` (`New`), Sinh viên có quyền mở lại đơn để chỉnh sửa Tiêu đề và Nội dung yêu cầu hoặc cập nhật lại tệp đính kèm. Để tránh xáo trộn luồng điều phối hàng chờ, Sinh viên không được phép thay đổi Phòng ban và Danh mục dịch vụ.
+
+**Actor:** Sinh viên (Chủ sở hữu Ticket)
+
+**Preconditions (Điều kiện tiên quyết):** Ticket do chính tài khoản Sinh viên tạo và đang ở trạng thái `Chưa tiếp nhận` (`New`).
+
+**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
+
+- **Mã Ticket:** Bắt buộc, chỉ đọc.
+- **Phòng ban & Danh mục:** Chỉ đọc (Khóa cứng, không cho phép chỉnh sửa).
+- **Tiêu đề yêu cầu:** Bắt buộc, Min 5 - Max 150 ký tự.
+- **Nội dung chi tiết:** Bắt buộc, Min 10 ký tự.
+- **Tệp đính kèm:** Tùy chọn, tối đa 5 file, dung lượng tối đa 5MB/file (`.png`, `.jpg`, `.pdf`, `.docx`).
+
+**Luồng chính (Main Flow):**
+
+1. Sinh viên mở chi tiết Ticket đang ở trạng thái `Chưa tiếp nhận` (`New`) từ danh sách yêu cầu.
+2. Nhấn nút “Chỉnh sửa đơn”.
+3. Giao diện hiển thị form chỉnh sửa:
+   - Thông tin Phòng ban và Danh mục hiển thị ở dạng chỉ đọc (`disabled`).
+   - Ô Tiêu đề và Nội dung cho phép người dùng thay đổi văn bản.
+   - Khu vực đính kèm cho phép xóa tệp cũ hoặc tải thêm tệp mới (tổng số tệp $\le 5$).
+4. Sinh viên sửa đổi thông tin và nhấn “Lưu thay đổi”.
+5. Hệ thống kiểm tra hợp lệ dữ liệu (độ dài, dung lượng tệp).
+6. Hệ thống cập nhật dữ liệu mới vào Ticket và ghi nhận log vào Audit Trail: *"Sinh viên cập nhật tiêu đề/nội dung yêu cầu"*.
+7. Hiển thị thông báo cập nhật thành công trên giao diện.
+
+**Luồng ngoại lệ (Exception Flow):**
+
+* **Đơn vừa được nhân viên tiếp nhận:** Nếu trong lúc sinh viên đang sửa trên form mà có Nhân viên bấm tiếp nhận (`claim`) đơn chuyển sang `In Progress`, khi sinh viên bấm Lưu hệ thống sẽ từ chối thao tác, hiển thị thông báo: *"Đơn đã được nhân viên tiếp nhận xử lý, không thể chỉnh sửa"* và làm mới dữ liệu màn hình.
+
+**Business Rules (Quy tắc nghiệp vụ):**
+
+* **BR-01:** Chỉ cho phép chỉnh sửa khi trạng thái Ticket chính xác là `New`.
+* **BR-02:** Tuyệt đối không cho phép thay đổi Phòng ban hoặc Danh mục (theo quy định tại [quy-tac-nghiep-vu.md](../../../../domain/quy-tac-nghiep-vu.md) BR-2).
+
+**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
+
+* **AC-01:** Khi Ticket ở trạng thái `New`, sinh viên sửa Tiêu đề và Nội dung hợp lệ $\rightarrow$ Hệ thống lưu thành công và ghi lịch sử truy vết.
+* **AC-02:** Form chỉnh sửa khóa hoàn toàn trường Phòng ban và Danh mục, không cho phép thay đổi.
+* **AC-03:** Khi Ticket đã chuyển sang `In Progress` hoặc các trạng thái khác $\rightarrow$ Nút "Chỉnh sửa đơn" bị ẩn, gọi API trực tiếp trả về lỗi `400 Bad Request`.
+

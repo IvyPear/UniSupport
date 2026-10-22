@@ -1,4 +1,4 @@
-﻿# 2. PHÂN HỆ SINH VIÊN (STUDENT WORKFLOWS)
+# 2. PHÂN HỆ SINH VIÊN (STUDENT WORKFLOWS)
 
 > **Ánh xạ Phân hệ:** [M05-khoi-tao-ticket](../modules/GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/), [M09-theo-doi-bo-sung](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/), [M10-ket-qua-danh-gia](../modules/GD2/Moc4-PhanHeSinhVien/M10-ket-qua-danh-gia/)
 
@@ -42,7 +42,7 @@ graph TD
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Sinh viên có Ticket đã khởi tạo.
-* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) (`[FR-M09-01]`, `[FR-M09-02]`)
+* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) (`[FR-M09-01]`)
 * **Luồng chính:**
   1. Mở menu **Yêu cầu của tôi**.
   2. Hệ thống tải danh sách Ticket thuộc sở hữu của tài khoản hiện tại.
@@ -67,7 +67,7 @@ graph TD
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Ticket đang ở trạng thái **Chờ bổ sung** (`Pending`).
-* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) (`[FR-M09-03]`, `[FR-M09-04]`)
+* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) (`[FR-M09-02]`)
 * **Luồng chính:**
   1. Sinh viên nhận thông báo yêu cầu bổ sung từ Nhân viên.
   2. Mở Ticket, đọc nội dung yêu cầu cụ thể.
@@ -84,7 +84,7 @@ graph TD
     A([Nhận thông báo Yêu cầu bổ sung]) --> B[Mở Ticket PENDING]
     B --> C[Nhập nội dung/tải file bổ sung]
     C --> D[Bấm Xác nhận gửi]
-    D --> E[Hệ thống dừng bộ đếm 72H]
+    D --> E[Hệ thống dừng bộ đếm 3 Ngày làm việc]
     E --> F[Chuyển trạng thái về IN PROGRESS]
     F --> G([Phát thông báo cho Nhân viên phụ trách])
 ```

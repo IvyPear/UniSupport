@@ -51,7 +51,7 @@
 **Luồng chính (Main Flow):**
 
 1. Tại danh sách đơn phòng ban hoặc màn hình giám sát, hệ thống liên tục tính toán thời gian xử lý thực tế so với mốc SLA cam kết.
-2. Với các đơn quá hạn đếm ngược 72h bổ sung hoặc quá hạn thời gian SLA:
+2. Với các đơn quá hạn đếm ngược 3 ngày làm việc bổ sung hoặc quá hạn thời gian SLA:
    - Hệ thống tự động tô màu đỏ nổi bật trên dòng Ticket.
    - Hiển thị nhãn cảnh báo rõ ràng: `Quá hạn SLA` kèm số giờ vượt quá.
 3. Trưởng phòng và nhân viên nhấp vào nhãn cảnh báo để xem chi tiết và can thiệp kịp thời (phân công lại hoặc đôn đốc xử lý).
