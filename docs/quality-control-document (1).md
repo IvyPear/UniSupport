@@ -1,18 +1,6 @@
 # QUALITY CONTROL DOCUMENT
 ## DỰ ÁN UNISUPPORT | KẾ HOẠCH KIỂM SOÁT CHẤT LƯỢNG
 
-| Thông tin | Nội dung |
-| :--- | :--- |
-| **Mã tài liệu** | US-QC-PLAN-01 |
-| **Phiên bản** | 1.0 – Bản dự thảo |
-| **Ngày lập** | 13/10/2026 |
-| **Dự án** | UniSupport – Hệ thống tiếp nhận và xử lý yêu cầu hỗ trợ sinh viên |
-| **Phạm vi** | 13 module theo Master Schedule; đối chiếu 13 phân hệ chức năng PRD |
-| **Người soạn / Duyệt** | [Điền tên] / [Điền tên] |
-| **Trạng thái** | Draft – chờ nhóm xác nhận chỉ tiêu và người phụ trách |
-
----
-
 ## 1. Mục đích và phạm vi
 Tài liệu xác định cách kiểm soát chất lượng của UniSupport từ rà soát yêu cầu, kiểm thử chức năng, kiểm thử tích hợp đến nghiệm thu và bàn giao. Mục tiêu là phát hiện sai lệch so với PRD sớm, có bằng chứng kiểm thử, theo dõi lỗi và chỉ cho phép chuyển giai đoạn khi đạt điều kiện chất lượng.
 * **Trong phạm vi:** đăng nhập/phân quyền, tài khoản, danh mục, tạo/tiếp nhận/xử lý Ticket, bổ sung, kết quả/đánh giá, điều phối, giám sát, báo cáo, triển khai.
@@ -42,7 +30,7 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 | **Q-03** | Lỗi nghiêm trọng | 0 lỗi Critical/High đang mở tại thời điểm bàn giao |
 | **Q-04** | Phân quyền và riêng tư | 100% kiểm thử truy cập trái quyền trọng yếu đạt |
 | **Q-05** | Tính toàn vẹn Ticket | Không có Ticket trùng do gửi lặp; không mất lịch sử/đính kèm |
-| **Q-06** | Hiệu năng | Ngưỡng phản hồi, tải đồng thời: [CẦN CHỐT] |
+| **Q-06** | Hiệu năng | Thời gian phản hồi trung bình < 2s; hỗ trợ ~3000 người dùng đồng thời |
 | **Q-07** | Khả năng phục hồi | Có bản sao lưu, thử phục hồi và phương án rollback được kiểm tra |
 
 ## 5. Chiến lược kiểm tra và kiểm thử
@@ -133,14 +121,16 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 | **Mã module PRD khác Master Schedule** | Sai phạm vi test / nghiệm thu | Chốt mapping trước khi viết test case |
 | **Hai người nhận cùng Ticket** | Sai người phụ trách | Test cạnh tranh và kiểm tra dữ liệu cuối |
 | **Thông báo gửi trùng** | Nhiễu trải nghiệm | Kiểm thử retry và sự kiện lặp |
-| **Quy tắc 72 giờ chưa đồng nhất** | Sai đóng/chờ bổ sung | Chốt điều kiện SLA/auto-close với BA/PO |
+| **Quy tắc 3 ngày chưa đồng nhất** | Sai đóng/chờ bổ sung | Chốt điều kiện SLA/auto-close với BA/PO |
 | **Phân quyền sai** | Lộ Ticket cá nhân/phòng ban | Test ma trận quyền và dữ liệu xuyên role |
 | **Lỗi xuất báo cáo** | Quyết định sai | Đối soát với dữ liệu nguồn |
 
 ## 12. Các quyết định cần chốt trước baseline
 * Xác nhận ngày thực tế, milestone và người phụ trách từ Master Schedule bản cuối.
 * Xác nhận mapping 13 phân hệ PRD sang 13 module triển khai.
-* Xác nhận các trạng thái Ticket (New, In Progress, Pending, Resolved, Closed) và thời điểm chuyển.
-* Xác nhận cách tính 3 ngày ở Pending và tự động đóng 3 ngày sau Resolved.
-* Xác nhận ngưỡng SLA, hiệu năng, số lượng người dùng đồng thời và tỷ lệ pass tối thiểu.
+* Xác nhận các trạng thái Ticket (New, In Progress, Pending, Resolved, Closed) và thời điểm chuyển. 
+| :--- | :--- | :--- |
+| **Quy tắc SLA** | Thời gian phản hồi SLA từ 24h - 48h. |
+| **Xử lý Pending & Auto-close** | Thời gian chờ ở trạng thái Pending là 3 ngày, và tự động đóng Ticket sau 3 ngày kể từ khi Resolved. |
+* Xác nhận ngưỡng SLA, hiệu năng (tối thiểu 500 người dùng đồng thời) và tỷ lệ pass tối thiểu.
 * Xác nhận môi trường UAT, dữ liệu thử, người có quyền ký nghiệm thu.
