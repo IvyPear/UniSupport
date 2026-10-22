@@ -136,4 +136,4 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 | **Xử lý Pending & Auto-close** | Thời gian chờ ở trạng thái Pending là 3 ngày, và tự động đóng Ticket sau 3 ngày kể từ khi Resolved. |
 
 * Xác nhận ngưỡng SLA, hiệu năng (tối thiểu 500 người dùng đồng thời) và tỷ lệ pass tối thiểu.
-* Xác nhận môi trường UAT, dữ liệu thử, người có quyền ký nghiệm thu.
+* Phê duyệt môi trường kiểm thử, bộ dữ liệu thử nghiệm và xác định nhân sự có thẩm quyền ký biên bản nghiệm thu.
