@@ -65,9 +65,9 @@
 
 ---
 
-## [FR-M07-03] Nhân viên yêu cầu sinh viên bổ sung hồ sơ và bắt đầu đếm ngược 72 giờ
+## [FR-M07-03] Nhân viên yêu cầu sinh viên bổ sung hồ sơ và bắt đầu đếm ngược 3 ngày làm việc
 
-**Mô tả:** Khi hồ sơ chưa đủ điều kiện xử lý, Nhân viên gửi yêu cầu Sinh viên bổ sung thêm thông tin/giấy tờ còn thiếu, hệ thống chuyển đơn sang trạng thái `Chờ bổ sung` và kích hoạt đồng hồ đếm ngược 72 giờ.
+**Mô tả:** Khi hồ sơ chưa đủ điều kiện xử lý, Nhân viên gửi yêu cầu Sinh viên bổ sung thêm thông tin/giấy tờ còn thiếu, hệ thống chuyển đơn sang trạng thái `Chờ bổ sung` và kích hoạt đồng hồ đếm ngược 3 ngày làm việc.
 
 **Actor:** Nhân viên hỗ trợ
 
@@ -88,7 +88,7 @@
 3. Bấm “Gửi yêu cầu”.
 4. Hệ thống kiểm tra nội dung (không được để trống).
 5. Chuyển trạng thái Ticket sang `Chờ bổ sung` (`Pending`).
-6. Kích hoạt bộ đếm ngược thời gian 72 giờ.
+6. Kích hoạt bộ đếm ngược thời gian 3 ngày làm việc (không tính Thứ 7, Chủ nhật và ngày lễ).
 7. Phát thông báo cho Sinh viên để sinh viên vào nộp bổ sung ở Module M09.
 8. *(Quy tắc tự động đóng)*: Nếu quá **3 ngày làm việc** (không tính Thứ 7, Chủ Nhật và ngày Lễ) mà Sinh viên không nộp bổ sung, hệ thống tự động chuyển đơn sang trạng thái `Closed`, đánh dấu `auto_closed = true` và ghi nhận lý do đóng tự động vào lịch sử Ticket.
 

@@ -68,30 +68,31 @@
 
 ---
 
-## [FR-M10-03] Hệ thống tự động đóng đơn nếu sinh viên không đánh giá sau 72 giờ
+## [FR-M10-03] Hệ thống tự động đóng đơn nếu sinh viên không đánh giá sau 3 ngày làm việc
 
-**Mô tả:** Sau 72 giờ tính từ thời điểm Ticket chuyển sang trạng thái Đã giải quyết mà Sinh viên không thực hiện đánh giá, hệ thống sẽ tự động chuyển trạng thái đơn sang Đã đóng.
+**Mô tả:** Sau 3 ngày làm việc (không tính Thứ 7, Chủ nhật và ngày lễ) tính từ thời điểm Ticket chuyển sang trạng thái Đã giải quyết mà Sinh viên không thực hiện đánh giá, hệ thống sẽ tự động chuyển trạng thái đơn sang Đã đóng.
 
 **Actor:** Hệ thống (System Background Task)
 
-**Preconditions (Điều kiện tiên quyết):** Ticket ở trạng thái `Đã giải quyết` (`Resolved`); thời gian hiện tại $\ge$ `resolved_at + 72 giờ`.
+**Preconditions (Điều kiện tiên quyết):** Ticket ở trạng thái `Đã giải quyết` (`Resolved`); thời gian hiện tại $\ge$ `auto_close_deadline` (mốc tính bằng `resolved_at + 3 ngày làm việc`).
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
 - **Mã Ticket:** Bắt buộc.
-- **Thời điểm chuyển Resolved:** Mốc thời gian bắt đầu tính 72h.
+- **Thời điểm chuyển Resolved:** Mốc thời gian bắt đầu tính 3 ngày làm việc.
 - **Trạng thái sau thao tác:** `Đã đóng` (`Closed`).
-- **Ghi chú tự động:** *"Hệ thống tự động đóng đơn do sinh viên không đánh giá sau 72 giờ"*.
+- **Ghi chú tự động:** *"Hệ thống tự động đóng đơn do sinh viên không đánh giá sau 3 ngày làm việc"*.
 
 **Luồng chính (Main Flow):**
 
 1. Tác vụ ngầm của hệ thống quét định kỳ các Ticket đang ở trạng thái `Đã giải quyết`.
-2. So sánh thời gian hiện tại với mốc `resolved_at`.
-3. Nếu phát hiện Ticket đã quá 72 giờ mà Sinh viên chưa thực hiện đánh giá:
+2. So sánh thời gian hiện tại với mốc `auto_close_deadline` (được tính bằng cách cộng 3 ngày làm việc bỏ qua Thứ 7, Chủ nhật và ngày nghỉ lễ).
+3. Nếu phát hiện Ticket đã quá 3 ngày làm việc mà Sinh viên chưa thực hiện đánh giá:
    a. Hệ thống tự động cập nhật trạng thái đơn thành `Đã đóng` (`Closed`).
    b. Đánh dấu trường `auto_closed = true`.
-   c. Ghi nhận log hoàn tất vào dòng thời gian của Ticket.
-   d. Khóa form đánh giá của Ticket đó.
+   c. Gán `closed_reason = "Quá hạn đánh giá 3 ngày làm việc"`.
+   d. Ghi nhận log hoàn tất vào dòng thời gian của Ticket.
+   e. Khóa form đánh giá của Ticket đó.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
@@ -99,6 +100,6 @@
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Sau 72 giờ ở trạng thái Đã giải quyết không có đánh giá $\rightarrow$ Đơn tự động chuyển sang `Đã đóng`.
+* **AC-01:** Sau 3 ngày làm việc ở trạng thái Đã giải quyết không có đánh giá $\rightarrow$ Đơn tự động chuyển sang `Đã đóng`.
 
 ---

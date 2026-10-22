@@ -18,7 +18,7 @@
 | :---------------------: | :-------------------- | :--------------------------------------- | :-------------------------- | :------------------------------------ | :-------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Giai đoạn 1** | `GD1/`              | **Mốc 1: Nền tảng**             | `Moc1-NenTang/`           | `INF-01`, `M01`, `M02`, `M03` |  1 + 11  | Khởi tạo hạ tầng, xác thực đăng nhập, RBAC phân quyền và quản trị tài khoản người dùng trên Database thật.                             |
 | **Giai đoạn 2** | `GD2/`              | **Mốc 2: Khởi Tạo Ticket**      | `Moc2-KhoiTaoTicket/`     | `M04`, `M05`                      |     4     | Cấu hình danh mục hỗ trợ chung/riêng và Form khởi tạo yêu cầu hỗ trợ của Sinh viên.                                                          |
-|                        |                       | **Mốc 3: Xử lí & Bổ sung**     | `Moc3-XuLi&BoSung/`       | `M06`, `M07`, `M08`, `M11`    |    11    | Tiếp nhận, Xử lý tiến độ, Yêu cầu bổ sung 72h, Báo sai phòng ban, Trả kết quả, và Điều phối (Admin & Trưởng phòng).                   |
+|                        |                       | **Mốc 3: Xử lí & Bổ sung**     | `Moc3-XuLi&BoSung/`       | `M06`, `M07`, `M08`, `M11`    |    11    | Tiếp nhận, Xử lý tiến độ, Yêu cầu bổ sung 3 ngày làm việc, Báo sai phòng ban, Trả kết quả, và Điều phối (Admin & Trưởng phòng).                   |
 |                        |                       | **Mốc 4: Phân Hệ Sinh viên**   | `Moc4-PhanHeSinhVien/`    | `M09`, `M10`                      |     5     | Trọn vẹn trải nghiệm Sinh viên: Theo dõi tiến độ thời gian thực, Nộp bổ sung hồ sơ, Xem kết quả và Đánh giá hài lòng (CSAT 1-5 sao). |
 | **Giai đoạn 3** | `GD3/`              | **Mốc 5: Giám sát & Dashboard** | `Moc5-GiamSat&Dashboard/` | `M12`, `M13`                      |     8     | Giám sát tiến độ phòng ban và toàn trường, cảnh báo đỏ quá hạn SLA, Global Search, Dashboard trực quan và xuất báo cáo Excel/PDF.      |
 
@@ -59,10 +59,11 @@
 
   * `[M04-01]` Admin quản lý danh mục hỗ trợ chung của toàn trường
   * `[M04-02]` Trưởng phòng quản lý danh mục hỗ trợ riêng của phòng ban
-* **[M05-khoi-tao-ticket/](GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/) — [M05] Tạo Form Ticket (0/2)** ([prd.md](GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/prd.md) | [Khoi-tao-ticket.md](GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/Khoi-tao-ticket.md))
+* **[M05-khoi-tao-ticket/](GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/) — [M05] Tạo Form Ticket (0/3)** ([prd.md](GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/prd.md) | [Khoi-tao-ticket.md](GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/Khoi-tao-ticket.md))
 
   * `[M05-01]` Chọn phòng ban, danh mục hoặc "Khác"
   * `[M05-02]` Nhập thông tin, đính kèm file và gửi Ticket
+  * `[M05-03]` Sinh viên chỉnh sửa Tiêu đề và Nội dung khi đơn chưa được tiếp nhận (trạng thái New)
 
 #### ⚙️ Mốc 3: Xử lí & Bổ sung (`GD2/Moc3-XuLi&BoSung/`)
 
@@ -74,7 +75,7 @@
 
   * `[M07-01]` Nhân viên cập nhật tiến độ, ghi chú và lưu lịch sử xử lý đơn
   * `[M07-02]` Nhân viên xem lại danh sách lịch sử các đơn mình đã xử lý
-  * `[M07-03]` Nhân viên yêu cầu sinh viên bổ sung hồ sơ và bắt đầu đếm ngược 72 giờ
+  * `[M07-03]` Nhân viên yêu cầu sinh viên bổ sung hồ sơ và bắt đầu đếm ngược 3 ngày làm việc
   * `[M07-04]` Nhân viên báo cáo và trả lại đơn do bị gửi sai phòng ban
 * **[M08-tra-ket-qua/](GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/) — [M08] Trả kết quả (0/2)** ([prd.md](GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/prd.md) | [Tra-ket-qua.md](GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/Tra-ket-qua.md))
 
@@ -96,7 +97,7 @@
 
   * `[M10-01]` Sinh viên xem kết quả giải quyết và tải tệp trả lời
   * `[M10-02]` Sinh viên đánh giá độ hài lòng từ 1 đến 5 sao, nhận xét và đóng đơn
-  * `[M10-03]` Hệ thống tự động đóng đơn nếu sinh viên không đánh giá sau 72 giờ
+  * `[M10-03]` Hệ thống tự động đóng đơn nếu sinh viên không đánh giá sau 3 ngày làm việc
 
 ---
 

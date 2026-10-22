@@ -150,6 +150,19 @@ erDiagram
 
 ---
 
+### 2.9. Bảng `system_holidays` (Lịch nghỉ lễ & cấu hình ngày làm việc)
+*Phục vụ cho Background Worker và hàm tính toán hạn chót 3 ngày làm việc (bỏ qua Thứ 7, Chủ nhật và các ngày được khai báo trong bảng này).*
+
+| Tên cột | Kiểu dữ liệu | Ràng buộc | Mô tả |
+|---|---|---|---|
+| `id` | `VARCHAR(36)` / `UUID` | `PRIMARY KEY` | Khóa chính |
+| `holiday_date` | `DATE` | `NOT NULL, UNIQUE` | Ngày nghỉ lễ theo lịch nhà nước/nhà trường (YYYY-MM-DD) |
+| `description` | `VARCHAR(150)` | `NOT NULL` | Tên ngày nghỉ lễ (VD: Tết Dương Lịch, Quốc Khánh 2/9) |
+| `is_recurring` | `BOOLEAN` | `NOT NULL DEFAULT FALSE` | Có lặp lại hàng năm không |
+| `created_at` | `TIMESTAMP` | `NOT NULL DEFAULT CURRENT_TIMESTAMP` | Thời điểm tạo |
+
+---
+
 ## 3. Danh mục Chỉ mục Tối ưu Truy vấn (Database Indexes)
 
 Để đảm bảo hiệu năng hệ thống không bị chậm khi dữ liệu ticket tăng trưởng, bắt buộc đánh chỉ mục:
