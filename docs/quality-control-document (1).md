@@ -141,6 +141,6 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 * Xác nhận ngày thực tế, milestone và người phụ trách từ Master Schedule bản cuối.
 * Xác nhận mapping 13 phân hệ PRD sang 19 module triển khai.
 * Xác nhận các trạng thái Ticket (New, In Progress, Pending, Resolved, Closed) và thời điểm chuyển.
-* Xác nhận cách tính 72 giờ ở Pending và tự động đóng 72 giờ sau Resolved.
+* Xác nhận cách tính 3 ngày ở Pending và tự động đóng 3 ngày sau Resolved.
 * Xác nhận ngưỡng SLA, hiệu năng, số lượng người dùng đồng thời và tỷ lệ pass tối thiểu.
 * Xác nhận môi trường UAT, dữ liệu thử, người có quyền ký nghiệm thu.
