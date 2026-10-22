@@ -1,4 +1,4 @@
-﻿# 3. PHÂN HỆ NHÂN VIÊN (STAFF WORKFLOWS)
+# 3. PHÂN HỆ NHÂN VIÊN (STAFF WORKFLOWS)
 
 > **Ánh xạ Phân hệ:** [M06-tiep-nhan-ticket](../modules/GD2/Moc3-XuLi&BoSung/M06-tiep-nhan-ticket/), [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/), [M08-tra-ket-qua](../modules/GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/)
 
@@ -59,15 +59,15 @@ graph TD
 ### NV-03 — Yêu cầu bổ sung
 
 * **Tác nhân:** Nhân viên phụ trách Ticket.
-* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-02]`)
+* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-03]`)
 * **Luồng chính:**
   1. Mở Ticket đang xử lý.
-  2. Chọn tính năng **Yêu cầu bổ sung thông tin**.
+  2. Chọn tính năng **Yêu cầu bổ sung thông tin** (chỉ được yêu cầu tối đa 1 lần duy nhất cho mỗi ticket).
   3. Nhập rõ nội dung thông tin/hồ sơ cần bổ sung, nhấn gửi.
-  4. Hệ thống lưu nội dung yêu cầu, chuyển trạng thái sang **Chờ bổ sung** (`Pending`), kích hoạt đếm ngược 72 giờ.
+  4. Hệ thống lưu nội dung yêu cầu, chuyển trạng thái sang **Chờ bổ sung** (`Pending`), kích hoạt đếm ngược 3 ngày làm việc (không tính Thứ 7, Chủ nhật và ngày lễ).
   5. Sinh viên nhận được thông báo in-app và tiến hành bổ sung theo luồng `SV-03`.
   6. Khi Sinh viên bổ sung hợp lệ, Ticket tự động trở lại **Đang xử lý**, gửi thông báo cho Nhân viên cũ.
-* **Ngoại lệ:** Nội dung bổ sung để trống $\rightarrow$ chặn gửi; Ticket đã đóng $\rightarrow$ không cho yêu cầu.
+* **Ngoại lệ:** Nội dung bổ sung để trống $\rightarrow$ chặn gửi; Đã từng yêu cầu bổ sung trước đó $\rightarrow$ chặn thao tác; Ticket đã đóng $\rightarrow$ không cho yêu cầu.
 * **Kết quả:** Luồng bổ sung thông tin khép kín, không sinh thêm đơn mới.
 
 ```mermaid
@@ -77,7 +77,7 @@ graph TD
     C --> D{Nội dung có bị trống?}
     D -->|Có| C
     D -->|Không| E[Chuyển trạng thái sang PENDING]
-    E --> F[Kích hoạt đếm ngược ngầm 72 Giờ]
+    E --> F[Kích hoạt đếm ngược ngầm 3 Ngày làm việc]
     F --> G([Gửi thông báo In-app tới Sinh viên])
 ```
 
@@ -86,7 +86,7 @@ graph TD
 ### NV-04 — Chuyển Ticket sai phòng ban
 
 * **Tác nhân:** Nhân viên phụ trách Ticket.
-* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-03]`)
+* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-04]`)
 * **Luồng chính:**
   1. Mở Ticket thuộc phạm vi xử lý.
   2. Xác định yêu cầu bị sai phòng ban chuyên trách.
@@ -140,7 +140,7 @@ graph TD
 ### NV-06 — Xem lịch sử xử lý
 
 * **Tác nhân:** Nhân viên.
-* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-04]`)
+* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-02]`)
 * **Luồng chính:**
   1. Mở menu **Lịch sử xử lý**.
   2. Hệ thống tải danh sách các Ticket Nhân viên đã tiếp nhận hoặc giải quyết trong quá khứ.

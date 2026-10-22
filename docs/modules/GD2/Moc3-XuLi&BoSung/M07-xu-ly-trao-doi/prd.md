@@ -78,7 +78,7 @@
 - **Mã Ticket:** Bắt buộc.
 - **Nội dung yêu cầu bổ sung:** Bắt buộc, Min 10 ký tự, mô tả rõ các loại giấy tờ/thông tin cần cung cấp thêm.
 - **Thời điểm bắt đầu đếm ngược:** Mốc thời gian hệ thống ghi nhận lúc gửi yêu cầu.
-- **Hạn chót bổ sung (72h):** `deadline = current_time + 72 giờ`.
+- **Hạn chót bổ sung:** `deadline = current_time + 3 ngày làm việc` (không tính Thứ 7, Chủ Nhật và ngày Lễ).
 - **Trạng thái sau thao tác:** `Chờ bổ sung` (`Pending`).
 
 **Luồng chính (Main Flow):**
@@ -90,16 +90,19 @@
 5. Chuyển trạng thái Ticket sang `Chờ bổ sung` (`Pending`).
 6. Kích hoạt bộ đếm ngược thời gian 72 giờ.
 7. Phát thông báo cho Sinh viên để sinh viên vào nộp bổ sung ở Module M09.
-8. *(Quy tắc tự động đóng)*: Nếu quá 72 giờ đếm ngược mà Sinh viên không nộp bổ sung, hệ thống sẽ tự động đóng đơn (`Closed`) để tránh đọng đơn treo.
+8. *(Quy tắc tự động đóng)*: Nếu quá **3 ngày làm việc** (không tính Thứ 7, Chủ Nhật và ngày Lễ) mà Sinh viên không nộp bổ sung, hệ thống tự động chuyển đơn sang trạng thái `Closed`, đánh dấu `auto_closed = true` và ghi nhận lý do đóng tự động vào lịch sử Ticket.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01:** Nội dung yêu cầu bổ sung là bắt buộc để sinh viên biết rõ cần nộp giấy tờ gì.
-* **BR-02:** Đồng hồ đếm ngược 72 giờ chạy tự động để kiểm soát thời hạn bổ sung.
+* **BR-02:** Đồng hồ đếm ngược 3 ngày làm việc chạy tự động để kiểm soát thời hạn bổ sung.
+* **BR-03 (Giới hạn 1 lần bổ sung):** Nhân viên chỉ được gửi yêu cầu bổ sung tối đa **1 lần** cho mỗi Ticket. Sau khi Sinh viên đã bổ sung và đơn quay lại `In Progress`, Nhân viên không được chuyển đơn về `Pending` lần thứ hai.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Gửi yêu cầu bổ sung $\rightarrow$ Đơn chuyển sang trạng thái Chờ bổ sung và hiển thị đồng hồ đếm ngược 72h.
+* **AC-01:** Gửi yêu cầu bổ sung $\rightarrow$ Đơn chuyển sang trạng thái Chờ bổ sung và hiển thị đếm ngược 3 ngày làm việc.
+* **AC-02:** Quá 3 ngày làm việc Sinh viên không bổ sung $\rightarrow$ Đơn tự động chuyển sang `Closed` và ghi nhận lý do đóng tự động.
+* **AC-03:** Nhân viên đã gửi yêu cầu bổ sung 1 lần $\rightarrow$ Nút "Yêu cầu bổ sung" bị ẩn/khóa, không cho phép gửi lần thứ hai.
 
 ---
 

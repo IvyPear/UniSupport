@@ -17,8 +17,10 @@ Vòng đời của một Ticket bao gồm các trạng thái tiêu chuẩn sau:
 | **New** | **In Progress** | Nhân viên / Quản lý | Nhân viên tự nhận việc (Claim) hoặc quản lý phân công. |
 | **In Progress** | **Pending** | Nhân viên | Nhân viên yêu cầu sinh viên bổ sung thông tin/tệp minh chứng. |
 | **Pending** | **In Progress** | Sinh viên | Sinh viên gửi lại thông tin bổ sung theo yêu cầu. |
+| **Pending** | **Closed** | Hệ thống (tự động) | Sinh viên không bổ sung thông tin trong 3 ngày làm việc. Hệ thống tự động đóng đơn. |
 | **In Progress** | **Resolved** | Nhân viên | Nhân viên gửi kết quả xử lý hoàn tất (kèm Resolution Notes). |
 | **Resolved** | **Closed** | Sinh viên | Sinh viên chấm điểm hài lòng (1–5 sao). **Đóng vĩnh viễn, không mở lại.** |
+| **Resolved** | **Closed** | Hệ thống (tự động) | Sinh viên không đánh giá trong 3 ngày làm việc. Hệ thống tự động đóng đơn. |
 
 ---
 
@@ -26,6 +28,8 @@ Vòng đời của một Ticket bao gồm các trạng thái tiêu chuẩn sau:
 Hệ thống tập trung tự động hóa các tác vụ thông báo và định tuyến, đảm bảo tuân thủ tuyệt đối các quy tắc cốt lõi:
 *   **Tự động gửi thông báo:** Hệ thống tự động gửi thông báo (In-app/Email) cho sinh viên hoặc nhân viên ngay khi có thay đổi trạng thái (ví dụ: nhân viên vừa nhận việc, hoặc đã có kết quả giải quyết).
 *   **Tự động định tuyến mục "Khác":** Khi sinh viên chọn danh mục "Khác", hệ thống tự động chuyển yêu cầu về hộp thư của Admin để phân phối đúng người phụ trách.
+*   **Tự động đóng đơn Pending quá hạn:** Khi Ticket ở trạng thái `Pending` quá **3 ngày làm việc** (không tính Thứ 7, Chủ Nhật và ngày Lễ) mà Sinh viên không bổ sung thông tin, hệ thống tự động chuyển trạng thái sang `Closed` và ghi nhận lý do đóng tự động.
+*   **Tự động đóng đơn Resolved quá hạn:** Khi Ticket ở trạng thái `Resolved` quá **3 ngày làm việc** (không tính Thứ 7, Chủ Nhật và ngày Lễ) mà Sinh viên không thực hiện đánh giá, hệ thống tự động chuyển trạng thái sang `Closed` và đánh dấu `auto_closed = true`.
 
 ---
 

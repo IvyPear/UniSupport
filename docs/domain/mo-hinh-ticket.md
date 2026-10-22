@@ -19,7 +19,7 @@ Theo dõi trạng thái xử lý của ticket và cam kết chất lượng dị
 *   **Trạng thái hiện tại (Status):**
     *   `New`: Ticket mới được gửi, chờ tiếp nhận.
     *   `In Progress`: Đã phân công chuyên viên và đang trong quá trình xử lý.
-    *   `Pending Student Response`: Tạm dừng để chờ sinh viên bổ sung thêm thông tin.
+    *   `Pending` (Chờ bổ sung): Tạm dừng để chờ sinh viên bổ sung thêm thông tin.
     *   `Resolved`: Vấn đề đã được giải quyết, chờ phản hồi xác nhận từ sinh viên.
     *   `Closed`: Ticket đã đóng hoàn tất.
 *   **Thời gian tạo (Created At):** Mốc thời gian hệ thống ghi nhận ticket.
