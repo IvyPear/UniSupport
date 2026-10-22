@@ -7,7 +7,7 @@
 | **Phiên bản** | 1.0 – Bản dự thảo |
 | **Ngày lập** | 13/10/2026 |
 | **Dự án** | UniSupport – Hệ thống tiếp nhận và xử lý yêu cầu hỗ trợ sinh viên |
-| **Phạm vi** | 19 module theo Master Schedule; đối chiếu 13 phân hệ chức năng PRD |
+| **Phạm vi** | 13 module theo Master Schedule; đối chiếu 13 phân hệ chức năng PRD |
 | **Người soạn / Duyệt** | [Điền tên] / [Điền tên] |
 | **Trạng thái** | Draft – chờ nhóm xác nhận chỉ tiêu và người phụ trách |
 
@@ -20,7 +20,7 @@ Tài liệu xác định cách kiểm soát chất lượng của UniSupport t�
 
 ## 2. Cơ sở và nguyên tắc QC
 * PRD 13 phân hệ M01–M13: nguồn xác định hành vi nghiệp vụ và Acceptance Criteria của từng FR.
-* Master Schedule 19 module: nguồn xác định trình tự triển khai, mốc kiểm soát và bàn giao.
+* Master Schedule 13 module: nguồn xác định trình tự triển khai, mốc kiểm soát và bàn giao.
 * Các tên/mã module trong PRD và Master Schedule có thể không trùng nhau; phải dùng bảng ánh xạ FR ↔ module thực hiện trước khi ký nghiệm thu.
 * Mọi thay đổi yêu cầu sau khi chốt baseline phải có yêu cầu thay đổi, đánh giá ảnh hưởng, phê duyệt và cập nhật test case.
 
@@ -58,7 +58,7 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 | **Regression** | Chạy lại test bị ảnh hưởng sau mỗi lần sửa lỗi | Regression report |
 | **Smoke / deployment** | Đăng nhập, tạo Ticket, nhận, xử lý, trả kết quả trên môi trường triển khai | Smoke checklist |
 
-## 6. Ma trận kiểm soát theo 19 module
+## 6. Ma trận kiểm soát theo 13 module
 
 | Module | Hạng mục | Điểm kiểm soát chính |
 | :--- | :--- | :--- |
@@ -139,7 +139,7 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 
 ## 12. Các quyết định cần chốt trước baseline
 * Xác nhận ngày thực tế, milestone và người phụ trách từ Master Schedule bản cuối.
-* Xác nhận mapping 13 phân hệ PRD sang 19 module triển khai.
+* Xác nhận mapping 13 phân hệ PRD sang 13 module triển khai.
 * Xác nhận các trạng thái Ticket (New, In Progress, Pending, Resolved, Closed) và thời điểm chuyển.
 * Xác nhận cách tính 3 ngày ở Pending và tự động đóng 3 ngày sau Resolved.
 * Xác nhận ngưỡng SLA, hiệu năng, số lượng người dùng đồng thời và tỷ lệ pass tối thiểu.
