@@ -1,9 +1,9 @@
-# TÀI LIỆU QUY TRÌNH — M06: Tiếp nhận Ticket — Nhân viên (Receive Ticket)
+﻿# TÀI LIỆU QUY TRÌNH — M06: Tiếp nhận Ticket — Nhân viên (Receive Ticket)
 
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M06
 * **Tên Phân hệ:** M06: Tiếp nhận Ticket — Nhân viên (Receive Ticket)
-* **Phân nhóm Giai đoạn:** `GĐ1-NenTang&ChucNangCotLoi`
+* **Mốc triển khai (Milestone): Moc3-XuLi&BoSung
 * **Đối tượng phụ trách:** Nhân viên
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 
@@ -17,3 +17,5 @@ Phân hệ M06 thuộc dự án UniSupport, thực thi các yêu cầu nghiệp 
 ## 3. Quy trình & Nghiệm thu
 * Triển khai cuốn chiếu trên môi trường thật.
 * Đảm bảo kiểm thử đầy đủ các kịch bản ngoại lệ và ràng buộc nghiệp vụ.
+
+

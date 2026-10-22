@@ -1,98 +1,118 @@
-# BẢNG PHÂN CHIA MODULE VÀ TASK - DỰ ÁN UNISUPPORT
+# BẢNG PHÂN CHIA GIAI ĐOẠN— DỰ ÁN UNISUPPORT
 
-> **Quy mô Phân hệ:** 13 MODULE THỰC THI (M01–M13) • 3 GIAI ĐOẠN • 4 ROLE
-> **Lưu ý cấu trúc:** Thư mục `modules/` được phân chia thành 3 folder tương ứng với 3 Giai đoạn triển khai dự án. Danh mục mã Module được đánh số liên tục từ **M01 đến M13**.
-> **Nguyên tắc cốt lõi:** Triển khai cuốn chiếu; dùng Database thật (không mockup); hoàn thành, kiểm thử và nghiệm thu từng module trước khi chuyển tiếp.
-
----
-
-## 1. Tổng quan các Giai đoạn & Cấu trúc Thư mục (Phase Folders Overview)
-
-| Giai đoạn     | Thư mục Giai đoạn                 | Phạm vi Module | Số lượng | Milestone Nghiệm thu                                                                                                                                     |
-| :-------------- | :------------------------------------ | :-------------- | :---------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **GĐ 1** | `GĐ1-NenTang&ChucNangCotLoi/` | M01–M08        |      8      | Khách hàng đăng nhập bằng tài khoản thật, tạo Ticket, Nhân viên tiếp nhận, xử lý và trả kết quả; dữ liệu lưu trên Database thật. |
-| **GĐ 2** | `GĐ2-PhanHeSinhVien/`    | M09–M10        |      2      | Sinh viên thực hiện đầy đủ luồng: Tạo → Theo dõi → Bổ sung → Nhận kết quả → Đánh giá.                                                |
-| **GĐ 3** | `GĐ3-DieuPhoi&GIamSat/`   | M11–M13        |            | Quản lý phân công và giám sát trong phòng ban; Admin theo dõi và điều phối toàn trường.                                                   |
+> **Quy mô Hệ thống:** 3 GIAI ĐOẠN (PHASES) • 5 MỐC TRIỂN KHAI (MILESTONES) • 13 MODULE THỰC THI (M01–M13) • 37 TASKS CHUẨN GITHUB + 1 INFRA TASK • 4 VAI TRÒ
+>
+> **Phân bổ Giai đoạn & Mốc (Theo yêu cầu dự án & GitHub):**
+>
+> * **Giai đoạn 1 (GD1):** Chứa **Mốc 1: Nền tảng** (`GD1/Moc1-NenTang/`)
+> * **Giai đoạn 2 (GD2):** Chứa **Mốc 2: Khởi Tạo Ticket**, **Mốc 3: Xử lí & Bổ sung**, và **Mốc 4: Phân Hệ Sinh viên** (`GD2/`)
+> * **Giai đoạn 3 (GD3):** Chứa **Mốc 5: Giám sát & Dashboard** (`GD3/Moc5-GiamSat&Dashboard/`)
+>
+> **Nguyên tắc cốt lõi:** Triển khai cuốn chiếu theo từng Mốc; dùng Database thật (không mockup); hoàn thành, kiểm thử và nghiệm thu từng Mốc trước khi chuyển tiếp.
 
 ---
 
-## 2. Danh mục 13 Phân hệ Chi tiết Theo Thư mục Giai đoạn
+## 1. Bảng Tổng quan Giai đoạn & Mốc Triển khai
 
-### 🚀 GIAI ĐOẠN 1 — NỀN TẢNG & WORKING MVP (`GĐ1-NenTang&ChucNangCotLoi/`)
-
-*Mục tiêu: Hoàn thiện quản trị nền tảng và luồng tạo → tiếp nhận → xử lý → trả kết quả Ticket trên Database thật.*
-
-* **[M01-dang-nhap-xac-thuc/](GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/) - M01: Đăng nhập & Xác thực** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/prd.md) | [Dang-nhap-xac-thuc.md](GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/Dang-nhap-xac-thuc.md))
-  * Đăng nhập, đăng xuất, quên và đặt lại mật khẩu.
-  * Xác thực và điều hướng theo Role.
-* **[M02-vai-tro-phan-quyen/](GĐ1-NenTang&ChucNangCotLoi/M02-vai-tro-phan-quyen/) - M02: Vai trò & Phân quyền — Admin** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M02-vai-tro-phan-quyen/prd.md) | [Vai-tro-phan-quyen.md](GĐ1-NenTang&ChucNangCotLoi/M02-vai-tro-phan-quyen/Vai-tro-phan-quyen.md))
-  * Quản lý vai trò người dùng.
-  * Cấu hình và kiểm soát quyền truy cập.
-* **[M03-quan-ly-tai-khoan/](GĐ1-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/) - M03: Quản lý tài khoản — Admin** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/prd.md) | [Quan-ly-tai-khoan.md](GĐ1-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/Quan-ly-tai-khoan.md))
-  * Tạo, xem, tìm kiếm và lọc tài khoản.
-  * Cập nhật, khóa, mở khóa và xóa tài khoản.
-* **[M04-quan-ly-danh-muc/](GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/) - M04: Quản lý danh mục hỗ trợ** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/prd.md) | [Quan-ly-danh-muc.md](GĐ1-NenTang&ChucNangCotLoi/M04-quan-ly-danh-muc/Quan-ly-danh-muc.md))
-  * Admin quản lý danh mục toàn trường.
-  * Quản lý thêm danh mục thuộc phòng ban.
-* **[M05-khoi-tao-ticket/](GĐ1-NenTang&ChucNangCotLoi/M05-khoi-tao-ticket/) - M05: Khởi tạo Ticket — Sinh viên** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M05-khoi-tao-ticket/prd.md) | [Khoi-tao-ticket.md](GĐ1-NenTang&ChucNangCotLoi/M05-khoi-tao-ticket/Khoi-tao-ticket.md))
-  * Chọn phòng ban, danh mục hoặc “Khác”.
-  * Nhập thông tin, đính kèm và gửi Ticket.
-* **[M06-tiep-nhan-ticket/](GĐ1-NenTang&ChucNangCotLoi/M06-tiep-nhan-ticket/) - M06: Tiếp nhận Ticket — Nhân viên** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M06-tiep-nhan-ticket/prd.md) | [Tiep-nhan-ticket.md](GĐ1-NenTang&ChucNangCotLoi/M06-tiep-nhan-ticket/Tiep-nhan-ticket.md))
-  * Xem danh sách Ticket mới thuộc phòng ban.
-  * Tìm kiếm, lọc và tiếp nhận Ticket.
-* **[M07-xu-ly-trao-doi/](GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/) - M07: Xử lý & Trao đổi — Nhân viên** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/prd.md) | [Xu-ly-trao-doi.md](GĐ1-NenTang&ChucNangCotLoi/M07-xu-ly-trao-doi/Xu-ly-trao-doi.md))
-  * Cập nhật trạng thái và tiến độ Ticket.
-  * Yêu cầu bổ sung và trao đổi với Sinh viên.
-  * Chuyển Ticket sai phòng ban về Admin.
-* **[M08-tra-ket-qua/](GĐ1-NenTang&ChucNangCotLoi/M08-tra-ket-qua/) - M08: Trả kết quả — Nhân viên** ([prd.md](GĐ1-NenTang&ChucNangCotLoi/M08-tra-ket-qua/prd.md) | [Tra-ket-qua.md](GĐ1-NenTang&ChucNangCotLoi/M08-tra-ket-qua/Tra-ket-qua.md))
-  * Nhập kết quả và đính kèm tài liệu.
-  * Hoàn thành Ticket và thông báo cho Sinh viên.
+|       Giai đoạn       | Thư mục Giai đoạn | Mốc Triển khai                         | Thư mục Mốc              | Phạm vi Module                       | Số Issue | Nội dung & Mục tiêu Nghiệm thu                                                                                                                          |
+| :---------------------: | :-------------------- | :--------------------------------------- | :-------------------------- | :------------------------------------ | :-------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Giai đoạn 1** | `GD1/`              | **Mốc 1: Nền tảng**             | `Moc1-NenTang/`           | `INF-01`, `M01`, `M02`, `M03` |  1 + 11  | Khởi tạo hạ tầng, xác thực đăng nhập, RBAC phân quyền và quản trị tài khoản người dùng trên Database thật.                             |
+| **Giai đoạn 2** | `GD2/`              | **Mốc 2: Khởi Tạo Ticket**      | `Moc2-KhoiTaoTicket/`     | `M04`, `M05`                      |     4     | Cấu hình danh mục hỗ trợ chung/riêng và Form khởi tạo yêu cầu hỗ trợ của Sinh viên.                                                          |
+|                        |                       | **Mốc 3: Xử lí & Bổ sung**     | `Moc3-XuLi&BoSung/`       | `M06`, `M07`, `M08`, `M11`    |    11    | Tiếp nhận, Xử lý tiến độ, Yêu cầu bổ sung 72h, Báo sai phòng ban, Trả kết quả, và Điều phối (Admin & Trưởng phòng).                   |
+|                        |                       | **Mốc 4: Phân Hệ Sinh viên**   | `Moc4-PhanHeSinhVien/`    | `M09`, `M10`                      |     5     | Trọn vẹn trải nghiệm Sinh viên: Theo dõi tiến độ thời gian thực, Nộp bổ sung hồ sơ, Xem kết quả và Đánh giá hài lòng (CSAT 1-5 sao). |
+| **Giai đoạn 3** | `GD3/`              | **Mốc 5: Giám sát & Dashboard** | `Moc5-GiamSat&Dashboard/` | `M12`, `M13`                      |     8     | Giám sát tiến độ phòng ban và toàn trường, cảnh báo đỏ quá hạn SLA, Global Search, Dashboard trực quan và xuất báo cáo Excel/PDF.      |
 
 ---
 
-### 🎓 GIAI ĐOẠN 2 — PHÂN HỆ SINH VIÊN (`GĐ2-PhanHeSinhVien/`)
+## 2. Danh mục Chi tiết Theo Giai đoạn & Mốc (Khớp 1-1 với GitHub Issues)
 
-*Mục tiêu: Hoàn thiện toàn bộ trải nghiệm Sinh viên.*
+### 🚀 GIAI ĐOẠN 1 — NỀN TẢNG HỆ THỐNG (`GD1/`)
 
-* **[M09-theo-doi-bo-sung/](GĐ2-PhanHeSinhVien/M09-theo-doi-bo-sung/) - M09: Theo dõi & Bổ sung thông tin** ([prd.md](GĐ2-PhanHeSinhVien/M09-theo-doi-bo-sung/prd.md) | [Theo-doi-bo-sung.md](GĐ2-PhanHeSinhVien/M09-theo-doi-bo-sung/Theo-doi-bo-sung.md))
-  * Xem danh sách, chi tiết và trạng thái Ticket.
-  * Tìm kiếm, lọc và theo dõi lịch sử Ticket.
-  * Bổ sung thông tin và tài liệu theo yêu cầu.
-  * Thông báo trạng thái và yêu cầu bổ sung.
-* **[M10-ket-qua-danh-gia/](GĐ2-PhanHeSinhVien/M10-ket-qua-danh-gia/) - M10: Kết quả & Đánh giá** ([prd.md](GĐ2-PhanHeSinhVien/M10-ket-qua-danh-gia/prd.md) | [Ket-qua-danh-gia.md](GĐ2-PhanHeSinhVien/M10-ket-qua-danh-gia/Ket-qua-danh-gia.md))
-  * Xem kết quả và tải tài liệu.
-  * Đánh giá mức độ hài lòng 1–5 sao.
-  * Viết nhận xét và xem thông báo kết quả.
+#### 🏛️ Mốc 1: Nền tảng (`GD1/Moc1-NenTang/`)
 
----
+* **`[INF-01]` Thiết lập cơ sở hạ tầng và môi trường triển khai hệ thống UniSupport**
+* **[M01-dang-nhap-xac-thuc/](GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/) — [M01] Đăng nhập & Xác thực (0/5)** ([prd.md](GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/prd.md) | [Dang-nhap-xac-thuc.md](GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/Dang-nhap-xac-thuc.md))
 
-### 📊 GIAI ĐOẠN 3 — ĐIỀU PHỐI & GIÁM SÁT (`GĐ3-DieuPhoi&GIamSat/`)
+  * `[M01-01]` Đăng nhập vào hệ thống
+  * `[M01-02]` Khóa tài khoản 15 phút khi nhập sai mật khẩu 5 lần liên tiếp
+  * `[M01-03]` Lấy lại mật khẩu qua Email dành riêng cho Admin
+  * `[M01-04]` Tự động chuyển trang phù hợp với quyền hạn sau khi đăng nhập
+  * `[M01-05]` Chặn truy cập trái phép và tự động văng tài khoản khi bị khóa
+* **[M02-vai-tro-phan-quyen/](GD1/Moc1-NenTang/M02-vai-tro-phan-quyen/) — [M02] Vai trò & Phân quyền (0/2)** ([prd.md](GD1/Moc1-NenTang/M02-vai-tro-phan-quyen/prd.md) | [Vai-tro-phan-quyen.md](GD1/Moc1-NenTang/M02-vai-tro-phan-quyen/Vai-tro-phan-quyen.md))
 
-*Mục tiêu: Hoàn thiện điều phối phòng ban và giám sát toàn trường.*
+  * `[M02-01]` Xem danh sách 4 vai trò của hệ thống
+  * `[M02-02]` Cài đặt và phân quyền chức năng chi tiết cho từng vai trò
+* **[M03-quan-ly-tai-khoan/](GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/) — [M03] Quản lý tài khoản (0/4)** ([prd.md](GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/prd.md) | [Quan-ly-tai-khoan.md](GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/Quan-ly-tai-khoan.md))
 
-* **[M11-quan-ly-dieu-phoi/](GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/) - M11: Quản lý & Điều phối Ticket** ([prd.md](GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/prd.md) | [Quan-ly-dieu-phoi.md](GĐ3-DieuPhoi&GIamSat/M11-quan-ly-dieu-phoi/Quan-ly-dieu-phoi.md))
-  * Quản lý phân công Ticket cho nhân viên thuộc phòng ban.
-  * Admin phân loại Ticket “Khác”.
-  * Admin tiếp nhận và điều chuyển Ticket sai phòng ban.
-* **[M12-giam-sat-tien-do/](GĐ3-DieuPhoi&GIamSat/M12-giam-sat-tien-do/) - M12: Giám sát tiến độ** ([prd.md](GĐ3-DieuPhoi&GIamSat/M12-giam-sat-tien-do/prd.md) | [Giam-sat-tien-do.md](GĐ3-DieuPhoi&GIamSat/M12-giam-sat-tien-do/Giam-sat-tien-do.md))
-  * Quản lý theo dõi tiến độ và hiệu suất nhân viên.
-  * Theo dõi Ticket tồn đọng, chưa tiếp nhận và quá hạn.
-  * Admin theo dõi tiến độ xử lý toàn trường.
-* **[M13-dashboard-bao-cao/](GĐ3-DieuPhoi&GIamSat/M13-dashboard-bao-cao/) - M13: Dashboard & Báo cáo** ([prd.md](GĐ3-DieuPhoi&GIamSat/M13-dashboard-bao-cao/prd.md) | [Dashboard-bao-cao.md](GĐ3-DieuPhoi&GIamSat/M13-dashboard-bao-cao/Dashboard-bao-cao.md))
-  * Dashboard và thống kê theo phạm vi quyền.
-  * Báo cáo Ticket theo trạng thái, danh mục và thời gian.
-  * Thống kê đánh giá và hiệu suất nhân viên.
+  * `[M03-01]` Xem, tìm kiếm và lọc danh sách tài khoản
+  * `[M03-02]` Tạo mới tài khoản
+  * `[M03-03]` Cập nhật thông tin và Khóa/Mở khóa tài khoản
+  * `[M03-04]` Thêm tài khoản hàng loạt bằng file Excel
 
 ---
 
-## 3. Quy tắc Nghiệm thu & Bóc tách Phụ thuộc Giai đoạn
+### 📦 GIAI ĐOẠN 2 — NGHIỆP VỤ TICKET & PHÂN HỆ SINH VIÊN (`GD2/`)
 
-1. **Dữ liệu hệ thống:** Thực hiện trên Database thật do chính người dùng nhập vào.
-2. **Nghiệm thu theo từng Phân hệ:** Hoàn thiện Frontend, Backend, API và kiểm thử trong phạm vi từng module.
-3. **Giải quyết điểm nghẽn Phụ thuộc M07 / M11 (GĐ1 vs GĐ3):** 
-   - Module `M07` (GĐ1) có chức năng `[FR-M07-03]` (`NV-04`) cho phép Nhân viên bấm chuyển trả Ticket sai phòng ban về Admin.
-   - Module `M11` (GĐ3) có chức năng `[FR-M11-03]` (`AD-05`) cho phép Admin điều chuyển đơn này sang phòng ban mới.
-   - **Quy tắc bóc tách:** Để tránh rủi ro đơn bị "kẹt chết" ở GĐ1 khi Nhân viên bấm chuyển trả, tính năng cốt lõi **Admin tiếp nhận & điều chuyển Ticket sai phòng ban (`[FR-M11-03]` Core MVP)** được bóc tách và đưa lên triển khai, nghiệm thu đồng bộ ngay ở **Giai đoạn 1**. Các tính năng quản lý phân công nâng cao khác của M11 vẫn giữ nguyên tại Giai đoạn 3.
-4. **Hệ thống Thông báo In-app:** 
-   - Đã được quy hoạch đồng bộ trên 4 Vai trò: Sinh viên (`[FR-M09-04]`), Nhân viên (`[FR-M06-03]`), Admin (`[FR-M11-04]`), và Quản lý (`[FR-M12-04]`).
+#### 📝 Mốc 2: Khởi Tạo Ticket (`GD2/Moc2-KhoiTaoTicket/`)
 
+* **[M04-quan-ly-danh-muc/](GD2/Moc2-KhoiTaoTicket/M04-quan-ly-danh-muc/) — [M04] Quản lý danh mục (0/2)** ([prd.md](GD2/Moc2-KhoiTaoTicket/M04-quan-ly-danh-muc/prd.md) | [Quan-ly-danh-muc.md](GD2/Moc2-KhoiTaoTicket/M04-quan-ly-danh-muc/Quan-ly-danh-muc.md))
+
+  * `[M04-01]` Admin quản lý danh mục hỗ trợ chung của toàn trường
+  * `[M04-02]` Trưởng phòng quản lý danh mục hỗ trợ riêng của phòng ban
+* **[M05-khoi-tao-ticket/](GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/) — [M05] Tạo Form Ticket (0/2)** ([prd.md](GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/prd.md) | [Khoi-tao-ticket.md](GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/Khoi-tao-ticket.md))
+
+  * `[M05-01]` Chọn phòng ban, danh mục hoặc "Khác"
+  * `[M05-02]` Nhập thông tin, đính kèm file và gửi Ticket
+
+#### ⚙️ Mốc 3: Xử lí & Bổ sung (`GD2/Moc3-XuLi&BoSung/`)
+
+* **[M06-tiep-nhan-ticket/](GD2/Moc3-XuLi&BoSung/M06-tiep-nhan-ticket/) — [M06] Tiếp nhận Ticket (0/2)** ([prd.md](GD2/Moc3-XuLi&BoSung/M06-tiep-nhan-ticket/prd.md) | [Tiep-nhan-ticket.md](GD2/Moc3-XuLi&BoSung/M06-tiep-nhan-ticket/Tiep-nhan-ticket.md))
+
+  * `[M06-01]` Nhân viên xem danh sách đơn mới của phòng ban
+  * `[M06-02]` Nhân viên nhận xử lý đơn và hệ thống chặn lỗi hai người nhận cùng một đơn
+* **[M07-xu-ly-trao-doi/](GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) — [M07] Xử lý & Bổ sung (0/4)** ([prd.md](GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/prd.md) | [Xu-ly-trao-doi.md](GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/Xu-ly-trao-doi.md))
+
+  * `[M07-01]` Nhân viên cập nhật tiến độ, ghi chú và lưu lịch sử xử lý đơn
+  * `[M07-02]` Nhân viên xem lại danh sách lịch sử các đơn mình đã xử lý
+  * `[M07-03]` Nhân viên yêu cầu sinh viên bổ sung hồ sơ và bắt đầu đếm ngược 72 giờ
+  * `[M07-04]` Nhân viên báo cáo và trả lại đơn do bị gửi sai phòng ban
+* **[M08-tra-ket-qua/](GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/) — [M08] Trả kết quả (0/2)** ([prd.md](GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/prd.md) | [Tra-ket-qua.md](GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/Tra-ket-qua.md))
+
+  * `[M08-01]` Nhân viên nhập kết quả giải quyết và đính kèm tệp trả lời
+  * `[M08-02]` Hoàn thành đơn và tự động gửi thông báo kết quả cho sinh viên
+* **[M11-quan-ly-dieu-phoi/](GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/) — [M11] Điều phối (0/3)** ([prd.md](GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/prd.md) | [Quan-ly-dieu-phoi.md](GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/Quan-ly-dieu-phoi.md))
+
+  * `[M11-01]` Admin phân loại và chuyển các đơn mục 'Khác' về đúng phòng ban
+  * `[M11-02]` Admin chuyển lại các đơn bị báo sai phòng ban về đúng nơi
+  * `[M11-03]` Trưởng phòng phân công người xử lý đơn trong nội bộ phòng ban
+
+#### 🎓 Mốc 4: Phân Hệ Sinh viên (`GD2/Moc4-PhanHeSinhVien/`)
+
+* **[M09-theo-doi-bo-sung/](GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) — [M09] Theo dõi & Bổ sung (0/2)** ([prd.md](GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/prd.md) | [Theo-doi-bo-sung.md](GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/Theo-doi-bo-sung.md))
+
+  * `[M09-01]` Sinh viên xem, tìm kiếm và theo dõi các đơn mình đã gửi
+  * `[M09-02]` Sinh viên nộp bổ sung thông tin và giấy tờ theo yêu cầu
+* **[M10-ket-qua-danh-gia/](GD2/Moc4-PhanHeSinhVien/M10-ket-qua-danh-gia/) — [M10] Kết quả & Đánh giá (0/3)** ([prd.md](GD2/Moc4-PhanHeSinhVien/M10-ket-qua-danh-gia/prd.md) | [Ket-qua-danh-gia.md](GD2/Moc4-PhanHeSinhVien/M10-ket-qua-danh-gia/Ket-qua-danh-gia.md))
+
+  * `[M10-01]` Sinh viên xem kết quả giải quyết và tải tệp trả lời
+  * `[M10-02]` Sinh viên đánh giá độ hài lòng từ 1 đến 5 sao, nhận xét và đóng đơn
+  * `[M10-03]` Hệ thống tự động đóng đơn nếu sinh viên không đánh giá sau 72 giờ
+
+---
+
+### 📊 GIAI ĐOẠN 3 — ĐIỀU PHỐI, GIÁM SÁT & BÁO CÁO TOÀN TRƯỜNG (`GD3/`)
+
+#### 📈 Mốc 5: Giám sát & Dashboard (`GD3/Moc5-GiamSat&Dashboard/`)
+
+* **[M12-giam-sat-tien-do/](GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/) — [M12] Theo dõi tiến độ (0/4)** ([prd.md](GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/prd.md) | [Giam-sat-tien-do.md](GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/Giam-sat-tien-do.md))
+
+  * `[M12-01]` Theo dõi khối lượng công việc của từng nhân viên trong phòng ban
+  * `[M12-02]` Tô đỏ cảnh báo các đơn sắp quá hạn hoặc bị tồn đọng lâu
+  * `[M12-03]` Admin theo dõi các phòng ban đang bị tồn đọng nhiều đơn nhất
+  * `[M12-04]` Admin tìm kiếm và tra cứu chi tiết mọi đơn trên toàn trường
+* **[M13-dashboard-bao-cao/](GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/) — [M13] Dashboard & báo cáo (0/4)** ([prd.md](GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/prd.md) | [Dashboard-bao-cao.md](GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/Dashboard-bao-cao.md))
+
+  * `[M13-01]` Hiển thị bảng thống kê tổng quan và biểu đồ số lượng đơn
+  * `[M13-02]` Hiển thị dữ liệu thống kê đúng theo quyền của Trưởng phòng và Admin
+  * `[M13-03]` Xuất báo cáo số liệu ra file Excel và PDF
+  * `[M13-04]` Thống kê điểm đánh giá hài lòng và hiệu suất làm việc của nhân viên

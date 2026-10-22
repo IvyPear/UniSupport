@@ -1,141 +1,107 @@
-# PHÂN HỆ: M11 — QUẢN LÝ & ĐIỀU PHỐI TICKET (ROUTING & DISPATCH)
+# PHÂN HỆ: M11 — ĐIỀU PHỐI (ROUTING & DISPATCH)
 
-## [FR-M11-01] Quản lý phân công và phân công lại Ticket trong phòng ban
+## [FR-M11-01] Admin phân loại và chuyển các đơn mục 'Khác' về đúng phòng ban
 
-**Mô tả:** Trưởng phòng (Quản lý) chủ động gán đơn hoặc phân công lại (Re-assign) Ticket cho Nhân viên trong phòng ban.
+**Mô tả:** Admin mở Hàng chờ các Ticket thuộc danh mục "Khác" do Sinh viên gửi, đọc nội dung yêu cầu và thực hiện phân loại, định tuyến đơn về đúng phòng ban chuyên trách.
 
-**Actor:** Quản lý phòng ban
+**Actor:** Quản trị viên (Admin)
 
-**Preconditions (Điều kiện tiên quyết):** Tài khoản vai trò Quản lý.
-
-**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
-
-- **Mã Ticket:** Bắt buộc.
-- **Nhân viên được phân công:** Bắt buộc, ID Nhân viên thuộc nội bộ phòng ban.
-- **Quản lý thực hiện:** ID Quản lý thao tác.
-- **Trạng thái sau thao tác:** Theo thông tin hiển thị trong hệ thống.
-
-**Luồng chính (Main Flow):**
-
-1. Quản lý xem danh sách Ticket phòng ban.
-2. Chọn đơn cần điều phối → Bấm “Phân công”.
-3. Chọn Nhân viên phụ trách từ danh sách nhân sự nội bộ phòng.
-4. Bấm Xác nhận.
-5. Hệ thống gán nhân viên phụ trách mới, chuyển trạng thái Đang xử lý (nếu đơn mới), phát thông báo trong ứng dụng cho Nhân viên được gán.
-
-**Business Rules (Quy tắc nghiệp vụ):**
-
-* **BR-01:** Chỉ được phân công cho Nhân viên thuộc nội bộ phòng ban quản lý.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
-
-**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-
-* **AC-01:** Phân công thành công → Gán nhân viên phụ trách mới và gửi thông báo cho Nhân viên đó.
-
-## [FR-M11-02] Admin phân loại Ticket thuộc danh mục “Khác”
-
-**Mô tả:** Admin xem và định tuyến các Ticket thuộc danh mục "Khác" về đúng phòng ban chuyên trách.
-
-**Actor:** Admin
-
-**Preconditions (Điều kiện tiên quyết):** Đơn thuộc danh mục "Khác".
+**Preconditions (Điều kiện tiên quyết):** Ticket thuộc danh mục "Khác" và đang ở trạng thái `Chưa tiếp nhận` (`New`).
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
 - **Mã Ticket:** Bắt buộc.
-- **Phòng ban phụ trách:** Bắt buộc, ID Phòng ban tiếp nhận mới.
-- **Danh mục được phân loại:** Bắt buộc, ID Danh mục dịch vụ chuẩn.
-- **Trạng thái sau thao tác:** Theo thông tin hiển thị trong hệ thống.
+- **Phòng ban tiếp nhận mới:** Bắt buộc, chọn Phòng ban chuyên trách phù hợp từ danh sách.
+- **Danh mục thủ tục mới:** Bắt buộc, gán Danh mục chuẩn thuộc phòng ban đó.
+- **Trạng thái sau thao tác:** `Chưa tiếp nhận` (`New`).
 
 **Luồng chính (Main Flow):**
 
-1. Admin mở Hàng chờ đơn "Khác".
-2. Đọc chi tiết nội dung đơn yêu cầu của Sinh viên.
-3. Chọn Phòng ban đích phù hợp.
-4. Nhấn “Phân loại”.
-5. Hệ thống cập nhật phòng ban, đưa đơn về Hàng chờ của phòng ban đó ở trạng thái Chưa tiếp nhận.
+1. Admin truy cập màn hình “Hàng chờ đơn Khác / Định tuyến”.
+2. Hệ thống tải danh sách các Ticket do sinh viên chọn mục "Khác".
+3. Admin nhấp vào một Ticket để đọc nội dung và xem tài liệu đính kèm.
+4. Admin chọn Phòng ban đích và chọn Danh mục dịch vụ chuẩn tương ứng.
+5. Nhấn “Xác nhận phân loại”.
+6. Hệ thống cập nhật Phòng ban và Danh mục mới cho Ticket.
+7. Đưa đơn vào Hàng chờ tiếp nhận của phòng ban đó ở trạng thái `Chưa tiếp nhận` (`New`).
+8. Ghi log lịch sử định tuyến vào Audit Trail của đơn.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-- **BR-01:** Chỉ người dùng có quyền phù hợp mới được thực hiện chức năng.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
+* **BR-01:** Sau khi Admin phân loại, đơn sẽ xuất hiện ngay trong Hàng chờ đơn mới của phòng ban tiếp nhận để nhân viên hoặc quản lý phòng ban vào xử lý.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Admin phân loại → Đơn chuyển sang Hàng chờ phòng ban mới chính xác.
-
-## [FR-M11-03] Admin tiếp nhận và điều chuyển Ticket sai phòng ban
-
-**Mô tả:** Admin xử lý điều chuyển các Ticket do Nhân viên báo sai phòng ban chuyển về.
-
-**Actor:** Admin
-
-**Preconditions (Điều kiện tiên quyết):** Ticket được Nhân viên báo sai phòng ban từ FR-M07-03.
-
-**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
-
-- **Mã Ticket:** Bắt buộc.
-- **Phòng ban cũ:** Chỉ đọc.
-- **Phòng ban mới:** Bắt buộc.
-- **Danh mục mới:** Bắt buộc.
-- **Trạng thái sau thao tác:** Theo thông tin hiển thị trong hệ thống.
-- **Nhân viên phụ trách:** chưa xác định (Xóa nhân viên phụ trách cũ).
-
-**Luồng chính (Main Flow):**
-
-1. Admin mở danh sách Đơn sai phòng ban chờ điều chuyển.
-2. Xem lý do chuyển trả từ Nhân viên cũ và xem nội dung đơn.
-3. Chọn Phòng ban mới phù hợp.
-4. Bấm “Điều chuyển”.
-5. Hệ thống xóa nhân viên phụ trách cũ, cập nhật Phòng ban mới, lưu log lịch sử luân chuyển.
-
-**Business Rules (Quy tắc nghiệp vụ):**
-
-- **BR-01:** Chỉ người dùng có quyền phù hợp mới được thực hiện chức năng.
-- **BR-02 (Tách Scope Giai đoạn 1 MVP):** Giao diện và API cốt lõi của tính năng `[FR-M11-03]` (Admin tiếp nhận & điều chuyển Ticket bị báo sai phòng ban) được bóc tách triển khai và nghiệm thu ngay ở **Giai đoạn 1** (đi kèm `M07`/`NV-04`), đảm bảo quy trình luân chuyển đơn không bị tắc nghẽn ở GĐ1.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
-
-**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-
-* **AC-01:** Điều chuyển thành công → Chuyển về hàng chờ phòng ban mới và lưu toàn bộ log luân chuyển.
-
-## [FR-M11-04] Tiếp nhận thông báo In-app cho Admin
-
-**Mô tả:** Admin nhận thông báo trong ứng dụng khi Nhân viên báo Ticket sai phòng ban (Sự kiện #5 trong Ma trận thông báo) hoặc khi có đơn "Khác" mới cần phân loại.
-
-**Actor:** Admin
-
-**Preconditions (Điều kiện tiên quyết):** Đã đăng nhập tài khoản Admin.
-
-**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
-
-- **Mã thông báo:** Khóa chính thông báo.
-- **Người nhận thông báo:** Bắt buộc, Vai trò Admin.
-- **Tiêu đề:** Max 100 ký tự (Ví dụ: "Có Ticket #TK-9999 bị báo sai phòng ban cần điều chuyển").
-- **Nội dung thông báo:** Max 255 ký tự (Gồm mã đơn, phòng ban chuyển trả, lý do chuyển).
-- **Ticket liên quan:** Bắt buộc, ID Ticket.
-
-**Luồng chính (Main Flow):**
-
-1. Khi Nhân viên bấm chuyển đơn sai phòng ban (`NV-04`), hệ thống phát thông báo In-app tới Hàng chờ thông báo của Admin.
-2. Admin nhấp vào thông báo quả chuông.
-3. Hệ thống điều hướng thẳng tới màn hình Hàng chờ đơn sai phòng ban chờ điều chuyển (`AD-05`).
-
-**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-
-* **AC-01:** Bấm thông báo → Chuyển hướng trực tiếp mở danh sách Hàng chờ điều chuyển của Admin.
+* **AC-01:** Admin phân loại $\rightarrow$ Ticket chuyển sang Hàng chờ của đúng phòng ban đích ở trạng thái Chưa tiếp nhận.
 
 ---
 
+## [FR-M11-02] Admin chuyển lại các đơn bị báo sai phòng ban về đúng nơi
+
+**Mô tả:** Admin tiếp nhận các Ticket do Nhân viên báo cáo sai phòng ban chuyển về (`M07-04`), xem xét lý do chuyển trả và điều chuyển đơn sang phòng ban chuyên trách mới.
+
+**Actor:** Quản trị viên (Admin)
+
+**Preconditions (Điều kiện tiên quyết):** Ticket được chuyển về từ chức năng báo sai phòng ban M07-04.
+
+**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
+
+- **Mã Ticket:** Bắt buộc.
+- **Lý do chuyển trả từ nhân viên cũ:** Chỉ đọc.
+- **Phòng ban cũ:** Chỉ đọc.
+- **Phòng ban chuyên trách mới:** Bắt buộc.
+- **Danh mục dịch vụ mới:** Bắt buộc.
+- **Nhân viên phụ trách:** `null` (xóa nhân viên cũ).
+
+**Luồng chính (Main Flow):**
+
+1. Admin mở danh sách “Đơn sai phòng ban chờ điều chuyển”.
+2. Xem lý do chuyển trả từ Nhân viên phòng ban cũ và đọc nội dung yêu cầu của sinh viên.
+3. Admin chọn Phòng ban mới phù hợp hơn và chọn Danh mục dịch vụ mới.
+4. Nhấn “Điều chuyển”.
+5. Hệ thống xóa người phụ trách cũ , cập nhật Phòng ban mới, giữ nguyên lịch sử cũ và đẩy đơn về Hàng chờ của phòng ban mới ở trạng thái `Chưa tiếp nhận` (`New`).
+6. Ghi nhận log luân chuyển vào lịch sử Ticket.
+
+**Business Rules (Quy tắc nghiệp vụ):**
+
+* **BR-01 (Bóc tách Giai đoạn 1 MVP):** Tính năng cốt lõi này được nghiệm thu đồng bộ cùng M07 ở Giai đoạn 1 để đảm bảo quy trình luân chuyển đơn không bị đứt gãy.
+
+**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
+
+* **AC-01:** Admin điều chuyển thành công $\rightarrow$ Đơn chuyển về phòng ban mới và lưu đầy đủ lịch sử lý do luân chuyển.
+
+---
+
+## [FR-M11-03] Trưởng phòng phân công người xử lý đơn trong nội bộ phòng ban
+
+**Mô tả:** Trưởng phòng (Quản lý) chủ động gán đơn mới hoặc phân công lại (Re-assign) Ticket cho các Nhân viên thuộc nội bộ phòng ban của mình.
+
+**Actor:** Quản lý phòng ban (Trưởng phòng)
+
+**Preconditions (Điều kiện tiên quyết):** Tài khoản vai trò Quản lý; Ticket thuộc phạm vi phòng ban mình quản lý.
+
+**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
+
+- **Mã Ticket:** Bắt buộc.
+- **Nhân viên được phân công:** Bắt buộc, ID nhân viên thuộc phòng ban.
+- **Trạng thái sau thao tác:** `Đang xử lý` (`In Progress`).
+
+**Luồng chính (Main Flow):**
+
+1. Trưởng phòng mở danh sách Ticket của phòng ban.
+2. Chọn Ticket cần điều phối $\rightarrow$ Nhấp nút “Phân công”.
+3. Hệ thống hiển thị danh sách nhân sự của phòng ban kèm số lượng đơn mỗi người đang phụ trách.
+4. Trưởng phòng chọn một Nhân viên và nhấn Xác nhận.
+5. Hệ thống gán ID Nhân viên làm người phụ trách (Assignee), chuyển trạng thái đơn sang `Đang xử lý` (nếu là đơn mới).
+6. Đưa đơn vào danh sách công việc cá nhân của Nhân viên được gán.
+7. Ghi log phân công vào lịch sử Ticket.
+
+**Business Rules (Quy tắc nghiệp vụ):**
+
+* **BR-01:** Trưởng phòng chỉ được phân công đơn cho các Nhân viên thuộc nội bộ phòng ban của mình.
+
+**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
+
+* **AC-01:** Phân công thành công $\rightarrow$ Ticket được gán cho nhân viên mới và chuyển sang trạng thái Đang xử lý.
+
+---

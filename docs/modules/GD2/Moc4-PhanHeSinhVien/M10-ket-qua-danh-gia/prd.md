@@ -1,106 +1,104 @@
 # PHÂN HỆ: M10 — KẾT QUẢ & ĐÁNH GIÁ (RESULTS & FEEDBACK)
 
-## [FR-M10-01] Xem kết quả xử lý và tải tệp kết quả
+## [FR-M10-01] Sinh viên xem kết quả giải quyết và tải tệp trả lời
 
-**Mô tả:** Sinh viên xem nội dung giải trình kết quả (Resolution Notes) và tải tài liệu trả lời khi đơn ở trạng thái Đã giải quyết.
+**Mô tả:** Sinh viên xem văn bản giải trình kết quả (Resolution Notes) từ Nhân viên và tải về các tệp tài liệu văn bản trả lời khi đơn ở trạng thái Đã giải quyết.
 
 **Actor:** Sinh viên
 
-**Preconditions (Điều kiện tiên quyết):** Ticket ở trạng thái Đã giải quyết.
+**Preconditions (Điều kiện tiên quyết):** Ticket đang ở trạng thái `Đã giải quyết` (`Resolved`).
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
 - **Mã Ticket:** Bắt buộc.
-- **Nội dung kết quả giải quyết:** Chỉ đọc.
-- **Tệp kết quả:** Danh sách đường dẫn tải tệp kết quả.
+- **Nội dung kết quả giải quyết:** Chỉ đọc, văn bản giải trình của nhân viên.
+- **Tệp đính kèm kết quả:** Danh sách đường dẫn tải tệp kết quả.
 
 **Luồng chính (Main Flow):**
 
-1. Mở Ticket Đã giải quyết.
-2. Hệ thống hiển thị phần thông tin Kết quả xử lý từ Nhân viên.
-3. Bấm tải tệp kết quả trả lời (nếu có).
+1. Sinh viên mở Ticket đã có kết quả (từ danh sách yêu cầu hoặc từ thông báo).
+2. Hệ thống hiển thị phần thông tin “Kết quả giải quyết” từ Nhân viên phụ trách.
+3. Sinh viên đọc nội dung phản hồi và nhấp tải các tệp tài liệu trả lời đính kèm (nếu có).
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-- **BR-01:** Chỉ người dùng có quyền phù hợp mới được thực hiện chức năng.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
+* **BR-01:** Chỉ hiển thị nội dung kết quả khi đơn đã đạt trạng thái `Đã giải quyết` hoặc `Đã đóng`.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Hiển thị đầy đủ văn bản kết quả và hỗ trợ tải file kết quả an toàn.
+* **AC-01:** Hiển thị rõ ràng văn bản kết quả xử lý và hỗ trợ tải xuống tệp an toàn.
 
-## [FR-M10-02] Đánh giá mức độ hài lòng 1–5 sao
+---
 
-**Mô tả:** Sinh viên chấm điểm đánh giá chất lượng phục vụ từ 1 đến 5 sao cho đơn đã xử lý.
+## [FR-M10-02] Sinh viên đánh giá độ hài lòng từ 1 đến 5 sao, nhận xét và đóng đơn
+
+**Mô tả:** Sinh viên chấm điểm đánh giá chất lượng phục vụ từ 1 đến 5 sao, viết nhận xét góp ý tùy chọn và xác nhận đóng đơn vĩnh viễn.
 
 **Actor:** Sinh viên
 
-**Preconditions (Điều kiện tiên quyết):** Ticket ở trạng thái Đã giải quyết.
+**Preconditions (Điều kiện tiên quyết):** Ticket đang ở trạng thái `Đã giải quyết` (`Resolved`).
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
 - **Mã Ticket:** Bắt buộc.
-- **Điểm đánh giá:** Bắt buộc, lựa chọn: 1, 2, 3, 4, 5.
+- **Điểm đánh giá (CSAT):** Bắt buộc, chọn từ 1 đến 5 sao.
+- **Nhận xét / Góp ý:** Tùy chọn, Max 1000 ký tự.
+- **Trạng thái sau thao tác:** `Đã đóng` (`Closed`).
 
 **Luồng chính (Main Flow):**
 
-1. Tại màn hình xem kết quả, chọn mục “Đánh giá chất lượng”.
-2. Chọn số sao từ 1 đến 5 sao.
-3. Hệ thống ghi nhận điểm sao.
+1. Tại màn hình xem kết quả, hệ thống hiển thị khu vực “Đánh giá chất lượng phục vụ”.
+2. Sinh viên nhấp chọn số sao tương ứng (từ 1 đến 5 sao).
+3. Sinh viên nhập thêm nhận xét, góp ý chi tiết (nếu muốn).
+4. Bấm nút “Gửi đánh giá & Đóng đơn”.
+5. Hệ thống kiểm tra số sao đã chọn (bắt buộc).
+6. Lưu điểm số sao và nhận xét vào dữ liệu đánh giá của Ticket (gắn chặt với Nhân viên phụ trách).
+7. Chuyển trạng thái Ticket thành `Đã đóng` (`Closed` - Đóng vĩnh viễn).
+8. Hiển thị thông báo cảm ơn sinh viên.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-* **BR-01:** Chọn số sao (1-5) là thao tác bắt buộc khi gửi đánh giá.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
+* **BR-01:** Chọn số sao (1-5 sao) là thao tác bắt buộc khi gửi đánh giá.
+* **BR-02 (Khóa vĩnh viễn - No Reopen):** Khi Ticket đã chuyển sang trạng thái `Đã đóng`, hệ thống khóa cứng toàn bộ tương tác, tuyệt đối không cho phép mở lại hoặc chỉnh sửa nội dung.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Chọn sao và bấm gửi → Lưu điểm mức độ hài lòng vào hệ thống thành công.
+* **AC-01:** Chọn sao và bấm đóng đơn $\rightarrow$ Lưu điểm đánh giá CSAT thành công và chuyển trạng thái thành `Đã đóng`.
+* **AC-02:** Chưa chọn sao mà bấm gửi $\rightarrow$ Báo lỗi yêu cầu chọn số sao trước khi gửi.
 
-## [FR-M10-03] Viết nhận xét và đóng Ticket vĩnh viễn
+---
 
-**Mô tả:** Sinh viên nhập góp ý tùy chọn và xác nhận đóng đơn vĩnh viễn (Đã đóng).
+## [FR-M10-03] Hệ thống tự động đóng đơn nếu sinh viên không đánh giá sau 72 giờ
 
-**Actor:** Sinh viên
+**Mô tả:** Sau 72 giờ tính từ thời điểm Ticket chuyển sang trạng thái Đã giải quyết mà Sinh viên không thực hiện đánh giá, hệ thống sẽ tự động chuyển trạng thái đơn sang Đã đóng.
 
-**Preconditions (Điều kiện tiên quyết):** Hoàn tất chọn sao ở FR-M10-02.
+**Actor:** Hệ thống (System Background Task)
+
+**Preconditions (Điều kiện tiên quyết):** Ticket ở trạng thái `Đã giải quyết` (`Resolved`); thời gian hiện tại $\ge$ `resolved_at + 72 giờ`.
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
 - **Mã Ticket:** Bắt buộc.
-- **Điểm đánh giá:** Bắt buộc, 1-5 sao.
-- **Nhận xét:** Tùy chọn, Ý kiến đóng góp thêm của Sinh viên.
-- **Trạng thái sau thao tác:** Theo thông tin hiển thị trong hệ thống.
-- **Thời điểm đóng Ticket:** Mốc thời gian đóng đơn.
-- **Đóng tự động:** Mặc định false, bằng true nếu do tự động đóng 72h.
+- **Thời điểm chuyển Resolved:** Mốc thời gian bắt đầu tính 72h.
+- **Trạng thái sau thao tác:** `Đã đóng` (`Closed`).
+- **Ghi chú tự động:** *"Hệ thống tự động đóng đơn do sinh viên không đánh giá sau 72 giờ"*.
 
 **Luồng chính (Main Flow):**
 
-1. Nhập ý kiến nhận xét (tùy chọn).
-2. Bấm “Gửi đánh giá & Đóng đơn”.
-3. Hệ thống lưu nhận xét và chuyển trạng thái Ticket thành Đã đóng (Đóng vĩnh viễn).
+1. Tác vụ ngầm của hệ thống quét định kỳ các Ticket đang ở trạng thái `Đã giải quyết`.
+2. So sánh thời gian hiện tại với mốc `resolved_at`.
+3. Nếu phát hiện Ticket đã quá 72 giờ mà Sinh viên chưa thực hiện đánh giá:
+   a. Hệ thống tự động cập nhật trạng thái đơn thành `Đã đóng` (`Closed`).
+   b. Đánh dấu trường `auto_closed = true`.
+   c. Ghi nhận log hoàn tất vào dòng thời gian của Ticket.
+   d. Khóa form đánh giá của Ticket đó.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-* **BR-01:** Ticket ở trạng thái Đã đóng bị khóa cứng mọi tương tác, tuyệt đối không cho phép mở lại (No Reopen).
-* **BR-02 (Auto-Close):** Sau 72 giờ ở trạng thái Đã giải quyết mà Sinh viên không đánh giá, hệ thống tự động gỡ bộ đếm và chuyển thành Đã đóng.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
+* **BR-01:** Các đơn bị đóng tự động không có điểm số sao (Rating = null) và không tính vào điểm trung bình CSAT của nhân viên, nhưng vẫn được ghi nhận là hoàn thành đúng hạn vào chỉ số KPI.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Đánh giá xong → Chuyển Đã đóng, khóa vĩnh viễn mọi thao tác chỉnh sửa/bình luận.
-* **AC-02 (Kiểm thử BR-02):** Quá 72h không đánh giá → Tự động đóng đơn sang Đã đóng.
+* **AC-01:** Sau 72 giờ ở trạng thái Đã giải quyết không có đánh giá $\rightarrow$ Đơn tự động chuyển sang `Đã đóng`.
 
 ---

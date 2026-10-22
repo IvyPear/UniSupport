@@ -1,9 +1,9 @@
-# TÀI LIỆU QUY TRÌNH — M01: Đăng nhập & Xác thực (Auth)
+﻿# TÀI LIỆU QUY TRÌNH — M01: Đăng nhập & Xác thực (Auth)
 
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M01
 * **Tên Phân hệ:** M01: Đăng nhập & Xác thực (Auth)
-* **Phân nhóm Giai đoạn:** `GĐ1-NenTang&ChucNangCotLoi`
+* **Mốc triển khai (Milestone): Moc1-NenTang
 * **Đối tượng phụ trách:** Sinh viên, Nhân viên, Quản lý, Admin
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 
@@ -17,3 +17,5 @@ Phân hệ M01 thuộc dự án UniSupport, thực thi các yêu cầu nghiệp 
 ## 3. Quy trình & Nghiệm thu
 * Triển khai cuốn chiếu trên môi trường thật.
 * Đảm bảo kiểm thử đầy đủ các kịch bản ngoại lệ và ràng buộc nghiệp vụ.
+
+

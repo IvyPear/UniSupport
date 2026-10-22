@@ -1,78 +1,70 @@
 # PHÂN HỆ: M04 — QUẢN LÝ DANH MỤC HỖ TRỢ (CATEGORY MANAGEMENT)
 
-## [FR-M04-01] Quản lý danh mục cấp toàn trường (Dành cho Admin)
+## [FR-M04-01] Admin quản lý danh mục hỗ trợ chung của toàn trường
 
-**Mô tả:** Admin chịu trách nhiệm tạo lập và quản lý các danh mục hỗ trợ chung cấp trường (Global Categories) hoặc danh mục dùng để điều phối ban đầu.
+**Mô tả:** Admin thiết lập, thêm mới, chỉnh sửa thông tin hoặc ẩn/hiện các danh mục hỗ trợ cấp trường và danh mục định tuyến dùng chung.
 
-**Actor:** Admin
+**Actor:** Quản trị viên (Admin)
 
-**Preconditions (Điều kiện tiên quyết):** Đã đăng nhập tài khoản Admin.
-
-**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
-
-- **Mã danh mục:** Bắt buộc, Duy nhất, 2-4 ký tự in hoa, VD: AC, FN, IT.
-- **Tên danh mục:** Bắt buộc, Max 100 ký tự, Tên danh mục dịch vụ.
-- **Phòng ban phụ trách:** Bắt buộc, Khóa ngoại tới Phòng ban tiếp nhận.
-- **Thời hạn xử lý:** Bắt buộc, Thời gian cam kết xử lý SLA mặc định tính theo giờ, VD: 24, 48.
-- **Trạng thái hiển thị:** Mặc định: true.
-
-**Luồng chính (Main Flow):**
-
-1. Admin mở menu “Danh mục toàn trường”.
-2. Thêm mới, chỉnh sửa thông tin hoặc ẩn/hiện các danh mục dùng chung.
-3. Quản lý danh mục đặc biệt (VD: Danh mục "Khác" dùng để định tuyến).
-4. Lưu thiết lập vào CSDL.
-
-**Business Rules (Quy tắc nghiệp vụ):**
-
-* **BR-01 (Giới hạn quyền Admin):** Admin có thể can thiệp thêm/sửa các danh mục cấp toàn trường.
-* **BR-02:** Danh mục bị ẩn sẽ không hiển thị trên form Tạo Ticket của Sinh viên nhưng giữ nguyên dữ liệu trên các Ticket cũ.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
-
-**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-
-* **AC-01:** Admin tạo danh mục toàn trường thành công → Danh mục này được hiển thị lên form tạo Ticket của Sinh viên.
-* **AC-02:** Trùng Mã danh mục → Hệ thống báo lỗi và không cho phép lưu.
-
-## [FR-M04-02] Quản lý danh mục chuyên môn nội bộ (Dành cho Quản lý phòng ban)
-
-**Mô tả:** Quản lý (Trưởng phòng) được quyền chủ động thêm mới, cấu hình và chỉnh sửa các danh mục dịch vụ chuyên môn chỉ thuộc về phòng ban của mình, không phụ thuộc vào Admin.
-
-**Actor:** Quản lý phòng ban
-
-**Preconditions (Điều kiện tiên quyết):** Tài khoản vai trò Quản lý đã gắn đúng Phòng ban.
+**Preconditions (Điều kiện tiên quyết):** Đăng nhập với quyền Admin hệ thống.
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
-- **Tên danh mục:** Bắt buộc.
-- **Hướng dẫn hồ sơ:** Tùy chọn, Hướng dẫn hồ sơ sinh viên cần chuẩn bị.
-- **Thời hạn xử lý của phòng ban:** Bắt buộc, Giờ.
-- **Trạng thái:** Bật/Tắt hiển thị.
+- **Mã danh mục:** Bắt buộc, Duy nhất, 2-6 ký tự in hoa (VD: `DT`, `CTSV`, `IT`, `OTHER`).
+- **Tên danh mục:** Bắt buộc, Max 100 ký tự (VD: Xác nhận sinh viên, Bảng điểm, Hỗ trợ tài khoản).
+- **Phòng ban tiếp nhận mặc định:** Bắt buộc, liên kết tới Phòng ban chuyên trách xử lý.
+- **Thời hạn cam kết xử lý SLA (giờ):** Bắt buộc, số nguyên dương (VD: 24, 48, 72 giờ).
+- **Trạng thái hiển thị:** Bật (`true`) / Tắt (`false`). Mặc định: `true`.
 
 **Luồng chính (Main Flow):**
 
-1. Quản lý mở menu “Danh mục phòng ban”.
-2. Hệ thống chỉ tải các danh mục thuộc quyền sở hữu của phòng ban đó.
-3. Quản lý chọn "Thêm mới danh mục", nhập Tên danh mục, Mô tả hướng dẫn và Thời hạn SLA tiêu chuẩn.
-4. Chọn Ẩn/Hiện danh mục.
-5. Lưu thông tin vào CSDL.
+1. Admin truy cập mục “Danh mục hỗ trợ toàn trường”.
+2. Hệ thống hiển thị bảng danh mục dịch vụ cấp trường hiện có.
+3. Admin chọn “Thêm danh mục mới” hoặc nhấp sửa danh mục hiện hành.
+4. Nhập Mã danh mục, Tên dịch vụ, chọn Phòng ban phụ trách và thời gian SLA tiêu chuẩn.
+5. Quản lý danh mục đặc biệt (Danh mục "Khác" dùng để điều phối luồng ngoại lệ).
+6. Bấm “Lưu”. Hệ thống kiểm tra trùng lặp và lưu vào CSDL.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-- **BR-01 (Data Isolation):** Quản lý chỉ được phép thêm mới và chỉnh sửa danh mục thuộc nội bộ phòng ban mình. Tuyệt đối không nhìn thấy hoặc sửa được danh mục của phòng ban khác hay danh mục toàn trường của Admin.
-- **BR-02:** Danh mục do Quản lý tạo ra khi hiển thị cho Sinh viên sẽ được nhóm tự động dưới tên Phòng ban đó.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
+* **BR-01:** Danh mục bị tắt hiển thị (`false`) sẽ không xuất hiện trên form tạo Ticket mới của Sinh viên nhưng dữ liệu trên các Ticket cũ vẫn được giữ nguyên vẹn.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Quản lý tạo danh mục mới → Sinh viên khi chọn đúng Phòng ban đó sẽ thấy danh mục chuyên môn này xuất hiện. Quản lý phòng ban khác không nhìn thấy danh mục này trong trang quản trị của họ.
+* **AC-01:** Admin tạo danh mục mới thành công $\rightarrow$ Danh mục này hiển thị cho Sinh viên lựa chọn khi gửi Ticket.
+* **AC-02:** Trùng Mã danh mục $\rightarrow$ Báo lỗi và không cho phép lưu.
+
+---
+
+## [FR-M04-02] Trưởng phòng quản lý danh mục hỗ trợ riêng của phòng ban
+
+**Mô tả:** Trưởng phòng (Quản lý) chủ động thêm mới, cập nhật mô tả hướng dẫn hồ sơ và thời hạn SLA cho các danh mục thủ tục chuyên môn nội bộ thuộc phòng ban mình phụ trách.
+
+**Actor:** Quản lý phòng ban (Trưởng phòng)
+
+**Preconditions (Điều kiện tiên quyết):** Tài khoản vai trò Quản lý đã được gắn đúng Phòng ban trực thuộc.
+
+**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
+
+- **Tên danh mục dịch vụ:** Bắt buộc, Max 150 ký tự.
+- **Hướng dẫn hồ sơ / Giấy tờ cần chuẩn bị:** Tùy chọn, văn bản hướng dẫn sinh viên.
+- **Thời hạn xử lý tiêu chuẩn SLA (giờ):** Bắt buộc, số giờ cam kết.
+- **Trạng thái kích hoạt:** Bật/Tắt hiển thị.
+
+**Luồng chính (Main Flow):**
+
+1. Trưởng phòng mở menu “Danh mục phòng ban”.
+2. Hệ thống chỉ tải các danh mục thuộc quyền sở hữu của phòng ban đó (Data Isolation).
+3. Trưởng phòng chọn “Thêm mới danh mục dịch vụ”, nhập tên thủ tục, mô tả hướng dẫn sinh viên chuẩn bị giấy tờ và cấu hình thời hạn SLA.
+4. Bấm Lưu thiết lập.
+5. Khi kích hoạt, danh mục dịch vụ này sẽ tự động xuất hiện trên Form tạo Ticket của Sinh viên dưới nhóm tên của phòng ban đó.
+
+**Business Rules (Quy tắc nghiệp vụ):**
+
+* **BR-01 (Phân tách dữ liệu):** Trưởng phòng chỉ quản lý danh mục nội bộ của phòng mình, không nhìn thấy hoặc sửa đổi được danh mục của phòng ban khác hay danh mục toàn trường của Admin.
+
+**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
+
+* **AC-01:** Trưởng phòng tạo danh mục chuyên môn thành công $\rightarrow$ Sinh viên chọn phòng ban này sẽ nhìn thấy danh mục và hướng dẫn giấy tờ tương ứng.
 
 ---

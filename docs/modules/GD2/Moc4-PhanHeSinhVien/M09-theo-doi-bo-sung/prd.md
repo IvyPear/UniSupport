@@ -1,139 +1,74 @@
-# PHÂN HỆ: M09 — THEO DÕI & BỔ SUNG THÔNG TIN (TICKET TRACKING & SUPPLEMENT)
+# PHÂN HỆ: M09 — THEO DÕI & BỔ SUNG (TICKET TRACKING & SUPPLEMENT)
 
-## [FR-M09-01] Xem danh sách, chi tiết và trạng thái Ticket theo thời gian thực
+## [FR-M09-01] Sinh viên xem, tìm kiếm và theo dõi các đơn mình đã gửi
 
-**Mô tả:** Sinh viên xem danh sách các đơn đã gửi và xem màn hình chi tiết tiến độ giải quyết thời gian thực.
+**Mô tả:** Sinh viên truy cập màn hình cá nhân để xem danh sách toàn bộ yêu cầu đã gửi, tìm kiếm, lọc theo trạng thái và theo dõi chi tiết tiến độ xử lý theo thời gian thực.
 
 **Actor:** Sinh viên
 
-**Preconditions (Điều kiện tiên quyết):** Đã đăng nhập tài khoản Sinh viên.
+**Preconditions (Điều kiện tiên quyết):** Sinh viên đã đăng nhập thành công vào hệ thống.
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
-- **Sinh viên gửi yêu cầu:** Bắt buộc, ID Sinh viên hiện tại.
-- **Mã Ticket:** Khóa chính Ticket khi xem chi tiết.
-- **Trạng thái hiện tại:** Theo thông tin hiển thị trong hệ thống.
+- **ID Sinh viên:** Xác thực tài khoản hiện tại.
+- **Từ khóa tìm kiếm:** Tùy chọn, Mã Ticket hoặc Tiêu đề yêu cầu.
+- **Bộ lọc trạng thái:** Tùy chọn, lọc theo: `Chưa tiếp nhận`, `Đang xử lý`, `Chờ bổ sung`, `Đã giải quyết`, `Đã đóng`.
+- **Thông tin chi tiết Ticket:** Mã Ticket, Ngày gửi, Phòng ban, Danh mục, Trạng thái hiện tại, Timeline lịch sử xử lý.
 
 **Luồng chính (Main Flow):**
 
-1. Mở menu “Yêu cầu của tôi”.
-2. Danh sách tải toàn bộ các Ticket do chính Sinh viên khởi tạo.
-3. Chọn một Ticket để xem chi tiết: Mã đơn, Ngày tạo, Phòng ban, Trạng thái hiện tại, Lịch sử xử lý.
+1. Sinh viên mở menu “Yêu cầu của tôi”.
+2. Hệ thống tải toàn bộ danh sách Ticket do chính Sinh viên đó khởi tạo.
+3. Sinh viên có thể nhập từ khóa hoặc chọn bộ lọc trạng thái để tìm đơn.
+4. Sinh viên chọn một Ticket bất kỳ để mở xem chi tiết:
+   - Thông tin yêu cầu ban đầu và các file đính kèm.
+   - Trạng thái hiện tại và tiến độ công việc theo thời gian thực.
+   - Các mốc lịch sử trao đổi và phản hồi từ nhân viên.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-* **BR-01:** Sinh viên chỉ có quyền xem các Ticket do chính mình gửi (Data Isolation).
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
+* **BR-01 (Phân tách dữ liệu):** Sinh viên chỉ xem được danh sách và chi tiết các đơn do chính tài khoản của mình khởi tạo.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Màn hình chi tiết hiển thị đúng dữ liệu và trạng thái thời gian thực của đơn.
+* **AC-01:** Hiển thị đúng và đầy đủ danh sách Ticket của sinh viên kèm trạng thái thời gian thực.
+* **AC-02:** Tìm kiếm và lọc theo trạng thái trả về kết quả chính xác.
 
-## [FR-M09-02] Tìm kiếm, lọc và theo dõi lịch sử Ticket
+---
 
-**Mô tả:** Sinh viên tìm kiếm đơn theo Mã Ticket/Tiêu đề và lọc danh sách theo từng trạng thái xử lý.
+## [FR-M09-02] Sinh viên nộp bổ sung thông tin và giấy tờ theo yêu cầu
 
-**Actor:** Sinh viên
-
-**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
-
-- **Từ khóa tìm kiếm:** Tùy chọn, Mã Ticket hoặc Tiêu đề.
-- **Bộ lọc trạng thái:** Theo thông tin hiển thị trong hệ thống.
-
-**Luồng chính (Main Flow):**
-
-1. Nhập từ khóa tìm kiếm tại ô Tìm kiếm.
-2. Chọn bộ lọc Trạng thái (Chưa tiếp nhận, Đang xử lý, Chờ bổ sung, Hoàn thành).
-3. Hệ thống trả về kết quả lọc tương ứng.
-
-**Business Rules (Quy tắc nghiệp vụ):**
-
-- **BR-01:** Chỉ người dùng có quyền phù hợp mới được thực hiện chức năng.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
-
-**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-
-* **AC-01:** Lọc trạng thái trả về đúng danh sách các Ticket thuộc trạng thái đó.
-
-## [FR-M09-03] Bổ sung thông tin và tài liệu theo yêu cầu
-
-**Mô tả:** Sinh viên phản hồi nhập nội dung và tải tệp đính kèm bổ sung khi Ticket ở trạng thái Chờ bổ sung.
+**Mô tả:** Khi đơn ở trạng thái Chờ bổ sung, Sinh viên nhập nội dung phản hồi và tải lên các tệp tài liệu minh chứng bổ sung theo yêu cầu của nhân viên.
 
 **Actor:** Sinh viên
 
-**Preconditions (Điều kiện tiên quyết):** Ticket đang ở trạng thái Chờ bổ sung (Chờ bổ sung).
+**Preconditions (Điều kiện tiên quyết):** Ticket đang ở trạng thái `Chờ bổ sung` (`Pending`).
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
 - **Mã Ticket:** Bắt buộc.
-- **Nội dung bổ sung:** Bắt buộc, Văn bản giải trình/bổ sung của Sinh viên.
-- **Tài liệu bổ sung:** Tùy chọn, Tệp minh chứng bổ sung, Max 5MB/file.
-- **Trạng thái sau thao tác:** Theo thông tin hiển thị trong hệ thống.
-- **Nhân viên phụ trách:** Giữ nguyên ID Nhân viên phụ trách cũ.
+- **Nội dung bổ sung:** Bắt buộc, Min 5 ký tự, văn bản giải trình của sinh viên.
+- **Tài liệu đính kèm bổ sung:** Tùy chọn, tối đa 5 file, dung lượng tối đa 5MB/file (ảnh, pdf, docx).
+- **Trạng thái sau thao tác:** `Đang xử lý` (`In Progress`).
 
 **Luồng chính (Main Flow):**
 
-1. Mở Ticket Chờ bổ sung từ thông báo hoặc danh sách.
-2. Đọc yêu cầu bổ sung của Nhân viên.
-3. Nhập thông tin bổ sung và tải file minh chứng (nếu có).
-4. Bấm “Xác nhận bổ sung”.
-5. Hệ thống lưu thông tin vào lịch sử đơn, dừng bộ đếm 72h.
-6. Tự động chuyển trạng thái đơn về lại Đang xử lý.
-7. Bắn thông báo cho Nhân viên phụ trách cũ vào tiếp tục xử lý.
+1. Sinh viên mở chi tiết Ticket đang ở trạng thái `Chờ bổ sung`.
+2. Đọc nội dung yêu cầu bổ sung từ Nhân viên và theo dõi thời gian còn lại trên đồng hồ đếm ngược 72 giờ.
+3. Sinh viên nhập nội dung giải trình bổ sung tại form phản hồi.
+4. Tải lên các tệp tài liệu/giấy tờ minh chứng (nếu có).
+5. Nhấn “Xác nhận gửi bổ sung”.
+6. Hệ thống lưu nội dung bổ sung vào dòng thời gian của Ticket và dừng bộ đếm ngược 72 giờ.
+7. Tự động chuyển trạng thái Ticket về lại `Đang xử lý` (`In Progress`).
+8. Giữ nguyên Nhân viên phụ trách cũ và phát thông báo cho Nhân viên đó tiếp tục giải quyết.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-* **BR-01:** Giữ nguyên Nhân viên phụ trách cũ, tuyệt đối không tạo đơn mới.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
+* **BR-01:** Giữ nguyên Mã Ticket và Nhân viên phụ trách cũ, tuyệt đối không tạo đơn mới.
+* **BR-02:** Form nộp bổ sung chỉ mở khi đơn ở trạng thái `Chờ bổ sung`.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Bổ sung thành công → Chuyển lại Đang xử lý, hủy bộ đếm 72h và báo cho Nhân viên phụ trách.
-
-## [FR-M09-04] Tiếp nhận thông báo trạng thái và yêu cầu bổ sung
-
-**Mô tả:** Sinh viên nhận thông báo trong ứng dụng (chấm đỏ biểu tượng quả chuông) khi có thay đổi trạng thái đơn.
-
-**Actor:** Sinh viên
-
-**Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
-
-- **Mã thông báo:** Khóa chính thông báo.
-- **Người nhận thông báo:** Bắt buộc, ID Sinh viên nhận.
-- **Tiêu đề:** Max 100 ký tự.
-- **Nội dung thông báo:** Max 255 ký tự.
-- **Ticket liên quan:** Bắt buộc, ID Ticket để chuyển hướng khi nhấp chuột.
-- **Trạng thái đã đọc:** Mặc định: false.
-
-**Luồng chính (Main Flow):**
-
-1. Hệ thống phát thông báo trong ứng dụng khi đơn đổi trạng thái hoặc có yêu cầu bổ sung.
-2. Sinh viên bấm vào thông báo.
-3. Hệ thống chuyển hướng tới đúng màn hình chi tiết Ticket đó.
-
-**Business Rules (Quy tắc nghiệp vụ):**
-
-- **BR-01:** Chỉ người dùng có quyền phù hợp mới được thực hiện chức năng.
-
-**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-
-- Nếu người dùng không có quyền truy cập, hệ thống từ chối thao tác và thông báo phù hợp.
-- Nếu thao tác không thành công, hệ thống hiển thị lỗi và không ghi nhận kết quả chưa hoàn chỉnh.
-
-**Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-
-* **AC-01:** Bấm thông báo → Mở trực tiếp màn hình chi tiết Ticket tương ứng.
+* **AC-01:** Sinh viên nộp bổ sung thành công $\rightarrow$ Đơn chuyển về `Đang xử lý`, hủy bộ đếm 72h và lưu thông tin vào lịch sử.
 
 ---

@@ -1,9 +1,9 @@
-# TÀI LIỆU QUY TRÌNH — M12: Giám sát tiến độ (Progress Monitoring)
+﻿# TÀI LIỆU QUY TRÌNH — M12: Giám sát tiến độ (Progress Monitoring)
 
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M12
 * **Tên Phân hệ:** M12: Giám sát tiến độ (Progress Monitoring)
-* **Phân nhóm Giai đoạn:** `GĐ3-DieuPhoi&GIamSat`
+* **Mốc triển khai (Milestone): Moc5-GiamSat&Dashboard
 * **Đối tượng phụ trách:** Quản lý, Admin
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 
@@ -17,3 +17,5 @@ Phân hệ M12 thuộc dự án UniSupport, thực thi các yêu cầu nghiệp 
 ## 3. Quy trình & Nghiệm thu
 * Triển khai cuốn chiếu trên môi trường thật.
 * Đảm bảo kiểm thử đầy đủ các kịch bản ngoại lệ và ràng buộc nghiệp vụ.
+
+

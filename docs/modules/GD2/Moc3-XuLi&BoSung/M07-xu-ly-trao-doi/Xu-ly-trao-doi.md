@@ -1,9 +1,9 @@
-# TÀI LIỆU QUY TRÌNH — M07: Xử lý & Trao đổi — Nhân viên (Process & Exchange)
+﻿# TÀI LIỆU QUY TRÌNH — M07: Xử lý & Trao đổi — Nhân viên (Process & Exchange)
 
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M07
 * **Tên Phân hệ:** M07: Xử lý & Trao đổi — Nhân viên (Process & Exchange)
-* **Phân nhóm Giai đoạn:** `GĐ1-NenTang&ChucNangCotLoi`
+* **Mốc triển khai (Milestone): Moc3-XuLi&BoSung
 * **Đối tượng phụ trách:** Nhân viên
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 
@@ -17,3 +17,5 @@ Phân hệ M07 thuộc dự án UniSupport, thực thi các yêu cầu nghiệp 
 ## 3. Quy trình & Nghiệm thu
 * Triển khai cuốn chiếu trên môi trường thật.
 * Đảm bảo kiểm thử đầy đủ các kịch bản ngoại lệ và ràng buộc nghiệp vụ.
+
+

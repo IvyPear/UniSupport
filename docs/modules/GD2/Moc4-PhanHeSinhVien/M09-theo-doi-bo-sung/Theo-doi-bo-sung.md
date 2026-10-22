@@ -1,9 +1,9 @@
-# TÀI LIỆU QUY TRÌNH — M09: Theo dõi & Bổ sung thông tin (Ticket Tracking & Supplement)
+﻿# TÀI LIỆU QUY TRÌNH — M09: Theo dõi & Bổ sung thông tin (Ticket Tracking & Supplement)
 
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M09
 * **Tên Phân hệ:** M09: Theo dõi & Bổ sung thông tin (Ticket Tracking & Supplement)
-* **Phân nhóm Giai đoạn:** `GĐ2-PhanHeSinhVien`
+* **Mốc triển khai (Milestone): Moc4-PhanHeSinhVien
 * **Đối tượng phụ trách:** Sinh viên
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 
@@ -17,3 +17,5 @@ Phân hệ M09 thuộc dự án UniSupport, thực thi các yêu cầu nghiệp 
 ## 3. Quy trình & Nghiệm thu
 * Triển khai cuốn chiếu trên môi trường thật.
 * Đảm bảo kiểm thử đầy đủ các kịch bản ngoại lệ và ràng buộc nghiệp vụ.
+
+

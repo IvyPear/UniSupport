@@ -1,4 +1,4 @@
-# TÀI LIỆU DỰ ÁN UNISUPPORT (PROJECT DOCUMENTATION INDEX)
+﻿# TÀI LIỆU DỰ ÁN UNISUPPORT (PROJECT DOCUMENTATION INDEX)
 
 ---
 
@@ -25,9 +25,9 @@ Chào mừng bạn đến với bộ tài liệu hoàn chỉnh của hệ thốn
 
 ### 📦 2. Đặc Tả Yêu Cầu Chức Năng (Modules / PRD)
 Tập hợp đặc tả **13 Phân hệ thực thi (từ M01 đến M13)** phân chia thành 3 thư mục Giai đoạn phát triển ([Xem chi tiết: modules/readme.md](modules/readme.md)):
-* **Giai đoạn 1 — Nền tảng & Working MVP (`modules/GĐ1-NenTang&ChucNangCotLoi/`):** M01 (Đăng nhập & Xác thực), M02 (Vai trò & Phân quyền — Admin), M03 (Quản lý tài khoản — Admin), M04 (Quản lý danh mục hỗ trợ), M05 (Khởi tạo Ticket — Sinh viên), M06 (Tiếp nhận Ticket — Nhân viên), M07 (Xử lý & Trao đổi — Nhân viên), M08 (Trả kết quả — Nhân viên).
-* **Giai đoạn 2 — Phân hệ Sinh viên (`modules/GĐ2-PhanHeSinhVien/`):** M09 (Theo dõi & Bổ sung thông tin), M10 (Kết quả & Đánh giá).
-* **Giai đoạn 3 — Điều phối & Giám sát (`modules/GĐ3-DieuPhoi&GIamSat/`):** M11 (Quản lý & Điều phối Ticket), M12 (Giám sát tiến độ), M13 (Dashboard & Báo cáo).
+* **Giai đoạn 1 — Nền tảng & Working MVP (`modules/GD1/Moc1-NenTang/`):** M01 (Đăng nhập & Xác thực), M02 (Vai trò & Phân quyền — Admin), M03 (Quản lý tài khoản — Admin), M04 (Quản lý danh mục hỗ trợ), M05 (Khởi tạo Ticket — Sinh viên), M06 (Tiếp nhận Ticket — Nhân viên), M07 (Xử lý & Trao đổi — Nhân viên), M08 (Trả kết quả — Nhân viên).
+* **Giai đoạn 2 — Phân hệ Sinh viên (`modules/GD2/Moc4-PhanHeSinhVien/`):** M09 (Theo dõi & Bổ sung thông tin), M10 (Kết quả & Đánh giá).
+* **Giai đoạn 3 — Điều phối & Giám sát (`modules/GD3/Moc5-GiamSat&Dashboard/`):** M11 (Quản lý & Điều phối Ticket), M12 (Giám sát tiến độ), M13 (Dashboard & Báo cáo).
 
 ---
 
@@ -46,3 +46,5 @@ Tập hợp đặc tả **13 Phân hệ thực thi (từ M01 đến M13)** phân
 ### 🧪 5. Kế Hoạch & Ma Trận Kiểm Thử (QA & Testing)
 * [chien-luoc-kiem-thu.md](qa/chien-luoc-kiem-thu.md) - Kế hoạch Kiểm thử, Các mức độ testing, Ma trận phân loại Bug Severity và Tiêu chí Release.
 * [ma-tran-test-case.md](qa/ma-tran-test-case.md) - Ma trận Kịch bản Kiểm thử chi tiết (Test Cases) phủ 100% yêu cầu PRD.
+
+

@@ -1,6 +1,6 @@
-# 0. QUY TRÌNH CHUNG — ĐĂNG NHẬP, XÁC THỰC & PHIÊN LÀM VIỆC (AUTHENTICATION & SESSION WORKFLOWS)
+﻿# 0. QUY TRÌNH CHUNG — ĐĂNG NHẬP, XÁC THỰC & PHIÊN LÀM VIỆC (AUTHENTICATION & SESSION WORKFLOWS)
 
-> **Ánh xạ Phân hệ:** [M01-dang-nhap-xac-thuc](../modules/GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/), [M02-vai-tro-phan-quyen](../modules/GĐ1-NenTang&ChucNangCotLoi/M02-vai-tro-phan-quyen/), [M03-quan-ly-tai-khoan](../modules/GĐ1-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/)
+> **Ánh xạ Phân hệ:** [M01-dang-nhap-xac-thuc](../modules/GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/), [M02-vai-tro-phan-quyen](../modules/GD1/Moc1-NenTang/M02-vai-tro-phan-quyen/), [M03-quan-ly-tai-khoan](../modules/GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/)
 > **Tác nhân:** Tất cả người dùng (Sinh viên, Nhân viên, Quản lý, Admin)
 
 ---
@@ -9,7 +9,7 @@
 
 * **Tác nhân:** Sinh viên, Nhân viên, Quản lý, Admin.
 * **Tiền điều kiện:** Người dùng đã có tài khoản hợp lệ trên hệ thống UniSupport (trạng thái `Active`).
-* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, `[FR-M01-02]`)
+* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, `[FR-M01-02]`)
 * **Luồng chính:**
   1. Người dùng truy cập trang Đăng nhập UniSupport.
   2. Nhập Mã định danh (Mã SV / Mã Cán bộ) và Mật khẩu.
@@ -47,7 +47,7 @@ graph TD
 
 * **Tác nhân:** Người dùng thực hiện đăng nhập sai.
 * **Tiền điều kiện:** Người dùng truy cập màn hình Đăng nhập.
-* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, quy tắc `BR-01`)
+* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, quy tắc `BR-01`)
 * **Luồng chính:**
   1. Người dùng nhập sai Mật khẩu hoặc Mã định danh.
   2. Hệ thống tăng bộ đếm số lần đăng nhập thất bại liên tiếp (`failed_attempts = failed_attempts + 1`).
@@ -75,7 +75,7 @@ graph TD
 
 * **Tác nhân:** Admin (Quên mật khẩu) / Sinh viên & Nhân viên (Cần hỗ trợ).
 * **Tiền điều kiện:** Người dùng không nhớ mật khẩu đăng nhập.
-* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, quy tắc `BR-02`, `BR-03`, `BR-04`)
+* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, quy tắc `BR-02`, `BR-03`, `BR-04`)
 * **Luồng chính:**
   - **Trường hợp 1: Đối với Admin (Có chức năng Quên mật khẩu self-service):**
     1. Admin nhấn liên kết **"Quên mật khẩu"** trên giao diện đăng nhập.
@@ -107,7 +107,7 @@ graph TD
 
 * **Tác nhân:** Hệ thống, Admin (khi khóa tài khoản `AD-01`).
 * **Tiền điều kiện:** Người dùng đang đăng nhập và có phiên làm việc active.
-* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GĐ1-NenTang&ChucNangCotLoi/M01-dang-nhap-xac-thuc/) (`[FR-M01-02]`), [M03-quan-ly-tai-khoan](../modules/GĐ1-NenTang&ChucNangCotLoi/M03-quan-ly-tai-khoan/) (`[FR-M03-02]`)
+* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/) (`[FR-M01-02]`), [M03-quan-ly-tai-khoan](../modules/GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/) (`[FR-M03-02]`)
 * **Luồng chính:**
   1. Người dùng đang hoạt động trong hệ thống với Token hiện tại.
   2. **Kịch bản A (Admin khóa tài khoản):** Admin chuyển trạng thái tài khoản của người dùng đó sang `Inactive` tại luồng `AD-01`. Hệ thống lập tức thu hồi/cho vào danh sách đen (Blacklist/Revoke) tất cả JWT Token/Session của tài khoản này.
@@ -128,3 +128,5 @@ graph TD
     F --> G[Xóa Session client & Đẩy về trang Login]
     G --> H([Hiển thị thông báo Văng phiên đăng nhập])
 ```
+
+
