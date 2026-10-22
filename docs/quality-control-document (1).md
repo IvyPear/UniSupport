@@ -111,13 +111,13 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 
 ## 9. Quality Gates theo giai đoạn
 
-| Gate | Thời điểm | Điều kiện ra cổng |
-| :--- | :--- | :--- |
-| **G1 – Baseline** | Sau M01–M02 | PRD/thiết kế được review, AC rõ, scope và mapping FR–module được duyệt |
-| **G2 – Working MVP** | Sau các module nền tảng và luồng Ticket cốt lõi | Đăng nhập → tạo → tiếp nhận → xử lý → trả kết quả hoạt động trên dữ liệu thật |
-| **G3 – Student flows** | Sau M09–M10 | Theo dõi, bổ sung, xem kết quả và đánh giá đạt test trọng yếu |
-| **G4 – Management** | Sau M14–M16 | Điều phối, cảnh báo, dashboard/báo cáo đúng phạm vi |
-| **G5 – Release** | Sau M17–M19 | UAT đạt; không còn Critical/High; có triển khai, rollback và ký nghiệm thu |
+| Gate | Điều kiện ra cổng |
+| :--- | :--- |
+| **G1 – Baseline** | PRD/thiết kế được review, AC rõ, scope và mapping FR–module được duyệt |
+| **G2 – Working MVP** | Đăng nhập → tạo → tiếp nhận → xử lý → trả kết quả hoạt động trên dữ liệu thật |
+| **G3 – Student flows** | Theo dõi, bổ sung, xem kết quả và đánh giá đạt test trọng yếu |
+| **G4 – Management** | Điều phối, cảnh báo, dashboard/báo cáo đúng phạm vi |
+| **G5 – Release** | UAT đạt; không còn Critical/High; có triển khai, rollback và ký nghiệm thu |
 
 ## 10. Hồ sơ bằng chứng và báo cáo QC
 * Requirements Traceability Matrix (FR ↔ Module ↔ Test Case ↔ Kết quả).
