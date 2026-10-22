@@ -130,7 +130,8 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 * Xác nhận mapping 13 phân hệ PRD sang 13 module triển khai.
 * Xác nhận các trạng thái Ticket (New, In Progress, Pending, Resolved, Closed) và thời điểm chuyển. 
 
-| **Quy tắc SLA** | Thời gian phản hồi SLA từ 24h - 48h. |
+| :--- | :--- | :--- |
+| **Quy tắc SLA**  | Thời gian phản hồi SLA từ 24h - 48h. |
 | **Xử lý Pending & Auto-close** | Thời gian chờ ở trạng thái Pending là 3 ngày, và tự động đóng Ticket sau 3 ngày kể từ khi Resolved. |
 
 * Xác nhận ngưỡng SLA, hiệu năng (tối thiểu 500 người dùng đồng thời) và tỷ lệ pass tối thiểu.
