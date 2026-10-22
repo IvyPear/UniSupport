@@ -128,8 +128,10 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 ## 12. Các quyết định cần chốt trước baseline
 * Xác nhận ngày thực tế, milestone và người phụ trách từ Master Schedule bản cuối.
 * Xác nhận mapping 13 phân hệ PRD sang 13 module triển khai.
-* Xác nhận các trạng thái Ticket (New, In Progress, Pending, Resolved, Closed) và thời điểm chuyển. 
+* Xác nhận các trạng thái Ticket (New, In Progress, Pending, Resolved, Closed) và thời điểm chuyển.
 
+| **Hạng mục** | **Quy định** |
+| :--- | :--- |
 | **Quy tắc SLA**  | Thời gian phản hồi SLA từ 24h - 48h. |
 | **Xử lý Pending & Auto-close** | Thời gian chờ ở trạng thái Pending là 3 ngày, và tự động đóng Ticket sau 3 ngày kể từ khi Resolved. |
 
