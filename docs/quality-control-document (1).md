@@ -78,29 +78,23 @@ Các ngưỡng dưới đây là đề xuất phục vụ lập kế hoạch, c�
 | **Regression** | Chạy lại test bị ảnh hưởng sau mỗi lần sửa lỗi | Regression report |
 | **Smoke / deployment** | Đăng nhập, tạo Ticket, nhận, xử lý, trả kết quả trên môi trường triển khai | Smoke checklist |
 
-## 6. Ma trận kiểm soát theo 19 module
+## 6. Ma trận kiểm soát theo 13 module
 
 | Module | Hạng mục | Điểm kiểm soát chính |
-| :--- | :--- | :--- |
-| **M01** | Khảo sát & đặc tả | Review PRD; FR có AC rõ |
-| **M02** | Tạm ứng & thiết kế | Review kiến trúc/UI và phê duyệt thiết kế |
-| **M03** | CSDL & nền tảng | Kiểm tra ràng buộc, migration, backup |
-| **M04** | Đăng nhập | Kiểm thử đăng nhập đúng/sai, khóa tài khoản |
-| **M05** | Quản lý tài khoản | Kiểm tra tìm kiếm, import, khóa/mở |
-| **M06** | Phân quyền | Kiểm tra 4 role, truy cập trái quyền |
-| **M07** | Danh mục hỗ trợ | Kiểm tra CRUD, ẩn danh mục, định tuyến |
-| **M08** | Tạo Ticket | Validation, file ≤5MB, chống tạo trùng |
-| **M09** | Theo dõi & bổ sung | Quyền xem Ticket, bổ sung đúng Ticket |
-| **M10** | Kết quả & đánh giá | Xem kết quả, 1–5 sao, đóng Ticket |
-| **M11** | Tiếp nhận Ticket | Chỉ 1 người nhận, chống tranh chấp |
-| **M12** | Xử lý & trao đổi | Yêu cầu bổ sung, lưu lịch sử, thông báo |
-| **M13** | Trả kết quả | Bắt buộc nội dung trả lời, thông báo một lần |
-| **M14** | Điều phối Ticket | Chuyển sai phòng ban, phân công lại, audit |
-| **M15** | Giám sát tiến độ | SLA, Ticket tồn đọng, phạm vi phòng ban |
-| **M16** | Dashboard / báo cáo | Đối chiếu thống kê, xuất báo cáo |
-| **M17** | Tích hợp & UAT | E2E/UAT đủ 4 vai trò |
-| **M18** | Sửa lỗi & bảo mật | Regression, 0 lỗi nghiêm trọng |
-| **M19** | Nghiệm thu / triển khai | Smoke, backup/rollback, sign-off |
+| **M01** | Đăng nhập | Kiểm thử đăng nhập đúng/sai, khóa tài khoản |
+| **M02** | Quản lý tài khoản | Kiểm tra tìm kiếm, import, khóa/mở |
+| **M03** | Phân quyền | Kiểm tra 4 role, truy cập trái quyền |
+| **M04** | Danh mục hỗ trợ | Kiểm tra CRUD, ẩn danh mục, định tuyến |
+| **M05** | Tạo Ticket | Validation, file ≤5MB, chống tạo trùng |
+| **M06** | Theo dõi & bổ sung | Quyền xem Ticket, bổ sung đúng Ticket |
+| **M07** | Kết quả & đánh giá | Xem kết quả, 1–5 sao, đóng Ticket |
+| **M08** | Tiếp nhận Ticket | Chỉ 1 người nhận, chống tranh chấp |
+| **M09** | Xử lý & trao đổi | Yêu cầu bổ sung, lưu lịch sử, thông báo |
+| **M10** | Trả kết quả | Bắt buộc nội dung trả lời, thông báo một lần |
+| **M11** | Điều phối Ticket | Chuyển sai phòng ban, phân công lại, audit |
+| **M12** | Giám sát tiến độ | SLA, Ticket tồn đọng, phạm vi phòng ban |
+| **M13** | Dashboard / báo cáo | Đối chiếu thống kê, xuất báo cáo |
+
 
 *Lưu ý: bảng trên sử dụng mã M01–M19 của Master Schedule. Các mã FR-M01–FR-M13 trong bộ PRD là mã phân hệ tài liệu, không mặc nhiên đồng nhất với module lịch triển khai.*
 
