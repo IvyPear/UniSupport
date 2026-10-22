@@ -8,7 +8,7 @@
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Đã đăng nhập; hệ thống có danh mục phòng ban hoạt động.
-* **Ánh xạ Module:** [M05-khoi-tao-ticket](../modules/GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/) (`[FR-M05-01]`, `[FR-M05-02]`)
+* **Ánh xạ Module:** [M05-khoi-tao-ticket](../modules/GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/) (`[FR-M05-01]`, `[FR-M05-02]`, `[FR-M05-03]`)
 * **Luồng chính:**
   1. Chọn **Tạo yêu cầu**.
   2. Hệ thống hiển thị danh sách phòng ban và danh mục.

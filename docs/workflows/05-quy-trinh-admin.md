@@ -1,4 +1,4 @@
-﻿# 5. PHÂN HỆ QUẢN TRỊ VIÊN (ADMIN WORKFLOWS)
+# 5. PHÂN HỆ QUẢN TRỊ VIÊN (ADMIN WORKFLOWS)
 
 > **Ánh xạ Phân hệ:** [M02-vai-tro-phan-quyen](../modules/GD1/Moc1-NenTang/M02-vai-tro-phan-quyen/), [M03-quan-ly-tai-khoan](../modules/GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/), [M04-quan-ly-danh-muc](../modules/GD2/Moc2-KhoiTaoTicket/M04-quan-ly-danh-muc/), [M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/), [M12-giam-sat-tien-do](../modules/GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../modules/GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/)
 
@@ -7,7 +7,7 @@
 ### AD-01 — Quản lý tài khoản
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M03-quan-ly-tai-khoan](../modules/GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/) (`[FR-M03-01]`, `[FR-M03-02]`)
+* **Ánh xạ Module:** [M03-quan-ly-tai-khoan](../modules/GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/) (`[FR-M03-01]`, `[FR-M03-02]`, `[FR-M03-03]`, `[FR-M03-04]`)
 * **Luồng chính:**
   1. Mở menu **Quản lý tài khoản**.
   2. Xem danh sách người dùng toàn trường; lọc theo Role, Phòng ban, Trạng thái.
@@ -75,7 +75,7 @@ graph TD
 ### AD-04 — Phân loại Ticket "Khác"
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/) (`[FR-M11-02]`)
+* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/) (`[FR-M11-01]`)
 * **Luồng chính:**
   1. Sinh viên khởi tạo đơn chọn danh mục **Khác**.
   2. Hệ thống chuyển đơn về Hàng chờ phân loại của Admin.
@@ -99,7 +99,7 @@ graph TD
 ### AD-05 — Điều chuyển Ticket sai phòng ban
 
 * **Tác nhân:** Admin hệ thống.
-* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/) (`[FR-M11-03]`) *(Phần Core MVP được bóc tách triển khai và nghiệm thu ở Giai đoạn 1 đồng bộ với M07/NV-04)*
+* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/) (`[FR-M11-02]`) *(Phần Core MVP được bóc tách triển khai và nghiệm thu ở Giai đoạn 1 đồng bộ với M07/NV-04)*
 * **Luồng chính:**
   1. Nhân viên chuyển trả đơn sai phòng ban về cho Admin.
   2. Đơn xuất hiện trong danh sách **Đơn sai phòng ban chờ điều chuyển** của Admin.

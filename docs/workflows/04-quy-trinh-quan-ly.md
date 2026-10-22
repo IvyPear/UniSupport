@@ -1,4 +1,4 @@
-﻿# 4. PHÂN HỆ QUẢN LÝ / TRƯỞNG PHÒNG (MANAGER WORKFLOWS)
+# 4. PHÂN HỆ QUẢN LÝ / TRƯỞNG PHÒNG (MANAGER WORKFLOWS)
 
 > **Ánh xạ Phân hệ:** [M04-quan-ly-danh-muc](../modules/GD2/Moc2-KhoiTaoTicket/M04-quan-ly-danh-muc/), [M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/), [M12-giam-sat-tien-do](../modules/GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../modules/GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/)
 
@@ -28,7 +28,7 @@ graph TD
 ### QL-02 — Phân công nhanh
 
 * **Tác nhân:** Quản lý phòng ban.
-* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/) (`[FR-M11-01]`)
+* **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/) (`[FR-M11-03]`)
 * **Luồng chính:**
   1. Mở danh sách Ticket của phòng ban đang ở trạng thái `Chưa tiếp nhận`.
   2. Chọn Ticket cần điều phối, bấm **Phân công** (`Assign / Re-assign`).
@@ -74,7 +74,7 @@ graph TD
 ### QL-04 — Theo dõi hiệu suất Nhân viên
 
 * **Tác nhân:** Quản lý phòng ban.
-* **Ánh xạ Module:** [M12-giam-sat-tien-do](../modules/GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/) (`[FR-M12-01]`), [M13-dashboard-bao-cao](../modules/GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/) (`[FR-M13-03]`)
+* **Ánh xạ Module:** [M12-giam-sat-tien-do](../modules/GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/) (`[FR-M12-01]`), [M13-dashboard-bao-cao](../modules/GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/) (`[FR-M13-04]`)
 * **Luồng chính:**
   1. Truy cập danh sách Nhân viên thuộc phòng ban.
   2. Chọn 1 Nhân viên cụ thể để xem báo cáo chi tiết.
