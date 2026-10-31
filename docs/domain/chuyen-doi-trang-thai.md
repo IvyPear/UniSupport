@@ -6,7 +6,7 @@ Vòng đời của một Ticket bao gồm các trạng thái tiêu chuẩn sau:
 *   **In Progress (Đang xử lý):** Nhân viên đã nhận và đang tiến hành giải quyết yêu cầu.
 *   **Pending (Chờ bổ sung):** Tạm dừng xử lý vì nhân viên cần sinh viên bổ sung thêm thông tin hoặc tệp đính kèm.
 *   **Resolved (Đã giải quyết):** Nhân viên đã xử lý xong và gửi kết quả phản hồi cho sinh viên.
-*   **Closed (Đã đóng):** Sinh viên đã chấm điểm hài lòng (1–5 sao). Ticket đóng vĩnh viễn, không cho phép mở lại.
+*   **Closed (Đã đóng):** Sinh viên đã đánh giá hài lòng (1–5 sao) hoặc hệ thống tự đóng do quá hạn bổ sung/đánh giá sau 3 ngày làm việc. Ticket đóng vĩnh viễn, không cho phép mở lại.
 
 ---
 
@@ -15,6 +15,7 @@ Vòng đời của một Ticket bao gồm các trạng thái tiêu chuẩn sau:
 | Từ trạng thái | Sang trạng thái | Người thực hiện | Điều kiện chuyển đổi |
 | :--- | :--- | :--- | :--- |
 | **New** | **In Progress** | Nhân viên / Quản lý | Nhân viên tự nhận việc (Claim) hoặc quản lý phân công. |
+| **In Progress** | **New** | Nhân viên | Nhân viên phụ trách xác nhận Ticket sai phòng ban, nhập lý do và chuyển về hàng chờ Admin; xóa người phụ trách, đổi danh mục sang "Khác", giữ nguyên mã Ticket và lịch sử. Đây là thao tác điều phối ngoại lệ, không phải mở lại Ticket đã đóng. |
 | **In Progress** | **Pending** | Nhân viên | Nhân viên yêu cầu sinh viên bổ sung thông tin/tệp minh chứng. |
 | **Pending** | **In Progress** | Sinh viên | Sinh viên gửi lại thông tin bổ sung theo yêu cầu. |
 | **Pending** | **Closed** | Hệ thống (tự động) | Sinh viên không bổ sung thông tin trong 3 ngày làm việc. Hệ thống tự động đóng đơn. |

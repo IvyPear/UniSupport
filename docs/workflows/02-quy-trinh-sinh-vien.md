@@ -16,7 +16,7 @@
   4. Nhập tiêu đề, nội dung; đính kèm tài liệu nếu có (tối đa 5MB/file).
   5. Xem lại và xác nhận gửi.
   6. Hệ thống kiểm tra trường bắt buộc, danh mục và file đính kèm.
-  7. Hệ thống sinh mã Ticket (VD: `IT-20261005-001`), lưu CSDL, ghi lịch sử, đặt trạng thái **Chưa tiếp nhận** (`New`).
+  7. Hệ thống sinh mã Ticket gồm mã danh mục, ngày và số thứ tự 4 chữ số (VD: `IT-20261005-0001`), lưu CSDL, ghi lịch sử, đặt trạng thái **Chưa tiếp nhận** (`New`).
   8. Nếu danh mục thông thường: đưa vào hàng chờ phòng ban. Nếu chọn **Khác**: đưa vào luồng Admin phân loại.
   9. Hiển thị mã Ticket và thông báo tạo thành công trên giao diện.
 * **Ngoại lệ:** Thiếu dữ liệu/file không hợp lệ $\rightarrow$ hiển thị lỗi tại chỗ, giữ nguyên nội dung đã nhập; lưu CSDL thất bại $\rightarrow$ báo lỗi, không tạo trùng đơn.
@@ -42,13 +42,14 @@ graph TD
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Sinh viên có Ticket đã khởi tạo.
-* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) (`[FR-M09-01]`)
+* **Ánh xạ Module:** [M09-theo-doi-bo-sung](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) (`[FR-M09-01]`), [M05-khoi-tao-ticket](../modules/GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/) (`[FR-M05-03]`)
 * **Luồng chính:**
   1. Mở menu **Yêu cầu của tôi**.
   2. Hệ thống tải danh sách Ticket thuộc sở hữu của tài khoản hiện tại.
   3. Tìm kiếm, lọc theo trạng thái (`Chưa tiếp nhận`, `Đang xử lý`, `Chờ bổ sung`, `Hoàn thành`).
-  4. Mở xem chi tiết: hiển thị mã Ticket, ngày tạo, phòng ban, danh mục, nội dung, tệp đính kèm và lịch sử xử lý.
+  4. Mở xem chi tiết: hiển thị mã Ticket, ngày tạo, phòng ban, danh mục, nội dung, tệp đính kèm và lịch sử xử lý được phép công khai cho Sinh viên (không hiển thị ghi chú nội bộ).
   5. Nhận thông báo realtime/in-app khi trạng thái thay đổi; nhấn thông báo mở đúng Ticket tương ứng.
+  6. Nếu Ticket còn `New`, có thể chọn **Chỉnh sửa đơn** để sửa Tiêu đề, Nội dung và thêm/xóa tệp hợp lệ rồi lưu. Phòng ban và Danh mục chỉ đọc; khi Ticket đã được tiếp nhận, thao tác bị chặn.
 * **Ngoại lệ:** Truy cập Ticket không thuộc sở hữu $\rightarrow$ từ chối quyền; Ticket không tồn tại $\rightarrow$ báo lỗi.
 * **Kết quả:** Sinh viên theo dõi minh bạch tiến độ giải quyết yêu cầu.
 

@@ -11,6 +11,8 @@
 3. **System Testing:** Kiểm thử toàn bộ 13 Phân hệ từ M01 đến M13.
 4. **Acceptance Testing (UAT):** Nghiệm thu theo đúng PRD không bao gồm mã giả.
 
+**Nguyên tắc bằng chứng:** Các số lượng test case phân bổ theo module là kế hoạch, không đồng nghĩa đã có đầy đủ kịch bản hoặc đã chạy đạt. Chỉ xác nhận bao phủ yêu cầu và trạng thái kiểm thử khi có RTM, bước test, dữ liệu và kết quả thực thi.
+
 ---
 
 ## 2. Phân loại Mức độ Lỗi (Bug Severity)

@@ -112,7 +112,7 @@
 
 **Actor:** Nhân viên hỗ trợ
 
-**Preconditions (Điều kiện tiên quyết):** Ticket đang thuộc phòng ban hiện tại của Nhân viên.
+**Preconditions (Điều kiện tiên quyết):** Nhân viên là người phụ trách Ticket, Ticket thuộc phòng ban hiện tại và đang ở trạng thái `Đang xử lý` (`In Progress`).
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
@@ -127,14 +127,15 @@
 2. Nhập bắt buộc “Lý do chuyển trả về Admin”.
 3. Bấm “Xác nhận chuyển trả”.
 4. Hệ thống làm trống tên nhân viên phụ trách cũ.
-5. Đổi danh mục Ticket thành danh mục điều phối .
+5. Đổi danh mục Ticket thành "Khác", đưa phòng ban về trạng thái chưa xác định trong thời gian chờ Admin phân loại; mã Ticket giữ nguyên.
 6. Đưa trạng thái Ticket về `Chưa tiếp nhận` (`New`) và đẩy vào Hàng chờ điều chuyển của Admin ở Module M11.
 7. Lưu toàn bộ lý do chuyển trả vào lịch sử luân chuyển của đơn.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01:** Bắt buộc phải nhập Lý do chuyển trả làm cơ sở để Admin phân tích và định tuyến lại đơn.
-* **BR-02 (Bóc tách MVP Giai đoạn 1):** Luồng Admin tiếp nhận và điều chuyển đơn sai phòng ban (`M11-02`) được triển khai đồng bộ ở Giai đoạn 1 để đảm bảo đơn không bị kẹt khi nhân viên bấm trả lại.
+* **BR-02 (Nghiệm thu đồng bộ Mốc 3):** Luồng Admin tiếp nhận và điều chuyển đơn sai phòng ban (`FR-M11-02`) phải được nghiệm thu cùng tính năng chuyển trả ở M07 trong Mốc 3 để tránh đơn bị kẹt ở hàng chờ Admin.
+* **BR-03:** Đây là chuyển đổi ngoại lệ `In Progress` $\rightarrow$ `New` đã được quy định trong Domain, không áp dụng cho Ticket `Pending`, `Resolved` hoặc `Closed`.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 

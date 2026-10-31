@@ -12,4 +12,4 @@
 ## 3. Giá trị cốt lõi
 * **Nhanh chóng & Tiện lợi:** Sinh viên gửi yêu cầu 24/7 từ bất cứ đâu, không cần đến trực tiếp văn phòng.
 * **Minh bạch & Rõ ràng:** Theo dõi trạng thái ticket theo thời gian thực.
-* **Hiệu quả vận hành:** Tự động phân phối công việc cho đúng nhân viên/phòng ban, cung cấp báo cáo thống kê trực quan cho ban quản lý.
+* **Hiệu quả vận hành:** Định tuyến theo danh mục/phòng ban đã chọn; mục "Khác" và đơn sai phòng ban do Admin phân loại lại, Nhân viên nhận xử lý hoặc Quản lý phân công theo quyền. Hệ thống cung cấp báo cáo thống kê trực quan cho ban quản lý.

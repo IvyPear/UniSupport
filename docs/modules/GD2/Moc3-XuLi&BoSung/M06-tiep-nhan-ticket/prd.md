@@ -13,7 +13,7 @@
 - **Phòng ban:** ID phòng ban của Nhân viên hiện tại.
 - **Trạng thái:** `Chưa tiếp nhận` (`New`).
 - **Thông tin hiển thị:** Mã Ticket, Tiêu đề, Ngày tạo, Tên sinh viên, Thời hạn SLA.
-- **Bộ lọc:** Lọc theo ngày tạo, mức độ ưu tiên, danh mục dịch vụ.
+- **Bộ lọc:** Lọc theo ngày tạo, danh mục dịch vụ và thời hạn xử lý (SLA); không sử dụng mức độ ưu tiên Ticket.
 
 **Luồng chính (Main Flow):**
 

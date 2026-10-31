@@ -33,7 +33,7 @@ flowchart LR
 ## 3. Các Quy tắc Nghiệp vụ Cốt lõi (Key Principles)
 
 1. **Cơ chế Hệ thống Đóng:** Tài khoản do nhà trường cấp sẵn; Sinh viên và Nhân viên đăng nhập bằng mã định danh cá nhân, tuyệt đối không có chức năng đăng ký tự do.
-2. **Khóa thao tác khi Đang xử lý:** Sinh viên chỉ được sửa Tiêu đề & Nội dung Ticket khi ở trạng thái `New` (không sửa Danh mục/Phòng ban), hoặc nộp bổ sung giấy tờ khi ở trạng thái `Pending`.
+2. **Khóa thao tác khi Đang xử lý:** Sinh viên được sửa Tiêu đề, Nội dung và tệp đính kèm Ticket khi ở trạng thái `New` (không sửa Danh mục/Phòng ban); chỉ nộp bổ sung khi ở trạng thái `Pending`.
 3. **Chống đếm ngược / Đơn treo (Pending 3 ngày làm việc):** Trạng thái `Pending` đếm ngược tối đa 3 ngày làm việc (không tính Thứ 7, Chủ nhật, Ngày lễ); hết 3 ngày làm việc sinh viên không bổ sung thông tin sẽ tự động đóng đơn (`Closed`).
 4. **Ép buộc Nhập kết quả (Resolution Notes):** Khi Nhân viên chuyển đơn sang `Resolved`, hệ thống bắt buộc nhập nội dung giải trình kết quả trước khi lưu.
 5. **Đóng vĩnh viễn (No Reopen):** Đơn chuyển sang `Closed` sau khi Sinh viên đánh giá sao (1–5) hoặc tự động đóng sau 3 ngày làm việc sẽ bị khóa cứng trên Database, tuyệt đối không cho phép mở lại.

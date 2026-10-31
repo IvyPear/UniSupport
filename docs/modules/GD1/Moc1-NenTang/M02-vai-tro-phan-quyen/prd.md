@@ -63,12 +63,13 @@
 2. Hệ thống hiển thị ma trận danh sách các quyền hạn chức năng tương ứng.
 3. Admin tích chọn hoặc bỏ chọn quyền hạn.
 4. Bấm “Lưu thiết lập phân quyền”.
-5. Hệ thống cập nhật bảng phân quyền trong CSDL.
-6. Quyền hạn mới được áp dụng ngay lập tức cho các thao tác tiếp theo của người dùng thuộc vai trò đó.
+5. Hệ thống cập nhật quan hệ vai trò – quyền chức năng trong CSDL.
+6. Quyền hạn mới được kiểm tra tại Backend và áp dụng ngay cho các yêu cầu tiếp theo của người dùng thuộc vai trò đó, kể cả khi phiên đăng nhập đang tồn tại.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01:** Tuyệt đối không được phép tước bỏ quyền Quản trị tài khoản và Quản trị phân quyền của tài khoản Admin chính (tránh mất quyền quản trị tối cao).
+* **BR-02:** Chỉ có 4 mã vai trò cố định. Bật/tắt quyền không làm thay đổi mã vai trò hoặc phạm vi dữ liệu của người dùng; Backend phải kiểm tra cả quyền chức năng lẫn quyền dữ liệu.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 

@@ -25,14 +25,14 @@ Chào mừng bạn đến với bộ tài liệu hoàn chỉnh của hệ thốn
 
 ### 📦 2. Đặc Tả Yêu Cầu Chức Năng (Modules / PRD)
 Tập hợp đặc tả **13 Phân hệ thực thi (từ M01 đến M13)** phân chia thành 3 thư mục Giai đoạn phát triển ([Xem chi tiết: modules/readme.md](modules/readme.md)):
-* **Giai đoạn 1 — Nền tảng & Working MVP (`modules/GD1/Moc1-NenTang/`):** M01 (Đăng nhập & Xác thực), M02 (Vai trò & Phân quyền — Admin), M03 (Quản lý tài khoản — Admin), M04 (Quản lý danh mục hỗ trợ), M05 (Khởi tạo Ticket — Sinh viên), M06 (Tiếp nhận Ticket — Nhân viên), M07 (Xử lý & Trao đổi — Nhân viên), M08 (Trả kết quả — Nhân viên).
-* **Giai đoạn 2 — Phân hệ Sinh viên (`modules/GD2/Moc4-PhanHeSinhVien/`):** M09 (Theo dõi & Bổ sung thông tin), M10 (Kết quả & Đánh giá).
-* **Giai đoạn 3 — Điều phối & Giám sát (`modules/GD3/Moc5-GiamSat&Dashboard/`):** M11 (Quản lý & Điều phối Ticket), M12 (Giám sát tiến độ), M13 (Dashboard & Báo cáo).
+* **Giai đoạn 1 — Nền tảng (`modules/GD1/Moc1-NenTang/`):** M01 (Đăng nhập & Xác thực), M02 (Vai trò & Phân quyền), M03 (Quản lý tài khoản).
+* **Giai đoạn 2 — Nghiệp vụ Ticket & Sinh viên (`modules/GD2/`):** Mốc 2 gồm M04 (Danh mục) và M05 (Khởi tạo Ticket); Mốc 3 gồm M06 (Tiếp nhận), M07 (Xử lý & Trao đổi), M08 (Trả kết quả), M11 (Điều phối); Mốc 4 gồm M09 (Theo dõi & Bổ sung), M10 (Kết quả & Đánh giá).
+* **Giai đoạn 3 — Giám sát & Dashboard (`modules/GD3/Moc5-GiamSat&Dashboard/`):** M12 (Giám sát tiến độ), M13 (Dashboard & Báo cáo).
 
 ---
 
 ### 🔄 3. Luồng Quy Trình Nghiệp Vụ (Workflows)
-* [docs/workflows/readme.md](workflows/readme.md) - Danh mục 9 luồng quy trình kèm sơ đồ Mermaid Diagram trực quan.
+* [docs/workflows/readme.md](workflows/readme.md) - Chỉ mục 7 tệp workflow (00–06), bao gồm quy trình 4 vai trò và ma trận thông báo.
 
 ---
 
@@ -45,6 +45,6 @@ Tập hợp đặc tả **13 Phân hệ thực thi (từ M01 đến M13)** phân
 
 ### 🧪 5. Kế Hoạch & Ma Trận Kiểm Thử (QA & Testing)
 * [chien-luoc-kiem-thu.md](qa/chien-luoc-kiem-thu.md) - Kế hoạch Kiểm thử, Các mức độ testing, Ma trận phân loại Bug Severity và Tiêu chí Release.
-* [ma-tran-test-case.md](qa/ma-tran-test-case.md) - Ma trận Kịch bản Kiểm thử chi tiết (Test Cases) phủ 100% yêu cầu PRD.
+* [ma-tran-test-case.md](qa/ma-tran-test-case.md) - Phân bổ test case dự kiến theo 13 module và danh sách kịch bản tiêu biểu; mức bao phủ thực tế chỉ được xác nhận qua RTM/kết quả kiểm thử.
 
 

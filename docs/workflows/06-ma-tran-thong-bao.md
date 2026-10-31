@@ -1,6 +1,6 @@
 # 6. MA TRẬN THÔNG BÁO (NOTIFICATION MATRIX)
 
-> **Quy tắc:** Giới hạn đúng 7 hành vi thông báo hệ thống đã được thống nhất. Không tự ý bổ sung các loại thông báo khác khi chưa có phê duyệt.
+> **Quy tắc:** Có 7 hàng quy tắc mô tả 6 sự kiện thông báo duy nhất (hàng #3 và #4 cùng một sự kiện trả kết quả). Không tự ý bổ sung thông báo khác khi chưa có phê duyệt.
 
 ---
 

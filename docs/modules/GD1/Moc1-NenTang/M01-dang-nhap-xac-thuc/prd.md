@@ -20,12 +20,12 @@
 2. Nhập Mã định danh và Mật khẩu.
 3. Nhấn nút “Đăng nhập”.
 4. Hệ thống kiểm tra thông tin xác thực và trạng thái hoạt động của tài khoản.
-5. Nếu thông tin hợp lệ, hệ thống cấp mã phiên làm việc (JWT Token) và chuyển người dùng vào trang hệ thống.
+5. Nếu thông tin hợp lệ, hệ thống cấp mã phiên làm việc (JWT Token). Nếu tài khoản đang có cờ bắt buộc đổi mật khẩu do Admin vừa đặt lại mật khẩu ở M03, người dùng phải đổi mật khẩu trước khi truy cập các chức năng khác; nếu không, hệ thống chuyển đến trang làm việc theo vai trò.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01 (Hệ thống đóng):** Tài khoản được nhà trường khởi tạo sẵn, hệ thống tuyệt đối không hiển thị chức năng hoặc nút “Đăng ký”.
-* **BR-02 (Mật khẩu mặc định):** Sinh viên và Nhân viên sử dụng tài khoản được cấp và không có chức năng tự quên mật khẩu. Nếu gặp sự cố, người dùng liên hệ phòng IT/Admin để được hỗ trợ.
+* **BR-02 (Mật khẩu mặc định):** Sinh viên, Nhân viên và Quản lý sử dụng tài khoản được cấp và không có chức năng tự quên mật khẩu. Nếu gặp sự cố, người dùng liên hệ phòng IT/Admin để được hỗ trợ.
 
 **Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
 
@@ -104,7 +104,7 @@
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-* **BR-01:** Chức năng này chỉ áp dụng duy nhất cho Role Admin. Sinh viên và Nhân viên không hiển thị nút Quên mật khẩu.
+* **BR-01:** Chức năng này chỉ áp dụng duy nhất cho Role Admin. Sinh viên, Nhân viên và Quản lý không được tự sử dụng luồng Quên mật khẩu.
 * **BR-02:** Mã OTP chỉ có hiệu lực trong 15 phút và chỉ được dùng 1 lần duy nhất.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
@@ -126,11 +126,13 @@
 
 - **Vai trò người dùng (Role):** `Student`, `Staff`, `Manager`, `Admin`.
 - **Đường dẫn đích (Landing URL):** Tự động xác định theo Role.
+- **Yêu cầu đổi mật khẩu sau reset:** Cờ `must_change_password`, do M03 thiết lập khi Admin đặt lại mật khẩu.
 
 **Luồng chính (Main Flow):**
 
 1. Xác thực thông tin đăng nhập thành công.
-2. Hệ thống kiểm tra vai trò người dùng và điều hướng tự động:
+2. Hệ thống kiểm tra cờ `must_change_password`; nếu đang bật, chuyển đến màn hình bắt buộc đổi mật khẩu, xác thực mật khẩu mới hợp lệ, sau đó tắt cờ và tiếp tục điều hướng. Trong thời gian đó, chặn thao tác nghiệp vụ khác.
+3. Hệ thống kiểm tra vai trò người dùng và điều hướng tự động:
    - **Sinh viên (`Student`):** Chuyển đến màn hình Quản lý Yêu cầu của tôi.
    - **Nhân viên (`Staff`):** Chuyển đến Hộp thư tiếp nhận Ticket phòng ban .
    - **Quản lý (`Manager`):** Chuyển đến Department Dashboard .
@@ -142,7 +144,8 @@
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Đăng nhập tài khoản vai trò nào $\rightarrow$ Chuyển thẳng về đúng giao diện làm việc của vai trò đó.
+* **AC-01:** Đăng nhập tài khoản không có yêu cầu đổi mật khẩu bắt buộc $\rightarrow$ Chuyển thẳng về đúng giao diện làm việc của vai trò đó.
+* **AC-02:** Tài khoản vừa được Admin reset mật khẩu phải đổi mật khẩu thành công trước khi vào giao diện làm việc; các tài khoản khác được điều hướng bình thường.
 
 ---
 

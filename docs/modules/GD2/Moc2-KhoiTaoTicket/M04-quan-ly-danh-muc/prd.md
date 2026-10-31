@@ -12,7 +12,7 @@
 
 - **Mã danh mục:** Bắt buộc, Duy nhất, 2-6 ký tự in hoa (VD: `DT`, `CTSV`, `IT`, `OTHER`).
 - **Tên danh mục:** Bắt buộc, Max 100 ký tự (VD: Xác nhận sinh viên, Bảng điểm, Hỗ trợ tài khoản).
-- **Phòng ban tiếp nhận mặc định:** Bắt buộc, liên kết tới Phòng ban chuyên trách xử lý.
+- **Phòng ban tiếp nhận mặc định:** Bắt buộc với danh mục thông thường; riêng danh mục hệ thống "Khác" chưa xác định phòng ban để Admin phân loại.
 - **Thời hạn cam kết xử lý SLA (giờ):** Bắt buộc, số nguyên dương (VD: 24, 48, 72 giờ).
 - **Trạng thái hiển thị:** Bật (`true`) / Tắt (`false`). Mặc định: `true`.
 
@@ -28,6 +28,7 @@
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01:** Danh mục bị tắt hiển thị (`false`) sẽ không xuất hiện trên form tạo Ticket mới của Sinh viên nhưng dữ liệu trên các Ticket cũ vẫn được giữ nguyên vẹn.
+* **BR-02:** Danh mục "Khác" dùng riêng cho hàng chờ Admin. Mã danh mục là duy nhất và được dùng khi tạo mã Ticket; mã Ticket đã sinh không thay đổi nếu danh mục được phân loại lại.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
@@ -47,6 +48,7 @@
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
 - **Tên danh mục dịch vụ:** Bắt buộc, Max 150 ký tự.
+- **Mã danh mục:** Bắt buộc, 2–6 ký tự in hoa và duy nhất như quy định danh mục chung ở FR-M04-01.
 - **Hướng dẫn hồ sơ / Giấy tờ cần chuẩn bị:** Tùy chọn, văn bản hướng dẫn sinh viên.
 - **Thời hạn xử lý tiêu chuẩn SLA (giờ):** Bắt buộc, số giờ cam kết.
 - **Trạng thái kích hoạt:** Bật/Tắt hiển thị.
@@ -55,7 +57,7 @@
 
 1. Trưởng phòng mở menu “Danh mục phòng ban”.
 2. Hệ thống chỉ tải các danh mục thuộc quyền sở hữu của phòng ban đó (Data Isolation).
-3. Trưởng phòng chọn “Thêm mới danh mục dịch vụ”, nhập tên thủ tục, mô tả hướng dẫn sinh viên chuẩn bị giấy tờ và cấu hình thời hạn SLA.
+3. Trưởng phòng chọn “Thêm mới danh mục dịch vụ”, nhập mã, tên thủ tục, mô tả hướng dẫn sinh viên chuẩn bị giấy tờ và cấu hình thời hạn SLA.
 4. Bấm Lưu thiết lập.
 5. Khi kích hoạt, danh mục dịch vụ này sẽ tự động xuất hiện trên Form tạo Ticket của Sinh viên dưới nhóm tên của phòng ban đó.
 

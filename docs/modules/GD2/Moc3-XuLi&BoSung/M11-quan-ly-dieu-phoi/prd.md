@@ -64,7 +64,7 @@
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-* **BR-01 (Bóc tách Giai đoạn 1 MVP):** Tính năng cốt lõi này được nghiệm thu đồng bộ cùng M07 ở Giai đoạn 1 để đảm bảo quy trình luân chuyển đơn không bị đứt gãy.
+* **BR-01 (Nghiệm thu đồng bộ Mốc 3):** Tính năng cốt lõi này được nghiệm thu cùng `FR-M07-04` trong Mốc 3 để đảm bảo quy trình luân chuyển đơn không bị đứt gãy.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
@@ -78,7 +78,7 @@
 
 **Actor:** Quản lý phòng ban (Trưởng phòng)
 
-**Preconditions (Điều kiện tiên quyết):** Tài khoản vai trò Quản lý; Ticket thuộc phạm vi phòng ban mình quản lý.
+**Preconditions (Điều kiện tiên quyết):** Tài khoản vai trò Quản lý; Ticket thuộc phòng ban mình quản lý và đang ở `New` (phân công mới) hoặc `In Progress` (phân công lại). Không phân công lại Ticket ở `Pending`, `Resolved`, `Closed`.
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
@@ -92,13 +92,14 @@
 2. Chọn Ticket cần điều phối $\rightarrow$ Nhấp nút “Phân công”.
 3. Hệ thống hiển thị danh sách nhân sự của phòng ban kèm số lượng đơn mỗi người đang phụ trách.
 4. Trưởng phòng chọn một Nhân viên và nhấn Xác nhận.
-5. Hệ thống gán ID Nhân viên làm người phụ trách (Assignee), chuyển trạng thái đơn sang `Đang xử lý` (nếu là đơn mới).
+5. Hệ thống gán ID Nhân viên làm người phụ trách (Assignee). Nếu Ticket ở `New`, chuyển trạng thái sang `In Progress`; nếu đang `In Progress`, giữ trạng thái và chỉ thay đổi người phụ trách.
 6. Đưa đơn vào danh sách công việc cá nhân của Nhân viên được gán.
 7. Ghi log phân công vào lịch sử Ticket.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01:** Trưởng phòng chỉ được phân công đơn cho các Nhân viên thuộc nội bộ phòng ban của mình.
+* **BR-02:** Mỗi Ticket chỉ có một người phụ trách hiện tại; thao tác phân công lại được ghi vào lịch sử, giữ nguyên mã Ticket và phát thông báo tới nhân viên mới.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 

@@ -37,7 +37,7 @@ graph TD
   2. Hiển thị danh sách Vai trò (`Student`, `Staff`, `Manager`, `Admin`) và Ma trận quyền chi tiết (ACL).
   3. Chọn điều chỉnh danh sách quyền hạn gắn với từng Vai trò.
   4. Xác nhận lưu vào CSDL.
-  5. Hệ thống áp dụng ma trận quyền mới ngay ở các phiên làm việc tiếp theo.
+  5. Backend áp dụng ma trận quyền mới ngay cho các yêu cầu tiếp theo, kể cả phiên đang đăng nhập; vẫn duy trì quyền quản trị tối cao của Admin chính.
 * **Kết quả:** Bảo mật hệ thống chặt chẽ theo nguyên tắc RBAC.
 
 ```mermaid

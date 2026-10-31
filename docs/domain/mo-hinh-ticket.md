@@ -7,11 +7,13 @@ Mã Ticket được thiết kế theo cấu trúc định dạng chuẩn hóa đ
     *   `YYYYMMDD`: Ngày khởi tạo yêu cầu (Năm-Tháng-Ngày).
     *   `SEQ_NUMBER`: Số thứ tự tự động tăng theo ngày (gồm 4 chữ số, từ `0001` đến `9999`).
 *   **Ví dụ:** `AC-20261005-0042` (Ticket thuộc mảng Học tập tạo ngày 05/10/2026, mang số thứ tự 42).
+*   **Tính bất biến:** Mã Ticket được cấp duy nhất khi tạo và không đổi khi Admin phân loại lại danh mục hoặc chuyển phòng ban. Danh mục/phòng ban hiện tại được theo dõi ở các trường dữ liệu riêng và lịch sử luân chuyển.
 
 ### 2. Thông tin cơ bản (Basic Information)
 Chứa toàn bộ nội dung yêu cầu hoặc sự cố do người dùng phản ánh:
 *   **Tiêu đề (Title):** Tóm tắt ngắn gọn nội dung cần hỗ trợ (Tối đa 150 ký tự).
 *   **Phân loại (Category):** Phân vùng nhóm vấn đề chính (Học tập, Học phí & Lệ phí, Dịch vụ SV, Kỹ thuật/IT, Bảng điểm/Bằng cấp).
+*   **Phòng ban (Department):** Có thể chưa xác định nếu chọn danh mục "Khác" và Ticket đang chờ Admin phân loại; bắt buộc được xác định trước khi đưa vào hàng chờ phòng ban xử lý.
 *   **Mô tả (Description):** Trình bày chi tiết hoàn cảnh, thông tin lỗi hoặc yêu cầu cụ thể. Hỗ trợ đính kèm tệp tin (hình ảnh, tài liệu minh chứng).
 
 ### 3. Thông tin Trạng thái & Thời gian (Status & Timestamps)

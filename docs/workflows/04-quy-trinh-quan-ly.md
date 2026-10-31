@@ -30,20 +30,20 @@ graph TD
 * **Tác nhân:** Quản lý phòng ban.
 * **Ánh xạ Module:** [M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/) (`[FR-M11-03]`)
 * **Luồng chính:**
-  1. Mở danh sách Ticket của phòng ban đang ở trạng thái `Chưa tiếp nhận`.
+  1. Mở danh sách Ticket thuộc phòng ban ở trạng thái `New` (phân công mới) hoặc `In Progress` (phân công lại).
   2. Chọn Ticket cần điều phối, bấm **Phân công** (`Assign / Re-assign`).
   3. Giao diện hiển thị danh sách Nhân viên nội bộ phòng ban.
   4. Chọn Nhân viên phụ trách và nhấn Xác nhận.
-  5. Backend kiểm tra quyền, gán tên Assignee, đổi trạng thái sang `In Progress` (nếu đơn mới), phát thông báo In-app cho Nhân viên được gán.
+  5. Backend kiểm tra quyền, gán tên Assignee; nếu Ticket là `New` thì đổi sang `In Progress`, còn nếu đã `In Progress` thì giữ nguyên trạng thái; phát thông báo In-app cho Nhân viên mới được gán.
 * **Ngoại lệ:** Chọn Nhân viên không thuộc phòng ban hoặc đơn vừa có người khác nhận $\rightarrow$ chặn thao tác.
 * **Kết quả:** Phân bổ công việc chủ động cho nhân sự nội bộ.
 
 ```mermaid
 graph TD
-    A([Mở danh sách đơn Chưa tiếp nhận]) --> B[Chọn Ticket & bấm Phân công Re-assign]
+    A([Mở đơn NEW hoặc IN PROGRESS]) --> B[Chọn Ticket & bấm Phân công Re-assign]
     B --> C[Chọn 1 Nhân viên từ danh sách nội bộ phòng]
     C --> D[Bấm Xác nhận phân công]
-    D --> E[Gán tên Assignee mới & chuyển IN PROGRESS]
+    D --> E[Gán Assignee mới; đơn NEW chuyển IN PROGRESS]
     E --> F([Bắn thông báo In-app cho Nhân viên mới])
 ```
 

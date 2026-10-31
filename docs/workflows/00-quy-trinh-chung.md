@@ -16,7 +16,8 @@
   3. Nhấn nút **Đăng nhập**.
   4. Backend kiểm tra tính chính xác của thông tin đăng nhập và trạng thái tài khoản.
   5. Nếu thông tin hợp lệ và tài khoản `Active`: Hệ thống cấp Mã phiên làm việc (JWT Token chứa `user_id`, `role`, `department_id`, `exp`) và lưu Session.
-  6. Điều hướng tự động tới Dashboard tương ứng với Role:
+  6. Nếu Admin vừa reset mật khẩu, hệ thống yêu cầu đổi mật khẩu mới trước khi truy cập các chức năng khác; sau khi đổi thành công thì điều hướng tiếp.
+  7. Điều hướng tự động tới Dashboard tương ứng với Role:
      - **Sinh viên:** Trang danh sách & khởi tạo Ticket cá nhân (`/student/tickets`).
      - **Nhân viên:** Trang Hộp thư tiếp nhận & xử lý Ticket phòng ban (`/staff/inbox`).
      - **Quản lý (Trưởng phòng):** Department Dashboard (`/manager/dashboard`).
@@ -43,7 +44,7 @@ graph TD
 
 ---
 
-### AUTH-02 — Khóa tài khoản tạm thời khi nhập sai quá 5 lần
+### AUTH-02 — Khóa tài khoản tạm thời khi nhập sai 5 lần liên tiếp
 
 * **Tác nhân:** Người dùng thực hiện đăng nhập sai.
 * **Tiền điều kiện:** Người dùng truy cập màn hình Đăng nhập.
@@ -73,32 +74,34 @@ graph TD
 
 ### AUTH-03 — Quy trình Quên mật khẩu & Hỗ trợ tài khoản
 
-* **Tác nhân:** Admin (Quên mật khẩu) / Sinh viên & Nhân viên (Cần hỗ trợ).
+* **Tác nhân:** Admin (Quên mật khẩu) / Sinh viên, Nhân viên, Quản lý (Cần hỗ trợ).
 * **Tiền điều kiện:** Người dùng không nhớ mật khẩu đăng nhập.
 * **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, quy tắc `BR-02`, `BR-03`, `BR-04`)
 * **Luồng chính:**
   - **Trường hợp 1: Đối với Admin (Có chức năng Quên mật khẩu self-service):**
     1. Admin nhấn liên kết **"Quên mật khẩu"** trên giao diện đăng nhập.
     2. Nhập Email/Mã định danh quản trị.
-    3. Hệ thống gửi mã xác thực OTP / Link khôi phục mật khẩu vào Email quản trị.
-    4. Admin nhập OTP/mã xác thực và đặt mật khẩu mới (tối thiểu 6-100 ký tự).
+    3. Hệ thống gửi mã OTP 6 chữ số, hiệu lực 15 phút và chỉ sử dụng một lần, vào Email quản trị.
+    4. Admin nhập OTP và đặt mật khẩu mới (tối thiểu 8 ký tự, gồm chữ hoa, chữ thường và chữ số).
     5. Đăng nhập lại với mật khẩu mới.
-  - **Trường hợp 2: Đối với Sinh viên & Nhân viên (Hệ thống đóng - No Register/No Self-Reset):**
-    1. Giao diện Đăng nhập **không hiển thị nút Đăng ký hoặc Quên mật khẩu** cho Sinh viên/Nhân viên.
+  - **Trường hợp 2: Đối với Sinh viên, Nhân viên & Quản lý (Hệ thống đóng - No Register/No Self-Reset):**
+    1. Giao diện Đăng nhập **không cung cấp chức năng Đăng ký hoặc Quên mật khẩu** cho Sinh viên/Nhân viên/Quản lý.
     2. Nếu quên mật khẩu, người dùng xem phần hướng dẫn: *"Vui lòng liên hệ Phòng CNTT / Phòng Dịch vụ Sinh viên để làm thủ tục cấp lại mật khẩu"*.
-    3. Admin tiếp nhận yêu cầu hỗ trợ offline/in-person và thực hiện reset mật khẩu mặc định qua phân hệ Quản lý tài khoản (`AD-01` / `[FR-M03-02]`).
+    3. Admin tiếp nhận yêu cầu hỗ trợ và thực hiện reset mật khẩu mặc định qua phân hệ Quản lý tài khoản (`AD-01` / `[FR-M03-03]`).
+    4. Người dùng đăng nhập bằng mật khẩu vừa được reset, bắt buộc đổi mật khẩu mới trước khi truy cập chức năng nghiệp vụ.
 * **Kết quả:** Đảm bảo nguyên tắc vận hành khép kín và an toàn bảo mật của môi trường Đại học.
 
 ```mermaid
 graph TD
     A([Người dùng quên mật khẩu]) --> B{Role của người dùng?}
     B -->|Admin| C[Bấm Quên mật khẩu trên UI]
-    C --> D[Nhận OTP / Link khôi phục qua Email]
+    C --> D[Nhận OTP 15 phút qua Email]
     D --> E[Nhập OTP & Đặt mật khẩu mới]
     E --> F([Đăng nhập thành công với MK mới])
-    B -->|Sinh viên / Nhân viên| G[Xem hướng dẫn Liên hệ Phòng IT/Helpdesk]
+    B -->|Sinh viên / Nhân viên / Quản lý| G[Xem hướng dẫn Liên hệ Phòng IT/Helpdesk]
     G --> H[Admin reset MK về mặc định tại AD-01]
-    H --> I([Người dùng đăng nhập bằng MK mặc định mới])
+    H --> I[Đăng nhập bằng mật khẩu được reset]
+    I --> J([Bắt buộc đổi mật khẩu rồi mới tiếp tục])
 ```
 
 ---
@@ -107,7 +110,7 @@ graph TD
 
 * **Tác nhân:** Hệ thống, Admin (khi khóa tài khoản `AD-01`).
 * **Tiền điều kiện:** Người dùng đang đăng nhập và có phiên làm việc active.
-* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/) (`[FR-M01-02]`), [M03-quan-ly-tai-khoan](../modules/GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/) (`[FR-M03-02]`)
+* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../modules/GD1/Moc1-NenTang/M01-dang-nhap-xac-thuc/) (`[FR-M01-05]`), [M03-quan-ly-tai-khoan](../modules/GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/) (`[FR-M03-03]`)
 * **Luồng chính:**
   1. Người dùng đang hoạt động trong hệ thống với Token hiện tại.
   2. **Kịch bản A (Admin khóa tài khoản):** Admin chuyển trạng thái tài khoản của người dùng đó sang `Inactive` tại luồng `AD-01`. Hệ thống lập tức thu hồi/cho vào danh sách đen (Blacklist/Revoke) tất cả JWT Token/Session của tài khoản này.

@@ -42,7 +42,7 @@
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 
-- **Mã Ticket:** Hệ thống tự động sinh theo quy chuẩn: `[CAT]-[YYYYMMDD]-[SEQ]` (VD: `IT-20261022-0042`).
+- **Mã Ticket:** Hệ thống tự động sinh theo quy chuẩn: `[CATEGORY_CODE]-[YYYYMMDD]-[SEQ_NUMBER]` (4 chữ số thứ tự trong ngày; VD: `IT-20261022-0042`). Mã không thay đổi khi Ticket được phân loại/điều phối lại.
 - **Tiêu đề yêu cầu:** Bắt buộc, Min 5 - Max 150 ký tự.
 - **Nội dung chi tiết:** Bắt buộc, Min 10 ký tự, mô tả rõ vấn đề cần hỗ trợ.
 - **Tệp đính kèm:** Tùy chọn, tối đa 5 file, dung lượng tối đa 5MB/file (định dạng: `.png`, `.jpg`, `.pdf`, `.docx`).
@@ -63,6 +63,7 @@
 
 * **BR-01:** Tiêu đề và Nội dung là trường bắt buộc, không được để trống.
 * **BR-02:** Tệp vượt quá 5MB hoặc không đúng định dạng cho phép sẽ bị chặn và cảnh báo tại chỗ.
+* **BR-03:** Nếu chọn danh mục "Khác", Ticket được lưu trạng thái `New` với phòng ban chưa xác định và chuyển về hàng chờ Admin; Admin xác định phòng ban trước khi chuyển cho nhân viên xử lý.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
@@ -71,7 +72,7 @@
 
 ---
 
-## [FR-M05-03] Sinh viên chỉnh sửa Tiêu đề và Nội dung khi đơn chưa được tiếp nhận
+## [FR-M05-03] Sinh viên chỉnh sửa Tiêu đề, Nội dung và tệp đính kèm khi đơn chưa được tiếp nhận
 
 **Mô tả:** Khi Ticket đang ở trạng thái `Chưa tiếp nhận` (`New`), Sinh viên có quyền mở lại đơn để chỉnh sửa Tiêu đề và Nội dung yêu cầu hoặc cập nhật lại tệp đính kèm. Để tránh xáo trộn luồng điều phối hàng chờ, Sinh viên không được phép thay đổi Phòng ban và Danh mục dịch vụ.
 
@@ -97,7 +98,7 @@
    - Khu vực đính kèm cho phép xóa tệp cũ hoặc tải thêm tệp mới (tổng số tệp $\le 5$).
 4. Sinh viên sửa đổi thông tin và nhấn “Lưu thay đổi”.
 5. Hệ thống kiểm tra hợp lệ dữ liệu (độ dài, dung lượng tệp).
-6. Hệ thống cập nhật dữ liệu mới vào Ticket và ghi nhận log vào Audit Trail: *"Sinh viên cập nhật tiêu đề/nội dung yêu cầu"*.
+6. Hệ thống cập nhật dữ liệu mới vào Ticket và ghi nhận log vào Audit Trail: *"Sinh viên cập nhật tiêu đề/nội dung/tệp đính kèm yêu cầu"* (ghi rõ tệp đã thêm/xóa nếu có).
 7. Hiển thị thông báo cập nhật thành công trên giao diện.
 
 **Luồng ngoại lệ (Exception Flow):**
@@ -106,7 +107,7 @@
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-* **BR-01:** Chỉ cho phép chỉnh sửa khi trạng thái Ticket chính xác là `New`.
+* **BR-01:** Chỉ cho phép chỉnh sửa Tiêu đề, Nội dung và tệp đính kèm khi trạng thái Ticket chính xác là `New`; giới hạn số lượng, dung lượng và định dạng tệp vẫn giữ như lúc tạo.
 * **BR-02:** Tuyệt đối không cho phép thay đổi Phòng ban hoặc Danh mục (theo quy định tại [quy-tac-nghiep-vu.md](../../../../domain/quy-tac-nghiep-vu.md) BR-2).
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
@@ -114,4 +115,5 @@
 * **AC-01:** Khi Ticket ở trạng thái `New`, sinh viên sửa Tiêu đề và Nội dung hợp lệ $\rightarrow$ Hệ thống lưu thành công và ghi lịch sử truy vết.
 * **AC-02:** Form chỉnh sửa khóa hoàn toàn trường Phòng ban và Danh mục, không cho phép thay đổi.
 * **AC-03:** Khi Ticket đã chuyển sang `In Progress` hoặc các trạng thái khác $\rightarrow$ Nút "Chỉnh sửa đơn" bị ẩn, gọi API trực tiếp trả về lỗi `400 Bad Request`.
+* **AC-04:** Khi Ticket còn `New`, sinh viên được thêm hoặc xóa tệp đính kèm hợp lệ; việc thay đổi được ghi lịch sử và không làm thay đổi mã Ticket, danh mục hoặc phòng ban.
 

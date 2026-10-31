@@ -23,7 +23,7 @@
 4. Sinh viên chọn một Ticket bất kỳ để mở xem chi tiết:
    - Thông tin yêu cầu ban đầu và các file đính kèm.
    - Trạng thái hiện tại và tiến độ công việc theo thời gian thực.
-   - Các mốc lịch sử trao đổi và phản hồi từ nhân viên.
+   - Các mốc lịch sử trao đổi và phản hồi được phép hiển thị cho Sinh viên; không lộ ghi chú nội bộ chỉ dành cho Nhân viên/Quản lý tại M07.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 

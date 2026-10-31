@@ -68,7 +68,7 @@
 
 ### 🔔 06. Ma trận Thông báo 
 
-* **[06-ma-tran-thong-bao.md](06-ma-tran-thong-bao.md)** — Ma trận 6 hành vi thông báo hệ thống đã thống nhất.
+* **[06-ma-tran-thong-bao.md](06-ma-tran-thong-bao.md)** — Ma trận 7 hàng quy tắc tương ứng 6 sự kiện thông báo duy nhất (hai hàng #3–#4 mô tả cùng một sự kiện trả kết quả).
 
 ### 📁 07. Luồng Quy trình Chi tiết (Detail WF Files)
 

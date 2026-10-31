@@ -12,7 +12,7 @@
 * **Luồng chính:**
   1. Mở danh sách **Yêu cầu mới**.
   2. Hệ thống hiển thị danh sách Ticket ở trạng thái **Chưa tiếp nhận** (`New`) thuộc phòng ban.
-  3. Tìm kiếm, lọc theo ngày tạo, độ ưu tiên; chọn mở xem chi tiết.
+  3. Tìm kiếm, lọc theo ngày tạo, danh mục và hạn xử lý SLA; chọn mở xem chi tiết.
   4. Nhấn nút **Tiếp nhận** (`Claim`).
   5. Backend xác thực Ticket vẫn chưa có người nhận và chưa bị khóa.
   6. Gán ID Nhân viên hiện tại làm Assignee, chuyển trạng thái sang **Đã tiếp nhận / Đang xử lý**, ghi log lịch sử.
@@ -39,7 +39,7 @@ graph TD
 * **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-01]`)
 * **Luồng chính:**
   1. Mở Ticket đang phụ trách từ danh sách cá nhân.
-  2. Chọn **Bắt đầu xử lý** $\rightarrow$ hệ thống gán trạng thái **Đang xử lý** (`In Progress`).
+  2. Ticket đã ở trạng thái **Đang xử lý** (`In Progress`) sau khi tiếp nhận hoặc được Quản lý phân công; nhân viên không cần thực hiện thêm thao tác chuyển trạng thái để bắt đầu.
   3. Thực hiện công việc chuyên môn và ghi nhận tiến độ/ghi chú nội bộ.
   4. Hệ thống lưu lịch sử và cập nhật trạng thái hiển thị cho Sinh viên.
   5. Phát thông báo cho Sinh viên theo quy tắc thông báo tự động.
@@ -87,6 +87,7 @@ graph TD
 
 * **Tác nhân:** Nhân viên phụ trách Ticket.
 * **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-04]`)
+* **Tiền điều kiện:** Ticket đang `In Progress` và thuộc quyền phụ trách của nhân viên; không chuyển trả từ `Pending`, `Resolved` hoặc `Closed`.
 * **Luồng chính:**
   1. Mở Ticket thuộc phạm vi xử lý.
   2. Xác định yêu cầu bị sai phòng ban chuyên trách.

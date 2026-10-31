@@ -1,4 +1,4 @@
-﻿# TÀI LIỆU QUY TRÌNH — M03: Vai trò & Phân quyền Admin (Roles & Permissions)
+﻿# TÀI LIỆU QUY TRÌNH — M02: Vai trò & Phân quyền Admin (Roles & Permissions)
 
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M02

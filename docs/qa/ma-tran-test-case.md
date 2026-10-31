@@ -2,7 +2,7 @@
 
 > **Dự án:** UniSupport — Nền tảng Tiếp nhận và Hỗ trợ Thủ tục Hành chính Sinh viên  
 > **Phiên bản:** 2.0 (QA/QC Test Engineering Specification)  
-> **Bao phủ:** Toàn bộ 13 Phân hệ (M01 đến M13) bao gồm **Happy Path**, **Negative Cases**, **Boundary Cases** và **Security/Concurrency**.
+> **Phạm vi kế hoạch:** 13 Phân hệ (M01 đến M13), dự kiến có **Happy Path**, **Negative Cases**, **Boundary Cases** và **Security/Concurrency**. Bảng số lượng bên dưới là phân bổ dự kiến; các bảng chi tiết chỉ liệt kê kịch bản tiêu biểu và không chứng minh đã viết/chạy đủ 180 test case.
 
 ---
 
@@ -10,20 +10,20 @@
 
 | Mã Module | Tên Phân hệ | Happy Path | Negative / Edge Cases | Tổng số Test Cases | Trạng thái |
 |:---:|---|:---:|:---:|:---:|:---:|
-| **M01** | Đăng nhập & Xác thực | 4 | 8 | 12 | Ready |
-| **M02** | Vai trò & Phân quyền | 5 | 5 | 10 | Ready |
-| **M03** | Quản lý Tài khoản | 6 | 9 | 15 | Ready |
-| **M04** | Quản lý Danh mục & SLA | 5 | 7 | 12 | Ready |
-| **M05** | Khởi tạo Ticket | 6 | 12 | 18 | Ready |
-| **M06** | Tiếp nhận Ticket & Đua lệnh | 5 | 9 | 14 | Ready |
-| **M07** | Xử lý & Yêu cầu bổ sung | 8 | 12 | 20 | Ready |
-| **M08** | Trả kết quả xử lý | 5 | 7 | 12 | Ready |
-| **M09** | Theo dõi & Nộp bổ sung | 6 | 10 | 16 | Ready |
-| **M10** | Đánh giá CSAT & Auto-close | 4 | 6 | 10 | Ready |
-| **M11** | Điều phối & Re-assign | 6 | 9 | 15 | Ready |
-| **M12** | Giám sát tiến độ & Cảnh báo SLA | 6 | 8 | 14 | Ready |
-| **M13** | Dashboard & Báo cáo | 6 | 6 | 12 | Ready |
-| | **TỔNG CỘNG** | **72** | **108** | **180** | **Ready for QA Execution** |
+| **M01** | Đăng nhập & Xác thực | 4 | 8 | 12 | Dự kiến |
+| **M02** | Vai trò & Phân quyền | 5 | 5 | 10 | Dự kiến |
+| **M03** | Quản lý Tài khoản | 6 | 9 | 15 | Dự kiến |
+| **M04** | Quản lý Danh mục & SLA | 5 | 7 | 12 | Dự kiến |
+| **M05** | Khởi tạo Ticket | 6 | 12 | 18 | Dự kiến |
+| **M06** | Tiếp nhận Ticket & Đua lệnh | 5 | 9 | 14 | Dự kiến |
+| **M07** | Xử lý & Yêu cầu bổ sung | 8 | 12 | 20 | Dự kiến |
+| **M08** | Trả kết quả xử lý | 5 | 7 | 12 | Dự kiến |
+| **M09** | Theo dõi & Nộp bổ sung | 6 | 10 | 16 | Dự kiến |
+| **M10** | Đánh giá CSAT & Auto-close | 4 | 6 | 10 | Dự kiến |
+| **M11** | Điều phối & Re-assign | 6 | 9 | 15 | Dự kiến |
+| **M12** | Giám sát tiến độ & Cảnh báo SLA | 6 | 8 | 14 | Dự kiến |
+| **M13** | Dashboard & Báo cáo | 6 | 6 | 12 | Dự kiến |
+| | **TỔNG DỰ KIẾN** | **72** | **108** | **180** | **Chưa xác nhận đầy đủ/đã chạy** |
 
 ---
 
@@ -34,8 +34,15 @@
 |---|---|---|---|---|
 | `TC-M01-N01` | Đăng nhập sai mật khẩu quá 5 lần | Negative / Security | Nhập sai mật khẩu liên tiếp 5 lần với 1 tài khoản | Khóa tạm thời tài khoản trong 15 phút, hiển thị thông báo rõ ràng, chặn gửi request. |
 | `TC-M01-N02` | Đăng nhập bằng tài khoản bị vô hiệu hóa (`INACTIVE`) | Negative | Tài khoản có cờ `status = 'INACTIVE'` | Trả về `403 Forbidden`, thông báo "Tài khoản của bạn đã bị khóa bởi Quản trị viên". |
-| `TC-M01-N03` | Nhập mã OTP hết hạn | Negative / Boundary | Nhập mã OTP sau khi đã quá hạn 5 phút | Trả về `400 Bad Request`, thông báo "Mã OTP đã hết hiệu lực, vui lòng yêu cầu mã mới". |
-| `TC-M01-N04` | Nhập mã OTP sai quá 3 lần | Negative / Security | Nhập sai OTP 3 lần liên tiếp trong luồng đặt lại mật khẩu | Hủy hiệu lực của phiên OTP hiện tại, yêu cầu bắt đầu lại luồng quên mật khẩu. |
+| `TC-M01-N03` | Admin nhập mã OTP hết hạn | Negative / Boundary | Nhập mã OTP sau 16 phút kể từ lúc cấp (thời hạn 15 phút theo FR-M01-03) | Trả về `400 Bad Request`, thông báo "Mã OTP đã hết hiệu lực, vui lòng yêu cầu mã mới". |
+| `TC-M01-N04` | Dùng lại mã OTP đã sử dụng | Negative / Security | Admin đã đổi mật khẩu thành công bằng OTP, sau đó gửi lại chính OTP đó | Hệ thống từ chối OTP đã dùng vì mỗi OTP chỉ có hiệu lực một lần theo FR-M01-03. |
+
+### 2.1b. Phân hệ M02 & M03 — Phân quyền động và đổi mật khẩu sau reset
+| Test ID | Tên kịch bản | Loại | Dữ liệu đầu vào / Điều kiện | Kết quả kỳ vọng (Expected Result) |
+|---|---|---|---|---|
+| `TC-M02-N01` | Quyền vừa bị Admin tắt trong phiên đang đăng nhập | Security / RBAC | Admin tắt quyền chức năng của một Role; tài khoản Role đó gửi yêu cầu mới | Backend từ chối thao tác không còn quyền ngay ở request tiếp theo, kể cả JWT chưa hết hạn. |
+| `TC-M02-N02` | Cố tước quyền tối cao của Admin chính | Negative / Security | Gửi thay đổi ACL tắt quyền quản trị tài khoản hoặc phân quyền tối cao | Backend từ chối cập nhật trái quy tắc M02, giữ nguyên quyền Admin chính. |
+| `TC-M03-N01` | Người dùng đăng nhập sau khi Admin reset mật khẩu | Security / Main | `must_change_password = true`, đăng nhập bằng mật khẩu được reset | Buộc đổi mật khẩu trước khi vào chức năng khác; đổi hợp lệ thì tắt cờ, lần đăng nhập sau không còn bị buộc đổi. |
 
 ---
 
@@ -46,8 +53,8 @@
 | `TC-M05-N02` | Đính kèm tệp tin vượt quá dung lượng 5MB | Negative | Đính kèm 1 file PDF có dung lượng 5.2MB | Hệ thống chặn tải lên ngay từ Client và Backend trả về `422 Unprocessable Entity` ("Dung lượng tệp tối đa là 5MB"). |
 | `TC-M05-N03` | Đính kèm tệp sai định dạng (.exe, .zip, .bat) | Security | Tải lên file script `malware.exe` hoặc `archive.zip` | Bị từ chối ngay lập tức, thông báo danh sách định dạng hợp lệ (`.png`, `.jpg`, `.pdf`, `.docx`). |
 | `TC-M05-N04` | Sinh viên sửa đơn khi trạng thái đã là `In Progress` | Negative | Gọi `PUT /api/v1/tickets/{id}` khi ticket đã có nhân viên tiếp nhận | Trả về `400 Bad Request`, thông báo "Đơn đã được tiếp nhận, không thể chỉnh sửa". |
-| `TC-M05-N05` | Sinh viên cố tình sửa Danh mục/Phòng ban khi ở `New` | Negative / BR-2 | Sinh viên gửi request thay đổi `category_id` hoặc `department_id` | Backend bỏ qua hoặc từ chối trường này, chỉ cho phép cập nhật `title` và `content`. |
-| `TC-M05-N06` | Spam tạo liên tục nhiều ticket trong 1 phút | Edge / Rate Limit | Gửi 5 request tạo ticket trong vòng 30 giây | Bị chặn bởi cơ chế Cooldown/Rate Limit (429 Too Many Requests), yêu cầu chờ 1 phút. |
+| `TC-M05-N05` | Sinh viên cố tình sửa Danh mục/Phòng ban khi ở `New` | Negative / BR-2 | Sinh viên gửi request thay đổi `category_id` hoặc `department_id` | Backend từ chối thay đổi Danh mục/Phòng ban; chỉ chấp nhận cập nhật `title`, `content` và danh sách tệp đính kèm hợp lệ. |
+| `TC-M05-N06` | Sinh viên sửa file đính kèm khi Ticket còn New | Boundary / File Validation | Chủ Ticket thay đổi tệp đính kèm, thử thêm tệp thứ 6 hoặc tệp sai định dạng | Cho phép thêm/xóa tệp hợp lệ trong giới hạn 5 tệp, 5MB/tệp; từ chối thay đổi vượt giới hạn, giữ nguyên dữ liệu hợp lệ và ghi lịch sử khi lưu thành công. |
 
 ---
 
@@ -64,7 +71,7 @@
 |---|---|---|---|---|
 | `TC-M07-N01` | **Nhân viên yêu cầu bổ sung lần thứ 2 cho cùng 1 đơn** | **Negative / BR-3** | Bấm yêu cầu bổ sung khi `supplement_count = 1` | Nút chức năng bị ẩn/disable trên UI, API trả về `400 Bad Request` ("Mỗi ticket chỉ được yêu cầu bổ sung tối đa 1 lần"). |
 | `TC-M07-E02` | Yêu cầu bổ sung gửi vào chiều Thứ Sáu | Boundary / Business Days | Gửi yêu cầu bổ sung lúc 16:30 chiều Thứ 6 | Hạn chót đếm ngược 3 ngày làm việc phải rơi vào 16:30 chiều Thứ Tư tuần sau (bỏ qua hoàn toàn Thứ 7 và Chủ nhật). |
-| `TC-M07-E03` | **Quá hạn 3 ngày làm việc mà sinh viên không bổ sung** | **Automation / Timeout** | Background worker quét ticket Pending quá deadline | Ticket tự động chuyển sang `Closed`, gán `auto_closed = true`, `closed_reason = "Quá hạn bổ sung 3 ngày làm việc"`, khóa chức năng nộp bổ sung. |
+| `TC-M07-E03` | **Quá hạn 3 ngày làm việc mà sinh viên không bổ sung** | **Automation / Timeout** | Background worker quét ticket Pending quá deadline | Ticket tự động chuyển sang `Closed`, gán `auto_closed = true`, `closed_reason = "TIMEOUT_PENDING"` (thông báo hiển thị lý do quá hạn 3 ngày làm việc), khóa chức năng nộp bổ sung. |
 | `TC-M09-N04` | Sinh viên bấm gửi bổ sung sau khi đơn đã bị Auto-close | Negative | Sinh viên submit form bổ sung chậm sau hạn chót | Trả về `400 Bad Request` ("Đơn đã bị đóng do quá hạn bổ sung, vui lòng tạo đơn mới"). |
 
 ---

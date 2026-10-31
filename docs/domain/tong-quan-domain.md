@@ -30,4 +30,8 @@ Xây dựng một **Cổng dịch vụ một cửa số hóa (Single Service Des
 ## 4. Đối tượng sử dụng (Actors & Roles)
 
 | Đối tượng | Vai trò & Trách nhiệm chính |
-|
+| :--- | :--- |
+| **Sinh viên (Student)** | Gửi Ticket, theo dõi tiến độ, chỉnh sửa yêu cầu khi `New`, bổ sung khi `Pending`, xem kết quả và đánh giá. |
+| **Nhân viên (Staff)** | Tiếp nhận Ticket trong phòng ban, xử lý, yêu cầu bổ sung, trả kết quả hoặc báo sai phòng ban về Admin. |
+| **Quản lý (Manager)** | Quản lý danh mục phòng ban, phân công hoặc phân công lại Ticket trong phòng ban, giám sát tiến độ và xem báo cáo nội bộ. |
+| **Admin** | Quản lý tài khoản, cấu hình phân quyền và danh mục toàn trường, điều phối Ticket "Khác"/sai phòng ban, giám sát và báo cáo toàn trường. |

@@ -96,7 +96,7 @@
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-* **BR-01:** Các đơn bị đóng tự động không có điểm số sao (Rating = null) và không tính vào điểm trung bình CSAT của nhân viên, nhưng vẫn được ghi nhận là hoàn thành đúng hạn vào chỉ số KPI.
+* **BR-01:** Các đơn bị đóng tự động do không đánh giá sau `Resolved` không có điểm số sao (Rating = null) và không tính vào CSAT. Việc đúng hay quá hạn SLA được xác định bằng thời điểm giải quyết `resolved_at` so với hạn xử lý, không mặc định mọi đơn tự đóng đều hoàn thành đúng hạn.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
