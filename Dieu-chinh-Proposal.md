@@ -6,7 +6,7 @@
 
 - **Khách hàng:** Ban Giám hiệu – Aurora University
 
-- **Đơn vị triển khai:**Nhóm 4
+- **Đơn vị triển khai:** Nhóm 4
 
 - **Ngày cập nhật:** 2/10/2026
 
