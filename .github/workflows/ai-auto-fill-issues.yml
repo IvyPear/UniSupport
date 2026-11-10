@@ -214,6 +214,25 @@ jobs:
               }
               return items.map(x => x.trim());
             }
+            // Retry semantically invalid JSON (valid JSON with missing/malformed arrays).
+            async function askGroqValidated(prompt, fields) {
+              let request = prompt;
+              for (let attempt = 0; attempt < 3; attempt++) {
+                const result = await askGroq(request);
+                try {
+                  for (const field of fields) bullets(result[field], field);
+                  return result;
+                } catch (err) {
+                  if (attempt === 2) throw new Error(`${err.message} after 3 validation attempts`);
+                  core.warning(`${err.message}; regenerating JSON (${attempt + 2}/3)`);
+                  request = prompt + `\nLẦN TRƯỚC SAI: ${err.message}. ` +
+                    `BẮT BUỘC tất cả các trường ${fields.join(', ')} là JSON array chứa 1-6 chuỗi không rỗng. ` +
+                    `Không trả null, object, số hoặc chuỗi đơn cho các trường này. ` +
+                    `Chỉ trả JSON hợp lệ, ngắn gọn, không thêm yêu cầu ngoài PRD.`;
+                  await sleep(15000);
+                }
+              }
+            }
             function childPrompt(issue, feature) {
               return `Dự án UniSupport. Viết issue ${JSON.stringify(issue.title)} từ FR sau.\n` +
                 `CHỈ lấy yêu cầu trong FR. Không tự thêm tính năng, công nghệ, API, thời gian, điều kiện. ` +
@@ -335,7 +354,7 @@ jobs:
                   if (!selected.size && alreadyStructured && existing.includes(feature.flow.trim())) {
                     return existing;
                   }
-                  const ai = await askGroq(childPrompt(issue, feature));
+                  const ai = await askGroqValidated(childPrompt(issue, feature), ['requirements', 'acceptance', 'deliverables']);
                   return childBody(ai, feature);
                 });
               }
@@ -344,7 +363,7 @@ jobs:
                   if (!group.children.length) throw new Error('Parent has no child issues');
                   const missing = group.children.filter(x => !features.has(x.id));
                   if (missing.length) throw new Error(`Unmatched children: ${missing.map(x => x.id).join(', ')}`);
-                  const ai = await askGroq(parentPrompt(group.parent, group.children, features));
+                  const ai = await askGroqValidated(parentPrompt(group.parent, group.children, features), ['scope']);
                   return parentBody(ai, group.children);
                 });
               } else if (!group.parent) core.warning(`${code}: parent issue not found`);
