@@ -1,0 +1,95 @@
+name: Cập nhật Parent Issue
+
+on:
+  workflow_dispatch:
+    inputs:
+      parent_id:
+        description: 'ID của Task Cha (VD: 135)'
+        required: true
+        type: string
+      label_wbs:
+        description: 'Nhãn của Sub-tasks (VD: M01)'
+        required: true
+        type: string
+      milestone_text:
+        description: 'Tên Milestone (VD: Mốc 1: Nền tảng)'
+        required: false
+        type: string
+
+jobs:
+  update-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lấy dữ liệu và Cập nhật Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const parentId = parseInt(context.payload.inputs.parent_id);
+            const labelWbs = context.payload.inputs.label_wbs;
+            const milestoneText = context.payload.inputs.milestone_text || '';
+            
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: labelWbs,
+              state: 'all',
+              per_page: 100
+            });
+            
+            let subTasksString = '';
+            issues.forEach(issue => {
+              if (issue.number !== parentId) {
+                const isClosed = issue.state === 'closed' ? 'x' : ' ';
+                subTasksString += `- [${isClosed}] #${issue.number} ${issue.title}\n`;
+              }
+            });
+            
+            if (!subTasksString) {
+              subTasksString = '- [ ] Chưa có sub-task nào hoặc sai nhãn.\n';
+            }
+
+            // Toàn bộ khối text này đã được thụt lề chuẩn YAML
+            const newBody = `
+            ### 1. Mục tiêu
+            Xây dựng các tính năng thuộc module ${labelWbs}.
+
+            ### 2. Thông tin quản lý
+            - **Milestone:** ${milestoneText}
+            - **WBS ID:** ${labelWbs}
+            - **PRD Reference:** 
+            - **Parent Assignee / Phụ trách:** 
+            - **Priority:** 
+            - **Dependencies:** 
+            - **Nhãn đề xuất:** ${labelWbs}
+
+            ### 3. Phạm vi hạng mục
+            **In scope**
+            - [ ] Tuân thủ các yêu cầu PRD được liệt kê tại mục PRD Reference.
+
+            **Out of scope**
+            - [ ] Các hạng mục nằm ngoài phạm vi đã xác định.
+
+            ### 4. Task con
+            ${subTasksString}
+            
+            ### 5. Tiêu chí chấp nhận (Acceptance Criteria)
+            - [ ] Hoàn thành toàn bộ task con của module.
+
+            ### 6. Ghi chú kiểm thử
+            - **Dữ liệu test:** Dữ liệu giả lập, không dùng dữ liệu cá nhân thật.
+
+            ### 7. Checklist hoàn thành (Definition of Done)
+            - [ ] Đầu ra nằm trong phạm vi đã thống nhất và tất cả tiêu chí chấp nhận áp dụng đã được xác minh.
+            - [ ] Các kiểm tra cần thiết đã chạy và đạt; lỗi quan trọng ảnh hưởng tiêu chí chấp nhận đã được xử lý.
+            - [ ] Issue liên kết PRD/WBS; PR liên kết Issue; cập nhật tài liệu liên quan nếu có ảnh hưởng.
+            - [ ] Lưu kết quả test/retest hoặc checklist làm bằng chứng.
+            - [ ] Assignee cập nhật trạng thái và chỉ đóng Issue khi các điều kiện DoD áp dụng đã đạt.
+            `.replace(/^[ \t]+/gm, '').trim(); 
+            // Lệnh replace ở trên sẽ tự động dọn dẹp khoảng trắng thừa để Markdown hiển thị chuẩn.
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parentId,
+              body: newBody
+            });
