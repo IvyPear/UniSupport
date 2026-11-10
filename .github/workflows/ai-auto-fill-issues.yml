@@ -7,8 +7,12 @@ on:
         description: 'M01, M02... (blank = all modules)'
         required: false
         type: string
+      issue_numbers:
+        description: 'Optional issue numbers, e.g. 116,135 (blank = all matching)'
+        required: false
+        type: string
       mode:
-        description: 'preview = view all; update = fill blanks; rewrite = replace existing bodies'
+        description: 'preview = review Main Flow changes; update = sync Main Flow only; rewrite = replace entire Issue'
         required: true
         type: choice
         options: [preview, update, rewrite]
@@ -25,7 +29,7 @@ concurrency:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 120
     env:
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
       GROQ_MODEL: openai/gpt-oss-20b
@@ -54,6 +58,9 @@ jobs:
             const inputs = context.payload.inputs || {};
             const filter = (inputs.module_code || '').trim().toUpperCase();
             const mode = inputs.mode || 'preview';
+            const selectedText = (inputs.issue_numbers || '').trim();
+            if (selectedText && !/^[0-9,\s]+$/.test(selectedText)) throw new Error('Invalid issue_numbers');
+            const selected = new Set(selectedText.split(',').map(x => Number(x.trim())).filter(Number.isInteger).filter(x => x > 0));
             const key = process.env.GROQ_API_KEY;
             const model = process.env.GROQ_MODEL;
             if (!key) throw new Error('Missing GROQ_API_KEY secret');
@@ -118,7 +125,7 @@ jobs:
               const p = issue.title.match(/^\[(M\d{2})\](?:\s|$)/i);
               const c = issue.title.match(/^\[(M\d{2})-(\d+)\](?:\s|$)/i);
               const code = (p?.[1] || c?.[1])?.toUpperCase();
-              if (!code || !prds.has(code)) continue;
+              if (!code || !prds.has(code) || (selected.size && !selected.has(issue.number))) continue;
               if (!groups.has(code)) groups.set(code, { parent: null, children: [] });
               const group = groups.get(code);
               if (p) {
@@ -133,8 +140,14 @@ jobs:
             const failures = [];
             const previews = [];
             const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+            // Serialize API calls and space them out to reduce TPM bursts.
+            let lastGroqCallAt = 0;
             async function askGroq(prompt) {
-              for (let attempt = 0; attempt < 3; attempt++) {
+              const maxAttempts = 8;
+              for (let attempt = 0; attempt < maxAttempts; attempt++) {
+                const since = Date.now() - lastGroqCallAt;
+                if (since < 15000) await sleep(15000 - since);
+                lastGroqCallAt = Date.now();
                 const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                   method: 'POST',
                   headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
@@ -145,25 +158,39 @@ jobs:
                       { role: 'user', content: prompt }
                     ],
                     temperature: 0.1,
-                    max_completion_tokens: 3500,
+                    max_completion_tokens: 1500,
                     response_format: { type: 'json_object' }
                   })
                 });
                 if (!res.ok) {
-                  const err = (await res.text()).slice(0, 400);
-                  if ([429, 500, 502, 503, 504].includes(res.status) && attempt < 2) {
-                    const retry = Number(res.headers.get('retry-after'));
-                    await sleep(Number.isFinite(retry) && retry > 0
-                      ? Math.min(retry * 1000, 120000) : 12000 * (attempt + 1));
-                    continue;
+                  const err = (await res.text()).slice(0, 650);
+                  const retryable = [429, 500, 502, 503, 504].includes(res.status);
+                  if (!retryable || attempt === maxAttempts - 1) {
+                    throw new Error(`Groq HTTP ${res.status}: ${err}`);
                   }
-                  throw new Error(`Groq HTTP ${res.status}: ${err}`);
+                  const retryHeader = res.headers.get('retry-after');
+                  let retryMs = retryHeader && /^\d+(?:\.\d+)?$/.test(retryHeader)
+                    ? Number(retryHeader) * 1000 : 0;
+                  // Groq sometimes returns 'Please try again in 269.9ms' in the error body.
+                  const waitHint = err.match(/try again in\s+([\d.]+)\s*(ms|s|m)\b/i);
+                  if (waitHint) {
+                    const unit = waitHint[2].toLowerCase();
+                    const factor = unit === 'ms' ? 1 : unit === 's' ? 1000 : 60000;
+                    retryMs = Math.max(retryMs, Number(waitHint[1]) * factor);
+                  }
+                  const backoff = Math.min(60000, 10000 * 2 ** attempt);
+                  const delay = Math.min(120000, Math.max(15000, retryMs + 1500, backoff));
+                  core.warning(`Groq HTTP ${res.status}; retry ${attempt + 1}/${maxAttempts - 1} after ${Math.ceil(delay / 1000)}s`);
+                  await sleep(delay);
+                  continue;
                 }
                 const data = await res.json();
                 const output = data.choices?.[0]?.message?.content;
                 if (!output) throw new Error('Groq returned no content');
-                return JSON.parse(output);
+                try { return JSON.parse(output); }
+                catch { throw new Error('Groq returned invalid JSON'); }
               }
+              throw new Error('Groq retries exhausted');
             }
             function requiredText(value, name) {
               if (typeof value !== 'string' || !value.trim()) throw new Error(`Missing ${name}`);
@@ -223,14 +250,31 @@ jobs:
                 '- [ ] Tất cả Task con đã hoàn thành.\n- [ ] Chức năng trong phạm vi đã được kiểm thử.\n- [ ] Không còn lỗi nghiêm trọng trong phạm vi module.'
               ].join('\n\n');
             }
-            async function processIssue(issue, makeBody) {
-              // Preview always generates a candidate, even when the issue already has content.
-              // Update fills blanks only; rewrite intentionally replaces existing content.
-              if (mode === 'update' && issue.body?.trim()) {
-                stats.skipped++;
-                core.info(`Skip #${issue.number}: existing body (update mode)`);
-                return;
+            // Replace only the Main Flow section; preserve every other section verbatim.
+            function syncMainFlow(body, flow) {
+              if (!flow || !/^1\.\s/m.test(flow)) throw new Error('Invalid Main Flow in PRD');
+              const normalized = (body || '').replace(/\r\n/g, '\n');
+              const heading = /^#{1,6}\s+(?:\d+[.)]\s*)?Main Flow\s*$/gim;
+              const matches = [...normalized.matchAll(heading)];
+              if (matches.length > 1) throw new Error('Multiple Main Flow headings: manual review required');
+              if (matches.length === 0) {
+                // Insert before Acceptance Criteria when possible, otherwise append.
+                const next = /^#{1,6}\s+(?:\d+[.)]\s*)?(?:Tiêu chí hoàn thành|Acceptance Criteria)\s*$/im;
+                const anchor = next.exec(normalized);
+                const insertion = '## 3. Main Flow\n\n' + flow.trim() + '\n\n';
+                return anchor
+                  ? normalized.slice(0, anchor.index).trimEnd() + '\n\n' + insertion + normalized.slice(anchor.index)
+                  : normalized.trimEnd() + '\n\n' + insertion.trimEnd() + '\n';
               }
+              const m = matches[0];
+              const from = m.index + m[0].length;
+              const tail = normalized.slice(from);
+              const nextHeading = /^#{1,6}\s+\S.*$/gm;
+              const next = nextHeading.exec(tail);
+              const to = next ? from + next.index : normalized.length;
+              return normalized.slice(0, from) + '\n\n' + flow.trim() + '\n\n' + normalized.slice(to).replace(/^\n+/, '');
+            }
+            async function processIssue(issue, makeBody, options = {}) {
               try {
                 const body = await makeBody();
                 if (mode === 'preview') {
@@ -239,25 +283,19 @@ jobs:
                   stats.previewed++;
                 } else {
                   const latest = (await github.rest.issues.get({ owner, repo, issue_number: issue.number })).data;
-                  if (latest.state !== 'open') {
+                  if (latest.state !== 'open' || (latest.body || '') !== (issue.body || '')) {
                     stats.skipped++;
-                    core.warning(`Skip #${issue.number}: issue is no longer open`);
+                    core.warning(`Skip #${issue.number}: issue closed or changed during workflow`);
                     return;
                   }
-                  // Protect concurrent edits: never overwrite content changed after listing.
-                  if ((latest.body || '') !== (issue.body || '')) {
+                  if (body === (latest.body || '').replace(/\r\n/g, '\n')) {
                     stats.skipped++;
-                    core.warning(`Skip #${issue.number}: body changed during workflow`);
-                    return;
-                  }
-                  if (mode === 'update' && latest.body?.trim()) {
-                    stats.skipped++;
-                    core.warning(`Skip #${issue.number}: existing body (update mode)`);
+                    core.info(`Skip #${issue.number}: Main Flow already synchronized`);
                     return;
                   }
                   await github.rest.issues.update({ owner, repo, issue_number: issue.number, body });
                   stats.updated++;
-                  core.info(`${mode === 'rewrite' ? 'Rewritten' : 'Updated'} #${issue.number}`);
+                  core.info(`Updated #${issue.number}`);
                 }
                 await sleep(1500);
               } catch (err) {
@@ -277,11 +315,20 @@ jobs:
                   const feature = features.get(id);
                   if (!feature) throw new Error(`No FR-${id} in ${file}`);
                   if (!feature.flow) throw new Error(`No Main Flow in FR-${id}`);
+                  if (mode !== 'rewrite') return syncMainFlow(issue.body || '', feature.flow);
+                  // Preserve already-generated Issue unless explicitly targeted by issue_numbers.
+                  const existing = (issue.body || '').replace(/\r\n/g, '\n');
+                  const alreadyStructured = ['## 1. Mô tả', '## 2. Yêu cầu chức năng',
+                    '## 3. Main Flow', '## 4. Tiêu chí hoàn thành',
+                    '## 5. Kết quả bàn giao'].every(h => existing.includes(h));
+                  if (!selected.size && alreadyStructured && existing.includes(feature.flow.trim())) {
+                    return existing;
+                  }
                   const ai = await askGroq(childPrompt(issue, feature));
                   return childBody(ai, feature);
                 });
               }
-              if (group.parent) {
+              if (group.parent && mode === 'rewrite') {
                 await processIssue(group.parent, async () => {
                   if (!group.children.length) throw new Error('Parent has no child issues');
                   const missing = group.children.filter(x => !features.has(x.id));
@@ -289,12 +336,12 @@ jobs:
                   const ai = await askGroq(parentPrompt(group.parent, group.children, features));
                   return parentBody(ai, group.children);
                 });
-              } else core.warning(`${code}: parent issue not found`);
+              } else if (!group.parent) core.warning(`${code}: parent issue not found`);
             }
             if (!groups.size) core.warning('No matching open issues found');
             const summary = [
               '## UniSupport AI Issue Generator',
-              `Mode: ${mode} | Module: ${filter || 'ALL'} | Model: ${model}`,
+              `Mode: ${mode} | Module: ${filter || 'ALL'} | Issues: ${selected.size ? [...selected].join(',') : 'ALL'} | Model: ${model}`,
               `Updated: ${stats.updated} | Previewed: ${stats.previewed} | Skipped: ${stats.skipped} | Failed: ${stats.failed}`,
               ...failures.map(x => `- ${x}`)
             ].join('\n\n');
