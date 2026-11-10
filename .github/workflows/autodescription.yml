@@ -1,108 +1,145 @@
-name: Cập nhật Form Task Cha & Con
+name: Test Đồng bộ Module (M01)
 
 on:
   workflow_dispatch:
     inputs:
-      parent_id:
-        description: 'ID của Task Cha (VD: 135)'
+      module_code:
+        description: 'Mã Module cần test (VD: M01)'
         required: true
-        type: string
-      label_wbs:
-        description: 'Nhãn của Sub-tasks (VD: M01)'
+        default: 'M01'
+      file_path:
+        description: 'Đường dẫn file tài liệu (VD: docs/M01.md)'
         required: true
-        type: string
-      milestone_text:
-        description: 'Tên Milestone (VD: Mốc 1: Nền tảng)'
-        required: false
-        type: string
+        default: 'docs/M01.md'
 
 permissions:
   issues: write
+  contents: read
 
 jobs:
-  update-issues:
+  test-sync-module:
     runs-on: ubuntu-latest
     steps:
-      - name: Áp dụng Form cho Task Cha và Task Con
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Đọc File PRD và Cập nhật Issue
         uses: actions/github-script@v7
         with:
           script: |
-            const rawId = context.payload.inputs.parent_id || '';
-            const parentId = parseInt(rawId.replace(/\D/g, ''), 10);
+            const fs = require('fs');
+            const modCode = context.payload.inputs.module_code;
+            const filePath = context.payload.inputs.file_path;
             
-            if (isNaN(parentId)) {
-              core.setFailed("Lỗi: ID của Task Cha không hợp lệ.");
+            // 1. Kiểm tra file PRD có tồn tại không
+            if (!fs.existsSync(filePath)) {
+              core.setFailed(`Lỗi: Không tìm thấy file tài liệu tại ${filePath}`);
               return;
             }
+            const docContent = fs.readFileSync(filePath, 'utf8');
 
-            const labelWbs = context.payload.inputs.label_wbs;
-            const milestoneText = context.payload.inputs.milestone_text || '';
-            
-            // Lấy danh sách tất cả issue cùng nhãn
+            // 2. Lấy TẤT CẢ issues có nhãn của module (VD: nhãn M01)
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: labelWbs,
+              labels: modCode,
               state: 'all',
               per_page: 100
             });
+
+            if (issues.length === 0) {
+              core.setFailed(`Không tìm thấy Issue nào có nhãn ${modCode}`);
+              return;
+            }
+
+            // 3. Phân loại Task Cha và Task Con
+            let parentTask = null;
+            const subTasks = [];
+
+            issues.forEach(issue => {
+              // Nếu tiêu đề chứa đúng "[M01] " (có khoảng trắng) hoặc chỉ là "[M01]" thì là task cha
+              if (issue.title.includes(`[${modCode}] `) || issue.title === `[${modCode}]`) {
+                parentTask = issue;
+              } 
+              // Nếu tiêu đề chứa "[M01-" thì là task con (VD: [M01-01])
+              else if (issue.title.includes(`[${modCode}-`)) {
+                subTasks.push(issue);
+              }
+            });
+
+            if (!parentTask) {
+              core.setFailed(`Không tìm thấy Task Cha nào có tiền tố [${modCode}] trong tiêu đề.`);
+              return;
+            }
+
+            // ==========================================
+            // XỬ LÝ TASK CHA
+            // ==========================================
+            let milestone = "[Chưa có]", owner = "[Chưa có]", deadline = "[Chưa có]";
             
-            // Tách riêng Task Cha và danh sách Task Con
-            const subTasks = issues.filter(issue => issue.number !== parentId);
+            const msMatch = docContent.match(/Milestone:\s*(.*)/i);
+            if (msMatch) milestone = msMatch[1].trim();
             
+            const ownerMatch = docContent.match(/Owner:\s*(.*)/i);
+            if (ownerMatch) owner = ownerMatch[1].trim();
+            
+            const dlMatch = docContent.match(/Deadline:\s*(.*)/i);
+            if (dlMatch) deadline = dlMatch[1].trim();
+
             let subTasksString = '';
             subTasks.forEach(issue => {
               const isClosed = issue.state === 'closed' ? 'x' : ' ';
               subTasksString += `- [${isClosed}] #${issue.number} ${issue.title}\n`;
             });
-            
-            if (!subTasksString) {
-              subTasksString = '- [ ] Chưa có task con.\n';
-            }
+            if (!subTasksString) subTasksString = '- [ ] Chưa có sub-task nào.\n';
 
-            // ==========================================
-            // 1. CẬP NHẬT FORM CHO TASK CHA
-            // ==========================================
-            const parentBody = `
-            ### 1) Mục tiêu:
-            Mục tiêu của module ${labelWbs} làm gì...
-
-            ### 2) Thông tin:
-            - **Milestone:** ${milestoneText}
-            - **Nhãn đề xuất:** ${labelWbs}
-
-            ### Task con:
-            ${subTasksString}
-            `.replace(/^[ \t]+/gm, '').trim();
+            const parentBody = `### 1) Thông tin quản lý\n- **Milestone:** ${milestone}\n- **Owner:** ${owner}\n- **Deadline:** ${deadline}\n\n### 2) Sub-tasks\n${subTasksString}\n### 3) Điều kiện hoàn thành\n- [ ] Tất cả sub-tasks đã được đóng.\n- [ ] Hoàn thành nghiệm thu theo PRD.`;
 
             await github.rest.issues.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: parentId,
+              issue_number: parentTask.number,
               body: parentBody
             });
+            console.log(`Đã cập nhật Task Cha: #${parentTask.number}`);
 
             // ==========================================
-            // 2. CẬP NHẬT FORM CHO TẤT CẢ TASK CON
+            // XỬ LÝ TASK CON HÀNG LOẠT
             // ==========================================
-            const subTaskBody = `
-            ### 1) Mô tả:
-            Mô tả nội dung của task con đó...
-
-            ### 2) Tiêu chí hoàn thành:
-            - [ ] Tiêu chí 1
-            - [ ] Tiêu chí 2
-            `.replace(/^[ \t]+/gm, '').trim();
-
             for (const issue of subTasks) {
-              // Cơ chế an toàn: Chỉ ghi đè nếu phần mô tả đang trống 
-              // hoặc chưa chứa form "Tiêu chí hoàn thành"
-              if (!issue.body || !issue.body.includes('Tiêu chí hoàn thành')) {
+              const codeMatch = issue.title.match(/\[(.*?)\]/); 
+              if (codeMatch) {
+                const taskCode = codeMatch[1]; // Lấy được M01-01
+                
+                // Tìm kiếm heading tương ứng (VD: "## [M01-01]")
+                const regex = new RegExp(`## \\s*\\[?${taskCode}\\]?[\\s\\S]*?(?=## |$)`, 'i');
+                const taskContentMatch = docContent.match(regex);
+
+                let moTa = "[Cần bổ sung mô tả]";
+                let mainFlow = "[Cần bổ sung Main flow]";
+                let tieuChi = "- [ ] [Cần bổ sung Tiêu chí]";
+
+                if (taskContentMatch) {
+                  const chunk = taskContentMatch[0];
+
+                  const moTaMatch = chunk.match(/Mô tả:([\\s\\S]*?(?=Main flow:|Tiêu chí hoàn thành:|$))/i);
+                  if (moTaMatch) moTa = moTaMatch[1].trim();
+
+                  const flowMatch = chunk.match(/Main flow:([\\s\\S]*?(?=Tiêu chí hoàn thành:|$))/i);
+                  if (flowMatch) mainFlow = flowMatch[1].trim();
+
+                  const tieuChiMatch = chunk.match(/Tiêu chí hoàn thành:([\\s\\S]*?(?=$))/i);
+                  if (tieuChiMatch) tieuChi = tieuChiMatch[1].trim();
+                }
+
+                const subTaskBody = `### 1) Mô tả\n${moTa}\n\n### 2) Main flow\n${mainFlow}\n\n### 3) Tiêu chí hoàn thành\n${tieuChi}`;
+
                 await github.rest.issues.update({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: issue.number,
                   body: subTaskBody
                 });
+                console.log(`Đã cập nhật Task Con: #${issue.number} - ${taskCode}`);
               }
             }
