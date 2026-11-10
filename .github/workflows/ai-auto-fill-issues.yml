@@ -1,3 +1,67 @@
+name: AI Issue Generator UniSupport (Groq)
+
+on:
+  workflow_dispatch:
+    inputs:
+      module_code:
+        description: 'Module (e.g. M01); blank = all modules'
+        required: false
+        type: string
+      mode:
+        description: 'Preview only or update empty issues'
+        required: true
+        type: choice
+        options:
+          - preview
+          - update
+        default: preview
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: unisupport-ai-issues
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      GROQ_MODEL: llama-3.3-70b-versatile
+    steps:
+      - name: Generate and validate issue content
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const input = context.payload.inputs || {};
+            const filter = (input.module_code || '').trim().toUpperCase();
+            const mode = input.mode || 'preview';
+            const apiKey = process.env.GROQ_API_KEY;
+            const model = process.env.GROQ_MODEL;
+            if (!apiKey) return core.setFailed('Missing GROQ_API_KEY repository secret');
+            if (filter && !/^M\d+$/.test(filter)) return core.setFailed('Module must look like M01');
+            if (!['preview', 'update'].includes(mode)) return core.setFailed('Invalid mode');
+
+            const issues = (await github.paginate(github.rest.issues.listForRepo, {
+              owner, repo, state: 'open', per_page: 100
+            })).filter(x => !x.pull_request);
+            const groups = new Map();
+            for (const issue of issues) {
+              const parent = /^\[(M\d+)\](?:\s|$)/i.exec(issue.title);
+              const child = /^\[(M\d+)-(\d+)\](?:\s|$)/i.exec(issue.title);
+              const code = (parent?.[1] || child?.[1] || '').toUpperCase();
+              if (!code || (filter && filter !== code)) continue;
+              if (!groups.has(code)) groups.set(code, {parent: null, children: []});
+              const group = groups.get(code);
+              if (child) group.children.push(issue);
+              else if (parent) {
+                if (group.parent) core.warning(`Multiple parents for ${code}; using latest found`);
                 group.parent = issue;
               }
             }
@@ -158,3 +222,11 @@
               `- Mode: ${mode}`,
               `- Module: ${filter || 'ALL'}`,
               `- Updated: ${stats.updated}`,
+              `- Previewed: ${stats.previewed}`,
+              `- Skipped: ${stats.skipped}`,
+              `- Failed: ${stats.failed}`,
+              ...errors.map(e => `- ${e.replaceAll('\n', ' ')}`)
+            ].join('\n');
+            await core.summary.addRaw(summary).write();
+            core.info(summary);
+            if (stats.failed) core.setFailed(`${stats.failed} issues failed`);
