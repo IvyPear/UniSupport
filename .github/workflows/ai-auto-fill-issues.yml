@@ -144,6 +144,7 @@ jobs:
             let lastGroqCallAt = 0;
             async function askGroq(prompt) {
               const maxAttempts = 8;
+              let completionLimit = 1800;
               for (let attempt = 0; attempt < maxAttempts; attempt++) {
                 const since = Date.now() - lastGroqCallAt;
                 if (since < 15000) await sleep(15000 - since);
@@ -158,13 +159,18 @@ jobs:
                       { role: 'user', content: prompt }
                     ],
                     temperature: 0.1,
-                    max_completion_tokens: 1500,
+                    max_completion_tokens: completionLimit,
                     response_format: { type: 'json_object' }
                   })
                 });
                 if (!res.ok) {
                   const err = (await res.text()).slice(0, 650);
-                  const retryable = [429, 500, 502, 503, 504].includes(res.status);
+                  const jsonTruncated = res.status === 400 && /json_validate_failed|max completion tokens reached|length/i.test(err);
+                  const retryable = jsonTruncated || [429, 500, 502, 503, 504].includes(res.status);
+                  if (jsonTruncated) {
+                    completionLimit = Math.min(4000, completionLimit + 700);
+                    core.warning(`Groq JSON truncated; retry with max_completion_tokens=${completionLimit}`);
+                  }
                   if (!retryable || attempt === maxAttempts - 1) {
                     throw new Error(`Groq HTTP ${res.status}: ${err}`);
                   }
@@ -188,7 +194,12 @@ jobs:
                 const output = data.choices?.[0]?.message?.content;
                 if (!output) throw new Error('Groq returned no content');
                 try { return JSON.parse(output); }
-                catch { throw new Error('Groq returned invalid JSON'); }
+                catch {
+                  if (attempt === maxAttempts - 1) throw new Error('Groq returned invalid JSON');
+                  completionLimit = Math.min(4000, completionLimit + 700);
+                  core.warning(`Groq returned invalid JSON; retry with max_completion_tokens=${completionLimit}`);
+                  await sleep(15000);
+                }
               }
               throw new Error('Groq retries exhausted');
             }
