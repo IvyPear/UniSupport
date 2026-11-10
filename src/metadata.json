@@ -1,0 +1,6 @@
+{
+  "name": "UniSupport - Hệ thống Tư vấn & Hỗ trợ Sinh viên",
+  "description": "Hệ thống hỗ trợ trực tuyến tiếp nhận, xử lý, phân công và đánh giá yêu cầu của sinh viên đa phòng ban.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
