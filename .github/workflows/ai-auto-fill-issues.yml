@@ -41,7 +41,7 @@ jobs:
           echo "PRD files tracked in this checkout:"
           find . -type f -iname 'prd.md' -not -path './.git/*' | head -80
           echo "Module directory present?"
-          if [ -d modules ]; then ls -la modules | head -30; else echo "No modules/ directory in checked-out branch"; fi
+          if [ -d docs/modules ]; then ls -la docs/modules | head -30; else echo "No docs/modules/ directory in checked-out branch"; fi
 
       - name: Generate and validate issues
         uses: actions/github-script@v7
@@ -71,7 +71,7 @@ jobs:
               return out;
             }
             const prds = new Map();
-            for (const file of walk('modules')) {
+            for (const file of walk('docs/modules')) {
               const text = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
               const heading = text.match(/^#\s+PHÂN HỆ:\s*(M\d{2})\b/im);
               const code = heading?.[1]?.toUpperCase();
@@ -80,10 +80,10 @@ jobs:
               prds.set(code, { file, text });
             }
             if (!prds.size) {
-              const discovered = walk('modules');
+              const discovered = walk('docs/modules');
               throw new Error(`No module PRD found for ${filter || 'ALL'}. PRD files found: ${discovered.length}. ` +
                 `Files: ${discovered.slice(0, 15).join(', ') || '(none)'}. ` +
-                `Check that modules/ is committed to the selected branch and the PRD heading starts with '# PHÂN HỆ: M01'.`);
+                `Check that docs/modules/ is committed to the selected branch and the PRD heading starts with '# PHÂN HỆ: M01'.`);
             }
 
             // Split each PRD at exact FR headings, not at generic Markdown headings.
