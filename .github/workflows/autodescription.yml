@@ -16,6 +16,10 @@ on:
         required: false
         type: string
 
+# Cấp quyền ghi (write) cho GitHub Actions để có thể sửa đổi nội dung Issue
+permissions:
+  issues: write
+
 jobs:
   update-issue:
     runs-on: ubuntu-latest
@@ -24,7 +28,15 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const parentId = parseInt(context.payload.inputs.parent_id);
+            // Tự động xóa các ký tự thừa (như dấu # hoặc khoảng trắng) chỉ giữ lại số
+            const rawId = context.payload.inputs.parent_id || '';
+            const parentId = parseInt(rawId.replace(/\D/g, ''), 10);
+            
+            if (isNaN(parentId)) {
+              core.setFailed("Lỗi: ID của Task Cha không hợp lệ. Vui lòng kiểm tra lại (VD nhập: 135).");
+              return;
+            }
+
             const labelWbs = context.payload.inputs.label_wbs;
             const milestoneText = context.payload.inputs.milestone_text || '';
             
@@ -48,7 +60,6 @@ jobs:
               subTasksString = '- [ ] Chưa có sub-task nào hoặc sai nhãn.\n';
             }
 
-            // Toàn bộ khối text này đã được thụt lề chuẩn YAML
             const newBody = `
             ### 1. Mục tiêu
             Xây dựng các tính năng thuộc module ${labelWbs}.
@@ -84,8 +95,7 @@ jobs:
             - [ ] Issue liên kết PRD/WBS; PR liên kết Issue; cập nhật tài liệu liên quan nếu có ảnh hưởng.
             - [ ] Lưu kết quả test/retest hoặc checklist làm bằng chứng.
             - [ ] Assignee cập nhật trạng thái và chỉ đóng Issue khi các điều kiện DoD áp dụng đã đạt.
-            `.replace(/^[ \t]+/gm, '').trim(); 
-            // Lệnh replace ở trên sẽ tự động dọn dẹp khoảng trắng thừa để Markdown hiển thị chuẩn.
+            `.replace(/^[ \t]+/gm, '').trim();
 
             await github.rest.issues.update({
               owner: context.repo.owner,
