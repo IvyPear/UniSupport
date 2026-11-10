@@ -75,4 +75,3 @@ Quy ước thời gian làm việc: 04 giờ/ngày, 05 ngày trong tuần và 04
 | **Biên lợi nhuận ròng** | **23,07%** |
 ```eof
 
-Toàn bộ dữ liệu của bạn đã được chuyển thành các bảng biểu chuẩn xác trong Markdown. Nếu bạn cần điều chỉnh thêm cột nào hay thay đổi cách canh lề, cứ báo lại cho mình nhé!
