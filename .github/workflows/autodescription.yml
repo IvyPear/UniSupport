@@ -1,145 +1,152 @@
-name: Test Đồng bộ Module (M01)
+name: Đồng bộ Toàn bộ Issue từ PRD (Cấu trúc Folder)
 
 on:
-  workflow_dispatch:
-    inputs:
-      module_code:
-        description: 'Mã Module cần test (VD: M01)'
-        required: true
-        default: 'M01'
-      file_path:
-        description: 'Đường dẫn file tài liệu (VD: docs/M01.md)'
-        required: true
-        default: 'docs/M01.md'
+  workflow_dispatch: # Chạy thủ công
+  push:
+    paths:
+      - 'modules/**/prd.md' # Tự động chạy khi file prd.md trong thư mục modules thay đổi
 
 permissions:
   issues: write
   contents: read
 
 jobs:
-  test-sync-module:
+  sync-all-tasks:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Lấy mã nguồn và tài liệu
         uses: actions/checkout@v4
 
-      - name: Đọc File PRD và Cập nhật Issue
+      - name: Quét Folder và Cập nhật Toàn hệ thống
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            const modCode = context.payload.inputs.module_code;
-            const filePath = context.payload.inputs.file_path;
+            const path = require('path');
             
-            // 1. Kiểm tra file PRD có tồn tại không
-            if (!fs.existsSync(filePath)) {
-              core.setFailed(`Lỗi: Không tìm thấy file tài liệu tại ${filePath}`);
-              return;
+            // Hàm quét đệ quy tìm file prd.md của module tương ứng
+            function findPrdFile(baseDir, modCode) {
+              let result = null;
+              function search(dir) {
+                if (!fs.existsSync(dir)) return;
+                const files = fs.readdirSync(dir);
+                for (const file of files) {
+                  if (result) break;
+                  const fullPath = path.join(dir, file);
+                  const stat = fs.statSync(fullPath);
+                  if (stat.isDirectory()) {
+                    // Nếu tên thư mục bắt đầu bằng mã module (VD: M01-)
+                    if (file.toUpperCase().startsWith(`${modCode}-`)) {
+                      const prdPath = path.join(fullPath, 'prd.md');
+                      const prdPathUpper = path.join(fullPath, 'PRD.md');
+                      if (fs.existsSync(prdPath)) result = prdPath;
+                      else if (fs.existsSync(prdPathUpper)) result = prdPathUpper;
+                    } else {
+                      search(fullPath); // Đào sâu vào thư mục con
+                    }
+                  }
+                }
+              }
+              search(baseDir);
+              return result;
             }
-            const docContent = fs.readFileSync(filePath, 'utf8');
-
-            // 2. Lấy TẤT CẢ issues có nhãn của module (VD: nhãn M01)
+            
+            // 1. Lấy TẤT CẢ issues đang mở
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: modCode,
               state: 'all',
               per_page: 100
             });
 
-            if (issues.length === 0) {
-              core.setFailed(`Không tìm thấy Issue nào có nhãn ${modCode}`);
-              return;
-            }
-
-            // 3. Phân loại Task Cha và Task Con
-            let parentTask = null;
-            const subTasks = [];
-
+            // 2. Gom nhóm Task Cha & Task Con theo mã
+            const modules = {};
             issues.forEach(issue => {
-              // Nếu tiêu đề chứa đúng "[M01] " (có khoảng trắng) hoặc chỉ là "[M01]" thì là task cha
-              if (issue.title.includes(`[${modCode}] `) || issue.title === `[${modCode}]`) {
-                parentTask = issue;
-              } 
-              // Nếu tiêu đề chứa "[M01-" thì là task con (VD: [M01-01])
-              else if (issue.title.includes(`[${modCode}-`)) {
-                subTasks.push(issue);
+              const match = issue.title.match(/\[([A-Z0-9]+)(?:-[0-9]+)?\]/i);
+              if (match) {
+                const modCode = match[1].toUpperCase();
+                if (!modules[modCode]) modules[modCode] = { parent: null, subtasks: [] };
+                
+                if (issue.title.includes(`\[${modCode}\] `) || issue.title === `\[${modCode}\]`) {
+                  modules[modCode].parent = issue;
+                } else if (issue.title.includes(`\[${modCode}-`)) {
+                  modules[modCode].subtasks.push(issue);
+                }
               }
             });
 
-            if (!parentTask) {
-              core.setFailed(`Không tìm thấy Task Cha nào có tiền tố [${modCode}] trong tiêu đề.`);
-              return;
-            }
+            // 3. Xử lý cập nhật cho từng Module
+            for (const [modCode, data] of Object.entries(modules)) {
+              if (!data.parent) continue;
 
-            // ==========================================
-            // XỬ LÝ TASK CHA
-            // ==========================================
-            let milestone = "[Chưa có]", owner = "[Chưa có]", deadline = "[Chưa có]";
-            
-            const msMatch = docContent.match(/Milestone:\s*(.*)/i);
-            if (msMatch) milestone = msMatch[1].trim();
-            
-            const ownerMatch = docContent.match(/Owner:\s*(.*)/i);
-            if (ownerMatch) owner = ownerMatch[1].trim();
-            
-            const dlMatch = docContent.match(/Deadline:\s*(.*)/i);
-            if (dlMatch) deadline = dlMatch[1].trim();
+              // Tự động mò tìm file prd.md trong thư mục modules/
+              const filePath = findPrdFile('modules', modCode);
+              
+              if (!filePath) {
+                console.log(`Bỏ qua ${modCode}: Không tìm thấy file prd.md trong bất kỳ thư mục nào bắt đầu bằng ${modCode}-`);
+                continue;
+              }
+              
+              console.log(`Đang xử lý ${modCode} với file: ${filePath}`);
+              const docContent = fs.readFileSync(filePath, 'utf8');
 
-            let subTasksString = '';
-            subTasks.forEach(issue => {
-              const isClosed = issue.state === 'closed' ? 'x' : ' ';
-              subTasksString += `- [${isClosed}] #${issue.number} ${issue.title}\n`;
-            });
-            if (!subTasksString) subTasksString = '- [ ] Chưa có sub-task nào.\n';
+              // ----- TASK CHA -----
+              let milestone = "[Chưa có]", owner = "[Chưa có]", deadline = "[Chưa có]";
+              const msMatch = docContent.match(/Milestone:\s*(.*)/i);
+              if (msMatch) milestone = msMatch[1].trim();
+              
+              const ownerMatch = docContent.match(/Owner:\s*(.*)/i);
+              if (ownerMatch) owner = ownerMatch[1].trim();
+              
+              const dlMatch = docContent.match(/Deadline:\s*(.*)/i);
+              if (dlMatch) deadline = dlMatch[1].trim();
 
-            const parentBody = `### 1) Thông tin quản lý\n- **Milestone:** ${milestone}\n- **Owner:** ${owner}\n- **Deadline:** ${deadline}\n\n### 2) Sub-tasks\n${subTasksString}\n### 3) Điều kiện hoàn thành\n- [ ] Tất cả sub-tasks đã được đóng.\n- [ ] Hoàn thành nghiệm thu theo PRD.`;
+              let subTasksString = '';
+              data.subtasks.forEach(issue => {
+                const isClosed = issue.state === 'closed' ? 'x' : ' ';
+                subTasksString += `- [${isClosed}] #${issue.number} ${issue.title}\n`;
+              });
+              if (!subTasksString) subTasksString = '- [ ] Chưa có sub-task.\n';
 
-            await github.rest.issues.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: parentTask.number,
-              body: parentBody
-            });
-            console.log(`Đã cập nhật Task Cha: #${parentTask.number}`);
+              const parentBody = `### 1) Thông tin quản lý\n- **Milestone:** ${milestone}\n- **Owner:** ${owner}\n- **Deadline:** ${deadline}\n\n### 2) Sub-tasks\n${subTasksString}\n### 3) Điều kiện hoàn thành\n- [ ] Tất cả sub-tasks đã được đóng.\n- [ ] Hoàn thành nghiệm thu theo PRD.`;
 
-            // ==========================================
-            // XỬ LÝ TASK CON HÀNG LOẠT
-            // ==========================================
-            for (const issue of subTasks) {
-              const codeMatch = issue.title.match(/\[(.*?)\]/); 
-              if (codeMatch) {
-                const taskCode = codeMatch[1]; // Lấy được M01-01
-                
-                // Tìm kiếm heading tương ứng (VD: "## [M01-01]")
-                const regex = new RegExp(`## \\s*\\[?${taskCode}\\]?[\\s\\S]*?(?=## |$)`, 'i');
-                const taskContentMatch = docContent.match(regex);
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: data.parent.number,
+                body: parentBody
+              });
 
-                let moTa = "[Cần bổ sung mô tả]";
-                let mainFlow = "[Cần bổ sung Main flow]";
-                let tieuChi = "- [ ] [Cần bổ sung Tiêu chí]";
+              // ----- TASK CON -----
+              for (const issue of data.subtasks) {
+                const codeMatch = issue.title.match(/\[(.*?)\]/); 
+                if (codeMatch) {
+                  const taskCode = codeMatch[1]; 
+                  const regex = new RegExp(`## \\s*\\[?${taskCode}\\]?[\\s\\S]*?(?=## |$)`, 'i');
+                  const taskContentMatch = docContent.match(regex);
 
-                if (taskContentMatch) {
-                  const chunk = taskContentMatch[0];
-
-                  const moTaMatch = chunk.match(/Mô tả:([\\s\\S]*?(?=Main flow:|Tiêu chí hoàn thành:|$))/i);
-                  if (moTaMatch) moTa = moTaMatch[1].trim();
-
-                  const flowMatch = chunk.match(/Main flow:([\\s\\S]*?(?=Tiêu chí hoàn thành:|$))/i);
-                  if (flowMatch) mainFlow = flowMatch[1].trim();
-
-                  const tieuChiMatch = chunk.match(/Tiêu chí hoàn thành:([\\s\\S]*?(?=$))/i);
-                  if (tieuChiMatch) tieuChi = tieuChiMatch[1].trim();
+                  let moTa = "[Cần bổ sung mô tả]", mainFlow = "[Cần bổ sung Main flow]", tieuChi = "- [ ] [Cần bổ sung Tiêu chí]";
+                  
+                  if (taskContentMatch) {
+                     const chunk = taskContentMatch[0];
+                     const moTaMatch = chunk.match(/Mô tả:([\\s\\S]*?(?=Main flow:|Tiêu chí hoàn thành:|$))/i);
+                     if (moTaMatch) moTa = moTaMatch[1].trim();
+                     
+                     const flowMatch = chunk.match(/Main flow:([\\s\\S]*?(?=Tiêu chí hoàn thành:|$))/i);
+                     if (flowMatch) mainFlow = flowMatch[1].trim();
+                     
+                     const tieuChiMatch = chunk.match(/Tiêu chí hoàn thành:([\\s\\S]*?(?=$))/i);
+                     if (tieuChiMatch) tieuChi = tieuChiMatch[1].trim();
+                  }
+                  
+                  const subTaskBody = `### 1) Mô tả\n${moTa}\n\n### 2) Main flow\n${mainFlow}\n\n### 3) Tiêu chí hoàn thành\n${tieuChi}`;
+                  
+                  await github.rest.issues.update({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    body: subTaskBody
+                  });
                 }
-
-                const subTaskBody = `### 1) Mô tả\n${moTa}\n\n### 2) Main flow\n${mainFlow}\n\n### 3) Tiêu chí hoàn thành\n${tieuChi}`;
-
-                await github.rest.issues.update({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: issue.number,
-                  body: subTaskBody
-                });
-                console.log(`Đã cập nhật Task Con: #${issue.number} - ${taskCode}`);
               }
             }
