@@ -8,10 +8,10 @@ on:
         required: false
         type: string
       mode:
-        description: 'preview does not edit issues'
+        description: 'preview = view all; update = fill blanks; rewrite = replace existing bodies'
         required: true
         type: choice
-        options: [preview, update]
+        options: [preview, update, rewrite]
         default: preview
 
 permissions:
@@ -58,7 +58,7 @@ jobs:
             const model = process.env.GROQ_MODEL;
             if (!key) throw new Error('Missing GROQ_API_KEY secret');
             if (filter && !/^M\d{2}$/.test(filter)) throw new Error('Module must look like M01');
-            if (!['preview', 'update'].includes(mode)) throw new Error('Invalid mode');
+            if (!['preview', 'update', 'rewrite'].includes(mode)) throw new Error('Invalid mode');
 
             // Discover module PRDs without hardcoding GD1/GD2/GD3 folder names.
             function walk(dir, out = []) {
@@ -224,9 +224,11 @@ jobs:
               ].join('\n\n');
             }
             async function processIssue(issue, makeBody) {
-              if (issue.body?.trim()) {
+              // Preview always generates a candidate, even when the issue already has content.
+              // Update fills blanks only; rewrite intentionally replaces existing content.
+              if (mode === 'update' && issue.body?.trim()) {
                 stats.skipped++;
-                core.info(`Skip #${issue.number}: existing body`);
+                core.info(`Skip #${issue.number}: existing body (update mode)`);
                 return;
               }
               try {
@@ -237,14 +239,25 @@ jobs:
                   stats.previewed++;
                 } else {
                   const latest = (await github.rest.issues.get({ owner, repo, issue_number: issue.number })).data;
-                  if (latest.body?.trim() || latest.state !== 'open') {
+                  if (latest.state !== 'open') {
                     stats.skipped++;
-                    core.warning(`Skip #${issue.number}: changed since listing`);
+                    core.warning(`Skip #${issue.number}: issue is no longer open`);
+                    return;
+                  }
+                  // Protect concurrent edits: never overwrite content changed after listing.
+                  if ((latest.body || '') !== (issue.body || '')) {
+                    stats.skipped++;
+                    core.warning(`Skip #${issue.number}: body changed during workflow`);
+                    return;
+                  }
+                  if (mode === 'update' && latest.body?.trim()) {
+                    stats.skipped++;
+                    core.warning(`Skip #${issue.number}: existing body (update mode)`);
                     return;
                   }
                   await github.rest.issues.update({ owner, repo, issue_number: issue.number, body });
                   stats.updated++;
-                  core.info(`Updated #${issue.number}`);
+                  core.info(`${mode === 'rewrite' ? 'Rewritten' : 'Updated'} #${issue.number}`);
                 }
                 await sleep(1500);
               } catch (err) {
