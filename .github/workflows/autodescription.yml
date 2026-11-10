@@ -1,4 +1,4 @@
-name: Cập nhật Parent Issue
+name: Cập nhật Form Task Cha & Con
 
 on:
   workflow_dispatch:
@@ -16,30 +16,29 @@ on:
         required: false
         type: string
 
-# Cấp quyền ghi (write) cho GitHub Actions để có thể sửa đổi nội dung Issue
 permissions:
   issues: write
 
 jobs:
-  update-issue:
+  update-issues:
     runs-on: ubuntu-latest
     steps:
-      - name: Lấy dữ liệu và Cập nhật Issue
+      - name: Áp dụng Form cho Task Cha và Task Con
         uses: actions/github-script@v7
         with:
           script: |
-            // Tự động xóa các ký tự thừa (như dấu # hoặc khoảng trắng) chỉ giữ lại số
             const rawId = context.payload.inputs.parent_id || '';
             const parentId = parseInt(rawId.replace(/\D/g, ''), 10);
             
             if (isNaN(parentId)) {
-              core.setFailed("Lỗi: ID của Task Cha không hợp lệ. Vui lòng kiểm tra lại (VD nhập: 135).");
+              core.setFailed("Lỗi: ID của Task Cha không hợp lệ.");
               return;
             }
 
             const labelWbs = context.payload.inputs.label_wbs;
             const milestoneText = context.payload.inputs.milestone_text || '';
             
+            // Lấy danh sách tất cả issue cùng nhãn
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -48,58 +47,62 @@ jobs:
               per_page: 100
             });
             
+            // Tách riêng Task Cha và danh sách Task Con
+            const subTasks = issues.filter(issue => issue.number !== parentId);
+            
             let subTasksString = '';
-            issues.forEach(issue => {
-              if (issue.number !== parentId) {
-                const isClosed = issue.state === 'closed' ? 'x' : ' ';
-                subTasksString += `- [${isClosed}] #${issue.number} ${issue.title}\n`;
-              }
+            subTasks.forEach(issue => {
+              const isClosed = issue.state === 'closed' ? 'x' : ' ';
+              subTasksString += `- [${isClosed}] #${issue.number} ${issue.title}\n`;
             });
             
             if (!subTasksString) {
-              subTasksString = '- [ ] Chưa có sub-task nào hoặc sai nhãn.\n';
+              subTasksString = '- [ ] Chưa có task con.\n';
             }
 
-            const newBody = `
-            ### 1. Mục tiêu
-            Xây dựng các tính năng thuộc module ${labelWbs}.
+            // ==========================================
+            // 1. CẬP NHẬT FORM CHO TASK CHA
+            // ==========================================
+            const parentBody = `
+            ### 1) Mục tiêu:
+            Mục tiêu của module ${labelWbs} làm gì...
 
-            ### 2. Thông tin quản lý
+            ### 2) Thông tin:
             - **Milestone:** ${milestoneText}
-            - **WBS ID:** ${labelWbs}
-            - **PRD Reference:** 
-            - **Parent Assignee / Phụ trách:** 
-            - **Priority:** 
-            - **Dependencies:** 
             - **Nhãn đề xuất:** ${labelWbs}
 
-            ### 3. Phạm vi hạng mục
-            **In scope**
-            - [ ] Tuân thủ các yêu cầu PRD được liệt kê tại mục PRD Reference.
-
-            **Out of scope**
-            - [ ] Các hạng mục nằm ngoài phạm vi đã xác định.
-
-            ### 4. Task con
+            ### Task con:
             ${subTasksString}
-            
-            ### 5. Tiêu chí chấp nhận (Acceptance Criteria)
-            - [ ] Hoàn thành toàn bộ task con của module.
-
-            ### 6. Ghi chú kiểm thử
-            - **Dữ liệu test:** Dữ liệu giả lập, không dùng dữ liệu cá nhân thật.
-
-            ### 7. Checklist hoàn thành (Definition of Done)
-            - [ ] Đầu ra nằm trong phạm vi đã thống nhất và tất cả tiêu chí chấp nhận áp dụng đã được xác minh.
-            - [ ] Các kiểm tra cần thiết đã chạy và đạt; lỗi quan trọng ảnh hưởng tiêu chí chấp nhận đã được xử lý.
-            - [ ] Issue liên kết PRD/WBS; PR liên kết Issue; cập nhật tài liệu liên quan nếu có ảnh hưởng.
-            - [ ] Lưu kết quả test/retest hoặc checklist làm bằng chứng.
-            - [ ] Assignee cập nhật trạng thái và chỉ đóng Issue khi các điều kiện DoD áp dụng đã đạt.
             `.replace(/^[ \t]+/gm, '').trim();
 
             await github.rest.issues.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: parentId,
-              body: newBody
+              body: parentBody
             });
+
+            // ==========================================
+            // 2. CẬP NHẬT FORM CHO TẤT CẢ TASK CON
+            // ==========================================
+            const subTaskBody = `
+            ### 1) Mô tả:
+            Mô tả nội dung của task con đó...
+
+            ### 2) Tiêu chí hoàn thành:
+            - [ ] Tiêu chí 1
+            - [ ] Tiêu chí 2
+            `.replace(/^[ \t]+/gm, '').trim();
+
+            for (const issue of subTasks) {
+              // Cơ chế an toàn: Chỉ ghi đè nếu phần mô tả đang trống 
+              // hoặc chưa chứa form "Tiêu chí hoàn thành"
+              if (!issue.body || !issue.body.includes('Tiêu chí hoàn thành')) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: subTaskBody
+                });
+              }
+            }
