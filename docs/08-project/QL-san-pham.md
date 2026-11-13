@@ -93,7 +93,7 @@ Mọi phản hồi thu thập được phải được phân loại và chuyển
 
 | Vấn đề phát hiện trên số liệu (What) *(Mô phỏng)* | Kết quả phỏng vấn người dùng (Why) *(Mô phỏng)* | Phân tích rủi ro sản phẩm | Hành động cải tiến thực tế (Action Item) |
 |:---|:---|:---|:---|
-| **Tạo Ticket:** Tỷ lệ thoát ngang (Bounce Rate) ở form tạo là 60%. Người dùng dừng > 3 phút nhưng không bấm gửi. | *"Em không biết vấn đề của em thì phòng Đào tạo hay phòng CTSV giải quyết. Sợ chọn sai bị từ chối nên em không gửi nữa."* | Giao diện đòi hỏi sinh viên phải nắm rõ cơ cấu tổ chức nhà trường → Đi ngược lại giá trị cốt lõi "Tập trung". | Loại bỏ trường bắt buộc chọn phòng ban. Cho phép chọn theo "Tên thủ tục hành chính". Hệ thống tự map về đúng đơn vị. |
+| **Tạo Ticket:** Tỷ lệ thoát ngang (Bounce Rate) ở form tạo là 60%. Người dùng dừng > 3 phút nhưng không bấm gửi. | *"Em không biết vấn đề của em thì phòng Đào tạo hay phòng CTSV giải quyết. Sợ chọn sai bị từ chối nên em không gửi nữa."* | Giao diện đòi hỏi sinh viên phải nắm rõ cơ cấu tổ chức nhà trường → Đi ngược lại giá trị cốt lõi "Tập trung". | Giữ tùy chọn mục 'Khác' (theo FR-M05-01) và đề xuất tính năng tự động gợi ý phòng ban theo tên thủ tục ở Giai đoạn 2 để không mâu thuẫn với PRD M05. |
 | **Theo dõi Ticket:** Tần suất truy cập lại trang chi tiết rất cao (trung bình 4 lần/ngày cho 1 đơn). | *"Hệ thống chỉ báo 'Đang xử lý', em không biết bao giờ xong nên cứ mở ra xem liên tục."* | Trạng thái hiển thị thiếu minh bạch về mốc thời gian, gây lo lắng cho người dùng. | Bổ sung thanh tiến trình trực quan (Progress Bar) kèm mốc "Thời gian dự kiến hoàn thành (ETA)". |
 
 ---

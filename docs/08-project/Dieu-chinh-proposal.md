@@ -20,7 +20,7 @@ Lộ trình triển khai được tái cấu trúc thành 5 giai đoạn chính 
 | Cột mốc | Thời gian | Nội dung hoàn thành |
 | :--- | :---: | :--- |
 | **MS-00 – Khởi động** | Tuần 1 – 3 | - Khảo sát và đặc tả.<br>- Thiết kế và tạm ứng.<br>- Database và nền tảng. |
-| **MS-01 – Nền tảng** | Tuần 4 – 6 | - Đăng nhập / Đăng ký.<br>- Vai trò và phân quyền.<br>- Quản lý tài khoản. |
+| **MS-01 – Nền tảng** | Tuần 4 – 6 | - Đăng nhập.<br>- Vai trò và phân quyền.<br>- Quản lý tài khoản. |
 | **MS-02 – Ticket và Phân hệ sinh viên** | Tuần 7 – 11 | - Quy trình xử lý Ticket (tạo, duyệt, cập nhật).<br>- Tính năng cho sinh viên (theo dõi, đánh giá). |
 | **MS-03 – Giám sát Dashboard** | Tuần 12 – 14 | - Dashboard theo dõi tiến độ.<br>- Báo cáo tiến độ từng phòng. |
 | **MS-04 – Bàn giao dự án** | Tuần 15 – 16 | - Nghiệm thu.<br>- Chuẩn bị tài liệu.<br>- Bàn giao chính thức. |
