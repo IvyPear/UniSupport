@@ -1,0 +1,63 @@
+name: Xóa Nội Dung Issue (Reset/Clean Up)
+
+on:
+  workflow_dispatch:
+    inputs:
+      label_filter:
+        description: 'Nhãn để lọc (VD: M01). Để trống nếu muốn xóa TOÀN BỘ open issues.'
+        required: false
+        type: string
+      confirm:
+        description: 'Gõ "YES" để xác nhận xóa (Tránh bấm nhầm)'
+        required: true
+        type: string
+
+permissions:
+  issues: write
+
+jobs:
+  clear-issues-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Xóa trắng nội dung Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const confirm = context.payload.inputs.confirm;
+            if (confirm !== 'YES') {
+              core.setFailed('Bạn chưa xác nhận YES. Hủy thao tác để đảm bảo an toàn.');
+              return;
+            }
+
+            const labelFilter = context.payload.inputs.label_filter;
+            
+            // Cấu hình tham số tìm kiếm
+            const queryParams = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all', // Lấy cả issue đang mở và đã đóng (nếu muốn)
+              per_page: 100
+            };
+            
+            if (labelFilter) {
+              queryParams.labels = labelFilter;
+            }
+
+            // Lấy danh sách Issue
+            const { data: issues } = await github.rest.issues.listForRepo(queryParams);
+
+            if (issues.length === 0) {
+              console.log('Không tìm thấy Issue nào để xóa nội dung.');
+              return;
+            }
+
+            // Lặp qua từng Issue và xóa trắng phần thân (body)
+            for (const issue of issues) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '' // Xóa trắng nội dung
+              });
+              console.log(`Đã xóa nội dung của Issue #${issue.number} - ${issue.title}`);
+            }

@@ -1,50 +1,103 @@
-﻿# TÀI LIỆU DỰ ÁN UNISUPPORT (PROJECT DOCUMENTATION INDEX)
+# TÀI LIỆU DỰ ÁN UNISUPPORT (PROJECT DOCUMENTATION INDEX)
 
 ---
 
-## 1. Giới Thiệu Cấu Trúc Tài Liệu
+## Cấu trúc tài liệu
 
-Chào mừng bạn đến với bộ tài liệu hoàn chỉnh của hệ thống **UniSupport** (Nền tảng Tiếp nhận và Hỗ trợ Thủ tục Hành chính Sinh viên). Thư mục tài liệu này được cấu trúc theo chuẩn Quản trị Phần mềm Chuyên nghiệp, hỗ trợ đầy đủ các vai trò: **Business Analyst (BA)**, **Software Developer (Dev)**, **QA/QC Engineer** và **Project Manager (PM)**.
+```
+docs/
+├── 01-product/              # Tổng quan sản phẩm
+│   └── README.md
+├── 02-domain/               # Nghiệp vụ cốt lõi
+│   ├── README.md
+│   ├── tong-quan-domain.md
+│   ├── quy-tac-nghiep-vu.md
+│   ├── mo-hinh-ticket.md
+│   └── chuyen-doi-trang-thai.md
+├── 03-modules/              # Đặc tả chức năng (13 module: M01–M13)
+│   ├── README.md
+│   ├── M01-dang-nhap-xac-thuc/
+│   ├── M02-vai-tro-phan-quyen/
+│   ├── M03-quan-ly-tai-khoan/
+│   ├── M04-quan-ly-danh-muc/
+│   ├── M05-khoi-tao-ticket/
+│   ├── M06-tiep-nhan-ticket/
+│   ├── M07-xu-ly-trao-doi/
+│   ├── M08-tra-ket-qua/
+│   ├── M09-theo-doi-bo-sung/
+│   ├── M10-ket-qua-danh-gia/
+│   ├── M11-quan-ly-dieu-phoi/
+│   ├── M12-giam-sat-tien-do/
+│   └── M13-dashboard-bao-cao/
+├── 04-workflows/            # Luồng quy trình nghiệp vụ
+│   ├── README.md
+│   ├── 00-quy-trinh-chung.md
+│   ├── 01-luong-hoat-dong-Ticket.md
+│   ├── 02-quy-trinh-sinh-vien.md
+│   ├── 03-quy-trinh-nhan-vien.md
+│   ├── 04-quy-trinh-quan-ly.md
+│   ├── 05-quy-trinh-admin.md
+│   └── 06-ma-tran-thong-bao.md
+├── 05-non-functional-requirements/  # Yêu cầu phi chức năng
+│   └── README.md
+├── 06-acceptance/           # Kiểm thử & nghiệm thu
+│   ├── test-scenarios.md
+│   └── chien-luoc-kiem-thu.md
+├── 07-architecture/         # Thiết kế kiến trúc & kỹ thuật
+│   ├── README.md
+│   ├── co-so-du-lieu-erd.md
+│   └── dac-ta-api.md
+├── 08-project/              # Quản lý dự án
+│   ├── sent/
+│   ├── team-charter.md
+│   ├── proposal-adjustment.md
+│   ├── master-plan.md
+│   └── master-plan.xlsx
+├── 09-quality/              # Kế hoạch chất lượng
+│   └── quality-plan.md
+├── 10-product-management/   # Quản lý sản phẩm
+│   └── README.md
+├── 11-governance/           # Quản trị dự án
+│   ├── README.md
+│   ├── change-control.md
+│   ├── monitoring.md
+│   └── reporting.md
+└── README.md                # File này — Mục lục tổng
+```
 
 ---
 
-## 2. Danh Mục Tài Liệu Chi Tiết (Documentation Index)
+## Danh mục tài liệu
 
-### 📌 Tổng Quan Sản Phẩm (Product Overview)
-* [tong-quan-san-pham.md](tong-quan-san-pham.md) - Định vị sản phẩm, mục tiêu dự án, các đối tượng sử dụng (Actors) và giá trị cốt lõi.
+### 📌 [01 — Tổng Quan Sản Phẩm](01-product/README.md)
+Định vị sản phẩm, đối tượng sử dụng (Actors), giá trị cốt lõi.
 
----
+### 🏛️ [02 — Nghiệp Vụ Cốt Lõi (Domain)](02-domain/README.md)
+Bối cảnh, quy tắc nghiệp vụ, mô hình Ticket, vòng đời 5 trạng thái.
 
-### 🏛️ 1. Nghiệp Vụ Cốt Lõi (Domain Knowledge) ([Xem chỉ mục chi tiết: domain/readme.md](domain/readme.md))
-* [docs/domain/tong-quan-domain.md](domain/tong-quan-domain.md) - Bối cảnh, Vấn đề cốt lõi và Giải pháp tổng thể Single Service Desk.
-* [docs/domain/quy-tac-nghiep-vu.md](domain/quy-tac-nghiep-vu.md) - Quy tắc nghiệp vụ toàn cục của toàn hệ thống.
-* [docs/domain/chuyen-doi-trang-thai.md](domain/chuyen-doi-trang-thai.md) - Vòng đời 5 trạng thái Ticket (`NEW` $\rightarrow$ `IN_PROGRESS` $\rightarrow$ `PENDING` $\rightarrow$ `RESOLVED` $\rightarrow$ `CLOSED`) và Ma trận chuyển đổi.
-* [docs/domain/mo-hinh-ticket.md](domain/mo-hinh-ticket.md) - Mô hình khái niệm của Ticket.
+### 📦 [03 — Đặc Tả Module (PRD)](03-modules/README.md)
+13 phân hệ thực thi (M01–M13) chia 3 giai đoạn, 5 mốc triển khai.
 
----
+### 🔄 [04 — Luồng Quy Trình (Workflows)](04-workflows/README.md)
+Quy trình 4 vai trò (Sinh viên, Nhân viên, Quản lý, Admin) và ma trận thông báo.
 
-### 📦 2. Đặc Tả Yêu Cầu Chức Năng (Modules / PRD)
-Tập hợp đặc tả **13 Phân hệ thực thi (từ M01 đến M13)** phân chia thành 3 thư mục Giai đoạn phát triển ([Xem chi tiết: modules/readme.md](modules/readme.md)):
-* **Giai đoạn 1 — Nền tảng (`modules/GD1/Moc1-NenTang/`):** M01 (Đăng nhập & Xác thực), M02 (Vai trò & Phân quyền), M03 (Quản lý tài khoản).
-* **Giai đoạn 2 — Nghiệp vụ Ticket & Sinh viên (`modules/GD2/`):** Mốc 2 gồm M04 (Danh mục) và M05 (Khởi tạo Ticket); Mốc 3 gồm M06 (Tiếp nhận), M07 (Xử lý & Trao đổi), M08 (Trả kết quả), M11 (Điều phối); Mốc 4 gồm M09 (Theo dõi & Bổ sung), M10 (Kết quả & Đánh giá).
-* **Giai đoạn 3 — Giám sát & Dashboard (`modules/GD3/Moc5-GiamSat&Dashboard/`):** M12 (Giám sát tiến độ), M13 (Dashboard & Báo cáo).
+### ⚙️ [05 — Yêu Cầu Phi Chức Năng](05-non-functional-requirements/README.md)
+Bảo mật, hiệu năng, toàn vẹn dữ liệu, SLA.
 
----
+### ✅ [06 — Kiểm Thử & Nghiệm Thu](06-acceptance/)
+Chiến lược kiểm thử, kịch bản test theo module.
 
-### 🔄 3. Luồng Quy Trình Nghiệp Vụ (Workflows)
-* [docs/workflows/readme.md](workflows/readme.md) - Chỉ mục 7 tệp workflow (00–06), bao gồm quy trình 4 vai trò và ma trận thông báo.
+### 💻 [07 — Kiến Trúc & Kỹ Thuật](07-architecture/README.md)
+Kiến trúc phân tầng, ERD, đặc tả API.
 
----
+### 📋 [08 — Quản Lý Dự Án](08-project/)
+Team Charter, điều chỉnh Proposal, kế hoạch nhân sự & ngân sách.
 
-### 💻 4. Thiết Kế Kỹ Thuật (Technical Design)
-* [tong-quan-kien-truc.md](technical/tong-quan-kien-truc.md) - Sơ đồ Kiến trúc Hệ thống Phân tầng, Tech Stack, Security (JWT/RBAC) và NFR (SLA/Performance).
-* [co-so-du-lieu-erd.md](technical/co-so-du-lieu-erd.md) - Sơ đồ CSDL Quan hệ (Mermaid ERD), Chi tiết Bảng, Constraints và Indexes.
-* [dac-ta-api.md](technical/dac-ta-api.md) - Đặc tả RESTful API Endpoints chuẩn hóa.
+### 📊 [09 — Kế Hoạch Chất Lượng](09-quality/quality-plan.md)
+Quality Planning, QA, QC, Defect Management.
 
----
+### 📦 [10 — Quản Lý Sản Phẩm](10-product-management/README.md)
+SLA, đo lường sản phẩm, tiêu chuẩn nghiệm thu, lộ trình.
 
-### 🧪 5. Kế Hoạch & Ma Trận Kiểm Thử (QA & Testing)
-* [chien-luoc-kiem-thu.md](qa/chien-luoc-kiem-thu.md) - Kế hoạch Kiểm thử, Các mức độ testing, Ma trận phân loại Bug Severity và Tiêu chí Release.
-* [ma-tran-test-case.md](qa/ma-tran-test-case.md) - Phân bổ test case dự kiến theo 13 module và danh sách kịch bản tiêu biểu; mức bao phủ thực tế chỉ được xác nhận qua RTM/kết quả kiểm thử.
-
-
+### 🔒 [11 — Quản Trị Dự Án (Governance)](11-governance/README.md)
+Điều phối, giám sát, kiểm soát thay đổi, báo cáo.
