@@ -48,21 +48,14 @@ docs/
 │   ├── co-so-du-lieu-erd.md
 │   └── dac-ta-api.md
 ├── 08-project/              # Quản lý dự án
-│   ├── sent/
-│   ├── Proposal.md
+│   ├── Proposal.md          # Proposal ban đầu (lịch sử)
+│   ├── Dieu-chinh-proposal.md # Baseline milestone hiện hành
+│   ├── Master Schedule.xlsx # Kế hoạch và phân bổ nguồn lực
+│   ├── Ngan-sach-nhan-su.md # Ngân sách và nhân sự
 │   ├── team-charter.md
-│   ├── proposal-adjustment.md
-│   ├── master-plan.md
-│   └── master-plan.xlsx
-├── 09-quality/              # Kế hoạch chất lượng
-│   └── quality-plan.md
-├── 10-product-management/   # Quản lý sản phẩm
-│   └── README.md
-├── 11-governance/           # Quản trị dự án
-│   ├── README.md
-│   ├── change-control.md
-│   ├── monitoring.md
-│   └── reporting.md
+│   ├── QL-chat-luong.md
+│   ├── QL-san-pham.md
+│   └── Dieuphoi-Giamsat.md
 └── README.md                # File này — Mục lục tổng
 ```
 
@@ -77,7 +70,7 @@ docs/
 Bối cảnh, quy tắc nghiệp vụ, mô hình Ticket, vòng đời 5 trạng thái.
 
 ### 📦 [03 — Đặc Tả Module (PRD)](03-modules/README.md)
-13 phân hệ thực thi (M01–M13) chia 3 giai đoạn, 5 mốc triển khai.
+13 phân hệ thực thi (M01–M13) được phân vào baseline MS-00–MS-04.
 
 ### 🔄 [04 — Luồng Quy Trình (Workflows)](04-workflows/README.md)
 Quy trình 4 vai trò (Sinh viên, Nhân viên, Quản lý, Admin) và ma trận thông báo.
@@ -94,11 +87,11 @@ Kiến trúc phân tầng, ERD, đặc tả API.
 ### 📋 [08 — Quản Lý Dự Án](08-project/)
 Team Charter, điều chỉnh Proposal, kế hoạch nhân sự & ngân sách.
 
-### 📊 [09 — Kế Hoạch Chất Lượng](09-quality/quality-plan.md)
-Quality Planning, QA, QC, Defect Management.
+### 📊 [Kế Hoạch Chất Lượng](08-project/QL-chat-luong.md)
+Quality Planning, QA, QC, Definition of Done và Defect Management.
 
-### 📦 [10 — Quản Lý Sản Phẩm](10-product-management/README.md)
-SLA, đo lường sản phẩm, tiêu chuẩn nghiệm thu, lộ trình.
+### 📦 [Quản Lý Sản Phẩm](08-project/QL-san-pham.md)
+SLA, đo lường sản phẩm, tiêu chuẩn nghiệm thu và lộ trình.
 
-### 🔒 [11 — Quản Trị Dự Án (Governance)](11-governance/README.md)
-Điều phối, giám sát, kiểm soát thay đổi, báo cáo.
+### 🔒 [Quản Trị Dự Án](08-project/Dieuphoi-Giamsat.md)
+Điều phối, giám sát, kiểm soát thay đổi và báo cáo.

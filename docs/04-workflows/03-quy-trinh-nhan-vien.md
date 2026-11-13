@@ -1,6 +1,6 @@
 # 3. PHÂN HỆ NHÂN VIÊN (STAFF WORKFLOWS)
 
-> **Ánh xạ Phân hệ:** [M06-tiep-nhan-ticket](../modules/GD2/Moc3-XuLi&BoSung/M06-tiep-nhan-ticket/), [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/), [M08-tra-ket-qua](../modules/GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/)
+> **Ánh xạ Phân hệ:** [M06-tiep-nhan-ticket](../03-modules/M06-tiep-nhan-ticket/), [M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/), [M08-tra-ket-qua](../03-modules/M08-tra-ket-qua/)
 
 ---
 
@@ -8,7 +8,7 @@
 
 * **Tác nhân:** Nhân viên phòng ban.
 * **Tiền điều kiện:** Đã đăng nhập tài khoản Role Nhân viên, thuộc phòng ban xử lý.
-* **Ánh xạ Module:** [M06-tiep-nhan-ticket](../modules/GD2/Moc3-XuLi&BoSung/M06-tiep-nhan-ticket/) (`[FR-M06-01]`, `[FR-M06-02]`)
+* **Ánh xạ Module:** [M06-tiep-nhan-ticket](../03-modules/M06-tiep-nhan-ticket/) (`[FR-M06-01]`, `[FR-M06-02]`)
 * **Luồng chính:**
   1. Mở danh sách **Yêu cầu mới**.
   2. Hệ thống hiển thị danh sách Ticket ở trạng thái **Chưa tiếp nhận** (`New`) thuộc phòng ban.
@@ -36,7 +36,7 @@ graph TD
 ### NV-02 — Cập nhật tiến độ
 
 * **Tác nhân:** Nhân viên phụ trách Ticket.
-* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-01]`)
+* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/) (`[FR-M07-01]`)
 * **Luồng chính:**
   1. Mở Ticket đang phụ trách từ danh sách cá nhân.
   2. Ticket đã ở trạng thái **Đang xử lý** (`In Progress`) sau khi tiếp nhận hoặc được Quản lý phân công; nhân viên không cần thực hiện thêm thao tác chuyển trạng thái để bắt đầu.
@@ -59,7 +59,7 @@ graph TD
 ### NV-03 — Yêu cầu bổ sung
 
 * **Tác nhân:** Nhân viên phụ trách Ticket.
-* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-03]`)
+* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/) (`[FR-M07-03]`)
 * **Luồng chính:**
   1. Mở Ticket đang xử lý.
   2. Chọn tính năng **Yêu cầu bổ sung thông tin** (chỉ được yêu cầu tối đa 1 lần duy nhất cho mỗi ticket).
@@ -86,7 +86,7 @@ graph TD
 ### NV-04 — Chuyển Ticket sai phòng ban
 
 * **Tác nhân:** Nhân viên phụ trách Ticket.
-* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-04]`)
+* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/) (`[FR-M07-04]`)
 * **Tiền điều kiện:** Ticket đang `In Progress` và thuộc quyền phụ trách của nhân viên; không chuyển trả từ `Pending`, `Resolved` hoặc `Closed`.
 * **Luồng chính:**
   1. Mở Ticket thuộc phạm vi xử lý.
@@ -113,7 +113,7 @@ graph TD
 ### NV-05 — Trả kết quả
 
 * **Tác nhân:** Nhân viên phụ trách Ticket.
-* **Ánh xạ Module:** [M08-tra-ket-qua](../modules/GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/) (`[FR-M08-01]`, `[FR-M08-02]`)
+* **Ánh xạ Module:** [M08-tra-ket-qua](../03-modules/M08-tra-ket-qua/) (`[FR-M08-01]`, `[FR-M08-02]`)
 * **Luồng chính:**
   1. Mở Ticket đang xử lý.
   2. Chọn **Trả kết quả**.
@@ -141,7 +141,7 @@ graph TD
 ### NV-06 — Xem lịch sử xử lý
 
 * **Tác nhân:** Nhân viên.
-* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) (`[FR-M07-02]`)
+* **Ánh xạ Module:** [M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/) (`[FR-M07-02]`)
 * **Luồng chính:**
   1. Mở menu **Lịch sử xử lý**.
   2. Hệ thống tải danh sách các Ticket Nhân viên đã tiếp nhận hoặc giải quyết trong quá khứ.

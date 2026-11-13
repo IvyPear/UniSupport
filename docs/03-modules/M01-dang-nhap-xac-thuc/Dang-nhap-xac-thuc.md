@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M01
 * **Tên Phân hệ:** M01: Đăng nhập & Xác thực (Auth)
-* **Mốc triển khai (Milestone): Moc1-NenTang
+* **Mốc triển khai (Milestone): MS-01
 * **Đối tượng phụ trách:** Sinh viên, Nhân viên, Quản lý, Admin
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

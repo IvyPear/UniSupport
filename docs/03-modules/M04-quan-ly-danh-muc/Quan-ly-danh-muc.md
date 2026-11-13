@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M04
 * **Tên Phân hệ:** M04: Quản lý danh mục hỗ trợ (Category Management)
-* **Mốc triển khai (Milestone): Moc2-KhoiTaoTicket
+* **Mốc triển khai (Milestone): MS-02
 * **Đối tượng phụ trách:** Admin, Quản lý
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

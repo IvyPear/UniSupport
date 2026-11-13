@@ -1,5 +1,7 @@
 # ĐỀ XUẤT GIẢI PHÁP HỆ THỐNG QUẢN LÝ HỖ TRỢ SINH VIÊN (UNISUPPORT)
 
+> **Trạng thái:** Bản proposal ban đầu, được lưu làm lịch sử. Baseline milestone hiện hành được xác định tại [Báo cáo điều chỉnh kế hoạch triển khai](Dieu-chinh-proposal.md).
+
 - **Khách hàng:** Ban Giám hiệu – Aurora University
 - **Đơn vị triển khai:** Tổ hợp Dự án UniSupport
 - **Thời gian thực hiện dự kiến:** 16 Tuần

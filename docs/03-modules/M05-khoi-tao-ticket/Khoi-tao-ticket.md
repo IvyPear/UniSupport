@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M05
 * **Tên Phân hệ:** M05: Khởi tạo Ticket — Sinh viên (Create Ticket)
-* **Mốc triển khai (Milestone): Moc2-KhoiTaoTicket
+* **Mốc triển khai (Milestone): MS-02
 * **Đối tượng phụ trách:** Sinh viên
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

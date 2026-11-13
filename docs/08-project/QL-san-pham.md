@@ -81,8 +81,8 @@ Mọi phản hồi thu thập được phải được phân loại và chuyển
 
 | STT | Loại phản hồi | Tiêu chí nhận diện | Quy trình tiếp nhận & Xử lý tiếp theo | Đầu mối chịu trách nhiệm |
 |:---:|:---|:---|:---|:---|
-| 1 | **Lỗi kỹ thuật / Sự cố (Bugs)** | Báo cáo lỗi giao diện, đứt kết nối, tính năng chạy sai đặc tả PRD | Chuyển vào **Quy trình Quản lý Chất lượng** (`09-quality/quality-plan.md`), gắn nhãn mức độ lỗi (P0–P3). | Đội ngũ QA/QC |
-| 2 | **Yêu cầu thay đổi / Tính năng mới (Feature Requests / CR)** | Đề xuất bổ sung tính năng mới, thay đổi luồng nghiệp vụ hoặc quy tắc tính điểm/thời hạn | Chuyển vào **Quy trình Kiểm soát Thay đổi** (`11-governance/change-control.md`), lập hồ sơ CR đánh giá tác động giá/tiến độ. | Project Manager & Ban Giám hiệu |
+| 1 | **Lỗi kỹ thuật / Sự cố (Bugs)** | Báo cáo lỗi giao diện, đứt kết nối, tính năng chạy sai đặc tả PRD | Chuyển vào **Quy trình Quản lý Chất lượng** ([QL-chat-luong.md](QL-chat-luong.md)), gắn nhãn mức độ lỗi (P0–P3). | Đội ngũ QA/QC |
+| 2 | **Yêu cầu thay đổi / Tính năng mới (Feature Requests / CR)** | Đề xuất bổ sung tính năng mới, thay đổi luồng nghiệp vụ hoặc quy tắc tính điểm/thời hạn | Chuyển vào **Quy trình Kiểm soát Thay đổi** ([Dieuphoi-Giamsat.md](Dieuphoi-Giamsat.md)), lập hồ sơ CR đánh giá tác động giá/tiến độ. | Project Manager & Ban Giám hiệu |
 | 3 | **Cải tiến giao diện & trải nghiệm (UX/UI Improvements)** | Góp ý về màu sắc, bố cục, nút bấm, độ tiện dụng mà không làm đổi nghiệp vụ cốt lõi | Đưa vào **Product Backlog** (Mục 6.1) để chấm điểm ưu tiên cho phiên bản tiếp theo. | Business Analyst / UI Designer |
 | 4 | **Thắc mắc vận hành / Quy trình (Inquiries)** | Sinh viên thắc mắc về thời gian xử lý, giấy tờ cần chuẩn bị hoặc cách dùng tính năng | Chuyển đến bộ phận CSKH/Nhân viên phòng ban để giải đáp; tổng hợp để bổ sung vào tài liệu **FAQ / Hướng dẫn sử dụng**. | Nhân viên tiếp nhận & BA |
 | 5 | **Góp ý chung / Khác (General Feedback)** | Lời khen ngợi, nhận xét chung về thái độ phục vụ hoặc ý kiến khác | Lưu trữ vào **Sổ tay Phản hồi (Feedback Log)** định kỳ hàng tháng để báo cáo đánh giá dịch vụ. | Product Owner |

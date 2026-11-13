@@ -12,15 +12,18 @@ Việc điều chỉnh cấu trúc Timeline và các cột mốc (Milestone) tro
 Đơn vị triển khai cam kết việc điều chỉnh này chỉ mang tính chất cơ cấu lại cách quản lý lộ trình, hoàn toàn không làm thay đổi tiến độ tổng thể cũng như ngân sách đã thống nhất.
 
 ## 3. CHI TIẾT HẠNG MỤC THAY ĐỔI
+
+> Đây là baseline milestone hiện hành của dự án. Proposal ban đầu được lưu tại [Proposal.md](Proposal.md) để đối chiếu lịch sử.
+
 Lộ trình triển khai được tái cấu trúc thành 5 giai đoạn chính bằng cách tích hợp các tính năng có tính liên kết cao, thay cho việc liệt kê theo tuần đơn lẻ, giúp duy trì luồng công việc liên tục và tối ưu nguồn lực.
 
 | Cột mốc | Thời gian | Nội dung hoàn thành |
 | :--- | :---: | :--- |
-| **Mốc 0 – Khởi động** | Tuần 1 – 3 | - Khảo sát và đặc tả.<br>- Thiết kế và tạm ứng.<br>- Database và nền tảng. |
-| **Mốc 1 – Nền tảng** | Tuần 4 – 6 | - Đăng nhập / Đăng ký.<br>- Vai trò và phân quyền.<br>- Quản lý tài khoản. |
-| **Mốc 2 – Ticket và Phân hệ sinh viên** | Tuần 7 – 11 | - Quy trình xử lý Ticket (tạo, duyệt, cập nhật).<br>- Tính năng cho sinh viên (theo dõi, đánh giá). |
-| **Mốc 3 – Giám sát Dashboard** | Tuần 12 – 14 | - Dashboard theo dõi tiến độ.<br>- Báo cáo tiến độ từng phòng. |
-| **Mốc 4 – Bàn giao dự án** | Tuần 15 – 16 | - Nghiệm thu.<br>- Chuẩn bị tài liệu.<br>- Bàn giao chính thức. |
+| **MS-00 – Khởi động** | Tuần 1 – 3 | - Khảo sát và đặc tả.<br>- Thiết kế và tạm ứng.<br>- Database và nền tảng. |
+| **MS-01 – Nền tảng** | Tuần 4 – 6 | - Đăng nhập / Đăng ký.<br>- Vai trò và phân quyền.<br>- Quản lý tài khoản. |
+| **MS-02 – Ticket và Phân hệ sinh viên** | Tuần 7 – 11 | - Quy trình xử lý Ticket (tạo, duyệt, cập nhật).<br>- Tính năng cho sinh viên (theo dõi, đánh giá). |
+| **MS-03 – Giám sát Dashboard** | Tuần 12 – 14 | - Dashboard theo dõi tiến độ.<br>- Báo cáo tiến độ từng phòng. |
+| **MS-04 – Bàn giao dự án** | Tuần 15 – 16 | - Nghiệm thu.<br>- Chuẩn bị tài liệu.<br>- Bàn giao chính thức. |
 
 ## 4. CAM KẾT VỀ MỨC ĐỘ ẢNH HƯỞNG ĐẾN DỰ ÁN
 Đội ngũ dự án đánh giá và cam kết việc cập nhật kế hoạch trên sẽ giữ nguyên các tiêu chuẩn cốt lõi của dự án:

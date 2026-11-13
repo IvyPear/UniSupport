@@ -120,6 +120,5 @@ Ngắn, theo thứ tự:
 
 - **Hai tài liệu mâu thuẫn, không biết cái nào đúng:** không chọn thay nhóm. Nêu cả hai bằng chứng, hỏi quyết định, sửa theo quyết định, ghi lý do.
 - **Sửa một chỗ kéo đổ nhiều chỗ:** làm theo bản đồ ảnh hưởng, chia nhiều commit theo nơi gốc, một PR có danh sách đầy đủ.
-- **Nhóm muốn sửa nhanh cho "đẹp tài liệu":** nhắc rằng nội dung không có trong mục lục và không tìm được thì không được tính; sửa nhanh nhưng không bỏ bước 6.
 - **Yêu cầu bịa số cho "khớp":** từ chối một câu, đề nghị tính lại từ effort thật hoặc ghi giả định rõ ràng, rồi hỏi nhóm chọn.
 - **Gần hạn chốt:** ưu tiên 1–4 trong bước 2, bỏ trình bày, không mở rộng phạm vi sửa. Mọi thay đổi sau thời điểm chốt không được tính.

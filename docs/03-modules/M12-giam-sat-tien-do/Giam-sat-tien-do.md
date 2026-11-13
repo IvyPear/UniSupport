@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M12
 * **Tên Phân hệ:** M12: Giám sát tiến độ (Progress Monitoring)
-* **Mốc triển khai (Milestone): Moc5-GiamSat&Dashboard
+* **Mốc triển khai (Milestone): MS-03
 * **Đối tượng phụ trách:** Quản lý, Admin
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 
