@@ -49,6 +49,7 @@ docs/
 │   └── dac-ta-api.md
 ├── 08-project/              # Quản lý dự án
 │   ├── sent/
+│   ├── Proposal.md
 │   ├── team-charter.md
 │   ├── proposal-adjustment.md
 │   ├── master-plan.md

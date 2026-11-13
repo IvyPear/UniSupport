@@ -25,7 +25,7 @@ Lộ trình triển khai được tái cấu trúc thành 5 giai đoạn chính 
 ## 4. CAM KẾT VỀ MỨC ĐỘ ẢNH HƯỞNG ĐẾN DỰ ÁN
 Đội ngũ dự án đánh giá và cam kết việc cập nhật kế hoạch trên sẽ giữ nguyên các tiêu chuẩn cốt lõi của dự án:
 - **Tiến độ và thời hạn bàn giao:** Không thay đổi. Mặc dù cấu trúc tuần được tối ưu lại để quy trình kiểm thử diễn ra sớm hơn, dự án vẫn đảm bảo hoàn thành và bàn giao đúng thời hạn cuối cùng (Deadline) đã thống nhất.
-- **Ngân sách:** Không thay đổi. Giữ nguyên mức chi phí dự kiến là 400.000.000 VNĐ.
+- **Ngân sách:** Không thay đổi. Giữ nguyên mức chi phí dự kiến là 300.000.000 VNĐ.
 - **Phạm vi công việc (Scope of Work):** Không thay đổi. Toàn bộ các tính năng và sản phẩm bàn giao (Deliverables) được đảm bảo nguyên vẹn như thỏa thuận ban đầu.
 
 ## 5. KẾT LUẬN
