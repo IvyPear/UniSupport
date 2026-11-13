@@ -6,6 +6,8 @@
 
 **Actor:** Quản lý phòng ban, Admin
 
+**Priority:** **High** — Cung cấp bức tranh toàn cảnh về hiệu suất vận hành của hệ thống cho các cấp quản lý và lãnh đạo.
+
 **Preconditions (Điều kiện tiên quyết):** Đăng nhập với tài khoản vai trò Quản lý hoặc Admin.
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
@@ -20,6 +22,11 @@
 2. Hệ thống tải các Widget thẻ chỉ số tổng quan.
 3. Hệ thống vẽ các biểu đồ trực quan về xu hướng tiếp nhận và tỷ lệ phân bố trạng thái đơn.
 4. Người dùng thay đổi bộ lọc thời gian $\rightarrow$ Hệ thống tự động tính toán lại và vẽ lại biểu đồ tương ứng.
+
+**Business Rules (Quy tắc nghiệp vụ):**
+
+* **BR-01:** Dữ liệu trên Dashboard được làm mới tự động theo cơ chế thời gian thực (Polling mỗi 60 giây hoặc khi người dùng chủ động tải lại trang).
+* **BR-02:** Tỷ lệ % hoàn thành trên biểu đồ tròn được làm tròn đến 1 chữ số thập phân, đảm bảo tổng các phần bằng đúng 100%.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 

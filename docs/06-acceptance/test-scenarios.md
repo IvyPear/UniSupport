@@ -34,8 +34,8 @@
 |---|---|---|---|---|---|
 | `TC-M01-N01` | `M01-02/AC-01` | Đăng nhập sai mật khẩu quá 5 lần | Negative / Security | Nhập sai mật khẩu liên tiếp 5 lần với 1 tài khoản | Khóa tạm thời tài khoản trong 15 phút, hiển thị thông báo rõ ràng, chặn gửi request. |
 | `TC-M01-N02` | `M01-05/AC-01` | Đăng nhập bằng tài khoản bị vô hiệu hóa (`INACTIVE`) | Negative | Tài khoản có cờ `status = 'INACTIVE'` | Trả về `403 Forbidden`, thông báo "Tài khoản của bạn đã bị khóa bởi Quản trị viên". |
-| `TC-M01-N03` | `M01-03/AC-02` | Admin nhập mã OTP hết hạn | Negative / Boundary | Nhập mã OTP sau 16 phút kể từ lúc cấp (thời hạn 15 phút theo FR-M01-03) | Trả về `400 Bad Request`, thông báo "Mã OTP đã hết hiệu lực, vui lòng yêu cầu mã mới". |
-| `TC-M01-N04` | `M01-03/AC-03` | Dùng lại mã OTP đã sử dụng | Negative / Security | Admin đã đổi mật khẩu thành công bằng OTP, sau đó gửi lại chính OTP đó | Hệ thống từ chối OTP đã dùng vì mỗi OTP chỉ có hiệu lực một lần theo FR-M01-03. |
+| `TC-M01-N03` | `M01-01/AC-01` | Đăng nhập lần đầu bằng mật khẩu mặc định (ngày sinh) | Security / Main | Tài khoản mới tạo đăng nhập bằng mật khẩu ngày sinh (`DDMMYYYY`) | Đăng nhập thành công, hệ thống kích hoạt cờ `must_change_password` và buộc chuyển sang màn hình đổi mật khẩu mới. |
+| `TC-M01-N04` | `M01-01/AC-02` | Đăng nhập bằng mật khẩu cũ sau khi đã đổi mật khẩu | Negative / Security | Đăng nhập bằng mật khẩu mặc định cũ sau khi đã đổi mật khẩu thành công | Hệ thống từ chối đăng nhập (`401 Unauthorized`), thông báo "Mật khẩu không chính xác". |
 
 ### 2.1b. Phân hệ M02 & M03 — Phân quyền động và đổi mật khẩu sau reset (`MS-01`)
 | Test ID | Mã AC kiểm chứng | Tên kịch bản | Loại | Dữ liệu đầu vào / Điều kiện | Kết quả kỳ vọng (Expected Result) |

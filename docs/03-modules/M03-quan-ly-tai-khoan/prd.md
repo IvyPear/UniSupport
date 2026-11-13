@@ -6,6 +6,8 @@
 
 **Actor:** Quản trị viên (Admin)
 
+**Priority:** **High** — Chức năng quản trị người dùng cốt lõi, phục vụ việc tra cứu và quản lý tài khoản toàn trường.
+
 **Preconditions (Điều kiện tiên quyết):** Admin đăng nhập thành công vào hệ thống.
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
@@ -21,6 +23,11 @@
 2. Hệ thống hiển thị bảng danh sách tài khoản toàn trường (phân trang 20 dòng/trang).
 3. Admin nhập từ khóa hoặc chọn các tiêu chí lọc.
 4. Hệ thống tải lại danh sách kết quả phù hợp theo thời gian thực.
+
+**Business Rules (Quy tắc nghiệp vụ):**
+
+* **BR-01:** Phân trang cố định 20 bản ghi trên mỗi trang; sắp xếp theo thứ tự thời gian tạo mới nhất lên đầu.
+* **BR-02:** Tìm kiếm không phân biệt chữ hoa, chữ thường (Case-insensitive) và hỗ trợ tìm kiếm gần đúng theo chuỗi con (Partial Match).
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
