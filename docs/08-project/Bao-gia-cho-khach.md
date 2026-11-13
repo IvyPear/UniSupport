@@ -13,25 +13,17 @@
 
 ## 2. Phạm vi và hạng mục báo giá
 
-* **Mốc 0 – Khởi động (Tuần 1 – 3)**
-  * Nội dung hoàn thành: Khảo sát và đặc tả, Thiết kế và tạm ứng, Database và nền tảng.
-  * Giá trị: 30.000.000 VNĐ
+> **Liên kết cơ sở ước lượng giờ công (Effort) & đơn giá:** Chi tiết phân bổ 886 giờ công theo vai trò, đơn giá theo giờ và cơ cấu chi phí dự án được quy định tại [Ngan-sach-nhan-su.md](Ngan-sach-nhan-su.md) và chi tiết theo từng tác vụ tại [Master-schedule.md](Master-schedule.md).
 
-* **Mốc 1 – Nền tảng (Tuần 4 – 6)**
-  * Nội dung hoàn thành: Đăng nhập / Đăng ký, Vai trò và phân quyền, Quản lý tài khoản.
-  * Giá trị: 45.000.000 VNĐ
-
-* **Mốc 2 – Ticket và Phân hệ sinh viên (Tuần 7 – 11)**
-  * Nội dung hoàn thành: Quy trình xử lý Ticket (tạo, duyệt, cập nhật), Tính năng cho sinh viên (theo dõi, đánh giá).
-  * Giá trị: 90.000.000 VNĐ
-
-* **Mốc 3 – Giám sát Dashboard (Tuần 12 – 14)**
-  * Nội dung hoàn thành: Dashboard theo dõi tiến độ, Báo cáo tiến độ từng phòng.
-  * Giá trị: 45.000.000 VNĐ
-
-* **Mốc 4 – Bàn giao dự án (Tuần 15 – 16)**
-  * Nội dung hoàn thành: Nghiệm thu, Chuẩn bị tài liệu, Bàn giao chính thức.
-  * Giá trị: 90.000.000 VNĐ
+| Mã hạng mục | Cột mốc (`MS-xx`) | Phạm vi Module / Công việc | Giờ công WBS trực tiếp | Giá trị báo giá (VNĐ, gồm VAT) |
+| :---: | :--- | :--- | :---: | ---: |
+| **`Q-00`** | **MS-00 – Khởi động** (Tuần 1 – 3) | Khảo sát & đặc tả, thiết kế kiến trúc/UI, tạm ứng, dựng Database & nền tảng (`INF-01`). | 88h | 30.000.000 |
+| **`Q-01`** | **MS-01 – Nền tảng** (Tuần 4 – 6) | `M01` Đăng nhập & Xác thực, `M02` Vai trò & Phân quyền, `M03` Quản lý tài khoản, kèm Test QA/QC Đợt 1. | 160h | 45.000.000 |
+| **`Q-02`** | **MS-02 – Ticket và Phân hệ sinh viên** (Tuần 7 – 11) | `M04` Danh mục, `M05` Tạo Ticket, `M06` Tiếp nhận, `M07` Xử lý & Bổ sung, `M08` Trả kết quả, `M09` Theo dõi, `M10` Đánh giá, `M11` Điều phối, kèm Test QA/QC Đợt 2 & Đợt 3. | 290h | 90.000.000 |
+| **`Q-03`** | **MS-03 – Giám sát Dashboard** (Tuần 12 – 14) | `M12` Giám sát tiến độ & cảnh báo SLA, `M13` Dashboard & Báo cáo, kèm Test QA/QC Đợt 4. | 124h | 45.000.000 |
+| **`Q-04`** | **MS-04 – Bàn giao dự án** (Tuần 15 – 16) | Kiểm thử nghiệm thu toàn diện (UAT), chuẩn bị tài liệu hướng dẫn và bàn giao chính thức. | 50h | 90.000.000 |
+| **—** | **Hoạt động BA xuyên suốt** (Tuần 1 – 16) | BA đồng hành làm rõ nghiệp vụ, quản lý yêu cầu và hỗ trợ nghiệm thu xuyên suốt 16 tuần *(đã phân bổ vào giá các mốc trên)*. | 174h | *(Đã tính trong Q-00..Q-04)* |
+| **TỔNG** | **Toàn dự án (16 tuần)** | **13 Module (`M01`–`M13`) + `INF-01` + Kiểm thử & Bàn giao** | **886h** | **300.000.000** |
 
 > **Quyền lợi của khách hàng:** Khách hàng được kiểm tra và xác nhận sản phẩm bàn giao trước khi thực hiện thanh toán theo từng đợt, căn cứ trên phạm vi và tiêu chí đã được hai bên thống nhất.
 

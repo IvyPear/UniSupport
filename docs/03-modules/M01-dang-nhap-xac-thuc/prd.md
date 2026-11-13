@@ -32,18 +32,11 @@
 * **E-02 (Bỏ trống trường bắt buộc):** Người dùng bấm Đăng nhập khi chưa điền mã định danh hoặc mật khẩu $\rightarrow$ Hệ thống kích hoạt validation tại chỗ, viền đỏ ô nhập liệu và báo lỗi *“Vui lòng nhập đầy đủ thông tin”*.
 * **E-03 (Tài khoản bị vô hiệu hóa):** Tài khoản có trạng thái `Inactive` đăng nhập $\rightarrow$ Hệ thống từ chối (`403 Forbidden`) và thông báo: *“Tài khoản của bạn đã bị khóa, vui lòng liên hệ Quản trị viên”*.
 
-* Nhập sai mã định danh hoặc mật khẩu $\rightarrow$ Hệ thống hiển thị thông báo *“Sai thông tin đăng nhập”*.
-* Bỏ trống trường bắt buộc $\rightarrow$ Báo lỗi tại chỗ và không gửi yêu cầu.
-
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 * **AC-01:** Nhập đúng mã định danh và mật khẩu $\rightarrow$ Đăng nhập thành công và cấp JWT Token hợp lệ (thời hạn 8 tiếng).
 * **AC-02:** Nhập sai thông tin đăng nhập $\rightarrow$ Báo lỗi rõ ràng và không cấp quyền truy cập.
 * **AC-03:** Màn hình Đăng nhập tuyệt đối không hiển thị nút “Đăng ký”.
 * **AC-04:** Đăng nhập lần đầu bằng mật khẩu ngày sinh (`must_change_password = true`) $\rightarrow$ Bắt buộc chuyển sang màn hình đổi mật khẩu mới.
-
-* **AC-01:** Nhập đúng mã định danh và mật khẩu $\rightarrow$ Đăng nhập thành công.
-* **AC-02:** Nhập sai thông tin $\rightarrow$ Báo lỗi rõ ràng và không cho phép đăng nhập.
-* **AC-03:** Màn hình Đăng nhập không có nút “Đăng ký” cho người dùng vãng lai.
 
 ---
 
@@ -101,23 +94,23 @@
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 - **Email / Mã Admin:** Bắt buộc, Max 100 ký tự.
-- **Mã OTP xác thực:** Bắt buộc, chuỗi 6 chữ số có hiệu lực 15 phút.
+- **Liên kết xác thực (Secure Reset Token):** Chuỗi token bảo mật gửi qua Email, có hiệu lực 15 phút và chỉ dùng 1 lần.
 - **Mật khẩu mới:** Bắt buộc, Min 8 ký tự, gồm chữ hoa, chữ thường và chữ số.
 - **Xác nhận mật khẩu:** Bắt buộc, trùng khớp với mật khẩu mới.
 
 **Luồng chính (Main Flow):**
 
 1. Tại giao diện Đăng nhập, Admin nhấp vào liên kết “Quên mật khẩu”.
-2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi mã xác thực”.
-3. Hệ thống kiểm tra quyền Admin, tạo mã OTP ngẫu nhiên và gửi về Email quản trị.
-4. Admin kiểm tra hòm thư, nhập mã OTP vào màn hình xác thực.
+2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi yêu cầu khôi phục”.
+3. Hệ thống kiểm tra quyền Admin, tạo liên kết xác thực (Secure Reset Token) và gửi về Email quản trị.
+4. Admin kiểm tra hòm thư và nhấp vào liên kết khôi phục mật khẩu.
 5. Admin nhập Mật khẩu mới và Xác nhận mật khẩu mới, sau đó bấm “Đổi mật khẩu”.
-6. Hệ thống kiểm tra OTP, cập nhật mật khẩu mã hóa mới vào CSDL và vô hiệu hóa mã OTP.
+6. Hệ thống kiểm tra tính hợp lệ của Reset Token, cập nhật mật khẩu mã hóa mới vào CSDL và vô hiệu hóa Token đó ngay lập tức.
 7. Hiển thị thông báo thành công và chuyển Admin về màn hình Đăng nhập.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 * **BR-01:** Chức năng này chỉ áp dụng duy nhất cho Role Admin. Sinh viên, Nhân viên và Quản lý không được sử dụng luồng này.
-* **BR-02:** Liên kết khôi phục chỉ có hiệu lực trong 15 phút và chỉ được dùng 1 lần duy nhất . Không dùng mã OTP.
+* **BR-02:** Liên kết khôi phục chỉ có hiệu lực trong 15 phút và chỉ được dùng 1 lần duy nhất. Không dùng mã OTP.
 
 **Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
 * **E-01 (Mã token hết hạn hoặc đã dùng):** Nhấp vào liên kết sau 15 phút hoặc liên kết đã sử dụng $\rightarrow$ Báo lỗi *“Liên kết khôi phục mật khẩu đã hết hạn hoặc không hợp lệ. Vui lòng gửi lại yêu cầu”*.
@@ -160,8 +153,6 @@
 **Business Rules (Quy tắc nghiệp vụ):**
 * **BR-01:** Điều hướng diễn ra tự động ngay sau khi cấp Token, không hiển thị trang trung gian.
 * **BR-02:** Nếu chưa hoàn tất đổi mật khẩu bắt buộc, người dùng bị chặn toàn bộ các thao tác nghiệp vụ khác.
-
-* **BR-01:** Điều hướng diễn ra tự động ngay sau khi cấp Token, không hiển thị trang trung gian không cần thiết.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 * **AC-01:** Đăng nhập tài khoản không có cờ đổi mật khẩu $\rightarrow$ Chuyển thẳng về đúng giao diện làm việc của vai trò đó.

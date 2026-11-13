@@ -42,7 +42,7 @@ Báo cáo tuần dùng để đối soát tiến độ thực tế với kế ho
 
 - **Tần suất:** Cuối tuần (trước 17:00 Thứ Sáu).
 - **Thành phần tham dự:** Toàn bộ thành viên tham gia trong dự án.
-- **Hình thức:** Đăng tải lên hệ thống Jira/GitHub Projects và gửi email tóm tắt.
+- **Hình thức:** Đăng tải lên hệ thống GitHub Issues / GitHub Projects và gửi email tóm tắt.
 
 **Cấu trúc báo cáo tuần:**
 
@@ -84,7 +84,7 @@ Báo cáo tổng kết được thực hiện khi dự án kết thúc nhằm đ
 ## 3. Quản lý minh bạch thông qua công cụ và quy định giao tiếp (Transparency & Communication Management)
 
 ### 3.1. Sử dụng công cụ quản lý và theo dõi công việc
-Dự án sử dụng công cụ quản lý tập trung như Jira hoặc GitHub Projects để quản lý và theo dõi các công việc trong quá trình triển khai.
+Dự án sử dụng công cụ quản lý tập trung là GitHub Issues và GitHub Projects để quản lý và theo dõi các công việc trong quá trình triển khai.
 
 Các thông tin cần được cập nhật trên hệ thống bao gồm:
 - Danh sách công việc và trạng thái thực hiện.

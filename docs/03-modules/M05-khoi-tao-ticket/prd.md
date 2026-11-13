@@ -108,7 +108,7 @@
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01:** Chỉ cho phép chỉnh sửa Tiêu đề, Nội dung và tệp đính kèm khi trạng thái Ticket chính xác là `New`; giới hạn số lượng, dung lượng và định dạng tệp vẫn giữ như lúc tạo.
-* **BR-02:** Tuyệt đối không cho phép thay đổi Phòng ban hoặc Danh mục (theo quy định tại [quy-tac-nghiep-vu.md](../../../../domain/quy-tac-nghiep-vu.md) BR-2).
+* **BR-02:** Tuyệt đối không cho phép thay đổi Phòng ban hoặc Danh mục (theo quy định tại [quy-tac-nghiep-vu.md](../../02-domain/quy-tac-nghiep-vu.md) BR-2).
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 

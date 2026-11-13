@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Tài liệu dự án UniSupport (docs/README.md)"
+    url: "https://github.com"
+    about: "Mục lục tài liệu dự án, PRD, Master Schedule và quy ước mã."
