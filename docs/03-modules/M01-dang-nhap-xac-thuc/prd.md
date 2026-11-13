@@ -12,7 +12,7 @@
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 - **Mã định danh:** Bắt buộc, Max 20 ký tự (Mã SV / Mã Cán bộ / Mã Quản trị).
-- **Mật khẩu:** Bắt buộc, Min 6 - Max 100 ký tự. Mật khẩu khởi tạo ban đầu là ngày tháng năm sinh (`DDMMYYYY`).
+- **Mật khẩu:** Bắt buộc, Min 8 - Max 100 ký tự. Mật khẩu khởi tạo ban đầu là ngày tháng năm sinh (`DDMMYYYY`).
 - **Ghi nhớ đăng nhập:** Tùy chọn, Mặc định: `false`.
 
 **Luồng chính (Main Flow):**
@@ -91,7 +91,7 @@
 
 ## [FR-M01-03] Đặt lại mật khẩu tài khoản quản trị Admin
 
-**Mô tả:** Tài khoản vai trò Quản trị viên (Admin) khôi phục mật khẩu thông qua liên kết xác thực an toàn (Secure Reset Token) gửi trực tiếp về Email quản trị đã đăng ký, không dùng dịch vụ OTP của bên thứ ba.
+**Mô tả:** Tài khoản vai trò Quản trị viên (Admin) khôi phục mật khẩu thông qua liên kết xác thực an toàn (Secure Reset Token) gửi trực tiếp về Email quản trị đã đăng ký; hệ thống không sử dụng OTP.
 
 **Actor:** Quản trị viên (Admin)
 
@@ -101,32 +101,32 @@
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 - **Email / Mã Admin:** Bắt buộc, Max 100 ký tự.
-- **Mã OTP xác thực:** Bắt buộc, chuỗi 6 chữ số có hiệu lực 15 phút.
+- **Reset Token:** Bắt buộc, token dùng một lần có hiệu lực 15 phút.
 - **Mật khẩu mới:** Bắt buộc, Min 8 ký tự, gồm chữ hoa, chữ thường và chữ số.
 - **Xác nhận mật khẩu:** Bắt buộc, trùng khớp với mật khẩu mới.
 
 **Luồng chính (Main Flow):**
 
 1. Tại giao diện Đăng nhập, Admin nhấp vào liên kết “Quên mật khẩu”.
-2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi mã xác thực”.
-3. Hệ thống kiểm tra quyền Admin, tạo mã OTP ngẫu nhiên và gửi về Email quản trị.
-4. Admin kiểm tra hòm thư, nhập mã OTP vào màn hình xác thực.
+2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi liên kết đặt lại”.
+3. Hệ thống kiểm tra quyền Admin, tạo Reset Token dùng một lần và gửi liên kết đặt lại về Email quản trị.
+4. Admin mở liên kết đặt lại trong thời hạn 15 phút.
 5. Admin nhập Mật khẩu mới và Xác nhận mật khẩu mới, sau đó bấm “Đổi mật khẩu”.
-6. Hệ thống kiểm tra OTP, cập nhật mật khẩu mã hóa mới vào CSDL và vô hiệu hóa mã OTP.
+6. Hệ thống kiểm tra Reset Token, cập nhật mật khẩu đã mã hóa vào CSDL và vô hiệu hóa token.
 7. Hiển thị thông báo thành công và chuyển Admin về màn hình Đăng nhập.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 * **BR-01:** Chức năng này chỉ áp dụng duy nhất cho Role Admin. Sinh viên, Nhân viên và Quản lý không được sử dụng luồng này.
-* **BR-02:** Liên kết khôi phục chỉ có hiệu lực trong 15 phút và chỉ được dùng 1 lần duy nhất . Không dùng mã OTP.
+* **BR-02:** Liên kết khôi phục chỉ có hiệu lực trong 15 phút và chỉ được dùng 1 lần duy nhất. Hệ thống không sử dụng OTP.
 
 **Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
 * **E-01 (Mã token hết hạn hoặc đã dùng):** Nhấp vào liên kết sau 15 phút hoặc liên kết đã sử dụng $\rightarrow$ Báo lỗi *“Liên kết khôi phục mật khẩu đã hết hạn hoặc không hợp lệ. Vui lòng gửi lại yêu cầu”*.
 * **E-02 (Mật khẩu mới không đủ độ phức tạp):** Nhập mật khẩu dưới 8 ký tự hoặc thiếu chữ hoa/số $\rightarrow$ Báo lỗi validation tại ô nhập liệu.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-* **AC-01:** Nhập đúng email Admin $\rightarrow$ Hệ thống gửi liên kết đặt lại mật khẩu và cập nhật thành công khi token hợp lệ.
+* **AC-01:** Nhập đúng email Admin $\rightarrow$ Hệ thống gửi liên kết đặt lại mật khẩu và cập nhật thành công khi Reset Token hợp lệ.
 * **AC-02:** Liên kết quá 15 phút hoặc đã qua sử dụng $\rightarrow$ Bị từ chối và không cho đổi mật khẩu.
-* **AC-03:** Sinh viên hoặc Nhân viên cố tình gửi email để lấy lại mật khẩu $\rightarrow$ Hệ thống từ chối thực hiện.
+* **AC-03:** Sinh viên, Nhân viên hoặc Quản lý cố tình gửi yêu cầu lấy lại mật khẩu $\rightarrow$ Hệ thống từ chối thực hiện.
 
 **Ví dụ Edge Case (Trường hợp biên):**
 * Admin gửi 2 yêu cầu khôi phục liên tiếp trong vòng 1 phút $\rightarrow$ Hệ thống chỉ chấp nhận Token của yêu cầu sau cùng, Token đầu tiên bị vô hiệu hóa ngay lập tức.

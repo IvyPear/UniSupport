@@ -86,7 +86,7 @@
 - **Mã định danh:** Chỉ đọc.
 - **Họ tên / Email / Phòng ban:** Có thể chỉnh sửa.
 - **Trạng thái tài khoản:** `Active` / `Inactive`.
-- **Đặt lại mật khẩu:** Tùy chọn nút bấm đưa mật khẩu về mặc định (`UniSupport@123`).
+- **Đặt lại mật khẩu:** Tùy chọn nút bấm đưa mật khẩu về mặc định là ngày sinh của người dùng (`DDMMYYYY`).
 
 **Luồng chính (Main Flow):**
 
@@ -94,7 +94,7 @@
 2. Chỉnh sửa thông tin cần thiết và bấm “Lưu thay đổi”.
 3. **Thao tác Khóa tài khoản:** Admin chuyển trạng thái sang `Inactive` $\rightarrow$ Hệ thống cập nhật trạng thái và lập tức thu hồi mọi phiên đăng nhập của người dùng đó (Kick-out).
 4. **Thao tác Mở khóa:** Admin chuyển trạng thái sang `Active` $\rightarrow$ Tài khoản được phép đăng nhập lại bình thường.
-5. **Thao tác Reset mật khẩu:** Admin nhấp “Đặt lại mật khẩu mặc định” $\rightarrow$ Hệ thống cập nhật mật khẩu về mặc định và bật cờ `must_change_password`. Ở lần đăng nhập tới, người dùng phải đổi mật khẩu thành công trước khi được phép truy cập các chức năng nghiệp vụ; hệ thống tắt cờ sau khi đổi thành công.
+5. **Thao tác Reset mật khẩu:** Admin nhấp “Đặt lại mật khẩu mặc định” $\rightarrow$ Hệ thống cập nhật mật khẩu về ngày sinh của người dùng (`DDMMYYYY`) và bật cờ `must_change_password`. Ở lần đăng nhập tới, người dùng phải đổi mật khẩu tối thiểu 8 ký tự thành công trước khi được phép truy cập các chức năng nghiệp vụ; hệ thống tắt cờ sau khi đổi thành công.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
