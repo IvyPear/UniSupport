@@ -1,4 +1,4 @@
-﻿# YÊU CẦU PHI CHỨC NĂNG (NON-FUNCTIONAL REQUIREMENTS)
+# YÊU CẦU PHI CHỨC NĂNG (NON-FUNCTIONAL REQUIREMENTS)
 
 > **Dự án:** UniSupport – Hệ thống quản lý hỗ trợ sinh viên  
 > **Nguồn:** Trích xuất từ tài liệu Kiến trúc Hệ thống
