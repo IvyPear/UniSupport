@@ -12,7 +12,7 @@
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 - **Mã định danh:** Bắt buộc, Max 20 ký tự (Mã SV / Mã Cán bộ / Mã Quản trị).
-- **Mật khẩu:** Bắt buộc, Min  - Max 100 ký tự. Mật khẩu khởi tạo ban đầu là ngày tháng năm sinh (`DDMMYYYY`).
+- **Mật khẩu:** Bắt buộc, Min 8- Max 100 ký tự. Mật khẩu khởi tạo ban đầu là ngày tháng năm sinh (`DDMMYYYY`).
 - **Ghi nhớ đăng nhập:** Tùy chọn, Mặc định: `false`.
 
 **Luồng chính (Main Flow):**
