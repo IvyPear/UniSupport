@@ -36,7 +36,6 @@ Hệ thống cho phép sinh viên gửi yêu cầu, theo dõi trạng thái xử
 - Ứng dụng di động độc lập (Mobile App) trên App Store hoặc Google Play.
 - Chức năng Trò chuyện trực tuyến hoặc Trợ lý ảo AI.
 - Tích hợp với Cổng thanh toán học phí hoặc các phần mềm tài chính bên thứ ba, ngoài hệ thống quản lý đào tạo.
-- Đảm bảo an toàn tài khoản, dữ liệu và thông tin người dùng trong phạm vi triển khai.
 - Phát triển các chức năng chưa được mô tả hoặc chưa được thống nhất trong phạm vi dự án.
 
 ---

@@ -12,7 +12,7 @@
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 - **Mã định danh:** Bắt buộc, Max 20 ký tự (Mã SV / Mã Cán bộ / Mã Quản trị).
-- **Mật khẩu:** Bắt buộc, Min 8 - Max 100 ký tự. Mật khẩu khởi tạo ban đầu là ngày tháng năm sinh (`DDMMYYYY`).
+- **Mật khẩu:** Bắt buộc, Min 8- Max 100 ký tự. Mật khẩu khởi tạo ban đầu là ngày tháng năm sinh (`DDMMYYYY`).
 - **Ghi nhớ đăng nhập:** Tùy chọn, Mặc định: `false`.
 
 **Luồng chính (Main Flow):**
@@ -94,23 +94,23 @@
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 - **Email / Mã Admin:** Bắt buộc, Max 100 ký tự.
-- **Reset Token:** Bắt buộc, token dùng một lần có hiệu lực 15 phút.
+- **Mã OTP xác thực:** Bắt buộc, chuỗi 6 chữ số có hiệu lực 15 phút.
 - **Mật khẩu mới:** Bắt buộc, Min 8 ký tự, gồm chữ hoa, chữ thường và chữ số.
 - **Xác nhận mật khẩu:** Bắt buộc, trùng khớp với mật khẩu mới.
 
 **Luồng chính (Main Flow):**
 
 1. Tại giao diện Đăng nhập, Admin nhấp vào liên kết “Quên mật khẩu”.
-2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi liên kết đặt lại”.
-3. Hệ thống kiểm tra quyền Admin, tạo Reset Token dùng một lần và gửi liên kết đặt lại về Email quản trị.
-4. Admin mở liên kết đặt lại trong thời hạn 15 phút.
+2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi mã xác thực”.
+3. Hệ thống kiểm tra quyền Admin, tạo mã OTP ngẫu nhiên và gửi về Email quản trị.
+4. Admin kiểm tra hòm thư, nhập mã OTP vào màn hình xác thực.
 5. Admin nhập Mật khẩu mới và Xác nhận mật khẩu mới, sau đó bấm “Đổi mật khẩu”.
-6. Hệ thống kiểm tra Reset Token, cập nhật mật khẩu đã mã hóa vào CSDL và vô hiệu hóa token.
+6. Hệ thống kiểm tra OTP, cập nhật mật khẩu mã hóa mới vào CSDL và vô hiệu hóa mã OTP.
 7. Hiển thị thông báo thành công và chuyển Admin về màn hình Đăng nhập.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 * **BR-01:** Chức năng này chỉ áp dụng duy nhất cho Role Admin. Sinh viên, Nhân viên và Quản lý không được sử dụng luồng này.
-* **BR-02:** Liên kết khôi phục chỉ có hiệu lực trong 15 phút và chỉ được dùng 1 lần duy nhất. Hệ thống không sử dụng OTP.
+* **BR-02:** Liên kết khôi phục chỉ có hiệu lực trong 15 phút và chỉ được dùng 1 lần duy nhất . Không dùng mã OTP.
 
 **Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
 * **E-01 (Mã token hết hạn hoặc đã dùng):** Nhấp vào liên kết sau 15 phút hoặc liên kết đã sử dụng $\rightarrow$ Báo lỗi *“Liên kết khôi phục mật khẩu đã hết hạn hoặc không hợp lệ. Vui lòng gửi lại yêu cầu”*.
