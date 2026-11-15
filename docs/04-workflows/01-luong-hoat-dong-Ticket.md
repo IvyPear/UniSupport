@@ -34,11 +34,11 @@ flowchart TD
 
 | Trạng thái | Ý nghĩa | Thao tác chuyển đến | Ánh xạ Module |
 |---|---|---|---|
-| **Chưa tiếp nhận** | Ticket mới được tạo, chưa có người nhận | Sinh viên gửi Ticket hoặc Ticket được điều chuyển về hàng chờ | [M05-khoi-tao-ticket](../modules/GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/) |
-| **Đang xử lý** | Nhân viên đã tiếp nhận hoặc đang xử lý công việc | Nhân viên bấm nhận việc, quản lý phân công, hoặc Sinh viên bổ sung thông tin | [M06-tiep-nhan-ticket](../modules/GD2/Moc3-XuLi&BoSung/M06-tiep-nhan-ticket/), [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/) |
-| **Chờ bổ sung** | Đang chờ Sinh viên cung cấp thêm dữ liệu | Nhân viên gửi yêu cầu bổ sung thông tin (Đếm ngược 3 ngày làm việc) | [M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/), [M09](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/) |
-| **Đã giải quyết** | Nhân viên đã gửi kết quả xử lý | Nhân viên trả kết quả thành công | [M08-tra-ket-qua](../modules/GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/) |
-| **Đã đóng** | Khóa Ticket vĩnh viễn, kết thúc vòng đời | Sinh viên đánh giá xong, hoặc tự động đóng do quá hạn 3 ngày làm việc (ở Pending hoặc Resolved) | [M10-ket-qua-danh-gia](../modules/GD2/Moc4-PhanHeSinhVien/M10-ket-qua-danh-gia/) |
+| **Chưa tiếp nhận** | Ticket mới được tạo, chưa có người nhận | Sinh viên gửi Ticket hoặc Ticket được điều chuyển về hàng chờ | [M05-khoi-tao-ticket](../03-modules/M05-khoi-tao-ticket/) |
+| **Đang xử lý** | Nhân viên đã tiếp nhận hoặc đang xử lý công việc | Nhân viên bấm nhận việc, quản lý phân công, hoặc Sinh viên bổ sung thông tin | [M06-tiep-nhan-ticket](../03-modules/M06-tiep-nhan-ticket/), [M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/) |
+| **Chờ bổ sung** | Đang chờ Sinh viên cung cấp thêm dữ liệu | Nhân viên gửi yêu cầu bổ sung thông tin (Đếm ngược 3 ngày làm việc) | [M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/), [M09](../03-modules/M09-theo-doi-bo-sung/) |
+| **Đã giải quyết** | Nhân viên đã gửi kết quả xử lý | Nhân viên trả kết quả thành công | [M08-tra-ket-qua](../03-modules/M08-tra-ket-qua/) |
+| **Đã đóng** | Khóa Ticket vĩnh viễn, kết thúc vòng đời | Sinh viên đánh giá xong, hoặc tự động đóng do quá hạn 3 ngày làm việc (ở Pending hoặc Resolved) | [M10-ket-qua-danh-gia](../03-modules/M10-ket-qua-danh-gia/) |
 
 ---
 

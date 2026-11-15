@@ -73,5 +73,4 @@ Quy ước thời gian làm việc: 04 giờ/ngày, 05 ngày trong tuần và 04
 | Thuế thu nhập doanh nghiệp giả định 15% | 12.212.143 |
 | **Lợi nhuận ròng** | **69.202.142** |
 | **Biên lợi nhuận ròng** | **23,07%** |
-```eof
 

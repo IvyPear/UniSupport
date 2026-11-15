@@ -22,47 +22,47 @@
 ### 🎓 02. Phân hệ Sinh viên (Student Workflows)
 
 * **[02-quy-trinh-sinh-vien.md](02-quy-trinh-sinh-vien.md)** — Tập hợp 5 quy trình nghiệp vụ Sinh viên:
-  * **SV-01:** Gửi yêu cầu hỗ trợ ([M05-khoi-tao-ticket](../modules/GD2/Moc2-KhoiTaoTicket/M05-khoi-tao-ticket/))
-  * **SV-02:** Theo dõi yêu cầu ([M09-theo-doi-bo-sung](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/))
-  * **SV-03:** Bổ sung thông tin ([M09-theo-doi-bo-sung](../modules/GD2/Moc4-PhanHeSinhVien/M09-theo-doi-bo-sung/))
-  * **SV-04:** Xem kết quả ([M10-ket-qua-danh-gia](../modules/GD2/Moc4-PhanHeSinhVien/M10-ket-qua-danh-gia/))
-  * **SV-05:** Đánh giá chất lượng ([M10-ket-qua-danh-gia](../modules/GD2/Moc4-PhanHeSinhVien/M10-ket-qua-danh-gia/))
+  * **SV-01:** Gửi yêu cầu hỗ trợ ([M05-khoi-tao-ticket](../03-modules/M05-khoi-tao-ticket/))
+  * **SV-02:** Theo dõi yêu cầu ([M09-theo-doi-bo-sung](../03-modules/M09-theo-doi-bo-sung/))
+  * **SV-03:** Bổ sung thông tin ([M09-theo-doi-bo-sung](../03-modules/M09-theo-doi-bo-sung/))
+  * **SV-04:** Xem kết quả ([M10-ket-qua-danh-gia](../03-modules/M10-ket-qua-danh-gia/))
+  * **SV-05:** Đánh giá chất lượng ([M10-ket-qua-danh-gia](../03-modules/M10-ket-qua-danh-gia/))
 
 ---
 
 ### 🛠️ 03. Phân hệ Nhân viên (Staff Workflows)
 
 * **[03-quy-trinh-nhan-vien.md](03-quy-trinh-nhan-vien.md)** — Tập hợp 6 quy trình nghiệp vụ Nhân viên phòng ban:
-  * **NV-01:** Tiếp nhận Ticket ([M06-tiep-nhan-ticket](../modules/GD2/Moc3-XuLi&BoSung/M06-tiep-nhan-ticket/))
-  * **NV-02:** Cập nhật tiến độ ([M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/))
-  * **NV-03:** Yêu cầu bổ sung ([M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/))
-  * **NV-04:** Chuyển Ticket sai phòng ban ([M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/))
-  * **NV-05:** Trả kết quả ([M08-tra-ket-qua](../modules/GD2/Moc3-XuLi&BoSung/M08-tra-ket-qua/))
-  * **NV-06:** Xem lịch sử xử lý ([M07-xu-ly-trao-doi](../modules/GD2/Moc3-XuLi&BoSung/M07-xu-ly-trao-doi/))
+  * **NV-01:** Tiếp nhận Ticket ([M06-tiep-nhan-ticket](../03-modules/M06-tiep-nhan-ticket/))
+  * **NV-02:** Cập nhật tiến độ ([M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/))
+  * **NV-03:** Yêu cầu bổ sung ([M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/))
+  * **NV-04:** Chuyển Ticket sai phòng ban ([M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/))
+  * **NV-05:** Trả kết quả ([M08-tra-ket-qua](../03-modules/M08-tra-ket-qua/))
+  * **NV-06:** Xem lịch sử xử lý ([M07-xu-ly-trao-doi](../03-modules/M07-xu-ly-trao-doi/))
 
 ---
 
 ### 📊 04. Phân hệ Quản lý / Trưởng phòng (Manager Workflows)
 
 * **[04-quy-trinh-quan-ly.md](04-quy-trinh-quan-ly.md)** — Tập hợp 6 quy trình nghiệp vụ Quản lý:
-  * **QL-01:** Theo dõi tổng quan phòng ban ([M13-dashboard-bao-cao](../modules/GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/))
-  * **QL-02:** Phân công nhanh ([M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/))
-  * **QL-03:** Giám sát tiến độ và tồn đọng ([M12-giam-sat-tien-do](../modules/GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/))
-  * **QL-04:** Theo dõi hiệu suất Nhân viên ([M12-giam-sat-tien-do](../modules/GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../modules/GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/))
-  * **QL-05:** Quản lý danh mục phòng ban ([M04-quan-ly-danh-muc](../modules/GD2/Moc2-KhoiTaoTicket/M04-quan-ly-danh-muc/))
-  * **QL-06:** Báo cáo và đánh giá ([M13-dashboard-bao-cao](../modules/GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/))
+  * **QL-01:** Theo dõi tổng quan phòng ban ([M13-dashboard-bao-cao](../03-modules/M13-dashboard-bao-cao/))
+  * **QL-02:** Phân công nhanh ([M11-quan-ly-dieu-phoi](../03-modules/M11-quan-ly-dieu-phoi/))
+  * **QL-03:** Giám sát tiến độ và tồn đọng ([M12-giam-sat-tien-do](../03-modules/M12-giam-sat-tien-do/))
+  * **QL-04:** Theo dõi hiệu suất Nhân viên ([M12-giam-sat-tien-do](../03-modules/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../03-modules/M13-dashboard-bao-cao/))
+  * **QL-05:** Quản lý danh mục phòng ban ([M04-quan-ly-danh-muc](../03-modules/M04-quan-ly-danh-muc/))
+  * **QL-06:** Báo cáo và đánh giá ([M13-dashboard-bao-cao](../03-modules/M13-dashboard-bao-cao/))
 
 ---
 
 ### ⚙️ 05. Phân hệ Quản trị viên (Admin Workflows)
 
 * **[05-quy-trinh-admin.md](05-quy-trinh-admin.md)** — Tập hợp 6 quy trình nghiệp vụ Admin:
-  * **AD-01:** Quản lý tài khoản ([M03-quan-ly-tai-khoan](../modules/GD1/Moc1-NenTang/M03-quan-ly-tai-khoan/))
-  * **AD-02:** Vai trò và phân quyền ([M02-vai-tro-phan-quyen](../modules/GD1/Moc1-NenTang/M02-vai-tro-phan-quyen/))
-  * **AD-03:** Quản lý danh mục toàn trường ([M04-quan-ly-danh-muc](../modules/GD2/Moc2-KhoiTaoTicket/M04-quan-ly-danh-muc/))
-  * **AD-04:** Phân loại Ticket "Khác" ([M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/))
-  * **AD-05:** Điều chuyển Ticket sai phòng ban ([M11-quan-ly-dieu-phoi](../modules/GD2/Moc3-XuLi&BoSung/M11-quan-ly-dieu-phoi/))
-  * **AD-06:** Theo dõi và thống kê toàn trường ([M12-giam-sat-tien-do](../modules/GD3/Moc5-GiamSat&Dashboard/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../modules/GD3/Moc5-GiamSat&Dashboard/M13-dashboard-bao-cao/))
+  * **AD-01:** Quản lý tài khoản ([M03-quan-ly-tai-khoan](../03-modules/M03-quan-ly-tai-khoan/))
+  * **AD-02:** Vai trò và phân quyền ([M02-vai-tro-phan-quyen](../03-modules/M02-vai-tro-phan-quyen/))
+  * **AD-03:** Quản lý danh mục toàn trường ([M04-quan-ly-danh-muc](../03-modules/M04-quan-ly-danh-muc/))
+  * **AD-04:** Phân loại Ticket "Khác" ([M11-quan-ly-dieu-phoi](../03-modules/M11-quan-ly-dieu-phoi/))
+  * **AD-05:** Điều chuyển Ticket sai phòng ban ([M11-quan-ly-dieu-phoi](../03-modules/M11-quan-ly-dieu-phoi/))
+  * **AD-06:** Theo dõi và thống kê toàn trường ([M12-giam-sat-tien-do](../03-modules/M12-giam-sat-tien-do/), [M13-dashboard-bao-cao](../03-modules/M13-dashboard-bao-cao/))
 
 ---
 

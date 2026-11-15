@@ -61,7 +61,7 @@
 | Công cụ | Mục đích sử dụng |
 | :--- | :--- |
 | **Slack** | Trao đổi công việc hàng ngày, họp, cập nhật tiến độ, lưu trữ và chia sẻ tài liệu. |
-| **ClickUp** | Quản lý task, deadline và theo dõi tiến độ công việc. |
+| **Jira** | Quản lý task, deadline và theo dõi tiến độ công việc. |
 | **GitHub** | Quản lý source code và version control. |
 | **Figma** | Thiết kế UI, wireframe và prototype. |
 | **Google Drive** | Lưu trữ tài liệu, meeting minutes và các tài liệu dự án. |
@@ -69,7 +69,7 @@
 ### 3.2. Quy trình thực hiện công việc
 **Vòng đời task:** `Task Assigned` → `To Do` → `Doing` → `Review` → `QA Verify` → `Done`
 
-1. **Nhận task (Task Assigned/To Do):** Kiểm tra mô tả, deadline, tài liệu và tiêu chí nghiệm thu trên ClickUp.
+1. **Nhận task (Task Assigned/To Do):** Kiểm tra mô tả, deadline, tài liệu và tiêu chí nghiệm thu trên Jira.
 2. **Thực hiện (Doing):** Chuyển trạng thái sang Doing, làm trên branch Git riêng (với dev) và cập nhật tiến độ. Hỏi BA/PM ngay nếu chưa rõ yêu cầu.
 3. **Review:** Tạo Pull Request gửi Senior Dev/thành viên liên quan review trước khi merge.
 4. **QA Verify:** Đội QA/QC kiểm thử tính năng và xác nhận không còn lỗi.
@@ -85,14 +85,14 @@
   * `feature/[task-id]-[short-description]`
   * `bugfix/[task-id]-[short-description]`
 * **Không** merge trực tiếp vào branch chính khi chưa được review.
-* Pull Request cần mô tả rõ nội dung thay đổi và liên kết với task tương ứng trên ClickUp.
+* Pull Request cần mô tả rõ nội dung thay đổi và liên kết với task tương ứng trên Jira.
 * Việc review không bắt buộc do một cá nhân cố định thực hiện; thành viên phù hợp có thể review tùy theo nội dung task.
 
 ### 3.4. Onboarding thành viên mới
 Khi có thành viên mới tham gia team:
 * **Giới thiệu dự án:** PM/BA giới thiệu mục tiêu, phạm vi và tình trạng hiện tại của dự án.
 * **Giới thiệu team:** Thành viên mới được giới thiệu vai trò của từng thành viên và người phụ trách các phần chính.
-* **Cấp quyền:** Cấp quyền truy cập vào Slack, ClickUp, GitHub, Figma và Google Drive theo role.
+* **Cấp quyền:** Cấp quyền truy cập vào Slack, Jira, GitHub, Figma và Google Drive theo role.
 * **Đọc tài liệu:** Thành viên mới đọc các tài liệu cần thiết liên quan đến dự án và phần công việc của mình.
 * **Nhận task đầu tiên:** Người phụ trách hướng dẫn task đầu tiên và hỗ trợ khi cần trước khi thành viên thực hiện độc lập.
 * *Thành viên mới được khuyến khích hỏi khi chưa rõ về yêu cầu, công cụ hoặc quy trình thay vì tự thực hiện theo giả định.*
@@ -105,7 +105,7 @@ Khi có thành viên mới tham gia team:
 * **Slack** là kênh trao đổi công việc chính của team.
 * Tin nhắn thông thường nên được phản hồi trong khoảng **6–12 giờ**.
 * Vấn đề khẩn cấp hoặc ảnh hưởng trực tiếp đến tiến độ cần được phản hồi sớm, ưu tiên trong **1–2 giờ** khi có thể.
-* Các quyết định hoặc vấn đề ảnh hưởng đến task, tiến độ hoặc kỹ thuật cần được cập nhật lại trên ClickUp, GitHub hoặc tài liệu liên quan để team có thông tin thống nhất.
+* Các quyết định hoặc vấn đề ảnh hưởng đến task, tiến độ hoặc kỹ thuật cần được cập nhật lại trên Jira, GitHub hoặc tài liệu liên quan để team có thông tin thống nhất.
 
 ### 4.2. Họp team
 * Team tổ chức **weekly meeting** để cập nhật tiến độ và xử lý các vấn đề đang tồn tại.
@@ -114,7 +114,7 @@ Khi có thành viên mới tham gia team:
 * Sau cuộc họp, các công việc cần thực hiện được ghi lại cùng người phụ trách và deadline (Meeting Minutes).
 
 ### 4.3. Cập nhật tiến độ & xử lý khi bị block
-* Thành viên chủ động cập nhật trạng thái task trên ClickUp.
+* Thành viên chủ động cập nhật trạng thái task trên Jira.
 * Khi công việc bị block, thành viên cần báo cho người phụ trách hoặc PM, nêu rõ vấn đề đang gặp và hỗ trợ cần thiết.
 
 ---

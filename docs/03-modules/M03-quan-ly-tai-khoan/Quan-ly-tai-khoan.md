@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M03
 * **Tên Phân hệ:** M03: Quản lý tài khoản Admin (Account Management)
-* **Mốc triển khai (Milestone): Moc1-NenTang
+* **Mốc triển khai (Milestone): MS-01
 * **Đối tượng phụ trách:** Admin
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

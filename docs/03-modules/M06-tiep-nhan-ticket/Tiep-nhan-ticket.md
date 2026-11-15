@@ -3,7 +3,7 @@
 ## 1. Thông tin Phân hệ
 * **Mã Phân hệ:** M06
 * **Tên Phân hệ:** M06: Tiếp nhận Ticket — Nhân viên (Receive Ticket)
-* **Mốc triển khai (Milestone): Moc3-XuLi&BoSung
+* **Mốc triển khai (Milestone): MS-02
 * **Đối tượng phụ trách:** Nhân viên
 * **Tài liệu Đặc tả Chi tiết (PRD FR):** [prd.md](prd.md)
 

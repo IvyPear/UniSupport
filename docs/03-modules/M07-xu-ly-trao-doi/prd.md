@@ -134,7 +134,7 @@
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01:** Bắt buộc phải nhập Lý do chuyển trả làm cơ sở để Admin phân tích và định tuyến lại đơn.
-* **BR-02 (Nghiệm thu đồng bộ Mốc 3):** Luồng Admin tiếp nhận và điều chuyển đơn sai phòng ban (`FR-M11-02`) phải được nghiệm thu cùng tính năng chuyển trả ở M07 trong Mốc 3 để tránh đơn bị kẹt ở hàng chờ Admin.
+* **BR-02 (Nghiệm thu đồng bộ MS-02):** Luồng Admin tiếp nhận và điều chuyển đơn sai phòng ban (`FR-M11-02`) phải được nghiệm thu cùng tính năng chuyển trả ở M07 trong MS-02 để tránh đơn bị kẹt ở hàng chờ Admin.
 * **BR-03:** Đây là chuyển đổi ngoại lệ `In Progress` $\rightarrow$ `New` đã được quy định trong Domain, không áp dụng cho Ticket `Pending`, `Resolved` hoặc `Closed`.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**

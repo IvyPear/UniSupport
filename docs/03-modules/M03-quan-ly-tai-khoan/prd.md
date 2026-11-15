@@ -6,6 +6,8 @@
 
 **Actor:** Quản trị viên (Admin)
 
+**Priority:** **High** — Chức năng quản trị người dùng cốt lõi, phục vụ việc tra cứu và quản lý tài khoản toàn trường.
+
 **Preconditions (Điều kiện tiên quyết):** Admin đăng nhập thành công vào hệ thống.
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
@@ -21,6 +23,11 @@
 2. Hệ thống hiển thị bảng danh sách tài khoản toàn trường (phân trang 20 dòng/trang).
 3. Admin nhập từ khóa hoặc chọn các tiêu chí lọc.
 4. Hệ thống tải lại danh sách kết quả phù hợp theo thời gian thực.
+
+**Business Rules (Quy tắc nghiệp vụ):**
+
+* **BR-01:** Phân trang cố định 20 bản ghi trên mỗi trang; sắp xếp theo thứ tự thời gian tạo mới nhất lên đầu.
+* **BR-02:** Tìm kiếm không phân biệt chữ hoa, chữ thường (Case-insensitive) và hỗ trợ tìm kiếm gần đúng theo chuỗi con (Partial Match).
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
@@ -44,7 +51,7 @@
 - **Email:** Bắt buộc, Đúng định dạng email trường.
 - **Vai trò:** Bắt buộc, chọn trong 4 vai trò chuẩn.
 - **Phòng ban:** Bắt buộc nếu là Nhân viên/Quản lý; không bắt buộc nếu là Sinh viên/Admin toàn trường.
-- **Mật khẩu khởi tạo:** Mật khẩu mặc định hệ thống.
+- **Mật khẩu khởi tạo:** Mật khẩu mặc định là ngày sinh của người dùng theo định dạng `DDMMYYYY`.
 
 **Luồng chính (Main Flow):**
 
@@ -79,7 +86,7 @@
 - **Mã định danh:** Chỉ đọc.
 - **Họ tên / Email / Phòng ban:** Có thể chỉnh sửa.
 - **Trạng thái tài khoản:** `Active` / `Inactive`.
-- **Đặt lại mật khẩu:** Tùy chọn nút bấm đưa mật khẩu về mặc định (`UniSupport@123`).
+- **Đặt lại mật khẩu:** Tùy chọn nút bấm đưa mật khẩu về mặc định là ngày sinh của người dùng (`DDMMYYYY`).
 
 **Luồng chính (Main Flow):**
 
@@ -87,7 +94,7 @@
 2. Chỉnh sửa thông tin cần thiết và bấm “Lưu thay đổi”.
 3. **Thao tác Khóa tài khoản:** Admin chuyển trạng thái sang `Inactive` $\rightarrow$ Hệ thống cập nhật trạng thái và lập tức thu hồi mọi phiên đăng nhập của người dùng đó (Kick-out).
 4. **Thao tác Mở khóa:** Admin chuyển trạng thái sang `Active` $\rightarrow$ Tài khoản được phép đăng nhập lại bình thường.
-5. **Thao tác Reset mật khẩu:** Admin nhấp “Đặt lại mật khẩu mặc định” $\rightarrow$ Hệ thống cập nhật mật khẩu về mặc định và bật cờ `must_change_password`. Ở lần đăng nhập tới, người dùng phải đổi mật khẩu thành công trước khi được phép truy cập các chức năng nghiệp vụ; hệ thống tắt cờ sau khi đổi thành công.
+5. **Thao tác Reset mật khẩu:** Admin nhấp “Đặt lại mật khẩu mặc định” $\rightarrow$ Hệ thống cập nhật mật khẩu về ngày sinh của người dùng (`DDMMYYYY`) và bật cờ `must_change_password`. Ở lần đăng nhập tới, người dùng phải đổi mật khẩu tối thiểu 8 ký tự thành công trước khi được phép truy cập các chức năng nghiệp vụ; hệ thống tắt cờ sau khi đổi thành công.
 
 **Business Rules (Quy tắc nghiệp vụ):**
 

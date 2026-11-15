@@ -64,7 +64,7 @@
 
 **Business Rules (Quy tắc nghiệp vụ):**
 
-* **BR-01 (Nghiệm thu đồng bộ Mốc 3):** Tính năng cốt lõi này được nghiệm thu cùng `FR-M07-04` trong Mốc 3 để đảm bảo quy trình luân chuyển đơn không bị đứt gãy.
+* **BR-01 (Nghiệm thu đồng bộ MS-02):** Tính năng cốt lõi này được nghiệm thu cùng `FR-M07-04` trong MS-02 để đảm bảo quy trình luân chuyển đơn không bị đứt gãy.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
