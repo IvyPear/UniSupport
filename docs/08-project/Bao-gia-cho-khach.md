@@ -25,8 +25,6 @@
 | **—** | **Hoạt động BA xuyên suốt** (Tuần 1 – 16) | BA đồng hành làm rõ nghiệp vụ, quản lý yêu cầu và hỗ trợ nghiệm thu xuyên suốt 16 tuần *(đã phân bổ vào giá các mốc trên)*. | 174h | *(Đã tính trong Q-00..Q-04)* |
 | **TỔNG** | **Toàn dự án (16 tuần)** | **13 Module (`M01`–`M13`) + `INF-01` + Kiểm thử & Bàn giao** | **886h** | **300.000.000** |
 
-> **Quyền lợi của khách hàng:** Khách hàng được kiểm tra và xác nhận sản phẩm bàn giao trước khi thực hiện thanh toán theo từng đợt, căn cứ trên phạm vi và tiêu chí đã được hai bên thống nhất.
-
 ---
 
 ## 3. Điều kiện thanh toán

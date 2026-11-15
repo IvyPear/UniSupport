@@ -17,13 +17,18 @@ Việc điều chỉnh cấu trúc Timeline và các cột mốc (Milestone) tro
 
 Lộ trình triển khai được tái cấu trúc thành 5 giai đoạn chính bằng cách tích hợp các tính năng có tính liên kết cao, thay cho việc liệt kê theo tuần đơn lẻ, giúp duy trì luồng công việc liên tục và tối ưu nguồn lực.
 
-| Cột mốc | Thời gian | Nội dung hoàn thành |
+| Cột mốc | Thời gian | Nội dung hoàn thành & Sản phẩm kiểm chứng |
 | :--- | :---: | :--- |
-| **MS-00 – Khởi động** | Tuần 1 – 3 | - Khảo sát và đặc tả.<br>- Thiết kế và tạm ứng.<br>- Database và nền tảng. |
-| **MS-01 – Nền tảng** | Tuần 4 – 6 | - Đăng nhập.<br>- Vai trò và phân quyền.<br>- Quản lý tài khoản. |
-| **MS-02 – Ticket và Phân hệ sinh viên** | Tuần 7 – 11 | - Quy trình xử lý Ticket (tạo, duyệt, cập nhật).<br>- Tính năng cho sinh viên (theo dõi, đánh giá). |
-| **MS-03 – Giám sát Dashboard** | Tuần 12 – 14 | - Dashboard theo dõi tiến độ.<br>- Báo cáo tiến độ từng phòng. |
-| **MS-04 – Bàn giao dự án** | Tuần 15 – 16 | - Nghiệm thu.<br>- Chuẩn bị tài liệu.<br>- Bàn giao chính thức. |
+| **MS-00 – Khởi động** | Tuần 1 – 3 | - Hoàn thiện khảo sát quy trình và tài liệu đặc tả yêu cầu.<br>- Thiết kế cơ sở dữ liệu nền tảng và bản mẫu giao diện tương tác (Prototype).<br>- **Sản phẩm chạy được:** Khởi tạo môi trường Staging, phát hành Landing Page giới thiệu hệ thống và tích hợp phiên bản đầu của chức năng Đăng nhập (M01). Khách hàng được cấp tài khoản Admin để đăng nhập kiểm tra kết nối Staging thực tế ngay từ mốc khởi động. |
+| **MS-01 – Nền tảng** | Tuần 4 – 6 | - Hoàn thiện module Đăng nhập & Xác thực người dùng (M01).<br>- Thiết lập ma trận Vai trò & Phân quyền truy cập (M02).<br>- Quản lý tài khoản và phân quyền người dùng (M03).<br>- Kiểm thử QA/QC Đợt 1. |
+| **MS-02 – Ticket và Phân hệ sinh viên** | Tuần 7 – 11 | - Quản lý danh mục hỗ trợ và hạn mức SLA (M04).<br>- Trọn vẹn quy trình vòng đời Ticket: Khởi tạo (M05), Tiếp nhận (M06), Xử lý & Bổ sung (M07), Trả kết quả (M08), Điều phối (M11).<br>- Phân hệ sinh viên: Theo dõi tiến độ (M09), Đánh giá chất lượng hỗ trợ (M10).<br>- Kiểm thử QA/QC Đợt 2 & Đợt 3. |
+| **MS-03 – Giám sát Dashboard** | Tuần 12 – 14 | - Giám sát tiến độ và cảnh báo chậm hạn SLA thời gian thực (M12).<br>- Dashboard thống kê và xuất báo cáo điều hành dành cho cấp quản lý (M13).<br>- Kiểm thử QA/QC Đợt 4. |
+| **MS-04 – Bàn giao dự án** | Tuần 15 – 16 | - Kiểm thử nghiệm thu người dùng toàn diện (UAT).<br>- Đóng gói sản phẩm, hoàn thiện bộ tài liệu kỹ thuật & tài liệu hướng dẫn vận hành.<br>- Chuyển giao hệ thống chính thức lên môi trường Production và ký biên bản bàn giao. |
+
+### Cơ chế kiểm chứng và tiêu chí nghiệm thu tại Mốc khởi động (MS-00):
+Để đối tác và Ban Giám hiệu có thể trực tiếp thẩm định hạ tầng kỹ thuật và trải nghiệm sản phẩm ngay từ những tuần đầu tiên (tránh cảm giác chỉ chi trả cho tài liệu giấy tờ), mốc `MS-00` tích hợp ngay phần mềm kiểm chứng:
+- **Đầu ra phần mềm Staging:** Triển khai môi trường máy chủ Staging thực tế, tích hợp trang Landing Page giới thiệu tổng quan hệ thống UniSupport và module Đăng nhập cơ bản.
+- **Tiêu chí nghiệm thu khách hàng:** Đại diện khách hàng được bàn giao tài khoản quản trị (Admin), trực tiếp truy cập vào liên kết Staging, thực hiện đăng nhập thành công vào hệ thống, kết hợp duyệt luồng giao diện mẫu (Interactive Prototype) để chính thức chốt baseline thiết kế.
 
 ## 4. CAM KẾT VỀ MỨC ĐỘ ẢNH HƯỞNG ĐẾN DỰ ÁN
 Đội ngũ dự án đánh giá và cam kết việc cập nhật kế hoạch trên sẽ giữ nguyên các tiêu chuẩn cốt lõi của dự án:

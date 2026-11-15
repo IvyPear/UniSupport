@@ -38,6 +38,31 @@ Dưới đây là bảng tổng hợp và mô tả chi tiết toàn bộ kế ho
 | **Mốc 4**<br>*(7/12 – 18/12)* | Bàn giao dự án | Nghiệm thu | 07/12/2026 | 11/12/2026 | 5 ngày | PM, QA 1 | 25h |
 | | | Bàn giao chính thức | 14/12/2026 | 18/12/2026 | 5 ngày | PM, QA 2 | 25h |
 
+### Phân tích chuỗi quan hệ phụ thuộc kỹ thuật & luồng nghiệp vụ (Work Dependency Matrix)
+
+Để đảm bảo dự án vận hành mượt mà và không bị nghẽn luồng phát triển, kế hoạch triển khai được thiết lập dựa trên các nguyên tắc phụ thuộc chặt chẽ:
+1. **Tầng nền tảng xác thực & kiểm soát truy cập (Identity & Access Layer):** `M01` (Đăng nhập) và `M02` (Phân quyền) đóng vai trò là hạ tầng bảo mật bắt buộc. Toàn bộ các module phía sau đều cần định danh người dùng và kiểm tra quyền hạn (RBAC) nên `M01` và `M02` phải được hoàn thiện làm tiền đề tiên quyết.
+2. **Chuỗi vòng đời xử lý Ticket (Ticket Lifecycle Chain):** 
+   - `M05` (Khởi tạo Ticket) là nguồn cung cấp dữ liệu đầu vào. `M06` (Tiếp nhận) và `M11` (Điều phối) chỉ có thể thực hiện khi đã có ticket hợp lệ được tạo.
+   - `M07` (Xử lý & Bổ sung) và `M08` (Trả kết quả) là các bước tiếp nối bắt buộc phải diễn ra tuần tự sau khi ticket đã được tiếp nhận và phân công.
+   - `M10` (Đánh giá chất lượng) chỉ khả dụng sau khi sinh viên đã nhận được kết quả xử lý từ `M08`.
+3. **Tầng tổng hợp và giám sát (Analytics Layer):** `M12` (Giám sát tiến độ & SLA) và `M13` (Dashboard & Báo cáo) phụ thuộc vào dữ liệu vận hành từ tất cả các module nghiệp vụ (`M04`–`M11`) để tính toán chỉ số KPI và trực quan hóa báo cáo điều hành.
+
+| Module / Hạng mục công việc | Tiền đề bắt buộc (Predecessors) | Bản chất phụ thuộc & Tác động luồng triển khai |
+| :--- | :--- | :--- |
+| **M01: Đăng nhập & Xác thực** | Hạ tầng Staging & Database (`INF-01`) | Thiết lập môi trường và cấu trúc dữ liệu người dùng để cấp phát phiên làm việc an toàn. |
+| **M02: Vai trò & Phân quyền** | M01 (Đăng nhập) | Người dùng bắt buộc phải được xác thực danh tính trước khi hệ thống áp dụng ma trận quyền hạn (RBAC). |
+| **M03: Quản lý tài khoản** | M01, M02 | Dựa trên cơ chế phân quyền để cấp quyền cho Admin quản lý hồ sơ và phân bổ tài khoản người dùng. |
+| **M04: Quản lý danh mục & SLA** | M02, M03 | Cần quyền Quản trị viên để cấu hình danh mục phòng ban và thời hạn SLA trước khi tiếp nhận ticket. |
+| **M05: Khởi tạo Ticket** | M01, M02, M04 | Sinh viên đăng nhập, tra cứu danh mục dịch vụ phù hợp để tạo và nộp yêu cầu hỗ trợ. |
+| **M06: Tiếp nhận Ticket** | M05 (Khởi tạo Ticket) | Luồng tiếp nhận của nhân viên chỉ có thể kích hoạt khi đã có yêu cầu hỗ trợ được tạo từ sinh viên. |
+| **M11: Điều phối Ticket** | M06 (Tiếp nhận Ticket) | Trưởng phòng/Admin căn cứ vào ticket đã tiếp nhận để phân bổ và gán trách nhiệm xử lý cho chuyên viên. |
+| **M07: Xử lý & Bổ sung** | M06, M11 | Chuyên viên chỉ có thể thao tác xử lý hoặc yêu cầu bổ sung thông tin sau khi ticket được tiếp nhận và phân công. |
+| **M08: Trả kết quả** | M07 (Xử lý & Bổ sung) | Phải có nội dung giải quyết hoặc phương án xử lý hoàn tất trước khi hệ thống trả kết quả cho sinh viên. |
+| **M09: Theo dõi tiến độ** | M05, M06, M07, M08 | Màn hình dòng thời gian (Timeline) lấy dữ liệu cập nhật trạng thái xuyên suốt quá trình xử lý ticket. |
+| **M10: Kết quả & Đánh giá** | M08 (Trả kết quả) | Sinh viên chỉ có thể thực hiện chấm điểm hài lòng (CSAT) và đóng ticket sau khi nhận được kết quả chính thức. |
+| **M12, M13: Dashboard & Báo cáo** | Toàn bộ Module nghiệp vụ (`M04`–`M11`) | Đòi hỏi dữ liệu lịch sử và trạng thái vận hành của toàn bộ các module nghiệp vụ để tổng hợp chỉ số SLA và trực quan hóa biểu đồ. |
+
 ---
 
 ## III. MÔ TẢ CHI TIẾT NỘI DUNG TỪNG MỐC
