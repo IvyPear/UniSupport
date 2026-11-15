@@ -15,26 +15,36 @@
 
 > **Liên kết cơ sở ước lượng giờ công (Effort) & đơn giá:** Chi tiết phân bổ 886 giờ công theo vai trò, đơn giá theo giờ và cơ cấu chi phí dự án được quy định tại [Ngan-sach-nhan-su.md](Ngan-sach-nhan-su.md) và chi tiết theo từng tác vụ tại [Master-schedule.md](Master-schedule.md).
 
-| Mã hạng mục | Cột mốc (`MS-xx`) | Phạm vi Module / Công việc | Giờ công WBS trực tiếp | Giá trị báo giá (VNĐ, gồm VAT) |
-| :---: | :--- | :--- | :---: | ---: |
-| **`Q-00`** | **MS-00 – Khởi động** (Tuần 1 – 3) | Khảo sát & đặc tả, thiết kế kiến trúc/UI, tạm ứng, dựng Database & nền tảng (`INF-01`). | 88h | 30.000.000 |
-| **`Q-01`** | **MS-01 – Nền tảng** (Tuần 4 – 6) | `M01` Đăng nhập & Xác thực, `M02` Vai trò & Phân quyền, `M03` Quản lý tài khoản, kèm Test QA/QC Đợt 1. | 160h | 45.000.000 |
-| **`Q-02`** | **MS-02 – Ticket và Phân hệ sinh viên** (Tuần 7 – 11) | `M04` Danh mục, `M05` Tạo Ticket, `M06` Tiếp nhận, `M07` Xử lý & Bổ sung, `M08` Trả kết quả, `M09` Theo dõi, `M10` Đánh giá, `M11` Điều phối, kèm Test QA/QC Đợt 2 & Đợt 3. | 290h | 90.000.000 |
-| **`Q-03`** | **MS-03 – Giám sát Dashboard** (Tuần 12 – 14) | `M12` Giám sát tiến độ & cảnh báo SLA, `M13` Dashboard & Báo cáo, kèm Test QA/QC Đợt 4. | 124h | 45.000.000 |
-| **`Q-04`** | **MS-04 – Bàn giao dự án** (Tuần 15 – 16) | Kiểm thử nghiệm thu toàn diện (UAT), chuẩn bị tài liệu hướng dẫn và bàn giao chính thức. | 50h | 90.000.000 |
-| **—** | **Hoạt động BA xuyên suốt** (Tuần 1 – 16) | BA đồng hành làm rõ nghiệp vụ, quản lý yêu cầu và hỗ trợ nghiệm thu xuyên suốt 16 tuần *(đã phân bổ vào giá các mốc trên)*. | 174h | *(Đã tính trong Q-00..Q-04)* |
-| **TỔNG** | **Toàn dự án (16 tuần)** | **13 Module (`M01`–`M13`) + `INF-01` + Kiểm thử & Bàn giao** | **886h** | **300.000.000** |
+| Mã hạng mục | Cột mốc (`MS-xx`) | Phạm vi Module / Công việc bàn giao | Giờ WBS | Giờ BA | Tổng Effort | Thành tiền (VNĐ, gồm VAT) | Đơn giá bình quân (VNĐ/h) |
+| :---: | :--- | :--- | :---: | :---: | :---: | ---: | ---: |
+| **`Q-00`** | **MS-00 – Khởi động**<br>*(Tuần 1 – 3)* | Khảo sát quy trình, đặc tả yêu cầu, thiết kế kiến trúc/DB (`INF-01`), bàn giao Interactive Prototype 4 vai trò. *(M01 bắt đầu ở MS-01)*. | 88h | 32h | **120h** | 30.000.000 | **250.000** |
+| **`Q-01`** | **MS-01 – Nền tảng**<br>*(Tuần 4 – 6)* | Module `M01` (Đăng nhập), `M02` (Phân quyền), `M03` (Quản lý tài khoản), kèm kiểm thử QA/QC Đợt 1 & khách hàng test (08–14/10). | 160h | 32h | **192h** | 45.000.000 | **234.375** |
+| **`Q-02`** | **MS-02 – Ticket & SV**<br>*(Tuần 7 – 11)* | Khởi động `M04` từ 12/10 (overlap đến 14/10), hoàn thiện vòng đời Ticket (`M04`–`M11`), phân hệ sinh viên và kiểm thử Đợt 2 & 3. | 290h | 56h | **346h** | 90.000.000 | **260.116** |
+| **`Q-03`** | **MS-03 – Giám sát**<br>*(Tuần 12 – 14)* | Giám sát tiến độ & cảnh báo SLA (`M12`), Dashboard & Báo cáo quản trị (`M13`), kèm kiểm thử QA/QC Đợt 4. | 124h | 32h | **156h** | 45.000.000 | **288.462** |
+| **`Q-04`** | **MS-04 – Bàn giao**<br>*(Tuần 15 – 16)* | Kiểm thử nghiệm thu người dùng (UAT), bàn giao tài liệu kỹ thuật, chuyển giao Production và bảo hành 06 tháng. | 50h | 22h | **72h** | 90.000.000 | **1.250.000** |
+| **TỔNG** | **Toàn dự án (16 tuần)** | **Toàn bộ 13 Module (`M01`–`M13`) + Hạ tầng nền tảng + UAT bàn giao** | **712h** | **174h** | **886h** | **300.000.000** | **338.599** |
+
+> **Nguyên tắc tính toán và Cơ cấu Đơn giá bình quân:**
+> - **Công thức tính đơn giá bình quân từng hạng mục:** $\text{Đơn giá bình quân (Q-xx)} = \frac{\text{Thành tiền Q-xx}}{\text{Tổng Effort Q-xx}}$.
+> - **Đơn giá bình quân toàn dự án:** $\frac{300.000.000\text{ VNĐ}}{886\text{ giờ công}} \approx 338.599\text{ VNĐ/giờ}$ (~338,6k/h), hoàn toàn khớp với tổng 886 giờ công tại [Ngan-sach-nhan-su.md](Ngan-sach-nhan-su.md) và [Master-schedule.md](Master-schedule.md).
+> - **Giải trình hạng mục `Q-04`:** Mức đơn giá tính trên giờ của `Q-04` cao hơn các giai đoạn phát triển trước do gói chi phí này bao gồm trách nhiệm nghiệm thu toàn trình (UAT), chi phí chuyển giao quyền sử dụng trọn đời mã nguồn, chi phí rủi ro đóng gói và cam kết bảo hành miễn phí 06 tháng sau bàn giao.
+>
+> **Quyền lợi của khách hàng:** Khách hàng được kiểm tra và xác nhận sản phẩm bàn giao trước khi thực hiện thanh toán theo từng đợt, căn cứ trên phạm vi và tiêu chí đã được hai bên thống nhất.
 
 ---
 
 ## 3. Điều kiện thanh toán
-Về phương thức thanh toán, các mốc được chia thành 02 đợt thanh toán như sau:
+Về phương thức thanh toán thương mại, dự án áp dụng cơ chế 02 đợt thanh toán (tỷ lệ 70% – 30%) nhằm đảm bảo nguồn kinh phí vận hành, hạ tầng và chi trả lương cho đội ngũ nhân sự ngay từ khi khởi động dự án:
 
-| Đợt thanh toán | Mốc | Điều kiện thanh toán | Giá trị |
-| :--- | :--- | :--- | :--- |
-| **Đợt 1** | Từ Mốc 0 đến Mốc 3 | Sau khi hoàn thành từ Mốc 0 đến hết Mốc 3 (Khảo sát, Nền tảng, Ticket - Phân hệ sinh viên và Dashboard giám sát). | 210.000.000 VNĐ (70%) |
-| **Đợt 2** | Mốc 4 | Sau khi hoàn tất công tác nghiệm thu, chuẩn bị đầy đủ tài liệu và bàn giao chính thức dự án. | 90.000.000 VNĐ (30%) |
-| **Tổng** | | | **300.000.000 VNĐ (100%)** |
+| Đợt thanh toán | Cột mốc áp dụng | Điều kiện kích hoạt thanh toán | Tỷ lệ | Giá trị thanh toán (VNĐ) |
+| :--- | :--- | :--- | :---: | ---: |
+| **Đợt 1 (Tạm ứng khởi động)** | **Mốc 0 (Khởi động)**<br>*(Tuần 1)* | Khách hàng thực hiện thanh toán tạm ứng ngay sau khi ký kết thỏa thuận hợp đồng và chính thức khởi động dự án để bảo đảm nguồn ngân sách thực thi, thiết lập hạ tầng Staging và chi trả lương nhân sự. | 70% | **210.000.000** |
+| **Đợt 2 (Tất toán bàn giao)** | **Mốc 4 (Bàn giao)**<br>*(Tuần 15–16)* | Thanh toán toàn bộ giá trị còn lại sau khi hoàn tất kiểm thử nghiệm thu người dùng (UAT), bàn giao đầy đủ bộ mã nguồn, tài liệu hướng dẫn và ký biên bản bàn giao chính thức. | 30% | **90.000.000** |
+| **TỔNG CỘNG** | **Toàn dự án** | **Hoàn thành nghĩa vụ thanh toán hợp đồng** | **100%** | **300.000.000** |
+
+> **Nguyên tắc phân biệt giữa Báo giá hạng mục và Điều kiện thanh toán:**
+> - Bảng tại **Mục 2** (`Q-00` đến `Q-04`) là bảng **báo giá chi tiết theo từng hạng mục và module bàn giao**, xác định giá trị kinh tế của từng phân hệ chức năng tương ứng với khối lượng giờ công (effort) thực tế.
+> - Bảng tại **Mục 3** quy định **lịch trình dòng tiền thanh toán thực tế** giữa hai bên: Áp dụng cơ chế tạm ứng 70% tại Mốc 0 để đơn vị triển khai chủ động dòng tiền chi trả đội ngũ, tránh rủi ro đứt gãy tài chính trong suốt 14 tuần phát triển. Khách hàng giữ lại 30% để thanh toán tại Mốc 4 khi nghiệm thu toàn trình.
 
 ---
 

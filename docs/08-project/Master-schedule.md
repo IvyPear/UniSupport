@@ -18,7 +18,7 @@ Dưới đây là bảng tổng hợp và mô tả chi tiết toàn bộ kế ho
 | **Mốc 0**<br>*(1/9 – 18/9)* | Khởi động | Khảo sát & Đặc tả | 01/09/2026 | 02/09/2026 | 2 ngày | PM, BA | 8h |
 | | | Thiết kế & Tạm ứng | 03/09/2026 | 10/09/2026 | 6 ngày | PM, BA, Senior | 32h |
 | | | Database & Nền tảng | 11/09/2026 | 18/09/2026 | 6 ngày | Senior, Dev 1 | 48h |
-| **Mốc 1**<br>*(21/9 – 9/10)* | Nền tảng | M01: Đăng nhập & Xác thực | 21/09/2026 | 25/09/2026 | 5 ngày | Senior, Dev 1, Dev 2 | 40h |
+| **Mốc 1**<br>*(21/09 – 14/10)* | Nền tảng | M01: Đăng nhập & Xác thực | 21/09/2026 | 25/09/2026 | 5 ngày | Senior, Dev 1, Dev 2 | 40h |
 | | | M02: Vai trò & Phân quyền | 28/09/2026 | 02/10/2026 | 5 ngày | Senior, Dev 1, Dev 3 | 40h |
 | | | M03: Quản lý tài khoản | 05/10/2026 | 07/10/2026 | 3 ngày | Senior, Dev 2, Dev 3 | 36h |
 | | | Test QA/QC (Đợt 1) | 08/10/2026 | 14/10/2026 | 5 ngày | PM, QA 1, QA 2 | 44h |
@@ -68,24 +68,24 @@ Dưới đây là bảng tổng hợp và mô tả chi tiết toàn bộ kế ho
 ## III. MÔ TẢ CHI TIẾT NỘI DUNG TỪNG MỐC
 
 ### 1. Mốc 0: Khởi động (01/09/2026 – 18/09/2026)
-* **Mục tiêu:** Hoàn thiện đặc tả yêu cầu, thiết kế kiến trúc hệ thống và dựng cơ sở hạ tầng nền tảng.
+* **Mục tiêu:** Hoàn thiện khảo sát đặc tả yêu cầu, thiết kế kiến trúc hệ thống, xây dựng cấu trúc cơ sở dữ liệu nền tảng và bàn giao bản mẫu giao diện tương tác (Interactive Prototype) cho 4 vai trò để khóa baseline thiết kế. *(Module M01 bắt đầu phát triển từ Mốc 1)*.
 * **Các công việc chính:**
   * **Khảo sát & Đặc tả (01/09 – 02/09):** PM và BA thực hiện làm rõ phạm vi, tài liệu hóa luồng nghiệp vụ.
-  * **Thiết kế & Tạm ứng (03/09 – 10/09):** Senior cùng PM/BA thiết kế giao diện, luồng dữ liệu kiến trúc hệ thống.
-  * **Database & Nền tảng (11/09 – 18/09):** Senior và Dev 1 dựng cấu trúc database, thiết lập môi trường framework.
+  * **Thiết kế & Tạm ứng (03/09 – 10/09):** Senior cùng PM/BA thiết kế giao diện Interactive Prototype, luồng dữ liệu kiến trúc hệ thống.
+  * **Database & Nền tảng (11/09 – 18/09):** Senior và Dev 1 dựng cấu trúc database, thiết lập môi trường framework hạ tầng Staging (`INF-01`).
 
-### 2. Mốc 1: Nền tảng (21/09/2026 – 09/10/2026)
+### 2. Mốc 1: Nền tảng (21/09/2026 – 14/10/2026)
 * **Mục tiêu:** Xây dựng khung bảo mật, định danh người dùng và cơ chế phân quyền cốt lõi.
 * **Các công việc chính:**
   * **M01: Đăng nhập & Xác thực (21/09 – 25/09):** Senior, Dev 1, Dev 2 lập trình cơ chế Auth/Token/Session.
   * **M02: Vai trò & Phân quyền (28/09 – 02/10):** Senior, Dev 1, Dev 3 cấu hình ma trận quyền theo vai trò.
   * **M03: Quản lý tài khoản (05/10 – 07/10):** Senior, Dev 2, Dev 3 tạo các chức năng CRUD người dùng/phân hệ.
-  * **Test QA/QC Đợt 1 (08/10 – 14/10):** Đội ngũ QA (QA 1, QA 2) cùng PM kiểm thử chức năng và phối hợp khách hàng nghiệm thu sơ bộ giai đoạn nền tảng.
+  * **Test QA/QC Đợt 1 & Khách hàng test (08/10 – 14/10):** Đội ngũ QA (QA 1, QA 2) cùng PM kiểm thử chức năng và phối hợp khách hàng trực tiếp dùng thử, nghiệm thu sơ bộ giai đoạn nền tảng.
 
 ### 3. Mốc 2: Ticket & Phân hệ sinh viên (12/10/2026 – 13/11/2026)
-* **Mục tiêu:** Đây là giai đoạn trọng tâm của hệ thống, triển khai toàn bộ quy trình vòng đời của Ticket hỗ trợ.
+* **Mục tiêu:** Đây là giai đoạn trọng tâm của hệ thống, triển khai toàn bộ quy trình vòng đời của Ticket hỗ trợ. *(Bắt đầu từ 12/10 với M04, overlap có chủ đích 3 ngày từ 12/10 – 14/10 với đợt test của Mốc 1 để tối ưu thời gian chờ)*.
 * **Các công việc chính:**
-  * **M04: Quản lý danh mục (12/10 – 14/10):** Khởi tạo danh mục phòng ban, loại yêu cầu hỗ trợ.
+  * **M04: Quản lý danh mục (12/10 – 14/10):** Khởi tạo danh mục phòng ban, loại yêu cầu hỗ trợ (chạy song song trong khi QA/khách hàng test Mốc 1).
   * **M05: Khởi tạo Ticket (15/10 – 19/10):** Giao diện và API cho sinh viên gửi yêu cầu hỗ trợ.
   * **M06: Tiếp nhận Ticket (20/10 – 22/10):** Cơ chế ghi nhận và phân loại ticket đến bộ phận chuyên môn.
   * **M11: Điều phối Ticket (23/10 – 26/10):** Chức năng gán việc, phân bổ người giải quyết ticket.
@@ -120,9 +120,9 @@ Dự án được tổ chức theo 5 cột mốc tuần tự (`MS-00` $\rightarr
 
 | Mã Mốc | Thời gian | Giờ công | Phụ thuộc | Sản phẩm chạy được / Đầu ra bàn giao & Cách khách hàng tự kiểm tra (Nghiệm thu) |
 | :---: | :---: | :---: | :---: | :--- |
-| **`MS-00`** | Tuần 1–3<br>*(01/09 – 18/09)* | 88h | — | **Đầu ra & Kiểm tra:** Bàn giao bản **Prototype giao diện tương tác (Interactive Prototype)** trên trình duyệt cùng khung ứng dụng & Database (`INF-01`) đã khởi tạo trên môi trường Staging ([Proposal.md — Mục 6.1 & 6.2](Proposal.md#61-lộ-trình-triển-khai-16-tuần)). Khách hàng trực tiếp bấm duyệt luồng màn hình của 4 vai trò trên Prototype để xác nhận khóa phạm vi trước khi lập trình chi tiết. |
-| **`MS-01`** | Tuần 4–6<br>*(21/09 – 14/10)* | 160h | `MS-00` | **Phần mềm chạy được:** Phân hệ Xác thực (`M01`), Phân quyền RBAC (`M02`) và Quản lý tài khoản (`M03`).<br>**Cách khách hàng tự dùng thử:** Khách hàng đăng nhập bằng 4 tài khoản vai trò (`Student`, `Staff`, `Manager`, `Admin`), thử nghiệm đổi mật khẩu lần đầu, khóa tài khoản khi nhập sai 5 lần, bật/tắt quyền động và import danh sách tài khoản bằng file Excel. |
-| **`MS-02`** | Tuần 7–11<br>*(12/10 – 13/11)* | 290h | `MS-01` | **Phần mềm chạy được:** Trọn vẹn vòng đời xử lý Ticket (`M04` đến `M11`).<br>**Cách khách hàng tự dùng thử:** Khách hàng tự thực hiện luồng khép kín: Cấu hình danh mục & SLA (`M04`) $\rightarrow$ Sinh viên tạo đơn & đính kèm file (`M05`) $\rightarrow$ Nhân viên tiếp nhận (`M06`) / Admin & Trưởng phòng điều phối (`M11`) $\rightarrow$ Nhân viên xử lý, yêu cầu bổ sung 3 ngày làm việc (`M07`) và trả kết quả (`M08`) $\rightarrow$ Sinh viên theo dõi, nộp bổ sung (`M09`) và đánh giá CSAT 1–5 sao (`M10`). |
+| **`MS-00`** | Tuần 1–3<br>*(01/09 – 18/09)* | 88h | — | **Đầu ra & Nghiệm thu:** Bàn giao hồ sơ khảo sát & đặc tả yêu cầu, bản thiết kế kiến trúc/CSDL và **bản mẫu giao diện tương tác (Interactive Prototype)** trên trình duyệt cùng hạ tầng Staging (`INF-01`). Khách hàng trực tiếp bấm duyệt luồng màn hình của 4 vai trò trên Prototype để xác nhận khóa phạm vi trước khi lập trình chi tiết. *(Module M01 bắt đầu phát triển từ MS-01)*. |
+| **`MS-01`** | Tuần 4–6<br>*(21/09 – 14/10)* | 160h | `MS-00` | **Phần mềm chạy được:** Phân hệ Xác thực (`M01`), Phân quyền RBAC (`M02`) và Quản lý tài khoản (`M03`).<br>**Khách hàng kiểm thử (08/10 – 14/10):** Khách hàng trực tiếp dùng thử và nghiệm thu sơ bộ giai đoạn nền tảng: đăng nhập 4 tài khoản vai trò (`Student`, `Staff`, `Manager`, `Admin`), thử nghiệm đổi mật khẩu lần đầu, khóa tài khoản khi nhập sai 5 lần, bật/tắt quyền động và import danh sách tài khoản bằng file Excel. |
+| **`MS-02`** | Tuần 7–11<br>*(12/10 – 13/11)* | 290h | `MS-01` | **Phần mềm chạy được:** Trọn vẹn vòng đời xử lý Ticket (`M04` đến `M11`). Khởi động từ 12/10 với `M04`, gối đầu (overlap) có chủ đích 3 ngày (12/10 – 14/10) với giai đoạn test MS-01 để tối ưu thời gian chờ.<br>**Cách khách hàng tự dùng thử:** Khách hàng tự thực hiện luồng khép kín: Cấu hình danh mục & SLA (`M04`) $\rightarrow$ Sinh viên tạo đơn & đính kèm file (`M05`) $\rightarrow$ Nhân viên tiếp nhận (`M06`) / Admin & Trưởng phòng điều phối (`M11`) $\rightarrow$ Nhân viên xử lý, yêu cầu bổ sung 3 ngày làm việc (`M07`) và trả kết quả (`M08`) $\rightarrow$ Sinh viên theo dõi, nộp bổ sung (`M09`) và đánh giá CSAT 1–5 sao (`M10`). |
 | **`MS-03`** | Tuần 12–14<br>*(16/11 – 04/12)* | 124h | `MS-02` | **Phần mềm chạy được:** Phân hệ Giám sát tiến độ (`M12`) và Dashboard & Báo cáo (`M13`).<br>**Cách khách hàng tự dùng thử:** Trưởng phòng và Ban Giám hiệu truy cập Dashboard xem biểu đồ thống kê thời gian thực, kiểm tra cảnh báo tô đỏ với các đơn quá hạn SLA, tra cứu đơn toàn trường và tải xuống báo cáo định dạng Excel/PDF. |
 | **`MS-04`** | Tuần 15–16<br>*(07/12 – 18/12)* | 50h | `MS-03` | **Phần mềm chạy được:** Bản phát hành hoàn chỉnh (Release Candidate / Production) tích hợp toàn bộ 13 phân hệ (`M01`–`M13`) kèm dữ liệu mẫu nghiệm thu (`Docs-02`) và bộ tài liệu hướng dẫn (`Docs-01`).<br>**Cách khách hàng tự dùng thử:** Khách hàng thực hiện kiểm thử nghiệm thu người dùng (UAT) toàn trình trên hệ thống hoàn chỉnh theo tiêu chuẩn tại [Proposal.md — Mục 8.2](Proposal.md#82-nghiệm-thu) và ký biên bản bàn giao chính thức. |
 
