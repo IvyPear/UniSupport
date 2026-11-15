@@ -51,7 +51,7 @@
 - **Email:** Bắt buộc, Đúng định dạng email trường.
 - **Vai trò:** Bắt buộc, chọn trong 4 vai trò chuẩn.
 - **Phòng ban:** Bắt buộc nếu là Nhân viên/Quản lý; không bắt buộc nếu là Sinh viên/Admin toàn trường.
-- **Mật khẩu khởi tạo:** Mật khẩu mặc định hệ thống.
+- **Mật khẩu khởi tạo:** Mật khẩu mặc định là ngày sinh của người dùng theo định dạng `DDMMYYYY`.
 
 **Luồng chính (Main Flow):**
 

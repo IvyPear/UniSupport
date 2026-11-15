@@ -32,18 +32,11 @@
 * **E-02 (Bỏ trống trường bắt buộc):** Người dùng bấm Đăng nhập khi chưa điền mã định danh hoặc mật khẩu $\rightarrow$ Hệ thống kích hoạt validation tại chỗ, viền đỏ ô nhập liệu và báo lỗi *“Vui lòng nhập đầy đủ thông tin”*.
 * **E-03 (Tài khoản bị vô hiệu hóa):** Tài khoản có trạng thái `Inactive` đăng nhập $\rightarrow$ Hệ thống từ chối (`403 Forbidden`) và thông báo: *“Tài khoản của bạn đã bị khóa, vui lòng liên hệ Quản trị viên”*.
 
-* Nhập sai mã định danh hoặc mật khẩu $\rightarrow$ Hệ thống hiển thị thông báo *“Sai thông tin đăng nhập”*.
-* Bỏ trống trường bắt buộc $\rightarrow$ Báo lỗi tại chỗ và không gửi yêu cầu.
-
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 * **AC-01:** Nhập đúng mã định danh và mật khẩu $\rightarrow$ Đăng nhập thành công và cấp JWT Token hợp lệ (thời hạn 8 tiếng).
 * **AC-02:** Nhập sai thông tin đăng nhập $\rightarrow$ Báo lỗi rõ ràng và không cấp quyền truy cập.
 * **AC-03:** Màn hình Đăng nhập tuyệt đối không hiển thị nút “Đăng ký”.
 * **AC-04:** Đăng nhập lần đầu bằng mật khẩu ngày sinh (`must_change_password = true`) $\rightarrow$ Bắt buộc chuyển sang màn hình đổi mật khẩu mới.
-
-* **AC-01:** Nhập đúng mã định danh và mật khẩu $\rightarrow$ Đăng nhập thành công.
-* **AC-02:** Nhập sai thông tin $\rightarrow$ Báo lỗi rõ ràng và không cho phép đăng nhập.
-* **AC-03:** Màn hình Đăng nhập không có nút “Đăng ký” cho người dùng vãng lai.
 
 ---
 
@@ -160,8 +153,6 @@
 **Business Rules (Quy tắc nghiệp vụ):**
 * **BR-01:** Điều hướng diễn ra tự động ngay sau khi cấp Token, không hiển thị trang trung gian.
 * **BR-02:** Nếu chưa hoàn tất đổi mật khẩu bắt buộc, người dùng bị chặn toàn bộ các thao tác nghiệp vụ khác.
-
-* **BR-01:** Điều hướng diễn ra tự động ngay sau khi cấp Token, không hiển thị trang trung gian không cần thiết.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 * **AC-01:** Đăng nhập tài khoản không có cờ đổi mật khẩu $\rightarrow$ Chuyển thẳng về đúng giao diện làm việc của vai trò đó.
