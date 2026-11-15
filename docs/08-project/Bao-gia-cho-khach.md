@@ -11,23 +11,38 @@
 
 ---
 
-## 2. Phạm vi và hạng mục báo giá
+## 2. Bảng báo giá chi tiết theo module (Hệ thống UniSupport)
 
-> **Liên kết cơ sở ước lượng giờ công (Effort) & đơn giá:** Chi tiết phân bổ 886 giờ công theo vai trò, đơn giá theo giờ và cơ cấu chi phí dự án được quy định tại [Ngan-sach-nhan-su.md](Ngan-sach-nhan-su.md) và chi tiết theo từng tác vụ tại [Master-schedule.md](Master-schedule.md).
+> **Thông tin chung:**
+> - **Dự án:** Hệ thống Quản lý và Tiếp nhận Hỗ trợ UniSupport
+> - **Tổng ngân sách modules:** `300.000.000 VNĐ` (Đã bao gồm VAT)
+> - **Đơn vị tính:** Việt Nam Đồng (VNĐ)
+> - **Phương pháp định giá:** Phân bổ theo tỷ trọng chi phí nhân sự thực tế (dựa trên đơn giá theo giờ từng vai trò)
 
-| Mã hạng mục | Cột mốc (`MS-xx`) | Phạm vi Module / Công việc bàn giao | Giờ WBS | Giờ BA | Tổng Effort | Thành tiền (VNĐ, gồm VAT) | Đơn giá bình quân (VNĐ/h) |
-| :---: | :--- | :--- | :---: | :---: | :---: | ---: | ---: |
-| **`Q-00`** | **MS-00 – Khởi động**<br>*(Tuần 1 – 3)* | Khảo sát quy trình, đặc tả yêu cầu, thiết kế kiến trúc/DB (`INF-01`), bàn giao Interactive Prototype 4 vai trò. *(M01 bắt đầu ở MS-01)*. | 88h | 32h | **120h** | 30.000.000 | **250.000** |
-| **`Q-01`** | **MS-01 – Nền tảng**<br>*(Tuần 4 – 6)* | Module `M01` (Đăng nhập), `M02` (Phân quyền), `M03` (Quản lý tài khoản), kèm kiểm thử QA/QC Đợt 1 & khách hàng test (08–14/10). | 160h | 32h | **192h** | 45.000.000 | **234.375** |
-| **`Q-02`** | **MS-02 – Ticket & SV**<br>*(Tuần 7 – 11)* | Khởi động `M04` từ 12/10 (overlap đến 14/10), hoàn thiện vòng đời Ticket (`M04`–`M11`), phân hệ sinh viên và kiểm thử Đợt 2 & 3. | 290h | 56h | **346h** | 90.000.000 | **260.116** |
-| **`Q-03`** | **MS-03 – Giám sát**<br>*(Tuần 12 – 14)* | Giám sát tiến độ & cảnh báo SLA (`M12`), Dashboard & Báo cáo quản trị (`M13`), kèm kiểm thử QA/QC Đợt 4. | 124h | 32h | **156h** | 45.000.000 | **288.462** |
-| **`Q-04`** | **MS-04 – Bàn giao**<br>*(Tuần 15 – 16)* | Kiểm thử nghiệm thu người dùng (UAT), bàn giao tài liệu kỹ thuật, chuyển giao Production và bảo hành 06 tháng. | 50h | 22h | **72h** | 90.000.000 | **1.250.000** |
-| **TỔNG** | **Toàn dự án (16 tuần)** | **Toàn bộ 13 Module (`M01`–`M13`) + Hạ tầng nền tảng + UAT bàn giao** | **712h** | **174h** | **886h** | **300.000.000** | **338.599** |
+| STT | Mã báo giá | Mã module | Tên Module / Chức năng | Giờ WBS (h) | Giờ BA (h) | Tổng Effort (h) | Thành tiền (VNĐ) |
+| :---: | :---: | :---: | :--- | :---: | :---: | :---: | ---: |
+| 1 | **`Q-01`** | `M01` | Đăng nhập & xác thực | 40 h | 10 h | **50 h** | 17.000.000 ₫ |
+| 2 | **`Q-02`** | `M02` | Vai trò & Phân quyền | 38 h | 9 h | **47 h** | 16.000.000 ₫ |
+| 3 | **`Q-03`** | `M03` | Quản lý tài khoản | 40 h | 10 h | **50 h** | 17.000.000 ₫ |
+| 4 | **`Q-04`** | `M04` | Quản lý danh mục | 42 h | 10 h | **52 h** | 17.500.000 ₫ |
+| 5 | **`Q-05`** | `M05` | Khởi tạo Ticket | 82 h | 19 h | **101 h** | 34.500.000 ₫ |
+| 6 | **`Q-06`** | `M06` | Tiếp nhận Ticket | 75 h | 17 h | **92 h** | 31.000.000 ₫ |
+| 7 | **`Q-07`** | `M07` | Xử lý & Bổ sung | 80 h | 19 h | **99 h** | 33.500.000 ₫ |
+| 8 | **`Q-08`** | `M08` | Trả kết quả | 62 h | 14 h | **76 h** | 26.000.000 ₫ |
+| 9 | **`Q-09`** | `M09` | Theo dõi & Bổ sung | 50 h | 12 h | **62 h** | 21.000.000 ₫ |
+| 10 | **`Q-10`** | `M10` | Kết quả & Đánh giá | 34 h | 9 h | **43 h** | 14.500.000 ₫ |
+| 11 | **`Q-11`** | `M11` | Điều phối Ticket | 46 h | 11 h | **57 h** | 19.500.000 ₫ |
+| 12 | **`Q-12`** | `M12` | Giám sát tiến độ | 58 h | 15 h | **73 h** | 24.500.000 ₫ |
+| 13 | **`Q-13`** | `M13` | Dashboard & Báo cáo | 65 h | 19 h | **84 h** | 28.000.000 ₫ |
+| **-** | **TỔNG CỘNG** | **13 MODULES** | **Toàn bộ hệ thống UniSupport** | **712 h** | **174 h** | **886 h** | **300.000.000 ₫** |
 
-> **Nguyên tắc tính toán và Cơ cấu Đơn giá bình quân:**
-> - **Công thức tính đơn giá bình quân từng hạng mục:** $\text{Đơn giá bình quân (Q-xx)} = \frac{\text{Thành tiền Q-xx}}{\text{Tổng Effort Q-xx}}$.
-> - **Đơn giá bình quân toàn dự án:** $\frac{300.000.000\text{ VNĐ}}{886\text{ giờ công}} \approx 338.599\text{ VNĐ/giờ}$ (~338,6k/h), hoàn toàn khớp với tổng 886 giờ công tại [Ngan-sach-nhan-su.md](Ngan-sach-nhan-su.md) và [Master-schedule.md](Master-schedule.md).
-> - **Giải trình hạng mục `Q-04`:** Mức đơn giá tính trên giờ của `Q-04` cao hơn các giai đoạn phát triển trước do gói chi phí này bao gồm trách nhiệm nghiệm thu toàn trình (UAT), chi phí chuyển giao quyền sử dụng trọn đời mã nguồn, chi phí rủi ro đóng gói và cam kết bảo hành miễn phí 06 tháng sau bàn giao.
+> **Kiểm tra đối soát (Phương án A):** ✅ Khớp đúng ngân sách: **300.000.000 ₫** (100%) | Khớp đúng nỗ lực: **886h Effort** (712h WBS + 174h BA).
+>
+> 📌 **NGUYÊN TẮC XÁC ĐỊNH & PHÂN BỔ GIỜ CÔNG VÀ LƯƠNG NHÂN SỰ:**
+> 1. **Đơn giá lương:** Trích xuất từ bảng *'PHÂN CHIA GIỜ CÔNG CHI TIẾT'*: PM 200.000 đ/h, BA 160.000 đ/h, Senior Dev 240.000 đ/h, Junior Devs (Dev 1, Dev 2, Dev 3) 90.000 đ/h, QA/QC 125.000 đ/h. Tổng quỹ lương gốc của toàn bộ dự án (886h) là 126.490.000 VNĐ.
+> 2. **Nhân sự module:** Từng module được gán đúng nhân sự đảm nhận: Senior phụ trách chính các module phức tạp, nền tảng (M01, M02, M03, M04, M05, M06, M11); Junior Devs phụ trách triển khai chi tiết; BA tham gia xuyên suốt mọi module. Các module thuần Junior không tính lương Senior.
+> 3. **Định giá phân bổ (Phương án A):** Ngân sách 300.000.000 VNĐ được tái phân bổ tập trung trọng số lớn vào các module cốt lõi xử lý Ticket của Mốc 2 (M05–M11 chiếm ~60% ngân sách và effort). Chi phí từng module phân bổ theo tỷ trọng nỗ lực thực tế kết hợp hệ số nghiệp vụ: $\text{Thành tiền} = \text{Tỷ trọng nỗ lực \& độ phức tạp} \times 300.000.000\text{ VNĐ}$, đảm bảo khớp đúng 300.000.000 VNĐ.
+> 4. **Quy mô nỗ lực:** Nỗ lực phát triển trực tiếp 13 modules là 450h (398h Dev + 52h BA). Toàn bộ 436h công việc chung (PM 72h, QA/QC 170h, kiến trúc & nền tảng 72h, nghiệm thu & bàn giao 122h BA) được phân bổ theo tỷ trọng nỗ lực kỹ thuật, đảm bảo tổng nỗ lực khớp đúng 712h WBS, 174h BA (tổng 886h effort).
 >
 > **Quyền lợi của khách hàng:** Khách hàng được kiểm tra và xác nhận sản phẩm bàn giao trước khi thực hiện thanh toán theo từng đợt, căn cứ trên phạm vi và tiêu chí đã được hai bên thống nhất.
 
@@ -43,7 +58,7 @@ Về phương thức thanh toán thương mại, dự án áp dụng cơ chế 0
 | **TỔNG CỘNG** | **Toàn dự án** | **Hoàn thành nghĩa vụ thanh toán hợp đồng** | **100%** | **300.000.000** |
 
 > **Nguyên tắc phân biệt giữa Báo giá hạng mục và Điều kiện thanh toán:**
-> - Bảng tại **Mục 2** (`Q-00` đến `Q-04`) là bảng **báo giá chi tiết theo từng hạng mục và module bàn giao**, xác định giá trị kinh tế của từng phân hệ chức năng tương ứng với khối lượng giờ công (effort) thực tế.
+> - Bảng tại **Mục 2** (`Q-01` đến `Q-13`) là bảng **báo giá chi tiết theo từng module chức năng bàn giao**, xác định giá trị kinh tế của từng phân hệ tương ứng với khối lượng giờ công (effort) và độ phức tạp kỹ thuật thực tế.
 > - Bảng tại **Mục 3** quy định **lịch trình dòng tiền thanh toán thực tế** giữa hai bên: Áp dụng cơ chế tạm ứng 70% tại Mốc 0 để đơn vị triển khai chủ động dòng tiền chi trả đội ngũ, tránh rủi ro đứt gãy tài chính trong suốt 14 tuần phát triển. Khách hàng giữ lại 30% để thanh toán tại Mốc 4 khi nghiệm thu toàn trình.
 
 ---
