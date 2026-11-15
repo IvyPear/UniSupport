@@ -45,7 +45,7 @@
   - Nếu người dùng quên mật khẩu, họ liên hệ trực tiếp phòng IT/Admin nhà trường. Admin sẽ kiểm tra định danh và thực hiện đặt lại mật khẩu về mặc định (ngày sinh) trên phân hệ `M03`.
 - **Bắt buộc đổi mật khẩu lần đầu (`NFR-SEC-04`):**
   - Tài khoản đăng nhập bằng mật khẩu mặc định (hoặc vừa được Admin reset) sẽ mang cờ `must_change_password = true`.
-  - Hệ thống lập tức điều hướng người dùng tới màn hình đổi mật khẩu mới (yêu cầu tối thiểu 6 ký tự). Người dùng không thể truy cập bất kỳ chức năng nào khác trước khi hoàn tất bước này.
+  - Hệ thống lập tức điều hướng người dùng tới màn hình đổi mật khẩu mới (yêu cầu tối thiểu 8 ký tự). Người dùng không thể truy cập bất kỳ chức năng nào khác trước khi hoàn tất bước này.
 
 ### 2.3. Phòng chống tấn công dò quét mật khẩu (`NFR-SEC-02`)
 - Hệ thống áp dụng bộ đếm số lần đăng nhập sai (`failed_attempts`):
