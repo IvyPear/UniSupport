@@ -94,18 +94,18 @@
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 - **Email / Mã Admin:** Bắt buộc, Max 100 ký tự.
-- **Mã OTP xác thực:** Bắt buộc, chuỗi 6 chữ số có hiệu lực 15 phút.
+- **Reset Token:** Chuỗi ký tự ngẫu nhiên bảo mật, đính kèm trong liên kết gửi qua Email, hiệu lực 15 phút.
 - **Mật khẩu mới:** Bắt buộc, Min 8 ký tự, gồm chữ hoa, chữ thường và chữ số.
 - **Xác nhận mật khẩu:** Bắt buộc, trùng khớp với mật khẩu mới.
 
 **Luồng chính (Main Flow):**
 
 1. Tại giao diện Đăng nhập, Admin nhấp vào liên kết “Quên mật khẩu”.
-2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi mã xác thực”.
-3. Hệ thống kiểm tra quyền Admin, tạo mã OTP ngẫu nhiên và gửi về Email quản trị.
-4. Admin kiểm tra hòm thư, nhập mã OTP vào màn hình xác thực.
+2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi liên kết khôi phục”.
+3. Hệ thống kiểm tra quyền Admin, tạo liên kết đặt lại mật khẩu an toàn chứa Reset Token dùng 1 lần và gửi về Email quản trị.
+4. Admin kiểm tra hòm thư và nhấp vào liên kết xác thực trong Email.
 5. Admin nhập Mật khẩu mới và Xác nhận mật khẩu mới, sau đó bấm “Đổi mật khẩu”.
-6. Hệ thống kiểm tra OTP, cập nhật mật khẩu mã hóa mới vào CSDL và vô hiệu hóa mã OTP.
+6. Hệ thống kiểm tra tính hợp lệ của Token, cập nhật mật khẩu mã hóa mới vào CSDL và vô hiệu hóa Token vừa sử dụng.
 7. Hiển thị thông báo thành công và chuyển Admin về màn hình Đăng nhập.
 
 **Business Rules (Quy tắc nghiệp vụ):**

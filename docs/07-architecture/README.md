@@ -39,7 +39,7 @@ Hệ thống **UniSupport** được thiết kế theo mô hình **Phân tầng 
 * **Cơ chế Closed-Loop (Hệ thống đóng):**
   * Không có endpoint/giao diện cho đăng ký tự do (`No Self-Registration`).
   * Mọi tài khoản do Admin khởi tạo thủ công hoặc Import Excel/CSV; không có đăng ký tự do.
-  * Đăng nhập bằng mã định danh (`user_code`) và mật khẩu; OTP khôi phục qua Email chỉ áp dụng cho Admin. Khi Admin reset mật khẩu người dùng, hệ thống bắt buộc người dùng đổi mật khẩu ở lần đăng nhập tiếp theo.
+  * Đăng nhập bằng mã định danh (`user_code`) và mật khẩu; liên kết khôi phục mật khẩu (Reset Token) qua Email chỉ áp dụng cho Admin. Khi Admin reset mật khẩu người dùng, hệ thống bắt buộc người dùng đổi mật khẩu ở lần đăng nhập tiếp theo.
 * **Khóa tài khoản tự động (Brute-force protection):** Nhập sai mật khẩu 5 lần liên tiếp sẽ tạm khóa tài khoản trong 15 phút.
 
 ### 3.2 Tải & Hiệu năng (Performance & SLA)
