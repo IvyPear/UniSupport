@@ -25,18 +25,21 @@
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01 (Hệ thống đóng):** Tài khoản được nhà trường khởi tạo sẵn, hệ thống tuyệt đối không hiển thị chức năng hoặc nút “Đăng ký”.
-* **BR-02 (Mật khẩu mặc định):** Sinh viên, Nhân viên và Quản lý sử dụng tài khoản được cấp và không có chức năng tự quên mật khẩu. Nếu gặp sự cố, người dùng liên hệ phòng IT/Admin để được hỗ trợ.
+* **BR-02 (Mật khẩu mặc định và đặt lại mật khẩu):** Sinh viên, Nhân viên và Quản lý sử dụng tài khoản được cấp (mật khẩu khởi tạo `DDMMYYYY`, `must_change_password = false`) và không có chức năng tự quên mật khẩu. Nếu quên mật khẩu, người dùng liên hệ phòng IT/Admin để được đặt lại mật khẩu tại phân hệ `M03` (`FR-M03-03`, `NFR-SEC-04`); khi đó cờ `must_change_password = true` được bật và bắt buộc người dùng đổi mật khẩu mới ở lần đăng nhập kế tiếp.
 
 **Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-* **E-01 (Sai thông tin đăng nhập):** Nhập sai mã định danh hoặc mật khẩu $\rightarrow$ Hệ thống hiển thị thông báo lỗi: *“Mã định danh hoặc mật khẩu không chính xác”*, tăng bộ đếm số lần đăng nhập sai (`failed_attempts`).
-* **E-02 (Bỏ trống trường bắt buộc):** Người dùng bấm Đăng nhập khi chưa điền mã định danh hoặc mật khẩu $\rightarrow$ Hệ thống kích hoạt validation tại chỗ, viền đỏ ô nhập liệu và báo lỗi *“Vui lòng nhập đầy đủ thông tin”*.
-* **E-03 (Tài khoản bị vô hiệu hóa):** Tài khoản có trạng thái `Inactive` đăng nhập $\rightarrow$ Hệ thống từ chối (`403 Forbidden`) và thông báo: *“Tài khoản của bạn đã bị khóa, vui lòng liên hệ Quản trị viên”*.
+* **E-01 (Sai thông tin đăng nhập):** Nhập sai mã định danh hoặc mật khẩu $\rightarrow$ Hệ thống trả về `401 Unauthorized`, hiển thị thông báo lỗi: *“Mã định danh hoặc mật khẩu không chính xác”*, tăng bộ đếm số lần đăng nhập sai (`failed_attempts`) và không cấp JWT Token.
+* **E-02 (Bỏ trống trường bắt buộc):** Người dùng bấm Đăng nhập khi chưa điền mã định danh hoặc mật khẩu $\rightarrow$ Hệ thống kích hoạt validation tại chỗ (`422 Unprocessable Entity`), viền đỏ ô nhập liệu, báo lỗi *“Vui lòng nhập đầy đủ thông tin”* và không cấp JWT Token.
+* **E-03 (Tài khoản bị vô hiệu hóa):** Tài khoản có trạng thái `Inactive` đăng nhập $\rightarrow$ Hệ thống từ chối (`403 Forbidden`), thông báo: *“Tài khoản của bạn đã bị khóa, vui lòng liên hệ Quản trị viên”* và không cấp JWT Token.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-* **AC-01:** Nhập đúng mã định danh và mật khẩu $\rightarrow$ Đăng nhập thành công và cấp JWT Token hợp lệ (thời hạn 8 tiếng).
-* **AC-02:** Nhập sai thông tin đăng nhập $\rightarrow$ Báo lỗi rõ ràng và không cấp quyền truy cập.
-* **AC-03:** Màn hình Đăng nhập tuyệt đối không hiển thị nút “Đăng ký”.
-* **AC-04:** Đăng nhập lần đầu bằng mật khẩu ngày sinh (`must_change_password = true`) $\rightarrow$ Bắt buộc chuyển sang màn hình đổi mật khẩu mới.
+* **AC-01:** Nhập đúng mã định danh và mật khẩu của tài khoản `Active` $\rightarrow$ Đăng nhập thành công (`200 OK`) và cấp JWT Token hợp lệ (thời hạn 8 tiếng).
+* **AC-02:** Xử lý đúng từng trường hợp lỗi và tuyệt đối không cấp JWT Token: (1) Sai mã định danh/mật khẩu (`E-01`) trả về `401 Unauthorized` kèm thông báo *“Mã định danh hoặc mật khẩu không chính xác”* và tăng `failed_attempts`; (2) Bỏ trống trường bắt buộc (`E-02`) chặn gửi/`422 Unprocessable Entity`, viền đỏ và báo *“Vui lòng nhập đầy đủ thông tin”*; (3) Tài khoản `Inactive` (`E-03`) trả về `403 Forbidden` kèm thông báo *“Tài khoản của bạn đã bị khóa, vui lòng liên hệ Quản trị viên”*.
+* **AC-03:** Màn hình Đăng nhập tuyệt đối không hiển thị nút “Đăng ký” (`BR-01`).
+* **AC-04:** Đăng nhập bằng tài khoản vừa được Admin đặt lại mật khẩu (`must_change_password = true`) $\rightarrow$ Bắt buộc chuyển sang màn hình đổi mật khẩu mới trước khi truy cập các chức năng khác (`BR-02`, liên kết `FR-M03-03` và `NFR-SEC-04`).
+
+**Ví dụ Edge Case (Trường hợp biên):**
+* Người dùng dán Mã định danh có khoảng trắng ở đầu/cuối hoặc dài đúng 20 ký tự $\rightarrow$ Hệ thống tự động cắt khoảng trắng thừa (`trim`) và xác thực bình thường; nếu vượt quá 20 ký tự thì chặn nhập/báo lỗi định dạng.
 
 ---
 
@@ -60,9 +63,9 @@
 2. Hệ thống tăng bộ đếm số lần sai: `failed_attempts = failed_attempts + 1`.
 3. Nếu `failed_attempts < 5`: Hiển thị cảnh báo số lần sai còn lại trước khi tài khoản bị khóa (Ví dụ: *"Bạn còn 2 lần thử trước khi tài khoản bị khóa"*).
 4. Khi `failed_attempts >= 5`:
-   a. Hệ thống tự động khóa tài khoản tạm thời.
+   a. Hệ thống tự động khóa tài khoản tạm thời ngay tại lần nhập sai thứ 5.
    b. Thiết lập thời gian khóa: `lockout_until = current_time + 15 phút`.
-   c. Hiển thị thông báo: *“Tài khoản tạm thời bị khóa trong 15 phút do nhập sai quá 5 lần liên tiếp”*.
+   c. Hiển thị thông báo: *“Tài khoản tạm thời bị khóa trong 15 phút do nhập sai mật khẩu 5 lần liên tiếp”*.
 5. Sau 15 phút, hệ thống tự động gỡ bỏ trạng thái tạm khóa, reset `failed_attempts = 0` và cho phép đăng nhập lại bình thường.
 
 **Business Rules (Quy tắc nghiệp vụ):**
@@ -73,9 +76,9 @@
 * **E-01 (Đăng nhập trong thời gian bị khóa):** Người dùng nhập đúng mật khẩu nhưng tài khoản vẫn còn trong thời gian 15 phút khóa $\rightarrow$ Hệ thống từ chối và hiển thị thông báo: *“Tài khoản đang bị tạm khóa. Vui lòng thử lại sau [số phút] phút”*.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-* **AC-01:** Nhập sai 5 lần liên tiếp $\rightarrow$ Tài khoản bị khóa 15 phút và hiển thị thông báo cảnh báo rõ ràng.
+* **AC-01:** Nhập sai 5 lần liên tiếp $\rightarrow$ Tài khoản bị khóa 15 phút; mọi yêu cầu đăng nhập trong thời gian khóa (kể cả nhập đúng mật khẩu) đều bị từ chối kèm thông báo số phút chờ (`BR-01`, `E-01`).
 * **AC-02:** Sau khi hết 15 phút $\rightarrow$ Tài khoản tự động mở khóa và đăng nhập lại được bình thường khi nhập đúng mật khẩu.
-* **AC-03:** Nhập sai 4 lần rồi nhập đúng ở lần thứ 5 $\rightarrow$ Đăng nhập thành công và bộ đếm lỗi được reset về 0.
+* **AC-03:** Nhập sai 4 lần rồi nhập đúng ở lần thứ 5 $\rightarrow$ Đăng nhập thành công và bộ đếm lỗi được reset về 0 (`BR-02`).
 
 **Ví dụ Edge Case (Trường hợp biên):**
 * Người dùng thực hiện lần thử thứ 5 đúng vào thời điểm `lockout_until` vừa hết hạn của đợt khóa trước $\rightarrow$ Hệ thống cho phép đăng nhập nếu đúng hoặc bắt đầu chu kỳ đếm sai mới từ 1 nếu sai.
@@ -94,18 +97,18 @@
 
 **Dữ liệu đầu vào / Thông tin sử dụng (Data Fields):**
 - **Email / Mã Admin:** Bắt buộc, Max 100 ký tự.
-- **Mã OTP xác thực:** Bắt buộc, chuỗi 6 chữ số có hiệu lực 15 phút.
+- **Reset Token:** Chuỗi ký tự ngẫu nhiên bảo mật, đính kèm trong liên kết gửi qua Email, hiệu lực 15 phút.
 - **Mật khẩu mới:** Bắt buộc, Min 8 ký tự, gồm chữ hoa, chữ thường và chữ số.
 - **Xác nhận mật khẩu:** Bắt buộc, trùng khớp với mật khẩu mới.
 
 **Luồng chính (Main Flow):**
 
 1. Tại giao diện Đăng nhập, Admin nhấp vào liên kết “Quên mật khẩu”.
-2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi mã xác thực”.
-3. Hệ thống kiểm tra quyền Admin, tạo mã OTP ngẫu nhiên và gửi về Email quản trị.
-4. Admin kiểm tra hòm thư, nhập mã OTP vào màn hình xác thực.
+2. Nhập Email hoặc Mã định danh Admin và nhấn “Gửi liên kết khôi phục”.
+3. Hệ thống kiểm tra quyền Admin, tạo liên kết đặt lại mật khẩu an toàn chứa Reset Token dùng 1 lần và gửi về Email quản trị.
+4. Admin kiểm tra hòm thư và nhấp vào liên kết xác thực trong Email.
 5. Admin nhập Mật khẩu mới và Xác nhận mật khẩu mới, sau đó bấm “Đổi mật khẩu”.
-6. Hệ thống kiểm tra OTP, cập nhật mật khẩu mã hóa mới vào CSDL và vô hiệu hóa mã OTP.
+6. Hệ thống kiểm tra tính hợp lệ của Token, cập nhật mật khẩu mã hóa mới vào CSDL và vô hiệu hóa Token vừa sử dụng.
 7. Hiển thị thông báo thành công và chuyển Admin về màn hình Đăng nhập.
 
 **Business Rules (Quy tắc nghiệp vụ):**
@@ -113,13 +116,13 @@
 * **BR-02:** Liên kết khôi phục chỉ có hiệu lực trong 15 phút và chỉ được dùng 1 lần duy nhất . Không dùng mã OTP.
 
 **Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
-* **E-01 (Mã token hết hạn hoặc đã dùng):** Nhấp vào liên kết sau 15 phút hoặc liên kết đã sử dụng $\rightarrow$ Báo lỗi *“Liên kết khôi phục mật khẩu đã hết hạn hoặc không hợp lệ. Vui lòng gửi lại yêu cầu”*.
-* **E-02 (Mật khẩu mới không đủ độ phức tạp):** Nhập mật khẩu dưới 8 ký tự hoặc thiếu chữ hoa/số $\rightarrow$ Báo lỗi validation tại ô nhập liệu.
+* **E-01 (Mã token hết hạn hoặc đã dùng):** Nhấp vào liên kết sau 15 phút hoặc liên kết đã sử dụng $\rightarrow$ Backend trả về `400 Bad Request` và báo lỗi *“Liên kết khôi phục mật khẩu đã hết hạn hoặc không hợp lệ. Vui lòng gửi lại yêu cầu”*.
+* **E-02 (Mật khẩu mới không đủ độ phức tạp):** Nhập mật khẩu dưới 8 ký tự hoặc thiếu chữ hoa/chữ thường/chữ số $\rightarrow$ Trả về `422 Unprocessable Entity` và báo lỗi validation tại ô nhập liệu.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-* **AC-01:** Nhập đúng email Admin $\rightarrow$ Hệ thống gửi liên kết đặt lại mật khẩu và cập nhật thành công khi Reset Token hợp lệ.
-* **AC-02:** Liên kết quá 15 phút hoặc đã qua sử dụng $\rightarrow$ Bị từ chối và không cho đổi mật khẩu.
-* **AC-03:** Sinh viên, Nhân viên hoặc Quản lý cố tình gửi yêu cầu lấy lại mật khẩu $\rightarrow$ Hệ thống từ chối thực hiện.
+* **AC-01:** Nhập đúng email Admin $\rightarrow$ Hệ thống gửi liên kết đặt lại mật khẩu và cập nhật thành công khi Reset Token hợp lệ (`BR-02`).
+* **AC-02:** Khi liên kết quá 15 phút hoặc đã qua sử dụng (`E-01`) thì trả về `400 Bad Request` kèm thông báo *“Liên kết khôi phục mật khẩu đã hết hạn hoặc không hợp lệ. Vui lòng gửi lại yêu cầu”*; khi mật khẩu mới dưới 8 ký tự hoặc thiếu chữ hoa, chữ thường, chữ số (`E-02`) thì trả về `422 Unprocessable Entity` và chặn đổi mật khẩu.
+* **AC-03:** Sinh viên, Nhân viên hoặc Quản lý cố tình gửi yêu cầu lấy lại mật khẩu $\rightarrow$ Hệ thống từ chối thực hiện (`403 Forbidden`, `BR-01`).
 
 **Ví dụ Edge Case (Trường hợp biên):**
 * Admin gửi 2 yêu cầu khôi phục liên tiếp trong vòng 1 phút $\rightarrow$ Hệ thống chỉ chấp nhận Token của yêu cầu sau cùng, Token đầu tiên bị vô hiệu hóa ngay lập tức.
@@ -151,12 +154,16 @@
    - **Quản trị viên (`Admin`):** Chuyển đến Global System Dashboard.
 
 **Business Rules (Quy tắc nghiệp vụ):**
-* **BR-01:** Điều hướng diễn ra tự động ngay sau khi cấp Token, không hiển thị trang trung gian.
-* **BR-02:** Nếu chưa hoàn tất đổi mật khẩu bắt buộc, người dùng bị chặn toàn bộ các thao tác nghiệp vụ khác.
+* **BR-01:** Với tài khoản bình thường (`must_change_password = false`), điều hướng diễn ra tự động ngay sau khi cấp Token và không hiển thị trang trung gian; ngoại lệ duy nhất là khi tài khoản có `must_change_password = true` (theo `BR-02`), hệ thống phải chuyển sang màn hình bắt buộc đổi mật khẩu trước rồi mới điều hướng vào trang làm việc theo vai trò.
+* **BR-02:** Nếu tài khoản đang có `must_change_password = true` (do Admin vừa reset mật khẩu ở `M03`) mà chưa hoàn tất đổi mật khẩu bắt buộc, người dùng bị chặn toàn bộ các thao tác nghiệp vụ khác.
+
+**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
+* **E-01 (Cố tình truy cập URL nghiệp vụ khi chưa đổi mật khẩu bắt buộc):** Tài khoản đang có `must_change_password = true` gọi trực tiếp URL hoặc API nghiệp vụ $\rightarrow$ Hệ thống chặn thao tác và điều hướng về màn hình bắt buộc đổi mật khẩu (`BR-02`).
+* **E-02 (Mật khẩu mới không hợp lệ khi đổi bắt buộc):** Người dùng nhập mật khẩu mới dưới 8 ký tự hoặc xác nhận mật khẩu không khớp $\rightarrow$ Báo lỗi validation tại chỗ và giữ nguyên trạng thái `must_change_password = true`.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-* **AC-01:** Đăng nhập tài khoản không có cờ đổi mật khẩu $\rightarrow$ Chuyển thẳng về đúng giao diện làm việc của vai trò đó.
-* **AC-02:** Đăng nhập tài khoản có `must_change_password = true` $\rightarrow$ Bắt buộc đổi mật khẩu thành công mới được vào giao diện làm việc.
+* **AC-01:** Đăng nhập tài khoản không có cờ đổi mật khẩu $\rightarrow$ Chuyển thẳng về đúng giao diện làm việc của vai trò đó (`BR-01`).
+* **AC-02:** Đăng nhập tài khoản có `must_change_password = true` $\rightarrow$ Chặn thao tác nghiệp vụ khác (`E-01`), kiểm tra mật khẩu mới tối thiểu 8 ký tự (`E-02`) và chỉ vào giao diện làm việc sau khi đổi thành công (`BR-02`).
 
 **Ví dụ Edge Case (Trường hợp biên):**
 * Người dùng cố tình gõ URL trực tiếp (ví dụ `/student/tickets`) khi chưa hoàn tất đổi mật khẩu $\rightarrow$ Route Guard chặn lại và tự động đẩy về trang `/change-password-required`.
@@ -188,8 +195,8 @@
 * **E-01 (Token hết hạn 8 tiếng):** Token hết hạn trong khi người dùng đang mở trình duyệt $\rightarrow$ Thao tác tiếp theo trả về `401 Unauthorized`, hệ thống tự động xóa token và chuyển về trang Đăng nhập.
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
-* **AC-01:** Truy cập URL trái quyền $\rightarrow$ Bị chặn ngay lập tức với mã `403 Forbidden`.
-* **AC-02:** Tài khoản bị Admin khóa $\rightarrow$ Lập tức văng khỏi phiên đăng nhập và không thể thực hiện thêm thao tác nào.
+* **AC-01:** Truy cập URL hoặc API trái quyền $\rightarrow$ Bị chặn ngay lập tức với mã `403 Forbidden` (`BR-01`).
+* **AC-02:** Tài khoản bị Admin khóa (`Inactive`) hoặc phiên JWT hết hạn sau 8 tiếng (`E-01`, `401 Unauthorized`) $\rightarrow$ Lập tức văng khỏi phiên đăng nhập và chuyển về trang Đăng nhập.
 
 **Ví dụ Edge Case (Trường hợp biên):**
 * Người dùng mở 2 tab trình duyệt cùng lúc; tab 1 bấm Đăng xuất hoặc bị khóa tài khoản $\rightarrow$ Thao tác tại tab 2 lập tức bị chặn và chuyển về trang Đăng nhập.

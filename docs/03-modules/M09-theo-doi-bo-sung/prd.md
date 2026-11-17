@@ -4,6 +4,8 @@
 
 **Mô tả:** Sinh viên truy cập màn hình cá nhân để xem danh sách toàn bộ yêu cầu đã gửi, tìm kiếm, lọc theo trạng thái và theo dõi chi tiết tiến độ xử lý theo thời gian thực.
 
+**Priority:** High (Màn hình theo dõi tiến độ chính của sinh viên, đảm bảo tính minh bạch).
+
 **Actor:** Sinh viên
 
 **Preconditions (Điều kiện tiên quyết):** Sinh viên đã đăng nhập thành công vào hệ thống.
@@ -29,16 +31,27 @@
 
 * **BR-01 (Phân tách dữ liệu):** Sinh viên chỉ xem được danh sách và chi tiết các đơn do chính tài khoản của mình khởi tạo.
 
+**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
+
+* **E-01 (Cố truy cập Ticket của sinh viên khác):** Sinh viên thay đổi ID trên URL hoặc gọi API xem Ticket không thuộc sở hữu của mình $\rightarrow$ Backend từ chối với mã `403 Forbidden` (`BR-01`).
+* **E-02 (Không tìm thấy Ticket khớp điều kiện lọc):** Từ khóa hoặc trạng thái lọc không có đơn nào $\rightarrow$ Hiển thị danh sách rỗng kèm thông báo *"Không tìm thấy yêu cầu phù hợp"*.
+
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Hiển thị đúng và đầy đủ danh sách Ticket của sinh viên kèm trạng thái thời gian thực.
-* **AC-02:** Tìm kiếm và lọc theo trạng thái trả về kết quả chính xác.
+* **AC-01:** Hiển thị đúng và đầy đủ danh sách Ticket do chính sinh viên tạo kèm trạng thái thời gian thực (ẩn ghi chú nội bộ); chặn `403 Forbidden` nếu truy cập đơn của người khác (`BR-01`, `E-01`).
+* **AC-02:** Tìm kiếm theo mã/tiêu đề và lọc theo 5 trạng thái trả về kết quả chính xác; hiển thị trạng thái rỗng nếu không có đơn khớp (`E-02`).
+
+**Ví dụ Edge Case (Trường hợp biên):**
+
+* Tài khoản sinh viên mới nhập học chưa từng gửi yêu cầu nào $\rightarrow$ Màn hình "Yêu cầu của tôi" hiển thị trạng thái trống (*Empty State*) cùng nút dẫn tới form "Tạo yêu cầu mới".
 
 ---
 
 ## [FR-M09-02] Sinh viên nộp bổ sung thông tin và giấy tờ theo yêu cầu
 
 **Mô tả:** Khi đơn ở trạng thái Chờ bổ sung, Sinh viên nhập nội dung phản hồi và tải lên các tệp tài liệu minh chứng bổ sung theo yêu cầu của nhân viên.
+
+**Priority:** High (Chức năng tương tác phản hồi của sinh viên khi hồ sơ thiếu, tiếp nối luồng xử lý).
 
 **Actor:** Sinh viên
 
@@ -62,6 +75,18 @@
 7. Tự động chuyển trạng thái Ticket về lại `Đang xử lý` (`In Progress`).
 8. Giữ nguyên Nhân viên phụ trách cũ và phát thông báo cho Nhân viên đó tiếp tục giải quyết.
 
+**Alternative / Error Flows:**
+
+* **E-01 (Nộp bổ sung khi đơn đã quá hạn 3 ngày làm việc và bị tự động đóng):**
+  - *Điều kiện kích hoạt:* Sinh viên truy cập form hoặc gọi API nộp bổ sung sau khi Ticket đã bị hệ thống tự động chuyển sang trạng thái `Closed` (`auto_closed = true`).
+  - *Xử lý của hệ thống:* Hệ thống từ chối nhận hồ sơ, khóa hoàn toàn form nộp bổ sung, trả về mã lỗi `400 Bad Request` kèm thông báo: *"Yêu cầu này đã quá hạn bổ sung (3 ngày làm việc) và đã tự động đóng. Vui lòng tạo yêu cầu mới nếu cần hỗ trợ"*.
+* **E-02 (Nội dung bổ sung trống hoặc tệp đính kèm không hợp lệ):**
+  - *Điều kiện kích hoạt:* Sinh viên để trống nội dung giải trình ($< 5$ ký tự) hoặc tải tệp vượt 5MB / sai định dạng.
+  - *Xử lý của hệ thống:* Hệ thống chặn gửi và báo lỗi validation `422 Unprocessable Entity` tại chỗ.
+
+**Ví dụ Edge Case:**
+* *Nộp bổ sung vào giây cuối cùng trước hạn chót:* Giao dịch gửi thành công trước thời điểm scheduler quét đóng đơn $\rightarrow$ Hệ thống dừng bộ đếm ngược, chuyển trạng thái về `In Progress` và thông báo cho nhân viên.
+
 **Business Rules (Quy tắc nghiệp vụ):**
 
 * **BR-01:** Giữ nguyên Mã Ticket và Nhân viên phụ trách cũ, tuyệt đối không tạo đơn mới.
@@ -69,6 +94,6 @@
 
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Sinh viên nộp bổ sung thành công $\rightarrow$ Đơn chuyển về `Đang xử lý`, hủy bộ đếm 3 ngày làm việc và lưu thông tin vào lịch sử.
+* **AC-01:** Sinh viên nộp bổ sung hợp lệ khi đơn đang `Pending` $\rightarrow$ Đơn chuyển về `Đang xử lý` (`In Progress`), giữ nguyên Mã Ticket và Nhân viên phụ trách cũ (`BR-01`), hủy bộ đếm 3 ngày làm việc; nếu đơn đã đóng (`BR-02`, `E-01`) thì trả về `400 Bad Request`, nếu nội dung bổ sung $< 5$ ký tự hoặc tệp lỗi (`E-02`) thì trả về `422 Unprocessable Entity`.
 
 ---

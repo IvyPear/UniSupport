@@ -12,7 +12,7 @@
 | **`NFR-SEC-01`** | **Bảo mật** | Mã hóa phiên làm việc | JWT (HS256/RS256), thời hạn token tối đa 8 tiếng | Kiểm tra cấu hình Token Header & Expiration |
 | **`NFR-SEC-02`** | **Bảo mật** | Chống dò quét mật khẩu (Brute-force) | Nhập sai liên tiếp 5 lần $\rightarrow$ Khóa tạm thời 15 phút | Kiểm thử tự động với script gửi 6 request sai |
 | **`NFR-SEC-03`** | **Bảo mật** | Cơ chế hệ thống đóng (Closed-Loop) | Không có nút Đăng ký; mật khẩu mặc định là ngày sinh (`DDMMYYYY`); không dùng OTP | Rà soát giao diện và kiểm thử API không cho phép tự đăng ký |
-| **`NFR-SEC-04`** | **Bảo mật** | Bắt buộc đổi mật khẩu lần đầu | Cờ `must_change_password = true` khi dùng mật khẩu mặc định hoặc sau khi Admin reset | Chặn điều hướng tới các trang khác khi chưa đổi mật khẩu |
+| **`NFR-SEC-04`** | **Bảo mật** | Bắt buộc đổi mật khẩu sau khi reset | Cờ `must_change_password = true` sau khi Admin đặt lại (reset) mật khẩu ở M03 | Chặn điều hướng tới các trang khác khi chưa đổi mật khẩu |
 | **`NFR-SEC-05`** | **Bảo mật** | Kiểm soát phân quyền dữ liệu (RBAC) | Kiểm tra quyền và phạm vi phòng ban tại Backend theo từng request | Gửi token Role khác để gọi API không thuộc quyền (kỳ vọng `403 Forbidden`) |
 | **`NFR-PERF-01`** | **Hiệu năng** | Thời gian phản hồi API thông thường | Độ trễ API $\le$ 500ms (đăng nhập, tìm kiếm, gửi ticket) ở tải bình thường | Postman / k6 đo lường độ trễ mạng nội bộ |
 | **`NFR-PERF-02`** | **Hiệu năng** | Thời gian phản hồi báo cáo tổng hợp | Độ trễ xử lý $\le$ 2.000ms (2 giây) đối với Dashboard và xuất báo cáo | Đo thời gian phản hồi API thống kê dưới tải 50 người dùng đồng thời |
@@ -43,9 +43,9 @@
 - **Không sử dụng OTP:**
   - Hệ thống **hoàn toàn không sử dụng cơ chế mã xác thực OTP** qua Email hay SMS để tránh phụ thuộc bên thứ ba và giảm chi phí hạ tầng.
   - Nếu người dùng quên mật khẩu, họ liên hệ trực tiếp phòng IT/Admin nhà trường. Admin sẽ kiểm tra định danh và thực hiện đặt lại mật khẩu về mặc định (ngày sinh) trên phân hệ `M03`.
-- **Bắt buộc đổi mật khẩu lần đầu (`NFR-SEC-04`):**
-  - Tài khoản đăng nhập bằng mật khẩu mặc định (hoặc vừa được Admin reset) sẽ mang cờ `must_change_password = true`.
-  - Hệ thống lập tức điều hướng người dùng tới màn hình đổi mật khẩu mới (yêu cầu tối thiểu 8 ký tự). Người dùng không thể truy cập bất kỳ chức năng nào khác trước khi hoàn tất bước này.
+- **Bắt buộc đổi mật khẩu sau khi Admin đặt lại (`NFR-SEC-04`):**
+  - Tài khoản mới tạo lần đầu có `must_change_password = false` để người dùng đăng nhập sử dụng ngay bằng mật khẩu mặc định (`DDMMYYYY`). Khi tài khoản được Admin đặt lại (reset) mật khẩu tại phân hệ `M03`, hệ thống bật cờ `must_change_password = true`.
+  - Ở lần đăng nhập kế tiếp sau khi reset, hệ thống lập tức điều hướng người dùng tới màn hình đổi mật khẩu mới (yêu cầu tối thiểu 8 ký tự). Người dùng không thể truy cập bất kỳ chức năng nào khác trước khi hoàn tất bước này.
 
 ### 2.3. Phòng chống tấn công dò quét mật khẩu (`NFR-SEC-02`)
 - Hệ thống áp dụng bộ đếm số lần đăng nhập sai (`failed_attempts`):

@@ -51,7 +51,7 @@ docs/
 ├── 08-project/              # Quản lý dự án
 │   ├── Proposal.md          # Proposal ban đầu (lịch sử)
 │   ├── Dieu-chinh-proposal.md # Baseline milestone hiện hành (MS-00..MS-04)
-│   ├── Bao-gia-cho-khach.md # Báo giá gửi khách (Q-00..Q-04)
+│   ├── Bao-gia-cho-khach.md # Báo giá gửi khách (Q-01..Q-13)
 │   ├── Ngan-sach-nhan-su.md # Ngân sách, đơn giá và phân bổ 886h theo vai trò
 │   ├── Master Schedule.xlsx # File tính toán kế hoạch, WBS, Gantt
 │   ├── Master-schedule.md   # Thuyết minh Master Plan & chi tiết tiến độ

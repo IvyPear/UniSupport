@@ -11,7 +11,7 @@
 * **Luồng chính:**
   1. Đăng nhập hệ thống, mở **Department Dashboard**.
   2. Hệ thống xác định phạm vi phòng ban trực thuộc của Quản lý.
-  3. Thống kê tổng quan số liệu Ticket theo trạng thái (`Mới`, `Đang xử lý`, `Chờ bổ sung`, `Hoàn thành`), tỷ lệ quá hạn SLA.
+  3. Thống kê tổng quan số liệu Ticket theo 5 trạng thái (`Chưa tiếp nhận`, `Đang xử lý`, `Chờ bổ sung`, `Đã giải quyết`, `Đã đóng`), tỷ lệ quá hạn SLA.
   4. Nhấp vào các thẻ chỉ số để xem chi tiết danh sách đơn tương ứng.
 * **Kết quả:** Quản lý nắm bắt trực quan tình hình hoạt động của phòng ban.
 

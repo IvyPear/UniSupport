@@ -1,4 +1,4 @@
-﻿# 0. QUY TRÌNH CHUNG — ĐĂNG NHẬP, XÁC THỰC & PHIÊN LÀM VIỆC (AUTHENTICATION & SESSION WORKFLOWS)
+# 0. QUY TRÌNH CHUNG — ĐĂNG NHẬP, XÁC THỰC & PHIÊN LÀM VIỆC (AUTHENTICATION & SESSION WORKFLOWS)
 
 > **Ánh xạ Phân hệ:** [M01-dang-nhap-xac-thuc](../03-modules/M01-dang-nhap-xac-thuc/), [M02-vai-tro-phan-quyen](../03-modules/M02-vai-tro-phan-quyen/), [M03-quan-ly-tai-khoan](../03-modules/M03-quan-ly-tai-khoan/)
 > **Tác nhân:** Tất cả người dùng (Sinh viên, Nhân viên, Quản lý, Admin)
@@ -9,7 +9,7 @@
 
 * **Tác nhân:** Sinh viên, Nhân viên, Quản lý, Admin.
 * **Tiền điều kiện:** Người dùng đã có tài khoản hợp lệ trên hệ thống UniSupport (trạng thái `Active`).
-* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../03-modules/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, `[FR-M01-02]`)
+* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../03-modules/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, `[FR-M01-04]`)
 * **Luồng chính:**
   1. Người dùng truy cập trang Đăng nhập UniSupport.
   2. Nhập Mã định danh (Mã SV / Mã Cán bộ) và Mật khẩu.
@@ -48,13 +48,13 @@ graph TD
 
 * **Tác nhân:** Người dùng thực hiện đăng nhập sai.
 * **Tiền điều kiện:** Người dùng truy cập màn hình Đăng nhập.
-* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../03-modules/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, quy tắc `BR-01`)
+* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../03-modules/M01-dang-nhap-xac-thuc/) (`[FR-M01-02]`)
 * **Luồng chính:**
   1. Người dùng nhập sai Mật khẩu hoặc Mã định danh.
   2. Hệ thống tăng bộ đếm số lần đăng nhập thất bại liên tiếp (`failed_attempts = failed_attempts + 1`).
   3. Nếu `failed_attempts < 5`: Hiển thị cảnh báo số lần sai còn lại.
   4. Khi `failed_attempts >= 5`: Hệ thống tự động chuyển tài khoản sang trạng thái **Tạm khóa 15 phút**, lưu mốc thời gian `lockout_until = current_time + 15m`.
-  5. Trong 15 phút này, mọi nỗ lực đăng nhập (dù đúng mật khẩu) đều bị từ chối với thông báo: *"Tài khoản bị tạm khóa 15 phút do nhập sai quá 5 lần"*.
+  5. Trong 15 phút này, mọi nỗ lực đăng nhập (dù đúng mật khẩu) đều bị từ chối với thông báo: *"Tài khoản tạm thời bị khóa trong 15 phút do nhập sai mật khẩu 5 lần liên tiếp"*.
   6. Sau 15 phút, hệ thống tự động reset `failed_attempts = 0` và cho phép đăng nhập lại bình thường.
 * **Kết quả:** Bảo vệ hệ thống khỏi các cuộc tấn công dò mật khẩu (Brute-force attack).
 
@@ -76,13 +76,13 @@ graph TD
 
 * **Tác nhân:** Admin (Quên mật khẩu) / Sinh viên, Nhân viên, Quản lý (Cần hỗ trợ).
 * **Tiền điều kiện:** Người dùng không nhớ mật khẩu đăng nhập.
-* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../03-modules/M01-dang-nhap-xac-thuc/) (`[FR-M01-01]`, quy tắc `BR-02`, `BR-03`, `BR-04`)
+* **Ánh xạ Module:** [M01-dang-nhap-xac-thuc](../03-modules/M01-dang-nhap-xac-thuc/) (`[FR-M01-03]`), [M03-quan-ly-tai-khoan](../03-modules/M03-quan-ly-tai-khoan/) (`[FR-M03-03]`), [NFR-SEC-04](../05-non-functional-requirements/README.md)
 * **Luồng chính:**
   - **Trường hợp 1: Đối với Admin (Có chức năng Quên mật khẩu self-service):**
     1. Admin nhấn liên kết **"Quên mật khẩu"** trên giao diện đăng nhập.
     2. Nhập Email/Mã định danh quản trị.
-    3. Hệ thống gửi mã OTP 6 chữ số, hiệu lực 15 phút và chỉ sử dụng một lần, vào Email quản trị.
-    4. Admin nhập OTP và đặt mật khẩu mới (tối thiểu 8 ký tự, gồm chữ hoa, chữ thường và chữ số).
+    3. Hệ thống gửi liên kết đặt lại mật khẩu an toàn (chứa Token dùng 1 lần, hiệu lực 15 phút) vào Email quản trị.
+    4. Admin nhấp vào liên kết trong Email và đặt mật khẩu mới (tối thiểu 8 ký tự, gồm chữ hoa, chữ thường và chữ số).
     5. Đăng nhập lại với mật khẩu mới.
   - **Trường hợp 2: Đối với Sinh viên, Nhân viên & Quản lý (Hệ thống đóng - No Register/No Self-Reset):**
     1. Giao diện Đăng nhập **không cung cấp chức năng Đăng ký hoặc Quên mật khẩu** cho Sinh viên/Nhân viên/Quản lý.
@@ -95,8 +95,8 @@ graph TD
 graph TD
     A([Người dùng quên mật khẩu]) --> B{Role của người dùng?}
     B -->|Admin| C[Bấm Quên mật khẩu trên UI]
-    C --> D[Nhận OTP 15 phút qua Email]
-    D --> E[Nhập OTP & Đặt mật khẩu mới]
+    C --> D[Nhận liên kết khôi phục qua Email]
+    D --> E[Nhấp link & Đặt mật khẩu mới]
     E --> F([Đăng nhập thành công với MK mới])
     B -->|Sinh viên / Nhân viên / Quản lý| G[Xem hướng dẫn Liên hệ Phòng IT/Helpdesk]
     G --> H[Admin reset MK về mặc định tại AD-01]

@@ -14,8 +14,8 @@
 | `POST` | `/api/v1/auth/login` | Đăng nhập bằng Mã định danh và Mật khẩu (M01), kiểm tra trạng thái tài khoản và cờ buộc đổi mật khẩu | Public | `{ user_code, password }` | `200 OK` (`access_token`, `refresh_token`, `user`, `must_change_password`) |
 | `POST` | `/api/v1/auth/refresh-token` | Cấp lại Access Token mới | Public | `{ refresh_token }` | `200 OK` (`access_token` mới) |
 | `POST` | `/api/v1/auth/logout` | Đăng xuất, hủy hiệu lực refresh token | All Roles | `{ refresh_token }` | `200 OK` |
-| `POST` | `/api/v1/auth/forgot-password` | Yêu cầu gửi OTP 6 chữ số (hiệu lực 15 phút), chỉ dành cho tài khoản Admin | Public (Backend chỉ xử lý tài khoản ADMIN) | `{ email }` | `200 OK` |
-| `POST` | `/api/v1/auth/reset-password` | Đặt lại mật khẩu với OTP một lần, chỉ dành cho Admin | Public (Backend kiểm tra OTP và ADMIN) | `{ email, otp, new_password }` | `200 OK` |
+| `POST` | `/api/v1/auth/forgot-password` | Yêu cầu gửi liên kết đặt lại mật khẩu chứa Token (hiệu lực 15 phút), chỉ dành cho tài khoản Admin | Public (Backend chỉ xử lý tài khoản ADMIN) | `{ email }` | `200 OK` |
+| `POST` | `/api/v1/auth/reset-password` | Đặt lại mật khẩu với Token một lần, chỉ dành cho Admin | Public (Backend kiểm tra Reset Token và ADMIN) | `{ token, new_password }` | `200 OK` |
 | `POST` | `/api/v1/auth/change-password` | Đổi mật khẩu bắt buộc sau khi Admin reset tại M03; chặn truy cập nghiệp vụ cho đến khi đổi thành công | Authenticated (chính chủ) | `{ current_password, new_password }` | `200 OK` (tắt `must_change_password`; sai thông tin trả lỗi) |
 
 ---
