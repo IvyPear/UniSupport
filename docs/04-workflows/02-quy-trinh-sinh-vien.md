@@ -8,12 +8,12 @@
 
 * **Tác nhân:** Sinh viên.
 * **Tiền điều kiện:** Đã đăng nhập; hệ thống có danh mục phòng ban hoạt động.
-* **Ánh xạ Module:** [M05-khoi-tao-ticket](../03-modules/M05-khoi-tao-ticket/) (`[FR-M05-01]`, `[FR-M05-02]`, `[FR-M05-03]`)
+* **Ánh xạ Module:** [M05-khoi-tao-ticket](../03-modules/M05-khoi-tao-ticket/) (`[FR-M05-01]`, `[FR-M05-02]`)
 * **Luồng chính:**
   1. Chọn **Tạo yêu cầu**.
   2. Hệ thống hiển thị danh sách phòng ban và danh mục.
   3. Chọn phòng ban và danh mục tương ứng, hoặc **Khác**.
-  4. Nhập tiêu đề, nội dung; đính kèm tài liệu nếu có (tối đa 5MB/file).
+  4. Nhập tiêu đề, nội dung; đính kèm tài liệu nếu có (tối đa 5 file, dung lượng tối đa 5MB/file, định dạng: `.png`, `.jpg`, `.pdf`, `.docx`).
   5. Xem lại và xác nhận gửi.
   6. Hệ thống kiểm tra trường bắt buộc, danh mục và file đính kèm.
   7. Hệ thống sinh mã Ticket gồm mã danh mục, ngày và số thứ tự 4 chữ số (VD: `IT-20261005-0001`), lưu CSDL, ghi lịch sử, đặt trạng thái **Chưa tiếp nhận** (`New`).
@@ -46,7 +46,7 @@ graph TD
 * **Luồng chính:**
   1. Mở menu **Yêu cầu của tôi**.
   2. Hệ thống tải danh sách Ticket thuộc sở hữu của tài khoản hiện tại.
-  3. Tìm kiếm, lọc theo trạng thái (`Chưa tiếp nhận`, `Đang xử lý`, `Chờ bổ sung`, `Hoàn thành`).
+  3. Tìm kiếm, lọc theo trạng thái (`Chưa tiếp nhận`, `Đang xử lý`, `Chờ bổ sung`, `Đã giải quyết`, `Đã đóng`).
   4. Mở xem chi tiết: hiển thị mã Ticket, ngày tạo, phòng ban, danh mục, nội dung, tệp đính kèm và lịch sử xử lý được phép công khai cho Sinh viên (không hiển thị ghi chú nội bộ).
   5. Nhận thông báo realtime/in-app khi trạng thái thay đổi; nhấn thông báo mở đúng Ticket tương ứng.
   6. Nếu Ticket còn `New`, có thể chọn **Chỉnh sửa đơn** để sửa Tiêu đề, Nội dung và thêm/xóa tệp hợp lệ rồi lưu. Phòng ban và Danh mục chỉ đọc; khi Ticket đã được tiếp nhận, thao tác bị chặn.
@@ -95,7 +95,7 @@ graph TD
 ### SV-04 — Xem kết quả
 
 * **Tác nhân:** Sinh viên.
-* **Tiền điều kiện:** Ticket ở trạng thái **Hoàn thành** (`Resolved`).
+* **Tiền điều kiện:** Ticket ở trạng thái **Đã giải quyết** (`Resolved`).
 * **Ánh xạ Module:** [M10-ket-qua-danh-gia](../03-modules/M10-ket-qua-danh-gia/) (`[FR-M10-01]`)
 * **Luồng chính:**
   1. Nhận thông báo có kết quả giải quyết từ hệ thống.
@@ -120,7 +120,7 @@ graph TD
 ### SV-05 — Đánh giá chất lượng
 
 * **Tác nhân:** Sinh viên.
-* **Tiền điều kiện:** Ticket ở trạng thái **Hoàn thành** (`Resolved`).
+* **Tiền điều kiện:** Ticket ở trạng thái **Đã giải quyết** (`Resolved`).
 * **Ánh xạ Module:** [M10-ket-qua-danh-gia](../03-modules/M10-ket-qua-danh-gia/) (`[FR-M10-02]`, `[FR-M10-03]`)
 * **Luồng chính:**
   1. Mở Ticket đã hoàn thành và chọn **Đánh giá**.
