@@ -4,6 +4,8 @@
 
 **Mô tả:** Sinh viên xem văn bản giải trình kết quả (Resolution Notes) từ Nhân viên và tải về các tệp tài liệu văn bản trả lời khi đơn ở trạng thái Đã giải quyết.
 
+**Priority:** High (Cho phép sinh viên tiếp nhận kết quả xử lý và tải tệp chứng từ trả lời).
+
 **Actor:** Sinh viên
 
 **Preconditions (Điều kiện tiên quyết):** Ticket đang ở trạng thái `Đã giải quyết` (`Resolved`).
@@ -24,15 +26,26 @@
 
 * **BR-01:** Chỉ hiển thị nội dung kết quả khi đơn đã đạt trạng thái `Đã giải quyết` hoặc `Đã đóng`.
 
+**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
+
+* **E-01 (Xem kết quả khi đơn chưa giải quyết xong):** Sinh viên mở đơn đang ở `New`, `In Progress` hoặc `Pending` $\rightarrow$ Khu vực "Kết quả giải quyết" chưa hiển thị (`BR-01`).
+* **E-02 (Tệp đính kèm kết quả không tồn tại hoặc lỗi tải xuống):** Đường dẫn tệp bị lỗi $\rightarrow$ Hệ thống trả về mã `404 Not Found` và thông báo lỗi tải tệp an toàn.
+
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Hiển thị rõ ràng văn bản kết quả xử lý và hỗ trợ tải xuống tệp an toàn.
+* **AC-01:** Khi đơn ở trạng thái `Resolved` hoặc `Closed`, hiển thị đầy đủ văn bản `Resolution Notes` và tải xuống thành công các tệp trả lời đính kèm; ẩn khu vực kết quả nếu đơn chưa giải quyết xong (`BR-01`, `E-01`, `E-02`).
+
+**Ví dụ Edge Case (Trường hợp biên):**
+
+* Nhân viên giải quyết xong đơn bằng văn bản hướng dẫn trực tiếp mà không đính kèm tệp nào $\rightarrow$ Màn hình kết quả hiển thị đầy đủ `Resolution Notes` và ẩn danh sách tệp đính kèm.
 
 ---
 
 ## [FR-M10-02] Sinh viên đánh giá độ hài lòng từ 1 đến 5 sao, nhận xét và đóng đơn
 
 **Mô tả:** Sinh viên chấm điểm đánh giá chất lượng phục vụ từ 1 đến 5 sao, viết nhận xét góp ý tùy chọn và xác nhận đóng đơn vĩnh viễn.
+
+**Priority:** Medium (Thu thập dữ liệu hài lòng CSAT và kết thúc vòng đời của Ticket).
 
 **Actor:** Sinh viên
 
@@ -61,16 +74,27 @@
 * **BR-01:** Chọn số sao (1-5 sao) là thao tác bắt buộc khi gửi đánh giá.
 * **BR-02 (Khóa vĩnh viễn - No Reopen):** Khi Ticket đã chuyển sang trạng thái `Đã đóng`, hệ thống khóa cứng toàn bộ tương tác, tuyệt đối không cho phép mở lại hoặc chỉnh sửa nội dung.
 
+**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
+
+* **E-01 (Bấm gửi khi chưa chọn số sao):** Sinh viên bấm "Gửi đánh giá & Đóng đơn" nhưng chưa chọn mức sao (1–5) $\rightarrow$ Báo lỗi validation yêu cầu chọn số sao (`BR-01`).
+* **E-02 (Đánh giá lại hoặc chỉnh sửa đơn đã `Closed`):** Sinh viên gửi request đánh giá lần 2 hoặc đánh giá trên đơn đã tự động đóng (`auto_closed = true`) $\rightarrow$ Backend từ chối với mã `409 Conflict` hoặc `400 Bad Request` (`BR-02`).
+
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Chọn sao và bấm đóng đơn $\rightarrow$ Lưu điểm đánh giá CSAT thành công và chuyển trạng thái thành `Đã đóng`.
-* **AC-02:** Chưa chọn sao mà bấm gửi $\rightarrow$ Báo lỗi yêu cầu chọn số sao trước khi gửi.
+* **AC-01:** Chọn số sao (1–5 sao) và bấm đóng đơn $\rightarrow$ Lưu điểm đánh giá CSAT thành công, chuyển trạng thái thành `Đã đóng` (`Closed`) và khóa vĩnh viễn mọi thao tác chỉnh sửa/đánh giá lại (`BR-02`, `E-02`).
+* **AC-02:** Chưa chọn sao mà bấm gửi $\rightarrow$ Báo lỗi yêu cầu chọn số sao trước khi gửi (`BR-01`, `E-01`).
+
+**Ví dụ Edge Case (Trường hợp biên):**
+
+* Sinh viên chọn mức 5 sao nhưng để trống ô nhận xét văn bản $\rightarrow$ Hệ thống vẫn chấp nhận hợp lệ, lưu `rating = 5`, `comment = null` và đóng đơn.
 
 ---
 
 ## [FR-M10-03] Hệ thống tự động đóng đơn nếu sinh viên không đánh giá sau 3 ngày làm việc
 
 **Mô tả:** Sau 3 ngày làm việc (không tính Thứ 7, Chủ nhật và ngày lễ) tính từ thời điểm Ticket chuyển sang trạng thái Đã giải quyết mà Sinh viên không thực hiện đánh giá, hệ thống sẽ tự động chuyển trạng thái đơn sang Đã đóng.
+
+**Priority:** Medium (Tác vụ ngầm dọn dẹp và kết thúc vòng đời các Ticket không có phản hồi đánh giá).
 
 **Actor:** Hệ thống (System Background Task)
 
@@ -98,8 +122,16 @@
 
 * **BR-01:** Các đơn bị đóng tự động do không đánh giá sau `Resolved` không có điểm số sao (Rating = null) và không tính vào CSAT. Việc đúng hay quá hạn SLA được xác định bằng thời điểm giải quyết `resolved_at` so với hạn xử lý, không mặc định mọi đơn tự đóng đều hoàn thành đúng hạn.
 
+**Alternative / Error Flows (Luồng rẽ nhánh / Xử lý lỗi):**
+
+* **E-01 (Sinh viên gửi đánh giá sau khi đơn đã bị đóng tự động):** Sinh viên mở sẵn trang đánh giá nhưng bấm gửi sau khi Background Worker đã chuyển đơn sang `Closed` (`auto_closed = true`) $\rightarrow$ Hệ thống từ chối với mã `400 Bad Request` và thông báo đơn đã tự động đóng.
+
 **Acceptance Criteria (Tiêu chí nghiệm thu - AC):**
 
-* **AC-01:** Sau 3 ngày làm việc ở trạng thái Đã giải quyết không có đánh giá $\rightarrow$ Đơn tự động chuyển sang `Đã đóng`.
+* **AC-01:** Sau 3 ngày làm việc ở trạng thái `Đã giải quyết` không có đánh giá $\rightarrow$ Đơn tự động chuyển sang `Đã đóng` (`auto_closed = true`, `rating = null`, không tính vào trung bình CSAT) và khóa form đánh giá (`BR-01`, `E-01`).
+
+**Ví dụ Edge Case (Trường hợp biên):**
+
+* Ticket chuyển sang `Resolved` lúc 14:00 Thứ Năm và Thứ Sáu là ngày nghỉ lễ được khai báo trong bảng `system_holidays` $\rightarrow$ Bộ đếm 3 ngày làm việc tự động bỏ qua Thứ Sáu, Thứ Bảy và Chủ Nhật, chỉ đóng tự động vào 14:00 Thứ Tư tuần kế tiếp.
 
 ---
